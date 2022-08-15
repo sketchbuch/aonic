@@ -35,7 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
-    await getAonBook();
+    String book = await getAonBook();
+    debugPrint(book);
   }
 
   @override
