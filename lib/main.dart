@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lonewolf_new/utils/get_aon_book.dart';
+
+import 'models/book.dart';
+import 'utils/get_aon_book_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,8 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
-    String book = await getAonBook();
-    debugPrint(book);
+    String bookData = await getAonBookData();
+    Book book = Book.fromXml(bookData);
+    print('### test: ${book.title}');
+    print('### test: ${book.lang}');
+    print('### test: ${book.version}');
   }
 
   @override
