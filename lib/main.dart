@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xml/xml.dart';
 
 import 'models/book.dart';
 import 'utils/get_aon_book_data.dart';
@@ -37,11 +38,18 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
-    String bookData = await getAonBookData();
-    Book book = Book.fromXml(bookData);
-    print('### test: ${book.title}');
-    print('### test: ${book.lang}');
-    print('### test: ${book.version}');
+    final bookData = await getAonBookData();
+    final bookXml = XmlDocument.parse(bookData);
+    final gamebook = bookXml.getElement('gamebook');
+
+    if (gamebook != null) {
+      Book book = Book.fromXml(gamebook);
+
+      print('### test: ${book.title}');
+      print('### test: ${book.lang}');
+      print('### test: ${book.version}');
+      print('### test: ${book.meta.title}');
+    }
   }
 
   @override
