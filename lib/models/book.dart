@@ -7,12 +7,14 @@ import 'section.dart';
 typedef Json = Map<String, dynamic>;
 
 class Book {
+  late DateTime? date;
   late List<Section> sections = [];
-  late final String lang;
-  late final String title;
-  late final String version;
+  late String lang = '';
+  late String publisher = 'Project Aon';
+  late String title = '';
+  late String version = '';
 
-  Book(this.title, this.lang, this.version);
+  Book(this.title, this.lang, this.version, this.date);
 
   Book.fromXml(String xml) {
     final json = _getJsonFromXml(xml);
@@ -20,16 +22,15 @@ class Book {
     if (json.containsKey('gamebook')) {
       final Json gb = json['gamebook'];
 
-      lang = gb.containsKey('_xml:lang') ? gb['_xml:lang'] : '';
-      title = gb.containsKey('meta') && gb['meta'].containsKey('title') ? gb['meta']['title'] : '';
-      version = gb.containsKey('_version') ? gb['_version'] : '';
-    } else {
-      lang = '';
-      title = '';
-      version = '';
-    }
+      lang = _getValue('_xml:lang', gb);
+      version = _getValue('_version', gb);
 
-    sections = [];
+      if (gb.containsKey('meta')) {
+        final Json meta = gb['meta'];
+
+        title = _getValue('title', meta);
+      }
+    }
   }
 
   Json _getJsonFromXml(String xml) {
@@ -37,5 +38,9 @@ class Book {
     xml2Json.parse(xml);
 
     return jsonDecode(xml2Json.toParkerWithAttrs());
+  }
+
+  String _getValue(String key, Json json) {
+    return json.containsKey(key) ? json[key] : '';
   }
 }
