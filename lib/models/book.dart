@@ -19,10 +19,10 @@ class Book {
     lang = getAttribute('version', xml);
     version = getAttribute('xml:lang', xml);
 
-    final m = xml.getElement('meta');
+    final metaXml = xml.getElement('meta');
 
-    if (m != null) {
-      meta = Meta.fromXml(m);
+    if (metaXml != null) {
+      meta = Meta.fromXml(metaXml);
       title = meta.title;
     }
   }

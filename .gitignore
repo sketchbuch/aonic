@@ -47,4 +47,4 @@ app.*.map.json
 /android/app/release
 
 *.code-workspace
-sample_xml.json
+sample.xml
