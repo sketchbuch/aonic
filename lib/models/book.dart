@@ -6,13 +6,15 @@ import 'meta.dart';
 import 'section.dart';
 
 class Book {
-  late List<Section> sections = [];
+  late List<Section> backmatter = [];
+  late List<Section> frontmatter = [];
+  late List<Section> numbered = [];
+  late Meta meta;
   late String lang = '';
   late String title = '';
   late String version = '';
-  late Meta meta;
 
-  Book(this.title, this.lang, this.version, this.meta, this.sections);
+  Book(this.title, this.lang, this.version, this.meta, this.backmatter, this.frontmatter, this.numbered);
 
   Book.fromXml(XmlElement xml) {
     lang = getAttribute('version', xml);
@@ -24,12 +26,37 @@ class Book {
       meta = Meta.fromXml(metaXml);
       title = meta.title;
     }
+
+    final backtmatterXml =
+        xml.findAllElements('section').where((sec) => sec.getAttribute('class') == SectionType.backmatter.name);
+
+    if (backtmatterXml.isNotEmpty) {
+      backmatter = backtmatterXml.map((xml) => Section.fromXml(xml)).toList();
+    }
+
+    final frontmatterXml = xml.findAllElements('section').where((sec) {
+      final className = sec.getAttribute('class');
+      return className == SectionType.frontmatter.name || className == SectionType.frontmatterSeparate.value;
+    });
+
+    if (frontmatterXml.isNotEmpty) {
+      frontmatter = frontmatterXml.map((xml) => Section.fromXml(xml)).toList();
+    }
+
+    final numberedXml = xml.findAllElements('section').where((sec) =>
+        sec.getAttribute('class') == SectionType.numbered.name && sec.getAttribute('id') != SectionType.numbered.name);
+
+    if (numberedXml.isNotEmpty) {
+      numbered = numberedXml.map((xml) => Section.fromXml(xml)).toList();
+    }
   }
 
   Json toJson() => {
-        'sections': sections.map((section) => section.toJson()),
+        'backmatter': backmatter.map((section) => section.toJson()),
+        'frontmatter': frontmatter.map((section) => section.toJson()),
         'lang': lang,
         'meta': meta.toJson(),
+        'numbered': numbered.map((section) => section.toJson()),
         'title': title,
         'version': version,
       };

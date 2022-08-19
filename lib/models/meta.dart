@@ -33,16 +33,18 @@ class Meta {
     }
 
     final creatorXml = xml.findElements('creator');
-    final descriptionXml = xml.findElements('description');
-    final rightsXml = xml.findElements('rights');
 
     if (creatorXml.isNotEmpty) {
       creators = creatorXml.map((elementXml) => Creator.fromXml(elementXml)).toList();
     }
 
+    final descriptionXml = xml.findElements('description');
+
     if (descriptionXml.isNotEmpty) {
       descriptions = descriptionXml.map((elementXml) => Description.fromXml(elementXml)).toList();
     }
+
+    final rightsXml = xml.findElements('rights');
 
     if (rightsXml.isNotEmpty) {
       rights = rightsXml.map((elementXml) => Right.fromXml(elementXml)).toList();
