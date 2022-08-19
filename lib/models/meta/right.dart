@@ -5,12 +5,9 @@ import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
 
 enum RightType {
-  copyrights('copyrights'),
-  licenseNotification('license-notification'),
-  uknown('uknown');
-
-  const RightType(this.value);
-  final String value;
+  copyrights,
+  licenseNotification,
+  uknown;
 }
 
 class Right {
@@ -32,7 +29,7 @@ class Right {
 
   Json toJson() => {
         'text': text,
-        'type': type.value,
+        'type': type.name,
       };
 
   @override
