@@ -45,9 +45,10 @@ class _MyHomePageState extends State<MyHomePage> {
     if (gamebook != null) {
       Book book = Book.fromXml(gamebook);
       print('### BOOK');
-      debugPrint('### backmatter: ${book.backmatter.length}');
+      /* debugPrint('### backmatter: ${book.backmatter.length}');
       debugPrint('### frontmatter: ${book.frontmatter.length}');
-      debugPrint('### numbered: ${book.numbered.length}');
+      debugPrint('### backmatter: ${book.numbered.length}'); */
+      debugPrint(book.numbered[0].toString());
       print('### /BOOK');
     }
   }

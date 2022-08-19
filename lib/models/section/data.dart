@@ -1,18 +1,20 @@
+import 'package:lonewolf_new/xml/content_parser.dart';
 import 'package:xml/xml.dart';
 
 import '../../types/types.dart';
 
 class Data {
-  late String text = '';
+  late Json content = {};
 
-  Data(this.text);
+  Data(this.content);
 
   Data.fromXml(XmlElement xml) {
-    text = xml.text;
+    final parser = ContentParser();
+    content = parser.toJson(xml);
   }
 
   Json toJson() => {
-        'text': text,
+        'content': content,
       };
 
   @override
