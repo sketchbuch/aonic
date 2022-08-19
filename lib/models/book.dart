@@ -1,10 +1,9 @@
 import 'package:xml/xml.dart';
 
+import '../types/types.dart';
 import '../utils/xml/helpers.dart';
 import 'meta.dart';
 import 'section.dart';
-
-typedef Json = Map<String, dynamic>;
 
 class Book {
   late List<Section> sections = [];
@@ -25,5 +24,18 @@ class Book {
       meta = Meta.fromXml(metaXml);
       title = meta.title;
     }
+  }
+
+  Json toJson() => {
+        'sections': sections.map((section) => section.toJson()),
+        'lang': lang,
+        'meta': meta.toJson(),
+        'title': title,
+        'version': version,
+      };
+
+  @override
+  String toString() {
+    return toJson().toString();
   }
 }

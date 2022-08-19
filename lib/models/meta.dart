@@ -1,13 +1,20 @@
 import 'package:xml/xml.dart';
 
+import '../types/types.dart';
 import '../utils/xml/helpers.dart';
+import 'meta/creator.dart';
+import 'meta/description.dart';
+import 'meta/right.dart';
 
 class Meta {
   late DateTime? publicationDate;
+  late List<Creator> creators = [];
+  late List<Description> descriptions = [];
+  late List<Right> rights = [];
   late String publisher = '';
   late String title = '';
 
-  Meta(this.title, this.publisher, this.publicationDate);
+  Meta(this.title, this.publisher, this.publicationDate, this.creators, this.descriptions, this.rights);
 
   Meta.fromXml(XmlElement xml) {
     publisher = getValue('publisher', xml);
@@ -21,8 +28,38 @@ class Meta {
       final year = getValue('year', dateXml);
 
       if (day.isNotEmpty && month.isNotEmpty && year.isNotEmpty) {
-        publicationDate = DateTime.parse('$year-${month.padLeft(2, '0')}-${day.padLeft(2, '0')}');
+        publicationDate = getDate(year, month, day);
       }
     }
+
+    final creatorXml = xml.findElements('creator');
+    final descriptionXml = xml.findElements('description');
+    final rightsXml = xml.findElements('rights');
+
+    if (creatorXml.isNotEmpty) {
+      creators = creatorXml.map((elementXml) => Creator.fromXml(elementXml)).toList();
+    }
+
+    if (descriptionXml.isNotEmpty) {
+      descriptions = descriptionXml.map((elementXml) => Description.fromXml(elementXml)).toList();
+    }
+
+    if (rightsXml.isNotEmpty) {
+      rights = rightsXml.map((elementXml) => Right.fromXml(elementXml)).toList();
+    }
+  }
+
+  Json toJson() => {
+        'creators': creators.map((creator) => creator.toJson()),
+        'descriptions': descriptions.map((description) => description.toJson()),
+        'publicationDate': publicationDate,
+        'publisher': publisher,
+        'rights': rights.map((right) => right.toJson()),
+        'title': title,
+      };
+
+  @override
+  String toString() {
+    return toJson().toString();
   }
 }

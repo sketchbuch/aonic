@@ -44,13 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (gamebook != null) {
       Book book = Book.fromXml(gamebook);
-
-      print('### title: ${book.title}');
-      print('### lang: ${book.lang}');
-      print('### version: ${book.version}');
-      print('### meta title: ${book.meta.title}');
-      print('### meta publicationDate: ${book.meta.publicationDate}');
-      print('### meta publisher: ${book.meta.publisher}');
+      print('### BOOK');
+      print(book.toJson());
+      print('### /BOOK');
     }
   }
 
