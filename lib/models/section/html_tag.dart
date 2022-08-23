@@ -2,7 +2,7 @@ import 'package:xml/xml.dart';
 
 import '../../types/types.dart';
 
-enum HtmlTagType { element, text, unknown }
+enum HtmlTagType { element, text }
 
 class HtmlTag {
   late final HtmlTagType type;
@@ -19,24 +19,18 @@ class HtmlTag {
 
     if (xml.nodeType == XmlNodeType.ELEMENT) {
       type = HtmlTagType.element;
-    } else if (xml.nodeType == XmlNodeType.TEXT) {
-      type = HtmlTagType.text;
     } else {
-      type = HtmlTagType.unknown;
+      type = HtmlTagType.text;
     }
 
-    if (type == HtmlTagType.unknown) {
-      throw Exception('Uknown content tag: $name - ${type.name}');
-    } else {
-      var elementCount = 0;
+    var elementCount = 0;
 
-      for (var child in xml.children) {
-        if (child.nodeType == XmlNodeType.ELEMENT) {
-          content.add(HtmlTag.fromXml(xml.childElements.elementAt(elementCount)));
-          elementCount += 1;
-        } else if (child.nodeType == XmlNodeType.TEXT) {
-          content.add(HtmlTag('text-tag', HtmlTagType.text, child.text, []));
-        }
+    for (var child in xml.children) {
+      if (child.nodeType == XmlNodeType.ELEMENT) {
+        content.add(HtmlTag.fromXml(xml.childElements.elementAt(elementCount)));
+        elementCount += 1;
+      } else if (child.nodeType == XmlNodeType.TEXT) {
+        content.add(HtmlTag('text-tag', HtmlTagType.text, child.text, []));
       }
     }
   }

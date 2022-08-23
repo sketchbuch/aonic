@@ -39,20 +39,12 @@ class _MyHomePageState extends State<MyHomePage> {
     final bookData = await getAonBookData();
     final bookXml = XmlDocument.parse(cleanXmlString(bookData));
     final gamebook = bookXml.getElement('gamebook');
-    print('### Step 1');
 
     if (gamebook != null) {
-      print('### Step 2');
       Book book = Book.fromXml(gamebook);
       setState(() {
         _book = book;
       });
-      print('### BOOK');
-      /* debugPrint('### backmatter: ${book.backmatter.length}');
-      debugPrint('### frontmatter: ${book.frontmatter.length}');
-      debugPrint('### backmatter: ${book.numbered.length}'); */
-      print(book.frontmatter.elementAt(0).toJson());
-      print('### /BOOK');
     }
   }
 
@@ -66,9 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            _book != null ? Text('Book loaded: ${_book?.title}') : const Text('Book NOT loaded'),
           ],
         ),
       ),
