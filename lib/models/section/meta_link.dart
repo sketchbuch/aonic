@@ -6,12 +6,12 @@ import '../../utils/xml/helpers.dart';
 enum MetaLinkType {
   next,
   prev,
-  uknown;
+  unknown;
 }
 
 class MetaLink {
-  late String idRef;
-  late MetaLinkType type;
+  late final String idRef;
+  late final MetaLinkType type;
 
   MetaLink(this.type, this.idRef);
 
@@ -22,7 +22,7 @@ class MetaLink {
       final typeName = getAttribute('class', xml);
       type = MetaLinkType.values.byName(typeName);
     } on ArgumentError {
-      type = MetaLinkType.uknown;
+      type = MetaLinkType.unknown;
     }
   }
 

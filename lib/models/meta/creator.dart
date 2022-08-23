@@ -9,7 +9,7 @@ enum CreatorType {
   long,
   medium,
   short,
-  uknown;
+  unknown;
 }
 
 class Creator {
@@ -27,7 +27,7 @@ class Creator {
       final typeName = getAttribute('class', xml);
       type = CreatorType.values.byName(typeName);
     } on ArgumentError {
-      type = CreatorType.uknown;
+      type = CreatorType.unknown;
     }
   }
 

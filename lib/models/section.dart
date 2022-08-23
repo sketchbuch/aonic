@@ -11,7 +11,7 @@ enum SectionType {
   frontmatter('frontmatter'),
   frontmatterSeparate('frontmatter-separate'),
   numbered('numbered'),
-  uknown('uknown');
+  unknown('unknown');
 
   const SectionType(this.value);
   final String value;
@@ -32,7 +32,7 @@ class Section {
       final typeName = getAttribute('class', xml);
       type = SectionType.values.byName(ReCase(typeName).camelCase);
     } on ArgumentError {
-      type = SectionType.uknown;
+      type = SectionType.unknown;
     }
 
     final metaXml = xml.getElement('meta');

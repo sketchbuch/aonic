@@ -3,6 +3,7 @@ import 'package:xml/xml.dart';
 
 import 'models/book.dart';
 import 'utils/get_aon_book_data.dart';
+import 'utils/xml/helpers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,23 +33,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  Book? _book;
 
   void _incrementCounter() async {
-    setState(() {
-      _counter++;
-    });
     final bookData = await getAonBookData();
-    final bookXml = XmlDocument.parse(bookData);
+    final bookXml = XmlDocument.parse(cleanXmlString(bookData));
     final gamebook = bookXml.getElement('gamebook');
+    print('### Step 1');
 
     if (gamebook != null) {
+      print('### Step 2');
       Book book = Book.fromXml(gamebook);
+      setState(() {
+        _book = book;
+      });
       print('### BOOK');
       /* debugPrint('### backmatter: ${book.backmatter.length}');
       debugPrint('### frontmatter: ${book.frontmatter.length}');
       debugPrint('### backmatter: ${book.numbered.length}'); */
-      debugPrint(book.numbered[0].toString());
+      print(book.frontmatter.elementAt(0).toJson());
       print('### /BOOK');
     }
   }
@@ -65,10 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),

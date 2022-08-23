@@ -54,10 +54,8 @@ class ContentParser {
   Attrs _getAttrs(XmlElement xml) {
     Attrs attrs = {};
 
-    if (xml.attributes.isNotEmpty) {
-      for (var attr in xml.attributes) {
-        attrs[attr.name.toString()] = attr.value;
-      }
+    for (var attr in xml.attributes) {
+      attrs[attr.name.toString()] = attr.value;
     }
 
     return attrs;

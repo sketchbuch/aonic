@@ -11,3 +11,8 @@ String getValue(String element, XmlElement xmlNode, [String fallbackValue = ''])
 DateTime getDate(String year, String month, String day) {
   return DateTime.parse('$year-${month.padLeft(2, '0')}-${day.padLeft(2, '0')}');
 }
+
+String cleanXmlString(String xmlString) {
+  var cleanedXmlString = xmlString.replaceAll(RegExp(r'>\s*<'), '><');
+  return cleanedXmlString.replaceAll('\n', '').trim();
+}
