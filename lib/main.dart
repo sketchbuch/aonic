@@ -4,6 +4,7 @@ import 'package:xml/xml.dart';
 import 'models/book.dart';
 import 'utils/get_aon_book_data.dart';
 import 'utils/xml/helpers.dart';
+import 'widgets/book_display.dart';
 
 void main() {
   runApp(const MyApp());
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _book != null ? Text('Book loaded: ${_book?.title}') : const Text('Book NOT loaded'),
+            _book != null ? BookDisplay(_book!) : const Text('Book NOT loaded'),
           ],
         ),
       ),
