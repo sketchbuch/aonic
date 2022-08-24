@@ -1,5 +1,7 @@
 import 'package:xml/xml.dart';
 
+import 'replace_character_tags.dart';
+
 String getAttribute(String name, XmlElement xmlNode, [String fallbackValue = '']) {
   return xmlNode.getAttribute(name) ?? fallbackValue;
 }
@@ -13,6 +15,6 @@ DateTime getDate(String year, String month, String day) {
 }
 
 String cleanXmlString(String xmlString) {
-  var cleanedXmlString = xmlString.replaceAll(RegExp(r'>\s*<'), '><');
-  return cleanedXmlString.replaceAll('\n', '').trim();
+  var cleanedString = xmlString.trim().replaceAll(RegExp(r'>\s*<'), '><').replaceAll('\n', '');
+  return replaceCharacterTags(cleanedString);
 }
