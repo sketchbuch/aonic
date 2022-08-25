@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../models/book.dart';
 import '../models/section.dart';
 import '../models/section/data.dart';
-import 'content_element.dart';
 
 class BookDisplay extends StatelessWidget {
   final Book book;
@@ -12,13 +11,12 @@ class BookDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int index = 3;
-    Section section = book.frontmatter.elementAt(index);
+    int index = 0;
+    Section section = book.numbered.elementAt(index);
     Data data = section.data;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[ContentElement(data.html)],
-    );
+    print(data.toJson());
+
+    return const Text('test');
   }
 }

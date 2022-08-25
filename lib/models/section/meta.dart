@@ -21,7 +21,7 @@ class Meta {
   }
 
   Json toJson() => {
-        'links': links.map((link) => link.toJson()),
+        'links': links.map((link) => link.toJson()).toList(),
         'title': title,
       };
 

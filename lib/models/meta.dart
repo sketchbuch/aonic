@@ -52,11 +52,11 @@ class Meta {
   }
 
   Json toJson() => {
-        'creators': creators.map((creator) => creator.toJson()),
-        'descriptions': descriptions.map((description) => description.toJson()),
+        'creators': creators.map((creator) => creator.toJson()).toList(),
+        'descriptions': descriptions.map((description) => description.toJson()).toList(),
         'publicationDate': publicationDate,
         'publisher': publisher,
-        'rights': rights.map((right) => right.toJson()),
+        'rights': rights.map((right) => right.toJson()).toList(),
         'title': title,
       };
 

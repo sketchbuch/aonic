@@ -27,7 +27,7 @@ class Book {
       title = meta.title;
     }
 
-    final backtmatterXml =
+    /* final backtmatterXml =
         xml.findAllElements('section').where((sec) => sec.getAttribute('class') == SectionType.backmatter.name);
 
     if (backtmatterXml.isNotEmpty) {
@@ -41,22 +41,23 @@ class Book {
 
     if (frontmatterXml.isNotEmpty) {
       frontmatter = frontmatterXml.map((xml) => Section.fromXml(xml)).toList();
-    }
+    } */
 
     final numberedXml = xml.findAllElements('section').where((sec) =>
         sec.getAttribute('class') == SectionType.numbered.name && sec.getAttribute('id') != SectionType.numbered.name);
 
     if (numberedXml.isNotEmpty) {
-      numbered = numberedXml.map((xml) => Section.fromXml(xml)).toList();
+      //numbered = numberedXml.map((xml) => Section.fromXml(xml)).toList();
+      numbered = [Section.fromXml(numberedXml.elementAt(179))];
     }
   }
 
   Json toJson() => {
-        'backmatter': backmatter.map((section) => section.toJson()),
-        'frontmatter': frontmatter.map((section) => section.toJson()),
+        'backmatter': backmatter.map((section) => section.toJson()).toList(),
+        'frontmatter': frontmatter.map((section) => section.toJson()).toList(),
         'lang': lang,
         'meta': meta.toJson(),
-        'numbered': numbered.map((section) => section.toJson()),
+        'numbered': numbered.map((section) => section.toJson()).toList(),
         'title': title,
         'version': version,
       };
