@@ -10,7 +10,7 @@ class ChoiceTag extends Tag {
   late final int linkTextIndex;
   late final List<TextElement> texts;
 
-  ChoiceTag(this.texts, this.linkTextIndex, this.idref);
+  ChoiceTag._() {}
 
   ChoiceTag.fromXml(XmlElement xml) {
     idref = getAttribute('idref', xml);

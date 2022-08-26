@@ -22,7 +22,7 @@ class ListTag extends Tag {
   late final ListTagType listType;
   late final ListType type;
 
-  ListTag(this.listType, this.type, this.items);
+  ListTag._() {}
 
   ListTag.fromXml(XmlElement xml) {
     final typeName = xml.name.toString();

@@ -7,7 +7,7 @@ import 'tag.dart';
 class DescriptionListTag extends Tag {
   late final List<DescriptionListItem> items;
 
-  DescriptionListTag(this.items);
+  DescriptionListTag._() {}
 
   DescriptionListTag.fromXml(XmlElement xml) {
     items = xml.childElements.map((child) => DescriptionListItem.fromXml(child)).toList();

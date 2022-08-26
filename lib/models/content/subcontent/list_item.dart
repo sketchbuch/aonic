@@ -7,7 +7,7 @@ import 'text_element.dart';
 class ListItem {
   late final List<TextElement> texts;
 
-  ListItem(this.texts);
+  ListItem._() {}
 
   ListItem.fromXml(XmlElement xml) {
     texts = getTextElementList(xml);

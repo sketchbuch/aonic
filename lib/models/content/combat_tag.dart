@@ -11,7 +11,7 @@ class CombatTag extends Tag {
   late final int endurance;
   late final String enemy;
 
-  CombatTag(this.enemy, this.combatskill, this.endurance);
+  CombatTag._() {}
 
   CombatTag.fromXml(XmlElement xml) {
     enemy = getValue('enemy', xml);

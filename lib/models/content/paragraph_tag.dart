@@ -8,7 +8,7 @@ import 'tag.dart';
 class ParagraphTag extends Tag {
   late final List<TextElement> texts;
 
-  ParagraphTag(this.texts);
+  ParagraphTag._() {}
 
   ParagraphTag.fromXml(XmlElement xml) {
     texts = getTextElementList(xml);
