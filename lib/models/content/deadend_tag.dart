@@ -3,8 +3,6 @@ import 'package:xml/xml.dart';
 import '../../types/types.dart';
 import 'tag.dart';
 
-const defaultAttrValue = 1;
-
 class DeadendTag extends Tag {
   late final String text;
 
