@@ -5,6 +5,7 @@ import '../../types/types.dart';
 import '../content/choice_tag.dart';
 import '../content/combat_tag.dart';
 import '../content/deadend_tag.dart';
+import '../content/description_list_tag.dart';
 import '../content/illustration_tag.dart';
 import '../content/list_tag.dart';
 import '../content/paragraph_tag.dart';
@@ -29,17 +30,13 @@ class Data {
         } else if (childName == 'combat') {
           content.add(CombatTag.fromXml(child));
         } else if (childName == 'illustration') {
-          final illustration = IllustrationTag.fromXml(child);
-
-          if (illustration.isRealIllustration) {
-            content.add(illustration);
-          }
+          content.add(IllustrationTag.fromXml(child));
         } else if (childName == 'p') {
           content.add(ParagraphTag.fromXml(child));
         } else if (childName == 'ol' || childName == 'ul') {
           content.add(ListTag.fromXml(child));
         } else if (childName == 'dl') {
-          print('### MISSING TAG TYPE: "$childName"');
+          content.add(DescriptionListTag.fromXml(child));
         } else if (childName == 'section') {
           print('### section WITHIN section');
         } else {

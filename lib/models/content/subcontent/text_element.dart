@@ -7,6 +7,8 @@ enum DisplayType {
   bold,
   bookref,
   cite,
+  dd,
+  dt,
   italic,
   link,
   plain,
@@ -55,6 +57,12 @@ class TextElement {
 
       case 'bookref':
         return DisplayType.bookref;
+
+      case 'dt':
+        return DisplayType.dt;
+
+      case 'dd':
+        return DisplayType.dd;
 
       case 'quote':
         return DisplayType.quote;
