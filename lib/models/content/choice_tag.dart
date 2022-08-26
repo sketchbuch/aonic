@@ -1,6 +1,5 @@
 import 'package:xml/xml.dart';
 
-import '../../exceptions/xml.dart';
 import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
 import 'subcontent/text_element.dart';
@@ -17,28 +16,21 @@ class ChoiceTag extends Tag {
     idref = getAttribute('idref', xml);
     texts = [];
 
-    final childCount = xml.children.length;
-    final childElementCount = xml.childElements.length;
+    var elementCount = 0;
 
-    if (childElementCount < 1) {
-      throw ContentXmlException('Too few child elements');
-    } else if (childElementCount > 1) {
-      throw ContentXmlException('Too many child elements: "$childElementCount"');
-    } else if (childCount < 2) {
-      throw ContentXmlException('Too few children');
-    } else {
-      for (var index = 0; index < childCount; index++) {
-        final child = xml.children.elementAt(index);
+    for (var index = 0; index < xml.children.length; index++) {
+      final child = xml.children.elementAt(index);
 
-        if (child.nodeType == XmlNodeType.ELEMENT) {
-          final childElement = xml.childElements.elementAt(0);
-          texts.add(TextElement.fromXml(childElement));
+      if (child.nodeType == XmlNodeType.ELEMENT) {
+        final childElement = xml.childElements.elementAt(elementCount);
+        texts.add(TextElement.fromXml(childElement));
+        elementCount += 1;
+
+        if (childElement.name.toString() == 'link-text') {
           linkTextIndex = index;
-        } else if (child.nodeType == XmlNodeType.TEXT) {
-          texts.add(TextElement.fromTxt(child.text));
-        } else {
-          throw ContentXmlException('Unknown nodeType: ${child.nodeType}');
         }
+      } else {
+        texts.add(TextElement.fromTxt(child.text));
       }
     }
   }

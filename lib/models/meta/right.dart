@@ -7,7 +7,8 @@ import '../../utils/xml/helpers.dart';
 enum RightType {
   copyrights,
   licenseNotification,
-  unknown;
+  none,
+  unknown,
 }
 
 class Right {
@@ -21,7 +22,12 @@ class Right {
 
     try {
       final typeName = getAttribute('class', xml);
-      type = RightType.values.byName(ReCase(typeName).camelCase);
+
+      if (typeName.isEmpty) {
+        type = RightType.none;
+      } else {
+        type = RightType.values.byName(ReCase(typeName).camelCase);
+      }
     } on ArgumentError {
       type = RightType.unknown;
     }

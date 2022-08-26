@@ -27,29 +27,27 @@ class Book {
       title = meta.title;
     }
 
-    /* final backtmatterXml =
-        xml.findAllElements('section').where((sec) => sec.getAttribute('class') == SectionType.backmatter.name);
+    final sections = xml.findAllElements('section');
 
-    if (backtmatterXml.isNotEmpty) {
-      backmatter = backtmatterXml.map((xml) => Section.fromXml(xml)).toList();
-    }
+    backmatter = sections
+        .where((sec) => sec.getAttribute('class') == SectionType.backmatter.name)
+        .map((xml) => Section.fromXml(xml))
+        .toList();
 
-    final frontmatterXml = xml.findAllElements('section').where((sec) {
-      final className = sec.getAttribute('class');
-      return className == SectionType.frontmatter.name || className == SectionType.frontmatterSeparate.value;
-    });
+    frontmatter = sections
+        .where((sec) {
+          final className = sec.getAttribute('class');
+          return className == SectionType.frontmatter.name || className == SectionType.frontmatterSeparate.value;
+        })
+        .map((xml) => Section.fromXml(xml))
+        .toList();
 
-    if (frontmatterXml.isNotEmpty) {
-      frontmatter = frontmatterXml.map((xml) => Section.fromXml(xml)).toList();
-    } */
-
-    final numberedXml = xml.findAllElements('section').where((sec) =>
-        sec.getAttribute('class') == SectionType.numbered.name && sec.getAttribute('id') != SectionType.numbered.name);
-
-    if (numberedXml.isNotEmpty) {
-      //numbered = numberedXml.map((xml) => Section.fromXml(xml)).toList();
-      numbered = [Section.fromXml(numberedXml.elementAt(112))];
-    }
+    numbered = sections
+        .where((sec) =>
+            sec.getAttribute('class') == SectionType.numbered.name &&
+            sec.getAttribute('id') != SectionType.numbered.name)
+        .map((xml) => Section.fromXml(xml))
+        .toList();
   }
 
   Json toJson() => {

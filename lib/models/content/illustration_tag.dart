@@ -8,9 +8,10 @@ import 'tag.dart';
 const realIllustrator = 'Gary Chalk';
 
 enum IllustrationType {
-  inline,
   float,
-  unknown;
+  inline,
+  none,
+  unknown,
 }
 
 class IllustrationTag extends Tag {
@@ -25,7 +26,12 @@ class IllustrationTag extends Tag {
   IllustrationTag.fromXml(XmlElement xml) {
     try {
       final typeName = getAttribute('class', xml);
-      type = IllustrationType.values.byName(typeName);
+
+      if (typeName.isEmpty) {
+        type = IllustrationType.none;
+      } else {
+        type = IllustrationType.values.byName(typeName);
+      }
     } on ArgumentError {
       type = IllustrationType.unknown;
     }
@@ -35,15 +41,7 @@ class IllustrationTag extends Tag {
     creator = metaXml != null ? getValue('creator', metaXml) : '';
     description = metaXml != null ? getValue('description', metaXml) : '';
     isRealIllustration = creator == realIllustrator ? true : false;
-
-    instances = [];
-    final instanceXml = xml.findElements('instance');
-
-    if (instanceXml.isNotEmpty) {
-      for (var instance in instanceXml) {
-        instances.add(IllustrationInstance.fromXml(instance));
-      }
-    }
+    instances = xml.findElements('instance').map((instance) => IllustrationInstance.fromXml(instance)).toList();
   }
 
   @override

@@ -11,8 +11,8 @@ class BookDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
-    Section section = book.numbered.elementAt(index);
+    int index = 2;
+    Section section = book.backmatter.elementAt(index);
     Data data = section.data;
 
     print(data.toJson());

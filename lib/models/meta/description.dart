@@ -5,6 +5,7 @@ import '../../utils/xml/helpers.dart';
 
 enum DescriptionType {
   blurb,
+  none,
   publication,
   unknown;
 }
@@ -20,7 +21,12 @@ class Description {
 
     try {
       final typeName = getAttribute('class', xml);
-      type = DescriptionType.values.byName(typeName);
+
+      if (typeName.isEmpty) {
+        type = DescriptionType.none;
+      } else {
+        type = DescriptionType.values.byName(typeName);
+      }
     } on ArgumentError {
       type = DescriptionType.unknown;
     }

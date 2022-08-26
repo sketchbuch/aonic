@@ -5,8 +5,9 @@ import '../../utils/xml/helpers.dart';
 
 enum MetaLinkType {
   next,
+  none,
   prev,
-  unknown;
+  unknown,
 }
 
 class MetaLink {
@@ -20,7 +21,12 @@ class MetaLink {
 
     try {
       final typeName = getAttribute('class', xml);
-      type = MetaLinkType.values.byName(typeName);
+
+      if (typeName.isEmpty) {
+        type = MetaLinkType.none;
+      } else {
+        type = MetaLinkType.values.byName(typeName);
+      }
     } on ArgumentError {
       type = MetaLinkType.unknown;
     }

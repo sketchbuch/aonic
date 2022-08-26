@@ -1,15 +1,14 @@
 import 'package:xml/xml.dart';
 
-import '../../types/types.dart';
-import 'subcontent/text_element.dart';
-import 'tag.dart';
+import '../../../types/types.dart';
+import 'text_element.dart';
 
-class ParagraphTag extends Tag {
+class ListItem {
   late final List<TextElement> texts;
 
-  ParagraphTag(this.texts);
+  ListItem();
 
-  ParagraphTag.fromXml(XmlElement xml) {
+  ListItem.fromXml(XmlElement xml) {
     texts = [];
 
     var elementCount = 0;
@@ -27,8 +26,12 @@ class ParagraphTag extends Tag {
     }
   }
 
-  @override
   Json toJson() => {
         'texts': texts.map((text) => text.toJson()).toList(),
       };
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
 }

@@ -52,7 +52,7 @@ void main() {
       final expected = {
         "fileName": "small1.pdf",
         "height": 150,
-        "mimeType": "unknown",
+        "mimeType": "none",
         "type": "pdf",
         "width": 386,
       };
@@ -80,14 +80,14 @@ void main() {
       expect(tag.toJson(), equals(expected));
     });
 
-    test('Type is unknown, if no class', () {
+    test('Type is none, if no class', () {
       const xml = '<instance src="small1.png" width="386" height="150"  mime-type="image/png"/>';
       final tag = IllustrationInstance.fromXml(getRootXmlElement(xml));
       final expected = {
         "fileName": "small1.png",
         "height": 150,
         "mimeType": "image/png",
-        "type": "unknown",
+        "type": "none",
         "width": 386,
       };
 

@@ -8,6 +8,7 @@ enum CreatorType {
   illustrator,
   long,
   medium,
+  none,
   short,
   unknown;
 }
@@ -25,7 +26,12 @@ class Creator {
 
     try {
       final typeName = getAttribute('class', xml);
-      type = CreatorType.values.byName(typeName);
+
+      if (typeName.isEmpty) {
+        type = CreatorType.none;
+      } else {
+        type = CreatorType.values.byName(typeName);
+      }
     } on ArgumentError {
       type = CreatorType.unknown;
     }

@@ -36,7 +36,7 @@ void main() {
         {
           "fileName": "small1.pdf",
           "height": 150,
-          "mimeType": "unknown",
+          "mimeType": "none",
           "type": "pdf",
           "width": 386,
         }
@@ -67,7 +67,7 @@ void main() {
       expect(tag.toJson(), equals(expected));
     });
 
-    test('Type is unknown, if no class', () {
+    test('Type is none, if no class', () {
       const xml = '<illustration></illustration>';
       final tag = IllustrationTag.fromXml(getRootXmlElement(xml));
       final expected = {
@@ -75,7 +75,7 @@ void main() {
         "description": "",
         "instances": [],
         "isRealIllustration": false,
-        "type": "unknown",
+        "type": "none",
       };
 
       expect(tag.toJson(), equals(expected));

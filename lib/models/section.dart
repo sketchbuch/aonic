@@ -11,6 +11,7 @@ enum SectionType {
   backmatter('backmatter'),
   frontmatter('frontmatter'),
   frontmatterSeparate('frontmatter-separate'),
+  none('none'),
   numbered('numbered'),
   unknown('unknown');
 
@@ -29,18 +30,21 @@ class Section {
 
   Section.fromXml(XmlElement xml) {
     id = getAttribute('id', xml);
-    footnotes = [];
 
     try {
       final typeName = getAttribute('class', xml);
-      type = SectionType.values.byName(ReCase(typeName).camelCase);
+
+      if (typeName.isEmpty) {
+        type = SectionType.none;
+      } else {
+        type = SectionType.values.byName(ReCase(typeName).camelCase);
+      }
     } on ArgumentError {
       type = SectionType.unknown;
     }
 
     final dataXml = xml.getElement('data');
     final metaXml = xml.getElement('meta');
-    final footnotesXml = xml.findElements('footnotes');
 
     if (metaXml != null) {
       meta = Meta.fromXml(metaXml);
@@ -50,15 +54,12 @@ class Section {
       data = Data.fromXml(dataXml);
     }
 
-    if (footnotesXml.isNotEmpty) {
-      for (var footnote in footnotesXml) {
-        footnotes.add(Footnote.fromXml(footnote));
-      }
-    }
+    footnotes = xml.findElements('footnotes').map((footnote) => Footnote.fromXml(footnote)).toList();
   }
 
   Json toJson() => {
         'data': data.toJson(),
+        'footnotes': footnotes.map((footnote) => footnote.toJson()).toList(),
         'id': id,
         'meta': meta.toJson(),
         'type': type.name,

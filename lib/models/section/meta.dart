@@ -12,12 +12,7 @@ class Meta {
 
   Meta.fromXml(XmlElement xml) {
     title = getValue('title', xml);
-
-    final linksXml = xml.findElements('link');
-
-    if (linksXml.isNotEmpty) {
-      links = linksXml.map((elementXml) => MetaLink.fromXml(elementXml)).toList();
-    }
+    links = xml.findElements('link').map((elementXml) => MetaLink.fromXml(elementXml)).toList();
   }
 
   Json toJson() => {

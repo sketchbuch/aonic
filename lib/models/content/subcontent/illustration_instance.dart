@@ -7,6 +7,7 @@ import '../../../utils/xml/helpers.dart';
 // TODO - Add instance type text: <instance class="text
 enum MimeType {
   gif('image/gif'),
+  none('none'),
   png('image/png'),
   unknown('unknown');
 
@@ -18,6 +19,8 @@ enum InstanceType {
   html('html'),
   htmlCompatible('html-compatible'),
   pdf('pdf'),
+  text('text'),
+  none('none'),
   unknown('unknown');
 
   const InstanceType(this.value);
@@ -40,19 +43,28 @@ class IllustrationInstance {
 
     try {
       final typeName = getAttribute('class', xml);
-      type = InstanceType.values.byName(ReCase(typeName).camelCase);
+
+      if (typeName.isEmpty) {
+        type = InstanceType.none;
+      } else {
+        type = InstanceType.values.byName(ReCase(typeName).camelCase);
+      }
     } on ArgumentError {
       type = InstanceType.unknown;
     }
 
     final mimeTypeName = getAttribute('mime-type', xml);
 
-    if (mimeTypeName == 'image/png') {
-      mimeType = MimeType.png;
-    } else if (mimeTypeName == 'image/gif') {
-      mimeType = MimeType.gif;
+    if (mimeTypeName.isEmpty) {
+      mimeType = MimeType.none;
     } else {
-      mimeType = MimeType.unknown;
+      if (mimeTypeName == 'image/png') {
+        mimeType = MimeType.png;
+      } else if (mimeTypeName == 'image/gif') {
+        mimeType = MimeType.gif;
+      } else {
+        mimeType = MimeType.unknown;
+      }
     }
   }
 

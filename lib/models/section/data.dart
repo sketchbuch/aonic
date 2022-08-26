@@ -6,6 +6,7 @@ import '../content/choice_tag.dart';
 import '../content/combat_tag.dart';
 import '../content/deadend_tag.dart';
 import '../content/illustration_tag.dart';
+import '../content/list_tag.dart';
 import '../content/paragraph_tag.dart';
 import '../content/tag.dart';
 
@@ -35,8 +36,14 @@ class Data {
           }
         } else if (childName == 'p') {
           content.add(ParagraphTag.fromXml(child));
+        } else if (childName == 'ol' || childName == 'ul') {
+          content.add(ListTag.fromXml(child));
+        } else if (childName == 'dl') {
+          print('### MISSING TAG TYPE: "$childName"');
+        } else if (childName == 'section') {
+          print('### section WITHIN section');
         } else {
-          throw ContentXmlException('Unknown child name: $childName');
+          throw ContentXmlException('Unknown child name: "$childName"');
         }
       }
     }

@@ -14,7 +14,7 @@ Future<String> getAonBookData([String bookCode = '01fftd']) async {
       return response.body;
     }
 
-    throw HttpException('Request Error: ${response.statusCode}');
+    throw HttpException('Request Error: "${response.statusCode}"');
   } on HttpException {
     rethrow;
   } catch (error) {
