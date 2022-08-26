@@ -4,6 +4,7 @@ import 'package:xml/xml.dart';
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
 
+// TODO - Add instance type text: <instance class="text
 enum MimeType {
   gif('image/gif'),
   png('image/png'),

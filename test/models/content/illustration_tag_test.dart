@@ -41,6 +41,7 @@ void main() {
           "width": 386,
         }
       ],
+      "isRealIllustration": true,
       "type": "inline",
     };
 
@@ -53,12 +54,13 @@ void main() {
     });
 
     test('Type is unknown, if class is not an expected value', () {
-      const xml = '''<illustration class="somethig"></illustration>''';
+      const xml = '<illustration class="somethig"></illustration>';
       final tag = IllustrationTag.fromXml(getRootXmlElement(xml));
       final expected = {
         "creator": "",
         "description": "",
         "instances": [],
+        "isRealIllustration": false,
         "type": "unknown",
       };
 
@@ -66,13 +68,42 @@ void main() {
     });
 
     test('Type is unknown, if no class', () {
-      const xml = '''<illustration></illustration>''';
+      const xml = '<illustration></illustration>';
       final tag = IllustrationTag.fromXml(getRootXmlElement(xml));
       final expected = {
         "creator": "",
         "description": "",
         "instances": [],
+        "isRealIllustration": false,
         "type": "unknown",
+      };
+
+      expect(tag.toJson(), equals(expected));
+    });
+
+    test('isRealIllustration is true, if author is Gary Chalk', () {
+      const xml = '<illustration class="inline"><meta><creator>Gary Chalk</creator></meta></illustration>';
+      final tag = IllustrationTag.fromXml(getRootXmlElement(xml));
+      final expected = {
+        "creator": "Gary Chalk",
+        "description": "",
+        "instances": [],
+        "isRealIllustration": true,
+        "type": "inline",
+      };
+
+      expect(tag.toJson(), equals(expected));
+    });
+
+    test('isRealIllustration is false, if author is NOT Gary Chalk', () {
+      const xml = '<illustration class="inline"><meta><creator>JC Alvarez</creator></meta></illustration>';
+      final tag = IllustrationTag.fromXml(getRootXmlElement(xml));
+      final expected = {
+        "creator": "JC Alvarez",
+        "description": "",
+        "instances": [],
+        "isRealIllustration": false,
+        "type": "inline",
       };
 
       expect(tag.toJson(), equals(expected));

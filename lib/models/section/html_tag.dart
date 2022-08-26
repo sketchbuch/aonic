@@ -1,6 +1,7 @@
 import 'package:xml/xml.dart';
 
 import '../../types/types.dart';
+import '../../utils/xml/helpers.dart';
 
 enum HtmlTagType { element, text }
 
@@ -14,7 +15,7 @@ class HtmlTag {
   HtmlTag(this.name, this.type, this.text, this.content, this.attrs);
 
   HtmlTag.fromXml(XmlElement xml) {
-    attrs = {};
+    attrs = getAttributes(xml);
     content = [];
     name = xml.name.toString();
     text = xml.nodeType == XmlNodeType.TEXT ? xml.text : '';
@@ -23,12 +24,6 @@ class HtmlTag {
       type = HtmlTagType.element;
     } else {
       type = HtmlTagType.text;
-    }
-
-    if (xml.attributes.isNotEmpty) {
-      for (var attr in xml.attributes) {
-        attrs[attr.name.toString()] = attr.value;
-      }
     }
 
     var elementCount = 0;

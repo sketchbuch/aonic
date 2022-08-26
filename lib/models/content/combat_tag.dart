@@ -25,11 +25,11 @@ class CombatTag extends Tag {
   int _getEnemyAttribute(String attrName, Iterable<XmlElement> enemyAttributes) {
     if (enemyAttributes.isNotEmpty) {
       for (var enemyAttribute in enemyAttributes) {
-        final attrs = enemyAttribute.attributes;
+        final attrs = getAttributes(enemyAttribute);
 
         if (attrs.isNotEmpty) {
-          for (var attr in attrs) {
-            if (attr.name.toString() == 'class' && attr.value == attrName) {
+          for (var key in attrs.keys) {
+            if (key == 'class' && attrs[key] == attrName) {
               return int.parse(enemyAttribute.text);
             }
           }

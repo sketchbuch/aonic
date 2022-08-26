@@ -1,6 +1,7 @@
 import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
+import '../../../utils/xml/helpers.dart';
 
 enum DisplayType {
   bold,
@@ -14,19 +15,22 @@ enum DisplayType {
 }
 
 class TextElement {
+  late final Attrs attrs;
   late final DisplayType displayType;
   late final String text;
 
-  TextElement(this.text, this.displayType);
+  TextElement(this.text, this.displayType, this.attrs);
 
   TextElement.fromXml(XmlElement xml) {
-    text = xml.text;
+    attrs = getAttributes(xml);
     displayType = _getDisplayType(xml.name.toString());
+    text = xml.text;
   }
 
   TextElement.fromTxt(String txt) {
-    text = txt;
+    attrs = {};
     displayType = DisplayType.plain;
+    text = txt;
   }
 
   DisplayType _getDisplayType(String elementName) {
@@ -61,6 +65,7 @@ class TextElement {
   }
 
   Json toJson() => {
+        'attrs': attrs,
         'displayType': displayType.name,
         'text': text,
       };

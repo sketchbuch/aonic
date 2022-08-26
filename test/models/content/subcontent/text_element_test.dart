@@ -24,6 +24,7 @@ void main() {
         final xml = '<$tagName>If you would rather press on, </$tagName>';
         final tag = TextElement.fromXml(getRootXmlElement(xml));
         final expected = {
+          "attrs": {},
           "displayType": displayType,
           "text": "If you would rather press on, ",
         };
@@ -50,6 +51,7 @@ void main() {
     group('fromTxt()', () {
       final tag = TextElement.fromTxt('If you would rather press on, ');
       final expected = {
+        "attrs": {},
         "displayType": "plain",
         "text": "If you would rather press on, ",
       };

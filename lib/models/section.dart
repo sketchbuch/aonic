@@ -4,6 +4,7 @@ import 'package:xml/xml.dart';
 import '../types/types.dart';
 import '../utils/xml/helpers.dart';
 import 'section/data.dart';
+import 'section/footnote.dart';
 import 'section/meta.dart';
 
 enum SectionType {
@@ -20,13 +21,15 @@ enum SectionType {
 class Section {
   late Data data;
   late Meta meta;
+  late List<Footnote> footnotes;
   late SectionType type;
   late String id;
 
-  Section(this.id, this.type);
+  Section(this.id, this.type, this.meta, this.footnotes, this.data);
 
   Section.fromXml(XmlElement xml) {
     id = getAttribute('id', xml);
+    footnotes = [];
 
     try {
       final typeName = getAttribute('class', xml);
@@ -35,8 +38,9 @@ class Section {
       type = SectionType.unknown;
     }
 
-    final metaXml = xml.getElement('meta');
     final dataXml = xml.getElement('data');
+    final metaXml = xml.getElement('meta');
+    final footnotesXml = xml.findElements('footnotes');
 
     if (metaXml != null) {
       meta = Meta.fromXml(metaXml);
@@ -44,6 +48,12 @@ class Section {
 
     if (dataXml != null) {
       data = Data.fromXml(dataXml);
+    }
+
+    if (footnotesXml.isNotEmpty) {
+      for (var footnote in footnotesXml) {
+        footnotes.add(Footnote.fromXml(footnote));
+      }
     }
   }
 

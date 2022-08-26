@@ -5,6 +5,8 @@ import '../../utils/xml/helpers.dart';
 import 'subcontent/illustration_instance.dart';
 import 'tag.dart';
 
+const realIllustrator = 'Gary Chalk';
+
 enum IllustrationType {
   inline,
   float,
@@ -16,6 +18,7 @@ class IllustrationTag extends Tag {
   late final List<IllustrationInstance> instances;
   late final String creator;
   late final String description;
+  late final bool isRealIllustration;
 
   IllustrationTag(this.creator, this.description, this.type, this.instances);
 
@@ -31,6 +34,7 @@ class IllustrationTag extends Tag {
 
     creator = metaXml != null ? getValue('creator', metaXml) : '';
     description = metaXml != null ? getValue('description', metaXml) : '';
+    isRealIllustration = creator == realIllustrator ? true : false;
 
     instances = [];
     final instanceXml = xml.findElements('instance');
@@ -47,6 +51,7 @@ class IllustrationTag extends Tag {
         'creator': creator,
         'description': description,
         'instances': instances.map((instance) => instance.toJson()).toList(),
+        'isRealIllustration': isRealIllustration,
         'type': type.name,
       };
 }
