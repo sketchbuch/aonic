@@ -6,7 +6,7 @@ import 'tag.dart';
 class DeadendTag extends Tag {
   late final String text;
 
-  DeadendTag._() {}
+  DeadendTag._();
 
   DeadendTag.fromXml(XmlElement xml) {
     text = xml.text;

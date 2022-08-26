@@ -21,7 +21,7 @@ class TextElement {
   late final DisplayType displayType;
   late final String text;
 
-  TextElement._() {}
+  TextElement._();
 
   TextElement.fromXml(XmlElement xml) {
     attrs = getAttributes(xml);

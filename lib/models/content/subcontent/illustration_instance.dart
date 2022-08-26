@@ -34,7 +34,7 @@ class IllustrationInstance {
   late final MimeType mimeType;
   late final String fileName;
 
-  IllustrationInstance._() {}
+  IllustrationInstance._();
 
   IllustrationInstance.fromXml(XmlElement xml) {
     fileName = getAttribute('src', xml);

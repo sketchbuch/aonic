@@ -13,7 +13,7 @@ class DescriptionListItem {
   late final DescriptionIemType type;
   late final List<TextElement> texts;
 
-  DescriptionListItem._() {}
+  DescriptionListItem._();
 
   DescriptionListItem.fromXml(XmlElement xml) {
     final typeName = xml.name.toString();
