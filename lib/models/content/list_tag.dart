@@ -5,8 +5,6 @@ import '../../utils/xml/helpers.dart';
 import 'subcontent/list_item.dart';
 import 'tag.dart';
 
-const defaultAttrValue = 1;
-
 enum ListTagType {
   ol,
   ul,
