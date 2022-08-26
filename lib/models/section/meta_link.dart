@@ -14,7 +14,7 @@ class MetaLink {
   late final String idRef;
   late final MetaLinkType type;
 
-  MetaLink(this.type, this.idRef);
+  MetaLink._();
 
   MetaLink.fromXml(XmlElement xml) {
     idRef = getAttribute('idref', xml);

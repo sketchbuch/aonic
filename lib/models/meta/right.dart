@@ -15,7 +15,7 @@ class Right {
   late RightType type;
   late String text = '';
 
-  Right(this.text, this.type);
+  Right._();
 
   Right.fromXml(XmlElement xml) {
     text = xml.text;

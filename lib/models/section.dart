@@ -26,7 +26,7 @@ class Section {
   late SectionType type;
   late String id;
 
-  Section(this.id, this.type, this.meta, this.footnotes, this.data);
+  Section._();
 
   Section.fromXml(XmlElement xml) {
     id = getAttribute('id', xml);

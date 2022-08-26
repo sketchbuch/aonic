@@ -18,7 +18,7 @@ class Creator {
   late String? sortText = '';
   late String text = '';
 
-  Creator(this.text, this.type, this.sortText);
+  Creator._();
 
   Creator.fromXml(XmlElement xml) {
     sortText = getAttribute('sort-name', xml, text);

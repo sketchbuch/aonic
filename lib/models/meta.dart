@@ -14,7 +14,7 @@ class Meta {
   late String publisher = '';
   late String title = '';
 
-  Meta(this.title, this.publisher, this.publicationDate, this.creators, this.descriptions, this.rights);
+  Meta._();
 
   Meta.fromXml(XmlElement xml) {
     publisher = getValue('publisher', xml);

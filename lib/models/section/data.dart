@@ -14,7 +14,7 @@ import '../content/tag.dart';
 class Data {
   late final List<Tag> content;
 
-  Data(this.content);
+  Data._();
 
   Data.fromXml(XmlElement xml) {
     content = [];

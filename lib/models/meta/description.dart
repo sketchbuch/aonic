@@ -14,7 +14,7 @@ class Description {
   late DescriptionType type;
   late String text = '';
 
-  Description(this.text, this.type);
+  Description._();
 
   Description.fromXml(XmlElement xml) {
     text = xml.text;

@@ -8,7 +8,7 @@ class Meta {
   late List<MetaLink> links = [];
   late String title = '';
 
-  Meta(this.title, this.links);
+  Meta._();
 
   Meta.fromXml(XmlElement xml) {
     title = getValue('title', xml);

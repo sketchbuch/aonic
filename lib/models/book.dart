@@ -14,7 +14,7 @@ class Book {
   late String title = '';
   late String version = '';
 
-  Book(this.title, this.lang, this.version, this.meta, this.backmatter, this.frontmatter, this.numbered);
+  Book._();
 
   Book.fromXml(XmlElement xml) {
     lang = getAttribute('version', xml);

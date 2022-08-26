@@ -8,7 +8,7 @@ class Footnote {
   late String idRef = '';
   late String text = '';
 
-  Footnote(this.text);
+  Footnote._();
 
   Footnote.fromXml(XmlElement xml) {
     id = getAttribute('id', xml);
