@@ -51,17 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final book = _book;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('${widget.title}${book != null ? ': ${book.title}' : ''}'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _book != null ? BookDisplay(_book!) : const Text('Book NOT loaded'),
-          ],
-        ),
+        child: book != null ? BookDisplay(book) : const Text('Book NOT loaded'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,

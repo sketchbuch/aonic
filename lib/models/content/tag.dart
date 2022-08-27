@@ -9,6 +9,8 @@ abstract class Tag {
 
   Json toJson() => {};
 
+  String tagType() => runtimeType.toString();
+
   @override
   String toString() {
     return toJson().toString();
