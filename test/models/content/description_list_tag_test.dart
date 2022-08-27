@@ -19,10 +19,37 @@ void main() {
     final tag = DescriptionListTag.fromXml(getRootXmlElement(xml));
     final expected = {
       "items": [
-        {"attrs": {}, "displayType": "dt", "text": "Transcription"},
-        {"attrs": {}, "displayType": "dd", "text": "Ryan Landek"},
-        {"attrs": {}, "displayType": "dt", "text": "Illustration Transcription"},
-        {"attrs": {}, "displayType": "dd", "text": "Jonathan BlakePaul HaskellSimon OsborneDaniel Strong"}
+        {
+          "displayAsLines": false,
+          "texts": [
+            {"attrs": {}, "displayType": "plain", "text": "Transcription"}
+          ],
+          "type": "dt"
+        },
+        {
+          "displayAsLines": false,
+          "texts": [
+            {"attrs": {}, "displayType": "plain", "text": "Ryan Landek"}
+          ],
+          "type": "dd"
+        },
+        {
+          "displayAsLines": false,
+          "texts": [
+            {"attrs": {}, "displayType": "plain", "text": "Illustration Transcription"}
+          ],
+          "type": "dt"
+        },
+        {
+          "displayAsLines": true,
+          "texts": [
+            {"attrs": {}, "displayType": "plain", "text": "Jonathan Blake"},
+            {"attrs": {}, "displayType": "plain", "text": "Paul Haskell"},
+            {"attrs": {}, "displayType": "plain", "text": "Simon Osborne"},
+            {"attrs": {}, "displayType": "plain", "text": "Daniel Strong"}
+          ],
+          "type": "dd"
+        }
       ]
     };
 

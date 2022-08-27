@@ -10,6 +10,7 @@ enum DescriptionIemType {
 }
 
 class DescriptionListItem {
+  late final bool displayAsLines;
   late final DescriptionIemType type;
   late final List<TextElement> texts;
 
@@ -25,11 +26,13 @@ class DescriptionListItem {
     }
 
     texts = getTextElementList(xml);
+    displayAsLines = type == DescriptionIemType.dd && xml.children.toString().contains("<line>");
   }
 
   Json toJson() => {
-        "texts": texts.map((text) => text.toJson()).toList(),
-        "type": type.name,
+        'displayAsLines': displayAsLines,
+        'texts': texts.map((text) => text.toJson()).toList(),
+        'type': type.name,
       };
 
   @override

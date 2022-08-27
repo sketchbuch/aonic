@@ -30,13 +30,18 @@ DateTime getDate(String year, String month, String day) {
 }
 
 List<TextElement> getTextElementList(XmlElement xml) {
-  var elementCount = 0;
+  var elementCount = -1;
 
   return xml.children.map((child) {
     if (child.nodeType == XmlNodeType.ELEMENT) {
-      final childElement = xml.childElements.elementAt(elementCount);
       elementCount += 1;
-      return TextElement.fromXml(childElement);
+
+      try {
+        final childElement = xml.childElements.elementAt(elementCount);
+        return TextElement.fromXml(childElement);
+      } on RangeError {
+        return TextElement.fromTxt(child.text);
+      }
     } else {
       return TextElement.fromTxt(child.text);
     }

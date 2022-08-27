@@ -22,13 +22,18 @@ class ChoiceTag extends Tag {
       final child = xml.children.elementAt(index);
 
       if (child.nodeType == XmlNodeType.ELEMENT) {
-        final childElement = xml.childElements.elementAt(elementCount);
-        texts.add(TextElement.fromXml(childElement));
-        elementCount += 1;
+        try {
+          final childElement = xml.childElements.elementAt(elementCount);
+          texts.add(TextElement.fromXml(childElement));
 
-        if (childElement.name.toString() == 'link-text') {
-          linkTextIndex = index;
+          if (childElement.name.toString() == 'link-text') {
+            linkTextIndex = index;
+          }
+        } on RangeError {
+          texts.add(TextElement.fromTxt(child.text));
         }
+
+        elementCount += 1;
       } else {
         texts.add(TextElement.fromTxt(child.text));
       }
