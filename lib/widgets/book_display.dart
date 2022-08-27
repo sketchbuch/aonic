@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import '../models/book.dart';
 import '../models/content/choice_tag.dart';
 import '../models/content/combat_tag.dart';
+import '../models/content/deadend_tag.dart';
 import '../models/content/illustration_tag.dart';
 import '../models/content/paragraph_tag.dart';
 import '../models/section.dart';
 import '../models/section/data.dart';
 import 'choice.dart';
 import 'combat.dart';
+import 'deadend.dart';
 import 'illustration.dart';
 import 'paragraph.dart';
 
@@ -19,7 +21,7 @@ class BookDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
+    int index = 52;
     Section section = book.numbered.elementAt(index);
     Data data = section.data;
 
@@ -35,6 +37,8 @@ class BookDisplay extends StatelessWidget {
             return Choice(tag as ChoiceTag);
           case 'CombatTag':
             return Combat(tag as CombatTag);
+          case 'DeadendTag':
+            return Deadend(tag as DeadendTag);
           case 'IllustrationTag':
             final illustration = tag as IllustrationTag;
 
