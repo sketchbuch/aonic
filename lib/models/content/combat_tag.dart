@@ -11,6 +11,7 @@ class CombatTag extends Tag {
   late final int endurance;
   late final String enemy;
 
+  // ignore: unused_element
   CombatTag._();
 
   CombatTag.fromXml(XmlElement xml) {

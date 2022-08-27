@@ -18,6 +18,7 @@ class Creator {
   late String? sortText = '';
   late String text = '';
 
+  // ignore: unused_element
   Creator._();
 
   Creator.fromXml(XmlElement xml) {

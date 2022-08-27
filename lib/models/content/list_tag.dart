@@ -22,6 +22,7 @@ class ListTag extends Tag {
   late final ListTagType listType;
   late final ListType type;
 
+  // ignore: unused_element
   ListTag._();
 
   ListTag.fromXml(XmlElement xml) {

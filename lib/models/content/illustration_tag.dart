@@ -21,6 +21,7 @@ class IllustrationTag extends Tag {
   late final String description;
   late final bool isRealIllustration;
 
+  // ignore: unused_element
   IllustrationTag._();
 
   IllustrationTag.fromXml(XmlElement xml) {

@@ -8,6 +8,7 @@ class Footnote {
   late String idRef = '';
   late String text = '';
 
+  // ignore: unused_element
   Footnote._();
 
   Footnote.fromXml(XmlElement xml) {

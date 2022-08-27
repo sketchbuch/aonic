@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../models/book.dart';
+import '../models/content/choice_tag.dart';
+import '../models/content/combat_tag.dart';
+import '../models/content/illustration_tag.dart';
+import '../models/content/paragraph_tag.dart';
 import '../models/section.dart';
 import '../models/section/data.dart';
 import 'choice.dart';
+import 'combat.dart';
+import 'illustration.dart';
 import 'paragraph.dart';
 
 class BookDisplay extends StatelessWidget {
@@ -26,9 +32,19 @@ class BookDisplay extends StatelessWidget {
 
         switch (tagType) {
           case 'ChoiceTag':
-            return Choice(tag);
+            return Choice(tag as ChoiceTag);
+          case 'CombatTag':
+            return Combat(tag as CombatTag);
+          case 'IllustrationTag':
+            final illustration = tag as IllustrationTag;
+
+            if (illustration.isRealIllustration) {
+              return Illustration(tag);
+            } else {
+              return Text('Stand-in image by "${illustration.creator}" not rendered');
+            }
           case 'ParagraphTag':
-            return Paragraph(tag);
+            return Paragraph(tag as ParagraphTag);
           default:
             return Text('Unsupported Tag: "$tagType"');
         }

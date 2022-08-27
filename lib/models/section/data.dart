@@ -14,6 +14,7 @@ import '../content/tag.dart';
 class Data {
   late final List<Tag> content;
 
+  // ignore: unused_element
   Data._();
 
   Data.fromXml(XmlElement xml) {

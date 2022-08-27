@@ -15,6 +15,7 @@ class Right {
   late RightType type;
   late String text = '';
 
+  // ignore: unused_element
   Right._();
 
   Right.fromXml(XmlElement xml) {

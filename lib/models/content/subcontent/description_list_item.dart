@@ -14,6 +14,7 @@ class DescriptionListItem {
   late final DescriptionIemType type;
   late final List<TextElement> texts;
 
+  // ignore: unused_element
   DescriptionListItem._();
 
   DescriptionListItem.fromXml(XmlElement xml) {

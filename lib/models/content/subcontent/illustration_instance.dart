@@ -34,6 +34,7 @@ class IllustrationInstance {
   late final MimeType mimeType;
   late final String fileName;
 
+  // ignore: unused_element
   IllustrationInstance._();
 
   IllustrationInstance.fromXml(XmlElement xml) {

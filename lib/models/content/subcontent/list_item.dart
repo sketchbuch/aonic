@@ -7,6 +7,7 @@ import 'text_element.dart';
 class ListItem {
   late final List<TextElement> texts;
 
+  // ignore: unused_element
   ListItem._();
 
   ListItem.fromXml(XmlElement xml) {

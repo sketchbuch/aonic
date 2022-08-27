@@ -14,6 +14,7 @@ class Book {
   late String title = '';
   late String version = '';
 
+  // ignore: unused_element
   Book._();
 
   Book.fromXml(XmlElement xml) {

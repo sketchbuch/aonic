@@ -14,6 +14,7 @@ class Description {
   late DescriptionType type;
   late String text = '';
 
+  // ignore: unused_element
   Description._();
 
   Description.fromXml(XmlElement xml) {

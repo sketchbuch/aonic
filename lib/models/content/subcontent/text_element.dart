@@ -21,6 +21,7 @@ class TextElement {
   late final DisplayType displayType;
   late final String text;
 
+  // ignore: unused_element
   TextElement._();
 
   TextElement.fromXml(XmlElement xml) {

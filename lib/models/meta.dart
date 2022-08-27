@@ -14,6 +14,7 @@ class Meta {
   late String publisher = '';
   late String title = '';
 
+  // ignore: unused_element
   Meta._();
 
   Meta.fromXml(XmlElement xml) {

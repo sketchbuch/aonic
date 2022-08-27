@@ -14,6 +14,7 @@ class MetaLink {
   late final String idRef;
   late final MetaLinkType type;
 
+  // ignore: unused_element
   MetaLink._();
 
   MetaLink.fromXml(XmlElement xml) {

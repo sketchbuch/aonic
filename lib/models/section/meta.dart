@@ -8,6 +8,7 @@ class Meta {
   late List<MetaLink> links = [];
   late String title = '';
 
+  // ignore: unused_element
   Meta._();
 
   Meta.fromXml(XmlElement xml) {

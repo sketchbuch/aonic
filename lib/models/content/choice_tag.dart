@@ -10,6 +10,7 @@ class ChoiceTag extends Tag {
   late final int linkTextIndex;
   late final List<TextElement> texts;
 
+  // ignore: unused_element
   ChoiceTag._();
 
   ChoiceTag.fromXml(XmlElement xml) {

@@ -8,6 +8,7 @@ import 'tag.dart';
 class ParagraphTag extends Tag {
   late final List<TextElement> texts;
 
+  // ignore: unused_element
   ParagraphTag._();
 
   ParagraphTag.fromXml(XmlElement xml) {

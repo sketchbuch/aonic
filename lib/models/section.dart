@@ -26,6 +26,7 @@ class Section {
   late SectionType type;
   late String id;
 
+  // ignore: unused_element
   Section._();
 
   Section.fromXml(XmlElement xml) {

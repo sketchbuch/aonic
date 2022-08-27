@@ -7,6 +7,7 @@ import 'tag.dart';
 class DescriptionListTag extends Tag {
   late final List<DescriptionListItem> items;
 
+  // ignore: unused_element
   DescriptionListTag._();
 
   DescriptionListTag.fromXml(XmlElement xml) {
