@@ -21,55 +21,66 @@ class BookDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int index = 52;
+    int index = 5;
     Section section = book.numbered.elementAt(index);
     Data data = section.data;
 
     print(data.toJson());
 
+    /* Widget _getContent(Tag tag) {
+      final tagType = tag.tagType();
+
+      switch (tagType) {
+        case 'ChoiceTag':
+          return Choice(tag as ChoiceTag);
+
+        case 'CombatTag':
+          return Combat(tag as CombatTag);
+
+        case 'DeadendTag':
+          return Deadend(tag as DeadendTag);
+
+        case 'IllustrationTag':
+          final illy = tag as IllustrationTag;
+          return illy.isRealIllustration ? Illustration(illy) : const SizedBox();
+
+        case 'ParagraphTag':
+          return Paragraph(tag as ParagraphTag);
+
+        default:
+          return Text('Unsupported Tag: "$tagType"');
+      }
+    } */
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: data.content.map<Widget>((tag) {
-        final tagType = tag.tagType();
+      children: data.content
+          .map<Widget>((tag) {
+            final tagType = tag.tagType();
 
-        switch (tagType) {
-          case 'ChoiceTag':
-            return Choice(tag as ChoiceTag);
-          case 'CombatTag':
-            return Combat(tag as CombatTag);
-          case 'DeadendTag':
-            return Deadend(tag as DeadendTag);
-          case 'IllustrationTag':
-            final illustration = tag as IllustrationTag;
+            switch (tagType) {
+              case 'ChoiceTag':
+                return Choice(tag as ChoiceTag);
 
-            if (illustration.isRealIllustration) {
-              return Illustration(tag);
-            } else {
-              return Text('Stand-in image by "${illustration.creator}" not rendered');
+              case 'CombatTag':
+                return Combat(tag as CombatTag);
+
+              case 'DeadendTag':
+                return Deadend(tag as DeadendTag);
+
+              case 'IllustrationTag':
+                final illy = tag as IllustrationTag;
+                return illy.isRealIllustration ? Illustration(illy) : const SizedBox();
+
+              case 'ParagraphTag':
+                return Paragraph(tag as ParagraphTag);
+
+              default:
+                return Text('Unsupported Tag: "$tagType"');
             }
-          case 'ParagraphTag':
-            return Paragraph(tag as ParagraphTag);
-          default:
-            return Text('Unsupported Tag: "$tagType"');
-        }
-      }).toList(),
+          })
+          .where((Widget widget) => widget.runtimeType.toString() != 'SizedBox')
+          .toList(),
     );
-
-    /* return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        const Text('Book:'),
-        const Text('==='),
-        Text('Title: ${book.title}'),
-        Text('Language: ${book.lang}'),
-        Text('Version: ${book.version}'),
-        const Text('--------'),
-        const Text('Section:'),
-        const Text('==='),
-        Text('ID: ${section.id}'),
-        Text('Type: ${section.type.value}'),
-        Text('Title: ${section.meta.title}'),
-      ],
-    ); */
   }
 }

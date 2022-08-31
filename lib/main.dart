@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:xml/xml.dart';
 
+import 'i18n/translations.g.dart';
 import 'models/book.dart';
 import 'utils/get_aon_book_data.dart';
 import 'utils/xml/helpers.dart';
 import 'widgets/book_display.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  LocaleSettings.useDeviceLocale();
+  runApp(TranslationProvider(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,11 +20,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lone Wolf App',
+      home: const MyHomePage(title: 'Lone Wolf'),
+      locale: TranslationProvider.of(context).flutterLocale,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: LocaleSettings.supportedLocales,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Lone Wolf'),
+      title: 'Lone Wolf App',
     );
   }
 }

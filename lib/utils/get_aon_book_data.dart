@@ -5,6 +5,7 @@ import 'package:http/http.dart' as https;
 Future<String> getAonBookData([String bookCode = '01fftd']) async {
   // https://www.projectaon.org/data/trunk/en/xml/01fftd.xml
   // view-source:https://www.projectaon.org/data/trunk/en/xml/01fftd.xml
+  // https://www.projectaon.org/en/xhtml/lw/01fftd/title.htm
   Uri uri = Uri.parse('https://www.projectaon.org/data/trunk/en/xml/$bookCode.xml');
 
   try {
