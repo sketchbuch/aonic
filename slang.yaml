@@ -1,5 +1,6 @@
 # Config
+input_directory: lib/i18n/
 namespaces: true
-output_directory: lib/i18n
+output_directory: lib/i18n/_generated_
 output_file_name: translations.g.dart
 output_format: multiple_files
