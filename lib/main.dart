@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:xml/xml.dart';
 
-import 'i18n/translations.g.dart';
+import 'i18n/_generated_/translations.g.dart';
 import 'models/book.dart';
 import 'utils/get_aon_book_data.dart';
 import 'utils/xml/helpers.dart';
@@ -19,15 +19,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final trans = t.common; // get translation
+
     return MaterialApp(
-      home: const MyHomePage(title: 'Lone Wolf'),
+      home: MyHomePage(title: trans.title),
       locale: TranslationProvider.of(context).flutterLocale,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: LocaleSettings.supportedLocales,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      title: 'Lone Wolf App',
+      title: trans.appTitle,
     );
   }
 }

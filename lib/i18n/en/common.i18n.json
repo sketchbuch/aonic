@@ -1,8 +1,4 @@
 {
-  "hello": "Hello $name",
-  "save": "Save",
-  "login": {
-    "success": "Logged in successfully",
-    "fail": "Logged in failed"
-  }
+  "appTitle": "Lone Wolf App",
+  "title": "LoneWolf"
 }

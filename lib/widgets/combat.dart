@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../i18n/_generated_/translations.g.dart';
 import '../models/content/combat_tag.dart';
 import 'content_renderer.dart';
 
@@ -10,6 +11,8 @@ class Combat extends StatelessWidget with ContentRenderer {
 
   @override
   Widget build(BuildContext context) {
+    final trans = t.numbered; // get translation
+
     return wrapContent(
       RichText(
         text: TextSpan(
@@ -19,13 +22,13 @@ class Combat extends StatelessWidget with ContentRenderer {
               child: Padding(padding: const EdgeInsets.only(right: 8.0), child: Text('${tag.enemy}:')),
             ),
             WidgetSpan(
-              child: Padding(padding: const EdgeInsets.only(right: 8.0), child: Text('Combat Skill'.toUpperCase())),
+              child: Padding(padding: const EdgeInsets.only(right: 8.0), child: Text(trans.combatSkill)),
             ),
             WidgetSpan(
               child: Padding(padding: const EdgeInsets.only(right: 16.0), child: Text(tag.combatskill.toString())),
             ),
             WidgetSpan(
-              child: Padding(padding: const EdgeInsets.only(right: 8.0), child: Text('Endurance'.toUpperCase())),
+              child: Padding(padding: const EdgeInsets.only(right: 8.0), child: Text(trans.endurance)),
             ),
             TextSpan(text: tag.endurance.toString()),
           ],
