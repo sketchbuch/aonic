@@ -41,6 +41,7 @@ class Data {
         } else if (childName == 'section') {
           print('### section WITHIN section');
         } else {
+          print('Unknown child name: "$childName"');
           throw ContentXmlException('Unknown child name: "$childName"');
         }
       }

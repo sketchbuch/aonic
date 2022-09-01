@@ -1,7 +1,7 @@
-class XmlException implements Exception {
+class BookXmlException implements Exception {
   String message;
 
-  XmlException(this.message);
+  BookXmlException(this.message);
 }
 
 class ContentXmlException implements Exception {

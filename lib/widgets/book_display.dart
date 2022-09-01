@@ -25,32 +25,7 @@ class BookDisplay extends StatelessWidget {
     Section section = book.numbered.elementAt(index);
     Data data = section.data;
 
-    print(data.toJson());
-
-    /* Widget _getContent(Tag tag) {
-      final tagType = tag.tagType();
-
-      switch (tagType) {
-        case 'ChoiceTag':
-          return Choice(tag as ChoiceTag);
-
-        case 'CombatTag':
-          return Combat(tag as CombatTag);
-
-        case 'DeadendTag':
-          return Deadend(tag as DeadendTag);
-
-        case 'IllustrationTag':
-          final illy = tag as IllustrationTag;
-          return illy.isRealIllustration ? Illustration(illy) : const SizedBox();
-
-        case 'ParagraphTag':
-          return Paragraph(tag as ParagraphTag);
-
-        default:
-          return Text('Unsupported Tag: "$tagType"');
-      }
-    } */
+    //print(data.toJson());
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

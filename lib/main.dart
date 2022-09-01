@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:xml/xml.dart';
 
 import 'i18n/_generated_/translations.g.dart';
-import 'models/book.dart';
-import 'utils/get_aon_book_data.dart';
-import 'utils/xml/helpers.dart';
-import 'widgets/book_display.dart';
+import 'pages/home_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
-  runApp(TranslationProvider(child: const MyApp()));
+  runApp(TranslationProvider(child: const App()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final trans = t.common; // get translation
 
     return MaterialApp(
-      home: MyHomePage(title: trans.title),
+      debugShowCheckedModeBanner: false,
+      home: HomePage(title: trans.title),
       locale: TranslationProvider.of(context).flutterLocale,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: LocaleSettings.supportedLocales,
@@ -30,50 +27,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       title: trans.appTitle,
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  Book? _book;
-
-  void _incrementCounter() async {
-    final bookData = await getAonBookData();
-    final bookXml = XmlDocument.parse(cleanXmlString(bookData));
-    final gamebook = bookXml.getElement('gamebook');
-
-    if (gamebook != null) {
-      Book book = Book.fromXml(gamebook);
-      setState(() {
-        _book = book;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final book = _book;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${widget.title}${book != null ? ': ${book.title}' : ''}'),
-      ),
-      body: Center(
-        child: book != null ? BookDisplay(book) : const Text('Book NOT loaded'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
   }
 }

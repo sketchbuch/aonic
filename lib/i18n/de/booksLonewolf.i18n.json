@@ -1,0 +1,84 @@
+{
+  "books": [
+    {
+      "code": "01fftd",
+      "title": "DE Flight from the Dark"
+    },
+    {
+      "code": "02fotw",
+      "title": "DE Fire on the Water"
+    },
+    {
+      "code": "03tcok",
+      "title": "DE The Caverns of Kalte"
+    },
+    {
+      "code": "04tcod",
+      "title": "DE The Chasm of Doom"
+    },
+    {
+      "code": "05sots",
+      "title": "DE Shadow on the Sand"
+    },
+    {
+      "code": "06tkot",
+      "title": "DE The Kingdoms of Terror"
+    },
+    {
+      "code": "07cd",
+      "title": "DE Castle Death"
+    },
+    {
+      "code": "08tjoh",
+      "title": "DE The Jungle of Horrors"
+    },
+    {
+      "code": "09tcof",
+      "title": "DE The Cauldron of Fear"
+    },
+    {
+      "code": "10tdot",
+      "title": "DE The Dungeons of Torgar"
+    },
+    {
+      "code": "11tpot",
+      "title": "DE The Prisoners of Time"
+    },
+    {
+      "code": "12tmod",
+      "title": "DE The Masters of Darkness"
+    },
+    {
+      "code": "13tplor",
+      "title": "DE The Plague Lords of Ruel"
+    },
+    {
+      "code": "14tcok",
+      "title": "DE The Captives of Kaag"
+    },
+    {
+      "code": "15tdc",
+      "title": "DE The Darke Crusade"
+    },
+    {
+      "code": "16tlov",
+      "title": "DE The Legacy of Vashna"
+    },
+    {
+      "code": "17tdoi",
+      "title": "DE The Deathlord of Ixia"
+    },
+    {
+      "code": "18dotd",
+      "title": "DE Dawn of the Dragons"
+    },
+    {
+      "code": "19wb",
+      "title": "DE Wolf's Bane"
+    },
+    {
+      "code": "20tcon",
+      "title": "DE The Curse of Naar"
+    }
+  ]
+}
