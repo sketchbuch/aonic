@@ -5,8 +5,6 @@ import '../../../helpers.dart';
 
 void main() {
   group('Model - Description()', () {
-    const text =
-        'Internet Edition published by Project Aon. This edition is intended to reflect the complete text of the original version. Where we have made minor corrections, they will be noted in the Errata.';
     const type = 'publication';
 
     const xml = '''<description class="$type">
