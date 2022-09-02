@@ -4,7 +4,7 @@ import 'package:xml/xml.dart';
 import '../constants/supported_books.dart';
 import '../exceptions/xml.dart';
 import '../i18n/_generated_/translations.g.dart';
-import '../models/book.dart';
+import '../models/book/book.dart';
 import '../models/booklist/booklist.dart';
 import '../models/booklist/booklist_item.dart';
 import '../utils/get_aon_book_data.dart';

@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-import '../../models/content/subcontent/text_element.dart';
+import '../../models/book/content/subcontent/text_element.dart';
 import '../../types/types.dart';
 import 'replace_character_tags.dart';
 

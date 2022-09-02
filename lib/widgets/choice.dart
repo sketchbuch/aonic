@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/content/choice_tag.dart';
+import '../models/book/content/choice_tag.dart';
 import 'content_renderer.dart';
 
 class Choice extends StatelessWidget with ContentRenderer {

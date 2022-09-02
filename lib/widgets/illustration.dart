@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/content/illustration_tag.dart';
+import '../models/book/content/illustration_tag.dart';
 import 'content_renderer.dart';
 import 'image/image_error.dart';
 import 'image/image_loading.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../i18n/_generated_/translations.g.dart';
-import '../models/content/combat_tag.dart';
+import '../models/book/content/combat_tag.dart';
 import 'content_renderer.dart';
 
 class Combat extends StatelessWidget with ContentRenderer {

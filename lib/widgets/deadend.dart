@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/content/deadend_tag.dart';
+import '../models/book/content/deadend_tag.dart';
 import 'content_renderer.dart';
 
 class Deadend extends StatelessWidget with ContentRenderer {

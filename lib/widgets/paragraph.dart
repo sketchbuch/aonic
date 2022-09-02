@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/content/paragraph_tag.dart';
+import '../models/book/content/paragraph_tag.dart';
 import 'content_renderer.dart';
 
 class Paragraph extends StatelessWidget with ContentRenderer {

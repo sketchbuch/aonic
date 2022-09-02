@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../models/book.dart';
-import '../models/content/choice_tag.dart';
-import '../models/content/combat_tag.dart';
-import '../models/content/deadend_tag.dart';
-import '../models/content/illustration_tag.dart';
-import '../models/content/paragraph_tag.dart';
-import '../models/section.dart';
-import '../models/section/data.dart';
+import '../models/book/book.dart';
+import '../models/book/content/choice_tag.dart';
+import '../models/book/content/combat_tag.dart';
+import '../models/book/content/deadend_tag.dart';
+import '../models/book/content/illustration_tag.dart';
+import '../models/book/content/paragraph_tag.dart';
+import '../models/book/section.dart';
+import '../models/book/section/data.dart';
 import 'choice.dart';
 import 'combat.dart';
 import 'deadend.dart';
