@@ -15,47 +15,50 @@ import 'illustration.dart';
 import 'paragraph.dart';
 
 class BookDisplay extends StatelessWidget {
-  final Book book;
+  final Book _book;
+  final int _pageNumber;
 
-  const BookDisplay(this.book, {Key? key}) : super(key: key);
+  const BookDisplay(this._book, this._pageNumber, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    int index = 16;
-    Section section = book.numbered.elementAt(index);
+    Section section = _book.numbered.elementAt(_pageNumber);
     Data data = section.data;
 
     //print(data.toJson());
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: data.content
-          .map<Widget>((tag) {
-            final tagType = tag.tagType();
+      children: [
+        Text(section.meta.title),
+        ...data.content
+            .map<Widget>((tag) {
+              final tagType = tag.tagType();
 
-            switch (tagType) {
-              case 'ChoiceTag':
-                return Choice(tag as ChoiceTag);
+              switch (tagType) {
+                case 'ChoiceTag':
+                  return Choice(tag as ChoiceTag);
 
-              case 'CombatTag':
-                return Combat(tag as CombatTag);
+                case 'CombatTag':
+                  return Combat(tag as CombatTag);
 
-              case 'DeadendTag':
-                return Deadend(tag as DeadendTag);
+                case 'DeadendTag':
+                  return Deadend(tag as DeadendTag);
 
-              case 'IllustrationTag':
-                final illy = tag as IllustrationTag;
-                return illy.isRealIllustration ? Illustration(illy) : const SizedBox();
+                case 'IllustrationTag':
+                  final illy = tag as IllustrationTag;
+                  return illy.isRealIllustration ? Illustration(illy) : const SizedBox();
 
-              case 'ParagraphTag':
-                return Paragraph(tag as ParagraphTag);
+                case 'ParagraphTag':
+                  return Paragraph(tag as ParagraphTag);
 
-              default:
-                return Text('Unsupported Tag: "$tagType"');
-            }
-          })
-          .where((Widget widget) => widget.runtimeType.toString() != 'SizedBox')
-          .toList(),
+                default:
+                  return Text('Unsupported Tag: "$tagType"');
+              }
+            })
+            .where((Widget widget) => widget.runtimeType.toString() != 'SizedBox')
+            .toList()
+      ],
     );
   }
 }

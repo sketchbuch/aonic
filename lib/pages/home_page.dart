@@ -23,6 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _pageNumber = 0;
   Book? _book;
   BooklistItem? _selectedBook;
 
@@ -63,6 +64,20 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void _handleNext() async {
+    setState(() {
+      final newPage = _pageNumber += 1;
+      _pageNumber = newPage > 350 ? 0 : newPage;
+    });
+  }
+
+  void _handlePrev() async {
+    setState(() {
+      final newPage = _pageNumber -= 1;
+      _pageNumber = newPage < 0 ? 350 : newPage;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final trans = t.home;
@@ -70,17 +85,33 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
+        actions: book != null
+            ? [
+                IconButton(
+                  icon: const Icon(Icons.navigate_before),
+                  tooltip: 'Previous',
+                  onPressed: _handlePrev,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.navigate_next),
+                  tooltip: 'Next',
+                  onPressed: _handleNext,
+                ),
+              ]
+            : [],
         title: Text('${widget.title}${book != null ? ': ${book.title}' : ''}'),
       ),
       body: Center(
-        child: book != null ? BookDisplay(book) : BookSelection(widget.booklist, _selectedBook, _handleBookSelection),
+        child: book != null
+            ? BookDisplay(book, _pageNumber)
+            : BookSelection(widget.booklist, _selectedBook, _handleBookSelection),
       ),
       floatingActionButton: _selectedBook == null
           ? null
           : FloatingActionButton(
               onPressed: book != null ? _handleBookUnload : _handleBookLoad,
               tooltip: book != null ? trans.loadButton.unload : trans.loadButton.load,
-              child: Icon(book != null ? Icons.chevron_left : Icons.download),
+              child: Icon(book != null ? Icons.home : Icons.download),
             ),
     );
   }
