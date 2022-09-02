@@ -6,7 +6,6 @@ import '../../../utils/xml/helpers.dart';
 class Footnote {
   late String id = '';
   late String idRef = '';
-  late String text = '';
 
   // ignore: unused_element
   Footnote._();
@@ -17,7 +16,8 @@ class Footnote {
   }
 
   Json toJson() => {
-        'text': text,
+        'id': id,
+        'idRef': idRef,
       };
 
   @override

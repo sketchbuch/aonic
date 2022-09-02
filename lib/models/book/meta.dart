@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:xml/xml.dart';
 
 import '../../types/types.dart';
@@ -41,7 +42,7 @@ class Meta {
   Json toJson() => {
         'creators': creators.map((creator) => creator.toJson()).toList(),
         'descriptions': descriptions.map((description) => description.toJson()).toList(),
-        'publicationDate': publicationDate,
+        'publicationDate': publicationDate != null ? DateFormat('dd-MM-yyyy').format(publicationDate!) : '',
         'publisher': publisher,
         'rights': rights.map((right) => right.toJson()).toList(),
         'title': title,

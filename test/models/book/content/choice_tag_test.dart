@@ -8,6 +8,7 @@ void main() {
     const xml =
         '<choice idref="sect213">If you would rather press on, <link-text class="attr-test">turn to 213</link-text>.</choice>';
     final tag = ChoiceTag.fromXml(getRootXmlElement(xml));
+
     final expected = {
       "idref": "sect213",
       "linkTextIndex": 1,

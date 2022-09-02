@@ -1,15 +1,19 @@
-import 'package:lonewolf_new/models/book/content/deadend_tag.dart';
+import 'package:lonewolf_new/models/book/section/meta_link.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
 
 void main() {
-  group('Model - DeadendTag():', () {
-    const xml = '<deadend>Your life and your mission end here.</deadend>';
-    final tag = DeadendTag.fromXml(getRootXmlElement(xml));
+  group('Model - MetaLink()', () {
+    const idRef = 'title';
+    const type = 'prev';
+
+    const xml = '<link class="$type" idref="$idRef" />';
+    final tag = MetaLink.fromXml(getRootXmlElement(xml));
 
     final expected = {
-      "text": "Your life and your mission end here.",
+      "idRef": idRef,
+      "type": type,
     };
 
     test('Returns expected JSON', () {

@@ -15,6 +15,7 @@ void main() {
         <instance class="pdf" src="small1.pdf" width="386" height="150" />
        </illustration>''';
     final tag = IllustrationTag.fromXml(getRootXmlElement(xml));
+
     final expected = {
       "creator": "Gary Chalk",
       "description": "This is the image description",

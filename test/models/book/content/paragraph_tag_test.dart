@@ -8,6 +8,7 @@ void main() {
     const xml =
         '<p>Each Meal of Laumspur may be consumed when prompted for a Meal, in which case it fulfils the Meal requirement in addition to restoring 3 <typ class="attribute">ENDURANCE</typ> points. Laumspur may also be consumed at any other time to restore <typ class="attribute">ENDURANCE</typ> without having any significance as a Meal.</p>';
     final tag = ParagraphTag.fromXml(getRootXmlElement(xml));
+
     final expected = {
       "texts": [
         {

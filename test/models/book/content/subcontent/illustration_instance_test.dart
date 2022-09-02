@@ -8,6 +8,7 @@ void main() {
     group('.png:', () {
       const xml = '<instance class="html" src="small1.png" width="386" height="150"  mime-type="image/png"/>';
       final tag = IllustrationInstance.fromXml(getRootXmlElement(xml));
+
       final expected = {
         "fileName": "small1.png",
         "height": 150,

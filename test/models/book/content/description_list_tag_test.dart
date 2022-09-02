@@ -17,6 +17,7 @@ void main() {
           </dd>
     </dl>''';
     final tag = DescriptionListTag.fromXml(getRootXmlElement(xml));
+
     final expected = {
       "items": [
         {

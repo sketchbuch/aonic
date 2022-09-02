@@ -23,6 +23,7 @@ void main() {
       test('Returns expected $testType with displayType "$displayType" when the tag is "$tagName"', () {
         final xml = '<$tagName>If you would rather press on, </$tagName>';
         final tag = TextElement.fromXml(getRootXmlElement(xml));
+
         final expected = {
           "attrs": {},
           "displayType": displayType,
@@ -50,6 +51,7 @@ void main() {
 
     group('fromTxt()', () {
       final tag = TextElement.fromTxt('If you would rather press on, ');
+
       final expected = {
         "attrs": {},
         "displayType": "plain",

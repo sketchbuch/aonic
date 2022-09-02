@@ -18,8 +18,8 @@ class Book {
   Book._();
 
   Book.fromXml(XmlElement xml) {
-    lang = getAttribute('version', xml);
-    version = getAttribute('xml:lang', xml);
+    lang = getAttribute('xml:lang', xml);
+    version = getAttribute('version', xml);
 
     final metaXml = xml.getElement('meta');
 

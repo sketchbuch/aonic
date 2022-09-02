@@ -12,6 +12,7 @@ void main() {
       <li><a idref="discplnz">Kai Disciplines</a></li>
     </ul>''';
     final tag = ListTag.fromXml(getRootXmlElement(xml));
+
     final expected = {
       "items": [
         {
