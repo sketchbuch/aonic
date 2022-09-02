@@ -4,14 +4,14 @@ import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
 import 'meta_link.dart';
 
-class Meta {
+class SectionMeta {
   late List<MetaLink> links = [];
   late String title = '';
 
   // ignore: unused_element
-  Meta._();
+  SectionMeta._();
 
-  Meta.fromXml(XmlElement xml) {
+  SectionMeta.fromXml(XmlElement xml) {
     title = getValue('title', xml);
     links = xml.findElements('link').map((elementXml) => MetaLink.fromXml(elementXml)).toList();
   }

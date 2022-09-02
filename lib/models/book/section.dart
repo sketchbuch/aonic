@@ -5,7 +5,7 @@ import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
 import 'section/data.dart';
 import 'section/footnote.dart';
-import 'section/meta.dart';
+import 'section/section_meta.dart';
 
 enum SectionType {
   backmatter('backmatter'),
@@ -21,7 +21,7 @@ enum SectionType {
 
 class Section {
   late Data data;
-  late Meta meta;
+  late SectionMeta meta;
   late List<Footnote> footnotes;
   late SectionType type;
   late String id;
@@ -48,7 +48,7 @@ class Section {
     final metaXml = xml.getElement('meta');
 
     if (metaXml != null) {
-      meta = Meta.fromXml(metaXml);
+      meta = SectionMeta.fromXml(metaXml);
     }
 
     if (dataXml != null) {

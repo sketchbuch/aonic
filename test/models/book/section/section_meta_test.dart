@@ -1,10 +1,10 @@
-import 'package:lonewolf_new/models/book/section/meta.dart';
+import 'package:lonewolf_new/models/book/section/section_meta.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
 
 void main() {
-  group('Model - Meta()', () {
+  group('Model - SectionMeta()', () {
     const title = 'Dedication';
     const idRef1 = 'title';
     const type1 = 'prev';
@@ -13,7 +13,7 @@ void main() {
 
     const xml =
         '<meta><title>$title</title><link class="$type1" idref="$idRef1" /><link class="$type2" idref="$idRef2" /></meta>';
-    final tag = Meta.fromXml(getRootXmlElement(xml));
+    final tag = SectionMeta.fromXml(getRootXmlElement(xml));
 
     final expected = {
       "links": [
