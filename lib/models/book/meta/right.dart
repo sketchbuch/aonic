@@ -3,24 +3,26 @@ import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
+import '../content/subcontent/text_element.dart';
 
 enum RightType {
-  copyrights,
-  licenseNotification,
-  none,
-  unknown,
+  copyrights('copyrights'),
+  licenseNotification('license-notification'),
+  none('none'),
+  unknown('unknown');
+
+  const RightType(this.value);
+  final String value;
 }
 
 class Right {
   late RightType type;
-  late String text = '';
+  late final List<List<TextElement>> texts;
 
   // ignore: unused_element
   Right._();
 
   Right.fromXml(XmlElement xml) {
-    text = xml.text;
-
     try {
       final typeName = getAttribute('class', xml);
 
@@ -32,11 +34,21 @@ class Right {
     } on ArgumentError {
       type = RightType.unknown;
     }
+
+    texts = [];
+
+    final lines = xml.findAllElements('line');
+
+    if (lines.isNotEmpty) {
+      for (var l in lines) {
+        texts.add(getTextElementList(l));
+      }
+    }
   }
 
   Json toJson() => {
-        'text': text,
-        'type': type.name,
+        'texts': texts.map((line) => line.map((text) => text.toJson()).toList()).toList(),
+        'type': type.value,
       };
 
   @override

@@ -2,6 +2,7 @@ import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
+import '../content/subcontent/text_element.dart';
 
 enum DescriptionType {
   blurb,
@@ -12,14 +13,12 @@ enum DescriptionType {
 
 class Description {
   late DescriptionType type;
-  late String text = '';
+  late final List<List<TextElement>> texts;
 
   // ignore: unused_element
   Description._();
 
   Description.fromXml(XmlElement xml) {
-    text = xml.text;
-
     try {
       final typeName = getAttribute('class', xml);
 
@@ -31,10 +30,20 @@ class Description {
     } on ArgumentError {
       type = DescriptionType.unknown;
     }
+
+    texts = [];
+
+    final paragraphs = xml.findElements('p');
+
+    if (paragraphs.isNotEmpty) {
+      for (var p in paragraphs) {
+        texts.add(getTextElementList(p));
+      }
+    }
   }
 
   Json toJson() => {
-        'text': text,
+        'texts': texts.map((line) => line.map((text) => text.toJson()).toList()).toList(),
         'type': type.name,
       };
 

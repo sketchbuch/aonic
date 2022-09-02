@@ -11,7 +11,6 @@ void main() {
     const idRef2 = 'acknwldg';
     const lang = 'en-UK';
     const publisher = 'Project Aon';
-    const rightType = 'licenseNotification';
     const sectionId = 'dedicate';
     const sectionTitle = 'Dedication';
     const sectionType = 'frontmatter';
@@ -32,7 +31,7 @@ void main() {
         <description class="$descriptionType">
           <p>Internet Edition published by <a href="&link.project.website;">Project Aon</a>. This edition is intended to reflect the complete text of the original version. Where we have made minor corrections, they will be noted in the <a idref="errata">Errata</a>.</p>
         </description>
-        <rights class="$rightType">
+        <rights class="license-notification">
           <p>
             <line>Text copyright <ch.copy/> 1984 Joe Dever.</line>
             <line>Illustrations copyright <ch.copy/> 1984 Gary Chalk.</line>
@@ -87,8 +86,28 @@ void main() {
         ],
         "descriptions": [
           {
-            "text":
-                "Internet Edition published by Project Aon. This edition is intended to reflect the complete text of the original version. Where we have made minor corrections, they will be noted in the Errata.",
+            "texts": [
+              [
+                {"attrs": {}, "displayType": "plain", "text": "Internet Edition published by "},
+                {
+                  "attrs": {"href": "&link.project.website;"},
+                  "displayType": "link",
+                  "text": "Project Aon"
+                },
+                {
+                  "attrs": {},
+                  "displayType": "plain",
+                  "text":
+                      ". This edition is intended to reflect the complete text of the original version. Where we have made minor corrections, they will be noted in the "
+                },
+                {
+                  "attrs": {"idref": "errata"},
+                  "displayType": "link",
+                  "text": "Errata"
+                },
+                {"attrs": {}, "displayType": "plain", "text": "."}
+              ]
+            ],
             "type": descriptionType
           }
         ],
@@ -96,9 +115,28 @@ void main() {
         "publisher": publisher,
         "rights": [
           {
-            "text":
-                "Text copyright © 1984 Joe Dever.Illustrations copyright © 1984 Gary Chalk.Distribution of this Internet Edition is restricted under the terms of the Project Aon License.",
-            "type": rightType
+            "texts": [
+              [
+                {"attrs": {}, "displayType": "plain", "text": "Text copyright © 1984 Joe Dever."}
+              ],
+              [
+                {"attrs": {}, "displayType": "plain", "text": "Illustrations copyright © 1984 Gary Chalk."}
+              ],
+              [
+                {
+                  "attrs": {},
+                  "displayType": "plain",
+                  "text": "Distribution of this Internet Edition is restricted under the terms of the "
+                },
+                {
+                  "attrs": {"idref": "license"},
+                  "displayType": "link",
+                  "text": "Project Aon License"
+                },
+                {"attrs": {}, "displayType": "plain", "text": "."}
+              ]
+            ],
+            "type": 'license-notification'
           }
         ],
         "title": title

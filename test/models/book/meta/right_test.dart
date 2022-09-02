@@ -5,9 +5,7 @@ import '../../../helpers.dart';
 
 void main() {
   group('Model - Right()', () {
-    const type = 'licenseNotification';
-
-    const xml = '''<rights class="$type">
+    const xml = '''<rights class="licenseNotification">
     <p>
       <line>Text copyright <ch.copy/> 1984 Joe Dever.</line>
       <line>Illustrations copyright <ch.copy/> 1984 Gary Chalk.</line>
@@ -17,9 +15,28 @@ void main() {
     final tag = Right.fromXml(getRootXmlElement(xml));
 
     final expected = {
-      'text':
-          'Text copyright © 1984 Joe Dever.Illustrations copyright © 1984 Gary Chalk.Distribution of this Internet Edition is restricted under the terms of the Project Aon License.',
-      'type': type,
+      "texts": [
+        [
+          {"attrs": {}, "displayType": "plain", "text": "Text copyright © 1984 Joe Dever."}
+        ],
+        [
+          {"attrs": {}, "displayType": "plain", "text": "Illustrations copyright © 1984 Gary Chalk."}
+        ],
+        [
+          {
+            "attrs": {},
+            "displayType": "plain",
+            "text": "Distribution of this Internet Edition is restricted under the terms of the "
+          },
+          {
+            "attrs": {"idref": "license"},
+            "displayType": "link",
+            "text": "Project Aon License"
+          },
+          {"attrs": {}, "displayType": "plain", "text": "."}
+        ]
+      ],
+      "type": 'license-notification',
     };
 
     test('Returns expected JSON', () {
