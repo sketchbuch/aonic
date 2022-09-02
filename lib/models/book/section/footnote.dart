@@ -17,12 +17,7 @@ class Footnote {
     idRef = getAttribute('idref', xml);
 
     final textXml = xml.getElement('p');
-
-    if (textXml != null) {
-      texts = getTextElementList(textXml);
-    } else {
-      texts = [];
-    }
+    texts = textXml != null ? getTextElementList(textXml) : [];
   }
 
   Json toJson() => {
