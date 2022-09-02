@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../models/books/book_item.dart';
+import '../models/booklist/booklist_item.dart';
 
 class BookSelection extends StatelessWidget {
-  final List<BookItem> _bookData;
-  final void Function(BookItem?) _onChanged;
-  final BookItem? _selectedBook;
+  final List<BooklistItem> _bookData;
+  final void Function(BooklistItem?) _onChanged;
+  final BooklistItem? _selectedBook;
 
   const BookSelection(this._bookData, this._selectedBook, this._onChanged, {Key? key}) : super(key: key);
 
@@ -15,7 +15,7 @@ class BookSelection extends StatelessWidget {
 
     for (var book in _bookData) {
       if (book.isSupported) {
-        supportedBooks.add(RadioListTile<BookItem>(
+        supportedBooks.add(RadioListTile<BooklistItem>(
           groupValue: _selectedBook,
           onChanged: _onChanged,
           title: Text(book.title),

@@ -7,6 +7,7 @@ import 'pages/home_page.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
+
   runApp(TranslationProvider(child: const App()));
 }
 

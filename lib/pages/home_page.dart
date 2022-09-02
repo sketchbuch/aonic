@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:xml/xml.dart';
 
+import '../constants/supported_books.dart';
 import '../exceptions/xml.dart';
 import '../i18n/_generated_/translations.g.dart';
 import '../models/book.dart';
-import '../models/books/book_item.dart';
-import '../models/books/lonewolf_books.dart';
+import '../models/booklist/booklist.dart';
+import '../models/booklist/booklist_item.dart';
 import '../utils/get_aon_book_data.dart';
 import '../utils/xml/helpers.dart';
 import '../widgets/book_display.dart';
@@ -13,7 +14,7 @@ import '../widgets/book_selection.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
-  final booklist = LoneWolfBooks(t.booksLonewolf.books, 'en').getBooks();
+  final booklist = Booklist(t.booksLonewolf.books, lonewolfSupportedBooks, 'en').getBooks();
 
   HomePage({Key? key, required this.title}) : super(key: key);
 
@@ -23,7 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Book? _book;
-  BookItem? _selectedBook;
+  BooklistItem? _selectedBook;
 
   void _handleBookLoad() async {
     final selectedBook = _selectedBook;
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _handleBookSelection(BookItem? book) async {
+  void _handleBookSelection(BooklistItem? book) async {
     setState(() {
       _selectedBook = book;
     });

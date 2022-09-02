@@ -1,15 +1,15 @@
 import '../../types/types.dart';
 
-class BookItem {
+class BooklistItem {
   final int number;
   final String code;
   final String title;
   late final bool isSupported;
   late final String xmlPath;
 
-  BookItem(this.title, this.code, this.number, String language, List<int> supportedBooks) {
+  BooklistItem(this.title, this.code, this.number, String language, List<int> supportedBooks) {
     isSupported = supportedBooks.contains(number);
-    xmlPath = 'https://www.projectaon.org/data/trunk/$language/xml/${code}.xml';
+    xmlPath = 'https://www.projectaon.org/data/trunk/$language/xml/$code.xml';
   }
 
   Json toJson() => {

@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:http/http.dart' as https;
 
-import '../models/books/book_item.dart';
+import '../models/booklist/booklist_item.dart';
 
-Future<String> getAonBookData(BookItem selectedBook) async {
+Future<String> getAonBookData(BooklistItem selectedBook) async {
   // https://www.projectaon.org/data/trunk/en/xml/01fftd.xml
   // view-source:https://www.projectaon.org/data/trunk/en/xml/01fftd.xml
   // https://www.projectaon.org/en/xhtml/lw/01fftd/title.htm
