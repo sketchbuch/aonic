@@ -55,7 +55,13 @@ class Section {
       data = Data.fromXml(dataXml);
     }
 
-    footnotes = xml.findElements('footnotes').map((footnote) => Footnote.fromXml(footnote)).toList();
+    final footnotesXml = xml.getElement('footnotes');
+
+    if (footnotesXml != null) {
+      footnotes = footnotesXml.findElements('footnote').map((footnote) => Footnote.fromXml(footnote)).toList();
+    } else {
+      footnotes = [];
+    }
   }
 
   Json toJson() => {
