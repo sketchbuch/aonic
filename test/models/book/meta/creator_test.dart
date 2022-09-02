@@ -3,27 +3,26 @@ import 'package:test/test.dart';
 
 import '../../../helpers.dart';
 
+const creatorSortText = 'Dever, Joe';
+const creatorText = 'Joe Dever';
+const creatorType = 'author';
+const creatorXml = '<creator class="$creatorType" sort-name="$creatorSortText">$creatorText</creator>';
+const creatorJson = {
+  "text": creatorText,
+  "type": creatorType,
+  "sortText": creatorSortText,
+};
+
 void main() {
   group('Model - Creator()', () {
-    const sortText = 'Dever, Joe';
-    const text = 'Joe Dever';
-    const type = 'author';
-
-    const xml = '<creator class="$type" sort-name="$sortText">$text</creator>';
-    final tag = Creator.fromXml(getRootXmlElement(xml));
-
-    final expected = {
-      "text": text,
-      "type": type,
-      "sortText": sortText,
-    };
+    final tag = Creator.fromXml(getRootXmlElement(creatorXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(expected));
+      expect(tag.toJson(), equals(creatorJson));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(expected.toString()));
+      expect(tag.toString(), equals(creatorJson.toString()));
     });
   });
 }

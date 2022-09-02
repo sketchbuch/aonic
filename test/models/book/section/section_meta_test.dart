@@ -2,39 +2,37 @@ import 'package:lonewolf_new/models/book/section/section_meta.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
+import 'meta_link_test.dart';
+
+const sectionMetaTitle = 'Dedication';
+const sectionMetaIdRef2 = 'acknwldg';
+const sectionMetaType2 = 'next';
+const sectionMetaXml = '''<meta>
+  <title>$sectionMetaTitle</title>
+  $metaLinkXml
+  <link class="$sectionMetaType2" idref="$sectionMetaIdRef2" />
+</meta>''';
+final sectionMetaJson = {
+  "links": [
+    metaLinkJson,
+    {
+      "idRef": sectionMetaIdRef2,
+      "type": sectionMetaType2,
+    },
+  ],
+  "title": sectionMetaTitle,
+};
 
 void main() {
   group('Model - SectionMeta()', () {
-    const title = 'Dedication';
-    const idRef1 = 'title';
-    const type1 = 'prev';
-    const idRef2 = 'acknwldg';
-    const type2 = 'next';
-
-    const xml =
-        '<meta><title>$title</title><link class="$type1" idref="$idRef1" /><link class="$type2" idref="$idRef2" /></meta>';
-    final tag = SectionMeta.fromXml(getRootXmlElement(xml));
-
-    final expected = {
-      "links": [
-        {
-          "idRef": idRef1,
-          "type": type1,
-        },
-        {
-          "idRef": idRef2,
-          "type": type2,
-        },
-      ],
-      "title": title,
-    };
+    final tag = SectionMeta.fromXml(getRootXmlElement(sectionMetaXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(expected));
+      expect(tag.toJson(), equals(sectionMetaJson));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(expected.toString()));
+      expect(tag.toString(), equals(sectionMetaJson.toString()));
     });
   });
 }

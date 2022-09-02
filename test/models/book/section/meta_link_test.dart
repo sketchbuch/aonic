@@ -3,25 +3,24 @@ import 'package:test/test.dart';
 
 import '../../../helpers.dart';
 
+const metaLinkIdRef = 'title';
+const metaLinkType = 'prev';
+const metaLinkXml = '<link class="$metaLinkType" idref="$metaLinkIdRef" />';
+const metaLinkJson = {
+  "idRef": metaLinkIdRef,
+  "type": metaLinkType,
+};
+
 void main() {
   group('Model - MetaLink()', () {
-    const idRef = 'title';
-    const type = 'prev';
-
-    const xml = '<link class="$type" idref="$idRef" />';
-    final tag = MetaLink.fromXml(getRootXmlElement(xml));
-
-    final expected = {
-      "idRef": idRef,
-      "type": type,
-    };
+    final tag = MetaLink.fromXml(getRootXmlElement(metaLinkXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(expected));
+      expect(tag.toJson(), equals(metaLinkJson));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(expected.toString()));
+      expect(tag.toString(), equals(metaLinkJson.toString()));
     });
   });
 }

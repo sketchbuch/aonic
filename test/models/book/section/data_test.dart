@@ -3,27 +3,27 @@ import 'package:test/test.dart';
 
 import '../../../helpers.dart';
 
+const dataXml = '<data><p class="dedication">To Mel and Yin</p></data>';
+const dataJson = {
+  "content": [
+    {
+      "texts": [
+        {"attrs": {}, "displayType": "plain", "text": "To Mel and Yin"}
+      ]
+    }
+  ]
+};
+
 void main() {
   group('Model - Data()', () {
-    const xml = '<data><p class="dedication">To Mel and Yin</p></data>';
-    final tag = Data.fromXml(getRootXmlElement(xml));
-
-    final expected = {
-      "content": [
-        {
-          "texts": [
-            {"attrs": {}, "displayType": "plain", "text": "To Mel and Yin"}
-          ]
-        }
-      ]
-    };
+    final tag = Data.fromXml(getRootXmlElement(dataXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(expected));
+      expect(tag.toJson(), equals(dataJson));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(expected.toString()));
+      expect(tag.toString(), equals(dataJson.toString()));
     });
   });
 }
