@@ -6,12 +6,13 @@ import 'package:redux/redux.dart';
 import 'i18n/_generated_/translations.g.dart';
 import 'pages/home_page.dart';
 import 'store/models/app_state.dart';
+import 'store/reducers/app_state_reducer.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
 
-  final store = Store<AppState>(reducer, initialState: const AppState.initialState());
+  final store = Store<AppState>(appStateReducer, initialState: const AppState.initialState());
 
   runApp(TranslationProvider(child: App(store)));
 }

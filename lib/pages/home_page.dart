@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 import 'package:xml/xml.dart';
 
-import '../constants/supported_books.dart';
+import '../constants/books.dart';
 import '../exceptions/xml.dart';
 import '../i18n/_generated_/translations.g.dart';
 import '../models/book/book.dart';
 import '../models/booklist/booklist.dart';
-import '../models/booklist/booklist_item.dart';
 import '../store/models/app_state.dart';
 import '../utils/get_aon_book_data.dart';
 import '../utils/xml/helpers.dart';
 import '../widgets/book_display.dart';
 import '../widgets/book_selection.dart';
+import 'home_view_model.dart';
 
 class HomePage extends StatelessWidget {
   final String title;
@@ -41,13 +40,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final trans = t.home;
-
     return StoreConnector<AppState, HomeViewModel>(
       converter: (store) => HomeViewModel.create(store),
       builder: (BuildContext context, HomeViewModel viewModel) {
-        final isBookLoaded = viewModel.bookLoaded;
-        final book = viewModel.book;
+        final isBookLoaded = viewModel.bookState.bookLoaded;
+        final book = viewModel.bookState.book;
 
         return Scaffold(
           appBar: AppBar(
@@ -87,76 +84,6 @@ class HomePage extends StatelessWidget {
               : null,
         );
       },
-    );
-  }
-}
-
-class HomeViewModel {
-  final Book? book;
-  final BooklistItem? selectedBook;
-  final bool bookLoaded;
-  final Function() onBookUnloaded;
-  final Function() onNextPage;
-  final Function() onPrevPage;
-  final Function(BooklistItem?) onSelectBook;
-  final Function(int) onGoToPage;
-  final Function(String, Book) onBookLoaded;
-  final int page;
-  final String bookXml;
-
-  HomeViewModel({
-    required this.book,
-    required this.bookLoaded,
-    required this.bookXml,
-    required this.onBookLoaded,
-    required this.onBookUnloaded,
-    required this.onGoToPage,
-    required this.onNextPage,
-    required this.onPrevPage,
-    required this.onSelectBook,
-    required this.page,
-    required this.selectedBook,
-  });
-
-  factory HomeViewModel.create(Store<AppState> store) {
-    final state = store.state;
-
-    void _onBookLoaded(String bookXml, Book book) {
-      store.dispatch(BookLoadedAction(bookXml, book));
-    }
-
-    void _onBookUnloaded() {
-      store.dispatch(BookUnloadedAction());
-    }
-
-    void _onNextPage() {
-      store.dispatch(NextPageAction());
-    }
-
-    void _onPrevPage() {
-      store.dispatch(PrevPageAction());
-    }
-
-    void _onGoToPage(int page) {
-      store.dispatch(GoToPageAction(page));
-    }
-
-    void _onSelectBook(BooklistItem? selectedBook) {
-      store.dispatch(SelectBookAction(selectedBook));
-    }
-
-    return HomeViewModel(
-      book: state.book,
-      bookLoaded: state.bookLoaded,
-      bookXml: state.bookXml,
-      onBookLoaded: _onBookLoaded,
-      onBookUnloaded: _onBookUnloaded,
-      onGoToPage: _onGoToPage,
-      onNextPage: _onNextPage,
-      onPrevPage: _onPrevPage,
-      onSelectBook: _onSelectBook,
-      page: state.page,
-      selectedBook: state.selectedBook,
     );
   }
 }

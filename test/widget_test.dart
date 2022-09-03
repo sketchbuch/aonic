@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lonewolf_new/main.dart';
 import 'package:lonewolf_new/store/models/app_state.dart';
+import 'package:lonewolf_new/store/reducers/app_state_reducer.dart';
 import 'package:redux/redux.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    final store = Store<AppState>(reducer, initialState: const AppState.initialState());
+    final store = Store<AppState>(appStateReducer, initialState: const AppState.initialState());
 
     // Build our app and trigger a frame.
     await tester.pumpWidget(App(store));
