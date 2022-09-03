@@ -25,8 +25,6 @@ class BookDisplay extends StatelessWidget {
     Section section = _book.numbered.elementAt(_pageNumber);
     Data data = section.data;
 
-    //print(data.toJson());
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

@@ -15,9 +15,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_redux: ^0.10.0
+  flutter_redux_dev_tools: ^0.5.2
   http: ^0.13.5
   intl: ^0.17.0
   recase: ^4.0.0
+  redux: ^5.0.0
   slang: ^2.7.0
   slang_flutter: ^2.7.0
   xml: ^6.1.0

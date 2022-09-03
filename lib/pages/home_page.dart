@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 import 'package:xml/xml.dart';
 
 import '../constants/supported_books.dart';
@@ -7,112 +9,154 @@ import '../i18n/_generated_/translations.g.dart';
 import '../models/book/book.dart';
 import '../models/booklist/booklist.dart';
 import '../models/booklist/booklist_item.dart';
+import '../store/models/app_state.dart';
 import '../utils/get_aon_book_data.dart';
 import '../utils/xml/helpers.dart';
 import '../widgets/book_display.dart';
 import '../widgets/book_selection.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   final String title;
   final booklist = Booklist(t.booksLonewolf.books, lonewolfSupportedBooks, 'en').getBooks();
+  final trans = t.home;
 
   HomePage({Key? key, required this.title}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _pageNumber = 0;
-  Book? _book;
-  BooklistItem? _selectedBook;
-
-  void _handleBookLoad() async {
-    final selectedBook = _selectedBook;
+  void _handleBookLoad(HomeViewModel viewModel) async {
+    final selectedBook = viewModel.selectedBook;
 
     if (selectedBook != null) {
-      try {
-        final bookData = await getAonBookData(selectedBook);
-        final bookXml = XmlDocument.parse(cleanXmlString(bookData));
-        final gamebook = bookXml.getElement('gamebook');
+      final bookData = await getAonBookData(selectedBook);
+      final bookXml = XmlDocument.parse(cleanXmlString(bookData));
+      final gamebook = bookXml.getElement('gamebook');
 
-        if (gamebook != null) {
-          Book book = Book.fromXml(gamebook);
-          setState(() {
-            _book = book;
-          });
-        } else {
-          throw BookXmlException('Book data does not contain a "gamebook" element');
-        }
-      } catch (error) {
-        print(error.toString());
+      if (gamebook != null) {
+        Book book = Book.fromXml(gamebook);
+        viewModel.onBookLoaded(bookData, book);
+      } else {
+        throw BookXmlException('Book data does not contain a "gamebook" element');
       }
     }
   }
 
-  void _handleBookSelection(BooklistItem? book) async {
-    setState(() {
-      _selectedBook = book;
-    });
-  }
-
-  void _handleBookUnload() async {
-    if (_book != null) {
-      setState(() {
-        _book = null;
-      });
-    }
-  }
-
-  void _handleNext() async {
-    setState(() {
-      final newPage = _pageNumber += 1;
-      _pageNumber = newPage > 350 ? 0 : newPage;
-    });
-  }
-
-  void _handlePrev() async {
-    setState(() {
-      final newPage = _pageNumber -= 1;
-      _pageNumber = newPage < 0 ? 350 : newPage;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final trans = t.home;
-    final book = _book;
+    //final trans = t.home;
 
-    return Scaffold(
-      appBar: AppBar(
-        actions: book != null
-            ? [
-                IconButton(
-                  icon: const Icon(Icons.navigate_before),
-                  tooltip: 'Previous',
-                  onPressed: _handlePrev,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.navigate_next),
-                  tooltip: 'Next',
-                  onPressed: _handleNext,
-                ),
-              ]
-            : [],
-        title: Text('${widget.title}${book != null ? ': ${book.title}' : ''}'),
-      ),
-      body: Center(
-        child: book != null
-            ? BookDisplay(book, _pageNumber)
-            : BookSelection(widget.booklist, _selectedBook, _handleBookSelection),
-      ),
-      floatingActionButton: _selectedBook == null
-          ? null
-          : FloatingActionButton(
-              onPressed: book != null ? _handleBookUnload : _handleBookLoad,
-              tooltip: book != null ? trans.loadButton.unload : trans.loadButton.load,
-              child: Icon(book != null ? Icons.home : Icons.download),
-            ),
+    return StoreConnector<AppState, HomeViewModel>(
+      converter: (store) => HomeViewModel.create(store),
+      builder: (BuildContext context, HomeViewModel viewModel) {
+        final isBookLoaded = viewModel.bookLoaded;
+        final book = viewModel.book;
+
+        return Scaffold(
+          appBar: AppBar(
+            actions: isBookLoaded
+                ? [
+                    IconButton(
+                      icon: const Icon(Icons.navigate_before),
+                      tooltip: 'Previous',
+                      onPressed: viewModel.onPrevPage,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.navigate_next),
+                      tooltip: 'Next',
+                      onPressed: viewModel.onNextPage,
+                    ),
+                  ]
+                : [],
+            title: Text(title),
+          ),
+          body: Center(
+            child: isBookLoaded && book != null
+                ? BookDisplay(book, viewModel.page)
+                : BookSelection(booklist, viewModel.selectedBook, viewModel.onSelectBook),
+          ),
+          floatingActionButton: viewModel.selectedBook != null
+              ? FloatingActionButton(
+                  onPressed: () {
+                    if (isBookLoaded) {
+                      viewModel.onBookUnloaded();
+                    } else {
+                      _handleBookLoad(viewModel);
+                    }
+                  },
+                  tooltip: isBookLoaded ? trans.loadButton.unload : trans.loadButton.load,
+                  child: Icon(isBookLoaded ? Icons.home : Icons.download),
+                )
+              : null,
+        );
+      },
+    );
+  }
+}
+
+class HomeViewModel {
+  final Book? book;
+  final BooklistItem? selectedBook;
+  final bool bookLoaded;
+  final Function() onBookUnloaded;
+  final Function() onNextPage;
+  final Function() onPrevPage;
+  final Function(BooklistItem?) onSelectBook;
+  final Function(int) onGoToPage;
+  final Function(String, Book) onBookLoaded;
+  final int page;
+  final String bookXml;
+
+  HomeViewModel({
+    required this.book,
+    required this.bookLoaded,
+    required this.bookXml,
+    required this.onBookLoaded,
+    required this.onBookUnloaded,
+    required this.onGoToPage,
+    required this.onNextPage,
+    required this.onPrevPage,
+    required this.onSelectBook,
+    required this.page,
+    required this.selectedBook,
+  });
+
+  factory HomeViewModel.create(Store<AppState> store) {
+    final state = store.state;
+
+    void _onBookLoaded(String bookXml, Book book) {
+      store.dispatch(BookLoaded(bookXml, book));
+    }
+
+    void _onBookUnloaded() {
+      store.dispatch(BookUnloaded());
+    }
+
+    void _onNextPage() {
+      store.dispatch(NextPage());
+    }
+
+    void _onPrevPage() {
+      store.dispatch(PrevPage());
+    }
+
+    void _onGoToPage(int page) {
+      store.dispatch(GoToPage(page));
+    }
+
+    void _onSelectBook(BooklistItem? selectedBook) {
+      store.dispatch(SelectBook(selectedBook));
+    }
+
+    return HomeViewModel(
+      book: state.book,
+      bookLoaded: state.bookLoaded,
+      bookXml: state.bookXml,
+      onBookLoaded: _onBookLoaded,
+      onBookUnloaded: _onBookUnloaded,
+      onGoToPage: _onGoToPage,
+      onNextPage: _onNextPage,
+      onPrevPage: _onPrevPage,
+      onSelectBook: _onSelectBook,
+      page: state.page,
+      selectedBook: state.selectedBook,
     );
   }
 }
