@@ -8,11 +8,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lonewolf_new/main.dart';
+import 'package:lonewolf_new/store/models/app_state.dart';
+import 'package:redux/redux.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    final store = Store<AppState>(reducer, initialState: const AppState.initialState());
+
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const App());
+    await tester.pumpWidget(App(store));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
