@@ -35,58 +35,58 @@ class AppState {
       );
 }
 
-class BookLoaded {
+class BookLoadedAction {
   final Book book;
   final bool isLoaded = true;
   final int page = 0;
   final String xml;
 
-  BookLoaded(this.xml, this.book);
+  BookLoadedAction(this.xml, this.book);
 }
 
-class BookUnloaded {
+class BookUnloadedAction {
   final Book? book = null;
   final bool isLoaded = false;
   final int page = 0;
   final String xml = '';
 
-  BookUnloaded();
+  BookUnloadedAction();
 }
 
-class NextPage {
-  NextPage();
+class NextPageAction {
+  NextPageAction();
 }
 
-class PrevPage {
-  PrevPage();
+class PrevPageAction {
+  PrevPageAction();
 }
 
-class GoToPage {
+class GoToPageAction {
   final int page;
 
-  GoToPage(this.page);
+  GoToPageAction(this.page);
 }
 
-class SelectBook {
+class SelectBookAction {
   final BooklistItem? book;
 
-  SelectBook(this.book);
+  SelectBookAction(this.book);
 }
 
 AppState reducer(AppState state, action) {
-  if (action is BookLoaded) {
+  if (action is BookLoadedAction) {
     return state.copyWith(bookLoaded: action.isLoaded, bookXml: action.xml, page: action.page, book: action.book);
-  } else if (action is BookUnloaded) {
+  } else if (action is BookUnloadedAction) {
     return state.copyWith(bookLoaded: action.isLoaded, bookXml: action.xml, page: action.page, book: action.book);
-  } else if (action is GoToPage) {
+  } else if (action is GoToPageAction) {
     return state.copyWith(page: action.page);
-  } else if (action is PrevPage) {
+  } else if (action is PrevPageAction) {
     final int newPage = state.page - 1;
     return state.copyWith(page: newPage < 0 ? 349 : newPage);
-  } else if (action is NextPage) {
+  } else if (action is NextPageAction) {
     final int newPage = state.page + 1;
     return state.copyWith(page: newPage > 349 ? 0 : newPage);
-  } else if (action is SelectBook) {
+  } else if (action is SelectBookAction) {
     return state.copyWith(selectedBook: action.book);
   }
 

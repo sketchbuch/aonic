@@ -122,27 +122,27 @@ class HomeViewModel {
     final state = store.state;
 
     void _onBookLoaded(String bookXml, Book book) {
-      store.dispatch(BookLoaded(bookXml, book));
+      store.dispatch(BookLoadedAction(bookXml, book));
     }
 
     void _onBookUnloaded() {
-      store.dispatch(BookUnloaded());
+      store.dispatch(BookUnloadedAction());
     }
 
     void _onNextPage() {
-      store.dispatch(NextPage());
+      store.dispatch(NextPageAction());
     }
 
     void _onPrevPage() {
-      store.dispatch(PrevPage());
+      store.dispatch(PrevPageAction());
     }
 
     void _onGoToPage(int page) {
-      store.dispatch(GoToPage(page));
+      store.dispatch(GoToPageAction(page));
     }
 
     void _onSelectBook(BooklistItem? selectedBook) {
-      store.dispatch(SelectBook(selectedBook));
+      store.dispatch(SelectBookAction(selectedBook));
     }
 
     return HomeViewModel(
