@@ -1,0 +1,9 @@
+{
+  "loadButton": {
+    "load": "Download book XML",
+    "unload": "Back to book selection"
+  },
+  "title": "LoneWolf",
+  "titleLoading": "Loading book...",
+  "titleSelection": "Select a book"
+}

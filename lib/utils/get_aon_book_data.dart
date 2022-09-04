@@ -21,6 +21,6 @@ Future<String> getAonBookData(BooklistItem selectedBook) async {
   } on HttpException {
     rethrow;
   } catch (error) {
-    throw Exception('Error: $error');
+    throw Exception('Error: ${error.toString()}');
   }
 }

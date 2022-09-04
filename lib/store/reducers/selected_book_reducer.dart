@@ -6,7 +6,7 @@ BooklistItem? selectedBookReducer(BooklistItem? book, action) {
     return action.book;
   }
 
-  if (action is BookUnloadedAction) {
+  if (action is LoadBookFaliure || action is UnloadBookAction) {
     return null;
   }
 

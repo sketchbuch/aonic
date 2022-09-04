@@ -6,13 +6,12 @@ import 'content_renderer.dart';
 
 class Combat extends StatelessWidget with ContentRenderer {
   final CombatTag tag;
+  final trans = t.numbered; // get translation
 
-  const Combat(this.tag, {Key? key}) : super(key: key);
+  Combat(this.tag, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final trans = t.numbered; // get translation
-
     return wrapContent(
       RichText(
         text: TextSpan(

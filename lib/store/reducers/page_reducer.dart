@@ -13,15 +13,15 @@ int pageReducer(int page, action) {
 
   if (action is PrevPageAction) {
     final int newPage = page - 1;
-    return newPage < pageMin ? pageMax : newPage;
+    return newPage < pageMin ? pageMin : newPage;
   }
 
   if (action is NextPageAction) {
     final int newPage = page + 1;
-    return newPage > pageMax ? pageMin : newPage;
+    return newPage > pageMax ? pageMax : newPage;
   }
 
-  if (action is BookUnloadedAction) {
+  if (action is LoadBookFaliure || action is UnloadBookAction) {
     return pageMin;
   }
 

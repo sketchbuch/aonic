@@ -1,0 +1,9 @@
+{
+  "loadButton": {
+    "load": "DE Download book XML",
+    "unload": "DE Back to book selection"
+  },
+  "title": "DE LoneWolf",
+  "titleLoading": "Loading book...",
+  "titleSelection": "DE Select a book"
+}

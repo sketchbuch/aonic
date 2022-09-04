@@ -4,35 +4,36 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 import 'i18n/_generated_/translations.g.dart';
-import 'pages/home_page.dart';
+import 'routes/generate_route.dart';
+import 'routes/routes.dart';
 import 'store/models/app_state.dart';
-import 'store/reducers/app_state_reducer.dart';
+import 'store/store.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
 
-  final store = Store<AppState>(appStateReducer, initialState: const AppState.initialState());
+  final store = createStore();
 
   runApp(TranslationProvider(child: App(store)));
 }
 
 class App extends StatelessWidget {
   final Store<AppState> store;
+  final trans = t.common;
 
-  const App(this.store, {Key? key}) : super(key: key);
+  App(this.store, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final trans = t.common; // get translation
-
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(title: trans.title),
+        initialRoute: homeRoute,
         locale: TranslationProvider.of(context).flutterLocale,
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        onGenerateRoute: generateRoute,
         supportedLocales: LocaleSettings.supportedLocales,
         theme: ThemeData(
           primarySwatch: Colors.blue,
