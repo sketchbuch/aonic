@@ -5,11 +5,12 @@ class Booklist {
   final List<dynamic> _bookData;
   final List<int> _supportedBooks;
   final String _language;
-  late final List<BooklistItem> _books;
+  final List<BooklistItem> _books = [];
 
-  Booklist(this._bookData, this._supportedBooks, this._language) {
+  Booklist(this._bookData, this._supportedBooks, this._language);
+
+  void createBookList() {
     int bookNumber = 1;
-    _books = [];
 
     for (var book in _bookData) {
       _books.add(BooklistItem(book.title, book.code, bookNumber, _language, _supportedBooks));
@@ -18,10 +19,14 @@ class Booklist {
   }
 
   List<BooklistItem> getBooks() {
+    if (_books.isEmpty && _bookData.isNotEmpty) {
+      createBookList();
+    }
+
     return _books;
   }
 
-  Json toJson() => {'books': _books.map((book) => book.toJson()).toList()};
+  Json toJson() => {'books': getBooks().map((book) => book.toJson()).toList()};
 
   @override
   String toString() {

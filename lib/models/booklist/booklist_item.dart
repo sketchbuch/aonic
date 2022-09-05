@@ -2,22 +2,22 @@ import '../../types/types.dart';
 
 class BooklistItem {
   final int number;
-  final String code;
-  final String title;
-  late final bool isSupported;
-  late final String xmlPath;
+  final TranslatedText code;
+  final TranslatedText title;
+  final String language;
+  final List<int> _supportedBooks;
 
-  BooklistItem(this.title, this.code, this.number, String language, List<int> supportedBooks) {
-    isSupported = supportedBooks.contains(number);
-    xmlPath = 'https://www.projectaon.org/data/trunk/$language/xml/$code.xml';
-  }
+  BooklistItem(this.title, this.code, this.number, this.language, this._supportedBooks);
+
+  String getXmlPath() => 'https://www.projectaon.org/data/trunk/$language/xml/$code.xml';
+  bool isSupported() => _supportedBooks.contains(number);
 
   Json toJson() => {
         'code': code,
-        'isSupported': isSupported,
+        'isSupported': isSupported(),
         'number': number,
         'title': title,
-        'xmlPath': xmlPath,
+        'xmlPath': getXmlPath(),
       };
 
   @override
