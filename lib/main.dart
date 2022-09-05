@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:lonewolf_new/theme/theme.dart';
 import 'package:redux/redux.dart';
 
 import 'i18n/_generated_/translations.g.dart';
@@ -35,9 +36,7 @@ class App extends StatelessWidget {
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
         onGenerateRoute: generateRoute,
         supportedLocales: LocaleSettings.supportedLocales,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: getTheme(),
         title: trans.appTitle,
       ),
     );

@@ -14,7 +14,7 @@ class BookSelection extends StatelessWidget {
     final List<RadioListTile> supportedBooks = [];
 
     for (var book in _bookData) {
-      if (book.isSupported) {
+      if (book.isSupported()) {
         supportedBooks.add(RadioListTile<BooklistItem>(
           groupValue: _selectedBook,
           onChanged: _onChanged,

@@ -8,7 +8,7 @@ Future<String> getAonBookData(BooklistItem selectedBook) async {
   // https://www.projectaon.org/data/trunk/en/xml/01fftd.xml
   // view-source:https://www.projectaon.org/data/trunk/en/xml/01fftd.xml
   // https://www.projectaon.org/en/xhtml/lw/01fftd/title.htm
-  Uri uri = Uri.parse(selectedBook.xmlPath);
+  Uri uri = Uri.parse(selectedBook.getXmlPath());
 
   try {
     final response = await https.get(uri);
