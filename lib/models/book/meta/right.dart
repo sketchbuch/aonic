@@ -16,7 +16,7 @@ enum RightType {
 }
 
 class Right {
-  late RightType type;
+  late final RightType type;
   late final List<List<TextElement>> texts;
 
   // ignore: unused_element

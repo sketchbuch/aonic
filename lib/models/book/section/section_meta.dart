@@ -5,15 +5,18 @@ import '../../../utils/xml/helpers.dart';
 import 'meta_link.dart';
 
 class SectionMeta {
-  late List<MetaLink> links = [];
-  late String title = '';
+  late final List<MetaLink> links = [];
+  late final String title;
 
   // ignore: unused_element
   SectionMeta._();
 
   SectionMeta.fromXml(XmlElement xml) {
     title = getValue('title', xml);
-    links = xml.findElements('link').map((elementXml) => MetaLink.fromXml(elementXml)).toList();
+
+    xml.findElements('link').forEach((elementXml) {
+      links.add(MetaLink.fromXml(elementXml));
+    });
   }
 
   Json toJson() => {

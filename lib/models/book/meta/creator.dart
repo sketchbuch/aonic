@@ -14,9 +14,9 @@ enum CreatorType {
 }
 
 class Creator {
-  late CreatorType type;
-  late String? sortText = '';
-  late String text = '';
+  late final CreatorType type;
+  late final String? sortText;
+  late final String text;
 
   // ignore: unused_element
   Creator._();

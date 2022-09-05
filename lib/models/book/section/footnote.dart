@@ -6,8 +6,8 @@ import '../content/subcontent/text_element.dart';
 
 class Footnote {
   late final List<TextElement> texts;
-  late String id = '';
-  late String idRef = '';
+  late final String id;
+  late final String idRef;
 
   // ignore: unused_element
   Footnote._();

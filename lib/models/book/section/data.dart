@@ -12,14 +12,12 @@ import '../content/paragraph_tag.dart';
 import '../content/tag.dart';
 
 class Data {
-  late final List<Tag> content;
+  final List<Tag> content = [];
 
   // ignore: unused_element
   Data._();
 
   Data.fromXml(XmlElement xml) {
-    content = [];
-
     if (xml.childElements.isNotEmpty) {
       for (var child in xml.childElements) {
         final childName = child.name.toString();

@@ -12,7 +12,7 @@ enum DescriptionType {
 }
 
 class Description {
-  late DescriptionType type;
+  late final DescriptionType type;
   late final List<List<TextElement>> texts;
 
   // ignore: unused_element
