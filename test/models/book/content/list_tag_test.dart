@@ -2,26 +2,17 @@ import 'package:lonewolf_new/models/book/content/list_tag.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
+import 'subcontent/list_item_test.dart';
 
 const listXml = '''<ul class="unbulleted">
-  <li>Illustration I (<a idref="sect7">Section 7</a>)</li>
+  $listItemXml
   <li>Illustration II (<a idref="sect23">Section 23</a>)</li>
   <li><a idref="equipmnt">Equipment</a></li>
   <li><a idref="discplnz">Kai Disciplines</a></li>
 </ul>''';
 final listExpected = {
   "items": [
-    {
-      "texts": [
-        {"attrs": {}, "displayType": "plain", "text": "Illustration I ("},
-        {
-          "attrs": {"idref": "sect7"},
-          "displayType": "link",
-          "text": "Section 7"
-        },
-        {"attrs": {}, "displayType": "plain", "text": ")"}
-      ]
-    },
+    listItemExpected,
     {
       "texts": [
         {"attrs": {}, "displayType": "plain", "text": "Illustration II ("},
