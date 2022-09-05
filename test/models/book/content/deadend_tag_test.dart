@@ -3,21 +3,21 @@ import 'package:test/test.dart';
 
 import '../../../helpers.dart';
 
+const deadendXml = '<deadend>Your life and your mission end here.</deadend>';
+const deadendExpected = {
+  "text": "Your life and your mission end here.",
+};
+
 void main() {
   group('Model - DeadendTag():', () {
-    const xml = '<deadend>Your life and your mission end here.</deadend>';
-    final tag = DeadendTag.fromXml(getRootXmlElement(xml));
-
-    final expected = {
-      "text": "Your life and your mission end here.",
-    };
+    final tag = DeadendTag.fromXml(getRootXmlElement(deadendXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(expected));
+      expect(tag.toJson(), equals(deadendExpected));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(expected.toString()));
+      expect(tag.toString(), equals(deadendExpected.toString()));
     });
   });
 }

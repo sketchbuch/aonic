@@ -40,6 +40,7 @@ class IllustrationTag extends Tag {
     final metaXml = xml.getElement('meta');
 
     creator = metaXml != null ? getValue('creator', metaXml) : '';
+    // TODO - Make a text element list
     description = metaXml != null ? getValue('description', metaXml) : '';
     isRealIllustration = creator == realIllustrator ? true : false;
     xml.findElements('instance').forEach((instance) {

@@ -2,56 +2,39 @@ import 'package:lonewolf_new/models/book/content/illustration_tag.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
+import 'subcontent/illustration_instance_test.dart';
+
+const illustrationXml = '''<illustration class="inline">
+  <meta>
+    <creator>Gary Chalk</creator>
+    <description>This is the image description</description>
+  </meta>
+  $pngInstanceXml
+  $gifInstanceXml
+  $pdfInstanceXml
+</illustration>''';
+final illustrationExpected = {
+  "creator": "Gary Chalk",
+  "description": "This is the image description",
+  "instances": [
+    pngInstanceExpected,
+    gifInstanceExpected,
+    pdfInstanceExpected,
+  ],
+  "isRealIllustration": true,
+  "type": "inline",
+};
 
 void main() {
   group('Model - IllustrationTag():', () {
-    const xml = '''<illustration class="inline">
-        <meta>
-         <creator>Gary Chalk</creator>
-         <description>This is the image description</description>
-        </meta>
-        <instance class="html" src="small1.png" width="386" height="150"  mime-type="image/png"/>
-        <instance class="html-compatible" src="small1.gif" width="386" height="150"  mime-type="image/gif"/>
-        <instance class="pdf" src="small1.pdf" width="386" height="150" />
-       </illustration>''';
-    final tag = IllustrationTag.fromXml(getRootXmlElement(xml));
-
-    final expected = {
-      "creator": "Gary Chalk",
-      "description": "This is the image description",
-      "instances": [
-        {
-          "fileName": "small1.png",
-          "height": 150,
-          "mimeType": "image/png",
-          "type": "html",
-          "width": 386,
-        },
-        {
-          "fileName": "small1.gif",
-          "height": 150,
-          "mimeType": "image/gif",
-          "type": "html-compatible",
-          "width": 386,
-        },
-        {
-          "fileName": "small1.pdf",
-          "height": 150,
-          "mimeType": "none",
-          "type": "pdf",
-          "width": 386,
-        }
-      ],
-      "isRealIllustration": true,
-      "type": "inline",
-    };
+    final tag = IllustrationTag.fromXml(getRootXmlElement(illustrationXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(expected));
+      expect(tag.toJson(), equals(illustrationExpected));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(expected.toString()));
+      expect(tag.toString(), equals(illustrationExpected.toString()));
     });
 
     test('Type is unknown, if class is not an expected value', () {
