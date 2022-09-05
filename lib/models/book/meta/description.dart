@@ -13,7 +13,7 @@ enum DescriptionType {
 
 class Description {
   late final DescriptionType type;
-  late final List<List<TextElement>> texts;
+  final List<List<TextElement>> texts = [];
 
   // ignore: unused_element
   Description._();
@@ -30,8 +30,6 @@ class Description {
     } on ArgumentError {
       type = DescriptionType.unknown;
     }
-
-    texts = [];
 
     final paragraphs = xml.findElements('p');
 

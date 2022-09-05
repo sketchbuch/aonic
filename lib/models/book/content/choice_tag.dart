@@ -6,16 +6,15 @@ import 'subcontent/text_element.dart';
 import 'tag.dart';
 
 class ChoiceTag extends Tag {
-  late final String idref;
+  final List<TextElement> texts = [];
   late final int linkTextIndex;
-  late final List<TextElement> texts;
+  late final String idref;
 
   // ignore: unused_element
   ChoiceTag._();
 
   ChoiceTag.fromXml(XmlElement xml) {
     idref = getAttribute('idref', xml);
-    texts = [];
 
     var elementCount = 0;
 

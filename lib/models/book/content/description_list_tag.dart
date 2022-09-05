@@ -5,13 +5,15 @@ import 'subcontent/description_list_item.dart';
 import 'tag.dart';
 
 class DescriptionListTag extends Tag {
-  late final List<DescriptionListItem> items;
+  final List<DescriptionListItem> items = [];
 
   // ignore: unused_element
   DescriptionListTag._();
 
   DescriptionListTag.fromXml(XmlElement xml) {
-    items = xml.childElements.map((child) => DescriptionListItem.fromXml(child)).toList();
+    for (var child in xml.childElements) {
+      items.add(DescriptionListItem.fromXml(child));
+    }
   }
 
   @override

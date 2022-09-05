@@ -6,13 +6,13 @@ import 'subcontent/text_element.dart';
 import 'tag.dart';
 
 class ParagraphTag extends Tag {
-  late final List<TextElement> texts;
+  final List<TextElement> texts = [];
 
   // ignore: unused_element
   ParagraphTag._();
 
   ParagraphTag.fromXml(XmlElement xml) {
-    texts = getTextElementList(xml);
+    texts.addAll(getTextElementList(xml));
   }
 
   @override

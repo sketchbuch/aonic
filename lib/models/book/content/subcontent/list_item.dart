@@ -5,13 +5,13 @@ import '../../../../utils/xml/helpers.dart';
 import 'text_element.dart';
 
 class ListItem {
-  late final List<TextElement> texts;
+  final List<TextElement> texts = [];
 
   // ignore: unused_element
   ListItem._();
 
   ListItem.fromXml(XmlElement xml) {
-    texts = getTextElementList(xml);
+    texts.addAll(getTextElementList(xml));
   }
 
   Json toJson() => {

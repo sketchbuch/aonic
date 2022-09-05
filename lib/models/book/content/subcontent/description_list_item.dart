@@ -10,9 +10,9 @@ enum DescriptionIemType {
 }
 
 class DescriptionListItem {
+  final List<TextElement> texts = [];
   late final bool displayAsLines;
   late final DescriptionIemType type;
-  late final List<TextElement> texts;
 
   // ignore: unused_element
   DescriptionListItem._();
@@ -26,7 +26,7 @@ class DescriptionListItem {
       type = DescriptionIemType.dd;
     }
 
-    texts = getTextElementList(xml);
+    texts.addAll(getTextElementList(xml));
     displayAsLines = type == DescriptionIemType.dd && xml.children.toString().contains("<line>");
   }
 

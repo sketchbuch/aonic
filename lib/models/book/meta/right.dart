@@ -17,7 +17,7 @@ enum RightType {
 
 class Right {
   late final RightType type;
-  late final List<List<TextElement>> texts;
+  final List<List<TextElement>> texts = [];
 
   // ignore: unused_element
   Right._();
@@ -34,8 +34,6 @@ class Right {
     } on ArgumentError {
       type = RightType.unknown;
     }
-
-    texts = [];
 
     final lines = xml.findAllElements('line');
 

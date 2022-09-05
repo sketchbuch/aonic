@@ -18,7 +18,7 @@ enum ListType {
 }
 
 class ListTag extends Tag {
-  late final List<ListItem> items;
+  final List<ListItem> items = [];
   late final ListTagType listType;
   late final ListType type;
 
@@ -46,7 +46,9 @@ class ListTag extends Tag {
       type = ListType.unknown;
     }
 
-    items = xml.findElements('li').map((li) => ListItem.fromXml(li)).toList();
+    xml.findElements('li').forEach((li) {
+      items.add(ListItem.fromXml(li));
+    });
   }
 
   @override

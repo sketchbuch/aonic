@@ -15,11 +15,11 @@ enum IllustrationType {
 }
 
 class IllustrationTag extends Tag {
+  final List<IllustrationInstance> instances = [];
+  late final bool isRealIllustration;
   late final IllustrationType type;
-  late final List<IllustrationInstance> instances;
   late final String creator;
   late final String description;
-  late final bool isRealIllustration;
 
   // ignore: unused_element
   IllustrationTag._();
@@ -42,7 +42,9 @@ class IllustrationTag extends Tag {
     creator = metaXml != null ? getValue('creator', metaXml) : '';
     description = metaXml != null ? getValue('description', metaXml) : '';
     isRealIllustration = creator == realIllustrator ? true : false;
-    instances = xml.findElements('instance').map((instance) => IllustrationInstance.fromXml(instance)).toList();
+    xml.findElements('instance').forEach((instance) {
+      instances.add(IllustrationInstance.fromXml(instance));
+    });
   }
 
   @override

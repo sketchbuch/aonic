@@ -5,7 +5,7 @@ import '../../../utils/xml/helpers.dart';
 import '../content/subcontent/text_element.dart';
 
 class Footnote {
-  late final List<TextElement> texts;
+  final List<TextElement> texts = [];
   late final String id;
   late final String idRef;
 
@@ -17,7 +17,9 @@ class Footnote {
     idRef = getAttribute('idref', xml);
 
     final textXml = xml.getElement('p');
-    texts = textXml != null ? getTextElementList(textXml) : [];
+    if (textXml != null) {
+      texts.addAll(getTextElementList(textXml));
+    }
   }
 
   Json toJson() => {
