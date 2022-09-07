@@ -2,9 +2,10 @@ import 'package:lonewolf_new/models/book/content/subcontent/description_list_ite
 import 'package:test/test.dart';
 
 import '../../../../helpers.dart';
+import '../../../../types.dart';
 
 const dtXml = '<dt>Illustration Transcription</dt>';
-const dtExpected = {
+const dtJson = {
   "displayAsLines": false,
   "texts": [
     {"attrs": {}, "displayType": "plain", "text": "Illustration Transcription"}
@@ -16,7 +17,7 @@ const ddLinexXml = '''<dd>
   <line>Jonathan Blake</line>
   <line>Pedro Almeida, Jan Charv<ch.aacute/>t, Christian Cognigni, Tony Lenzo, Dewi Morgan, Laurence O<ch.apos/>Toole, Timothy Pederick</line>
 </dd>''';
-final ddLinexExpected = {
+final ddLinexJson = {
   "displayAsLines": true,
   "texts": [
     {"attrs": {}, "displayType": "plain", "text": "Jonathan Blake"},
@@ -32,7 +33,7 @@ final ddLinexExpected = {
 
 const ddXml =
     '''<dd>Pedro Almeida, Jan Charv<ch.aacute/>t, Christian Cognigni, Tony Lenzo, Dewi Morgan, Laurence O<ch.apos/>Toole, Timothy Pederick</dd>''';
-final ddExpected = {
+final ddJson = {
   "displayAsLines": false,
   "texts": [
     {
@@ -47,28 +48,28 @@ final ddExpected = {
 
 void main() {
   group('Model - DescriptionListItem()', () {
-    final Map<String, Map<String, Object>> descriptionListItems = {
-      "<dt>": {"xml": dtXml, "expected": dtExpected},
-      "<dd> lines": {"xml": ddLinexXml, "expected": ddLinexExpected},
-      "<dd> non-lines": {"xml": ddXml, "expected": ddExpected},
+    final TestIterationData descriptionListItems = {
+      "<dt>": {"xml": dtXml, "json": dtJson},
+      "<dd> lines": {"xml": ddLinexXml, "json": ddLinexJson},
+      "<dd> non-lines": {"xml": ddXml, "json": ddJson},
     };
 
-    void testDescriptionListItemType(String instanceType, String xml, Object expected) {
-      group(instanceType, () {
+    void testDescriptionListItemType(String type, String xml, Object json) {
+      group('$type:', () {
         final tag = DescriptionListItem.fromXml(getRootXmlElement(xml));
 
         test('Returns expected JSON', () {
-          expect(tag.toJson(), equals(expected));
+          expect(tag.toJson(), equals(json));
         });
 
         test('Returns expected string', () {
-          expect(tag.toString(), equals(expected.toString()));
+          expect(tag.toString(), equals(json.toString()));
         });
       });
     }
 
-    descriptionListItems.forEach((instanceType, instanceData) {
-      testDescriptionListItemType(instanceType, instanceData['xml']!.toString(), instanceData['expected']!);
+    descriptionListItems.forEach((type, data) {
+      testDescriptionListItemType(type, data['xml']!.toString(), data['json']!);
     });
   });
 }

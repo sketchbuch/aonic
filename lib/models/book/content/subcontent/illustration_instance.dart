@@ -18,9 +18,9 @@ enum MimeType {
 enum InstanceType {
   html('html'),
   htmlCompatible('html-compatible'),
+  none('none'),
   pdf('pdf'),
   text('text'),
-  none('none'),
   unknown('unknown');
 
   const InstanceType(this.value);
@@ -38,21 +38,26 @@ class IllustrationInstance {
   IllustrationInstance._();
 
   IllustrationInstance.fromXml(XmlElement xml) {
-    fileName = getAttribute('src', xml);
-    width = int.parse(getAttribute('width', xml, '0'));
-    height = int.parse(getAttribute('height', xml, '0'));
-
     try {
       final typeName = getAttribute('class', xml);
 
       if (typeName.isEmpty) {
         type = InstanceType.none;
+      } else if (typeName == 'none') {
+        // See book 2, for example
+        type = InstanceType.text;
       } else {
         type = InstanceType.values.byName(ReCase(typeName).camelCase);
       }
     } on ArgumentError {
       type = InstanceType.unknown;
     }
+
+    final isText = type == InstanceType.text;
+
+    fileName = isText ? '' : getAttribute('src', xml);
+    width = isText ? 0 : int.parse(getAttribute('width', xml, '0'));
+    height = isText ? 0 : int.parse(getAttribute('height', xml, '0'));
 
     final mimeTypeName = getAttribute('mime-type', xml);
 

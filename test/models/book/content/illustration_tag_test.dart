@@ -13,13 +13,13 @@ const illustrationXml = '''<illustration class="inline">
   $gifInstanceXml
   $pdfInstanceXml
 </illustration>''';
-final illustrationExpected = {
+final illustrationJson = {
   "creator": "Gary Chalk",
   "description": "This is the image description",
   "instances": [
-    pngInstanceExpected,
-    gifInstanceExpected,
-    pdfInstanceExpected,
+    pngInstanceJson,
+    gifInstanceJson,
+    pdfInstanceJson,
   ],
   "isRealIllustration": true,
   "type": "inline",
@@ -30,11 +30,11 @@ void main() {
     final tag = IllustrationTag.fromXml(getRootXmlElement(illustrationXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(illustrationExpected));
+      expect(tag.toJson(), equals(illustrationJson));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(illustrationExpected.toString()));
+      expect(tag.toString(), equals(illustrationJson.toString()));
     });
 
     test('Type is unknown, if class is not an expected value', () {

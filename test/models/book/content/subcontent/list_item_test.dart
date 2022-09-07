@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import '../../../../helpers.dart';
 
 const listItemXml = '<li>Illustration I (<a idref="sect7">Section 7</a>)</li>';
-const listItemExpected = {
+const listItemJson = {
   "texts": [
     {"attrs": {}, "displayType": "plain", "text": "Illustration I ("},
     {
@@ -21,11 +21,11 @@ void main() {
     final tag = ListItem.fromXml(getRootXmlElement(listItemXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(listItemExpected));
+      expect(tag.toJson(), equals(listItemJson));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(listItemExpected.toString()));
+      expect(tag.toString(), equals(listItemJson.toString()));
     });
   });
 }

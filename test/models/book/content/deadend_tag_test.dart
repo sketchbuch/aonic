@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import '../../../helpers.dart';
 
 const deadendXml = '<deadend>Your life and your mission end here.</deadend>';
-const deadendExpected = {
+const deadendJson = {
   "text": "Your life and your mission end here.",
 };
 
@@ -13,11 +13,11 @@ void main() {
     final tag = DeadendTag.fromXml(getRootXmlElement(deadendXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(deadendExpected));
+      expect(tag.toJson(), equals(deadendJson));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(deadendExpected.toString()));
+      expect(tag.toString(), equals(deadendJson.toString()));
     });
   });
 }

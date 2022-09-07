@@ -2,9 +2,10 @@ import 'package:lonewolf_new/models/book/content/subcontent/illustration_instanc
 import 'package:test/test.dart';
 
 import '../../../../helpers.dart';
+import '../../../../types.dart';
 
 const pngInstanceXml = '<instance class="html" src="small1.png" width="386" height="150"  mime-type="image/png"/>';
-const pngInstanceExpected = {
+const pngInstanceJson = {
   "fileName": "small1.png",
   "height": 150,
   "mimeType": "image/png",
@@ -14,7 +15,7 @@ const pngInstanceExpected = {
 
 const gifInstanceXml =
     '<instance class="html-compatible" src="small1.gif" width="386" height="150"  mime-type="image/gif"/>';
-const gifInstanceExpected = {
+const gifInstanceJson = {
   "fileName": "small1.gif",
   "height": 150,
   "mimeType": "image/gif",
@@ -23,7 +24,7 @@ const gifInstanceExpected = {
 };
 
 const pdfInstanceXml = '<instance class="pdf" src="small1.pdf" width="386" height="150" />';
-const pdfInstanceExpected = {
+const pdfInstanceJson = {
   "fileName": "small1.pdf",
   "height": 150,
   "mimeType": "none",
@@ -31,30 +32,50 @@ const pdfInstanceExpected = {
   "width": 386,
 };
 
+const textInstanceXml = '<instance class="text"></instance>';
+const textInstanceJson = {
+  "fileName": "",
+  "height": 0,
+  "mimeType": "none",
+  "type": "text",
+  "width": 0,
+};
+
+const textWithAttrsInstanceXml = '<instance class="text" src="none" width="none" height="none"></instance>';
+const textWithAttrsInstanceJson = {
+  "fileName": "",
+  "height": 0,
+  "mimeType": "none",
+  "type": "text",
+  "width": 0,
+};
+
 void main() {
   group('Model - IllustrationInstance()', () {
-    final Map<String, Map<String, Object>> instances = {
-      "png": {"xml": pngInstanceXml, "expected": pngInstanceExpected},
-      "gif": {"xml": gifInstanceXml, "expected": gifInstanceExpected},
-      "pdf": {"xml": pdfInstanceXml, "expected": pdfInstanceExpected},
+    final TestIterationData instances = {
+      "png": {"xml": pngInstanceXml, "json": pngInstanceJson},
+      "gif": {"xml": gifInstanceXml, "json": gifInstanceJson},
+      "pdf": {"xml": pdfInstanceXml, "json": pdfInstanceJson},
+      "text": {"xml": textInstanceXml, "json": textInstanceJson},
+      "text with attrs": {"xml": textWithAttrsInstanceXml, "json": textWithAttrsInstanceJson},
     };
 
-    void testInstanceType(String instanceType, String xml, Object expected) {
-      group('.$instanceType:', () {
+    void testInstanceType(String type, String xml, Object json) {
+      group('$type:', () {
         final tag = IllustrationInstance.fromXml(getRootXmlElement(xml));
 
         test('Returns expected JSON', () {
-          expect(tag.toJson(), equals(expected));
+          expect(tag.toJson(), equals(json));
         });
 
         test('Returns expected string', () {
-          expect(tag.toString(), equals(expected.toString()));
+          expect(tag.toString(), equals(json.toString()));
         });
       });
     }
 
-    instances.forEach((instanceType, instanceData) {
-      testInstanceType(instanceType, instanceData['xml']!.toString(), instanceData['expected']!);
+    instances.forEach((type, data) {
+      testInstanceType(type, data['xml']!.toString(), data['json']!);
     });
 
     test('Type is unknown, if class is not an expected value', () {

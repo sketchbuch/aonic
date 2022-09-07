@@ -24,16 +24,16 @@ void main() {
         final xml = '<$tagName>If you would rather press on, </$tagName>';
         final tag = TextElement.fromXml(getRootXmlElement(xml));
 
-        final expected = {
+        final expectedJson = {
           "attrs": {},
           "displayType": displayType,
           "text": "If you would rather press on, ",
         };
 
         if (testType == 'JSON') {
-          expect(tag.toJson(), equals(expected));
+          expect(tag.toJson(), equals(expectedJson));
         } else {
-          expect(tag.toString(), equals(expected.toString()));
+          expect(tag.toString(), equals(expectedJson.toString()));
         }
       });
     }
@@ -52,17 +52,17 @@ void main() {
     group('fromTxt()', () {
       final tag = TextElement.fromTxt('If you would rather press on, ');
 
-      final expected = {
+      final expectedJson = {
         "attrs": {},
         "displayType": "plain",
         "text": "If you would rather press on, ",
       };
       test('Returns expected JSON', () {
-        expect(tag.toJson(), equals(expected));
+        expect(tag.toJson(), equals(expectedJson));
       });
 
       test('Returns expected string', () {
-        expect(tag.toString(), equals(expected.toString()));
+        expect(tag.toString(), equals(expectedJson.toString()));
       });
     });
   });

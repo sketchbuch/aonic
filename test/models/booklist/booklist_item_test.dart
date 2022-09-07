@@ -11,7 +11,7 @@ void main() {
     const title = 'Flight from the Dark';
     const xmlPath = 'https://www.projectaon.org/data/trunk/$language/xml/$code.xml';
 
-    final expected = {
+    final expectedJson = {
       'code': code,
       'isSupported': isSupported,
       'number': number,
@@ -21,12 +21,12 @@ void main() {
 
     test('Returns expected JSON', () {
       final item = BooklistItem(title, code, number, language, supportedBooks);
-      expect(item.toJson(), equals(expected));
+      expect(item.toJson(), equals(expectedJson));
     });
 
     test('Returns expected string', () {
       final item = BooklistItem(title, code, number, language, supportedBooks);
-      expect(item.toString(), equals(expected.toString()));
+      expect(item.toString(), equals(expectedJson.toString()));
     });
 
     test('isSupported is true if book number is in supportedBooks', () {

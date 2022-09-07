@@ -5,7 +5,7 @@ import '../../../helpers.dart';
 
 const choiceXml =
     '<choice idref="sect213">If you would rather press on, <link-text class="attr-test">turn to 213</link-text>.</choice>';
-const choiceExpected = {
+const choiceJson = {
   "idref": "sect213",
   "linkTextIndex": 1,
   "texts": [
@@ -32,11 +32,11 @@ void main() {
     final tag = ChoiceTag.fromXml(getRootXmlElement(choiceXml));
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(choiceExpected));
+      expect(tag.toJson(), equals(choiceJson));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(choiceExpected.toString()));
+      expect(tag.toString(), equals(choiceJson.toString()));
     });
   });
 }

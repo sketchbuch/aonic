@@ -22,8 +22,8 @@ class Creator {
   Creator._();
 
   Creator.fromXml(XmlElement xml) {
-    sortText = getAttribute('sort-name', xml, text);
     text = xml.text;
+    sortText = getAttribute('sort-name', xml, text);
 
     try {
       final typeName = getAttribute('class', xml);

@@ -22,7 +22,7 @@ void main() {
       MockTranslationObject(bookTwoCode, bookTwoTitle),
     ];
 
-    final expected = {
+    final expectedJson = {
       'books': [
         {
           'code': bookOneCode,
@@ -43,12 +43,12 @@ void main() {
 
     test('Returns expected JSON', () {
       final list = Booklist(bookData, supportedBooks, language);
-      expect(list.toJson(), equals(expected));
+      expect(list.toJson(), equals(expectedJson));
     });
 
     test('Returns expected string', () {
       final list = Booklist(bookData, supportedBooks, language);
-      expect(list.toString(), equals(expected.toString()));
+      expect(list.toString(), equals(expectedJson.toString()));
     });
   });
 }

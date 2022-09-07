@@ -1,3 +1,3 @@
 const homeRoute = '/';
-const bookRoute = '/test';
+const bookRoute = '/book';
 const settingsRoute = '/settings';

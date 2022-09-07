@@ -47,5 +47,5 @@ app.*.map.json
 /android/app/release
 
 *.code-workspace
-sample.xml
 lib/i18n/_generated_
+/samples

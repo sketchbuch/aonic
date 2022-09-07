@@ -15,6 +15,7 @@ class BookViewModel {
   final bool isIdle;
   final bool isLoading;
   final int page;
+  final String bookErrorMessage;
   final void Function() onNextPage;
   final void Function() onPrevPage;
   final void Function() onUnloadBook;
@@ -24,6 +25,7 @@ class BookViewModel {
 
   BookViewModel({
     required this.book,
+    required this.bookErrorMessage,
     required this.isBookLoaded,
     required this.isError,
     required this.isIdle,
@@ -68,6 +70,7 @@ class BookViewModel {
 
     return BookViewModel(
       book: bookState.book,
+      bookErrorMessage: bookState.errorMessage,
       isBookLoaded: bookState.status == BookStateStatus.succeeded,
       isError: bookState.status == BookStateStatus.failed,
       isIdle: bookState.status == BookStateStatus.idle,

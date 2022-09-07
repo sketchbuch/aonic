@@ -6,15 +6,25 @@ import 'package:xml/xml.dart';
 import '../../models/book/book.dart';
 import '../../models/booklist/booklist_item.dart';
 import '../../utils/get_aon_book_data.dart';
+import '../../utils/get_aon_book_file_data.dart';
 import '../../utils/xml/helpers.dart';
 import 'actions.dart';
+
+const useLocalFile = true;
 
 ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
   return (Store<AppState> store) async {
     store.dispatch(LoadBookRequest());
 
     try {
-      final bookData = await getAonBookData(selectedBook);
+      String bookData = '';
+
+      if (useLocalFile) {
+        bookData = await getAonBookFileData();
+      } else {
+        bookData = await getAonBookData(selectedBook);
+      }
+
       final bookXml = XmlDocument.parse(cleanXmlString(bookData));
       final gamebook = bookXml.getElement('gamebook');
 
@@ -25,6 +35,7 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
         store.dispatch(LoadBookFaliure('Book data does not contain a "gamebook" element'));
       }
     } catch (error) {
+      print('### loadBookAction() Error: "${error.toString()}"');
       store.dispatch(LoadBookFaliure(error.toString()));
     }
   };
