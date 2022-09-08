@@ -5,12 +5,15 @@ import '../pages/book/book_page.dart';
 import '../pages/home/home_page.dart';
 import 'routes.dart';
 
-Route<dynamic> generateRoute(RouteSettings settings) {
+Route<dynamic> generateMainRoute(RouteSettings settings) {
   switch (settings.name) {
     case homeRoute:
       return MaterialPageRoute(builder: (_) => HomePage());
 
     case bookRoute:
+    case bookBackmatterRoute:
+    case bookFrontmatterRoute:
+    case bookNumberedRoute:
       return MaterialPageRoute(builder: (_) => BookPage());
 
     default:

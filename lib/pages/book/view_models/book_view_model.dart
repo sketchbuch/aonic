@@ -1,11 +1,11 @@
 import 'package:redux/redux.dart';
 
-import '../../models/book/book.dart';
-import '../../models/booklist/booklist_item.dart';
-import '../../store/actions/actions.dart';
-import '../../store/actions/thunk_actions.dart';
-import '../../store/models/app_state.dart';
-import '../../store/models/book_state.dart';
+import '../../../models/book/book.dart';
+import '../../../models/booklist/booklist_item.dart';
+import '../../../store/actions/actions.dart';
+import '../../../store/actions/thunk_actions.dart';
+import '../../../store/models/app_state.dart';
+import '../../../store/models/book_state.dart';
 
 class BookViewModel {
   final Book? book;

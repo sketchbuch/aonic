@@ -5,7 +5,7 @@ import 'package:lonewolf_new/theme/theme.dart';
 import 'package:redux/redux.dart';
 
 import 'i18n/_generated_/translations.g.dart';
-import 'routes/generate_route.dart';
+import 'routes/generate_main_route.dart';
 import 'routes/routes.dart';
 import 'store/models/app_state.dart';
 import 'store/store.dart';
@@ -34,7 +34,8 @@ class App extends StatelessWidget {
         initialRoute: homeRoute,
         locale: TranslationProvider.of(context).flutterLocale,
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
-        onGenerateRoute: generateRoute,
+        navigatorKey: mainNav,
+        onGenerateRoute: generateMainRoute,
         supportedLocales: LocaleSettings.supportedLocales,
         theme: getTheme(),
         title: trans.appTitle,

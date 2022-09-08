@@ -3,25 +3,58 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 import '../../constants/books.dart';
 import '../../i18n/_generated_/translations.g.dart';
-import '../../models/booklist/booklist.dart';
+import '../../routes/generate_book_route.dart';
+import '../../routes/routes.dart';
 import '../../store/models/app_state.dart';
-import '../../widgets/book_display.dart';
-import '../../widgets/book_selection.dart';
-import 'book_view_model.dart';
+import 'view_models/book_view_model.dart';
 
-class BookPage extends StatelessWidget {
-  final booklist = Booklist(t.booksLonewolf.books, lonewolfSupportedBooks, 'en').getBooks();
-  final transCommon = t.common;
+class BookPage extends StatefulWidget {
   final transBook = t.book;
+  final transCommon = t.common;
 
   BookPage({Key? key}) : super(key: key);
 
-  void _handleBookLoad(BookViewModel viewModel) async {
-    final selectedBook = viewModel.selectedBook;
+  @override
+  State<BookPage> createState() => _BookPageState();
+}
 
-    if (selectedBook != null) {
-      viewModel.onLoadBook(selectedBook);
+class _BookPageState extends State<BookPage> {
+  Future<void> _onExitPressed() async {
+    final isConfirmed = await _canExitBook();
+
+    if (isConfirmed && mounted) {
+      _exitSetup();
     }
+  }
+
+  Future<bool> _canExitBook() async {
+    return await showDialog<bool>(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Are you sure?'),
+                content: const Text('If you exit device setup, your progress will be lost.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: const Text('Leave'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(false);
+                    },
+                    child: const Text('Stay'),
+                  ),
+                ],
+              );
+            }) ??
+        false;
+  }
+
+  void _exitSetup() {
+    Navigator.of(context).pop();
   }
 
   @override
@@ -29,57 +62,40 @@ class BookPage extends StatelessWidget {
     return StoreConnector<AppState, BookViewModel>(
       converter: (store) => BookViewModel.create(store),
       builder: (BuildContext context, BookViewModel viewModel) {
-        final book = viewModel.book;
-        final page = viewModel.page;
-
-        var titleText = transBook.titleSelection;
-        var tooltipText = transBook.loadButton.load;
+        var titleText = widget.transBook.titleSelection;
 
         if (viewModel.isLoading) {
-          titleText = transBook.titleLoading;
+          titleText = widget.transBook.titleLoading;
         } else if (viewModel.isBookLoaded) {
-          titleText = transBook.title;
-          tooltipText = transBook.loadButton.unload;
+          titleText = widget.transBook.title;
         }
 
-        return Scaffold(
-          appBar: AppBar(
-            actions: viewModel.isBookLoaded
-                ? [
-                    IconButton(
-                      icon: const Icon(Icons.navigate_before),
-                      onPressed: page > pageMin ? viewModel.onPrevPage : null,
-                      tooltip: transCommon.prev,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.navigate_next),
-                      onPressed: page < pageMax ? viewModel.onNextPage : null,
-                      tooltip: transCommon.next,
-                    ),
-                  ]
-                : [],
-            title: Text(titleText),
+        return WillPopScope(
+          onWillPop: _canExitBook,
+          child: Scaffold(
+            appBar: AppBar(
+              actions: viewModel.isBookLoaded
+                  ? [
+                      IconButton(
+                        icon: const Icon(Icons.navigate_before),
+                        onPressed: viewModel.page > pageMin ? viewModel.onPrevPage : null,
+                        tooltip: widget.transCommon.prev,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.navigate_next),
+                        onPressed: viewModel.page < pageMax ? viewModel.onNextPage : null,
+                        tooltip: widget.transCommon.next,
+                      ),
+                    ]
+                  : [],
+              title: Text(titleText),
+            ),
+            body: Navigator(
+              key: bookNav,
+              initialRoute: bookRoute,
+              onGenerateRoute: generateBookRoute,
+            ),
           ),
-          body: Center(
-            child: viewModel.isBookLoaded && book != null
-                ? BookDisplay(book, page)
-                : viewModel.isLoading
-                    ? const CircularProgressIndicator()
-                    : BookSelection(booklist, viewModel.selectedBook, viewModel.onSelectBook),
-          ),
-          floatingActionButton: viewModel.selectedBook != null && !viewModel.isLoading
-              ? FloatingActionButton(
-                  onPressed: () {
-                    if (viewModel.isBookLoaded) {
-                      viewModel.onUnloadBook();
-                    } else {
-                      _handleBookLoad(viewModel);
-                    }
-                  },
-                  tooltip: tooltipText,
-                  child: Icon(viewModel.isBookLoaded ? Icons.home : Icons.download),
-                )
-              : null,
         );
       },
     );
