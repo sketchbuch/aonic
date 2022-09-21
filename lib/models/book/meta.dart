@@ -53,13 +53,13 @@ class Meta {
   List<List<TextElement>> getDescriptionTexts([DescriptionType? type]) {
     List<List<TextElement>> texts = [];
 
-    if (descriptions.isNotEmpty) {
+    /* if (descriptions.isNotEmpty) {
       final visibleDescriptions = type != null ? descriptions.where((descrip) => descrip.type == type) : descriptions;
 
       for (var description in visibleDescriptions) {
         texts.addAll(description.texts);
       }
-    }
+    } */
 
     return texts;
   }
@@ -67,13 +67,13 @@ class Meta {
   List<List<TextElement>> getRightTexts([RightType? type]) {
     List<List<TextElement>> texts = [];
 
-    if (rights.isNotEmpty) {
+    /* if (rights.isNotEmpty) {
       final visibleRights = type != null ? rights.where((right) => right.type == type) : rights;
 
       for (var right in visibleRights) {
         texts.addAll(right.texts);
       }
-    }
+    } */
 
     return texts;
   }

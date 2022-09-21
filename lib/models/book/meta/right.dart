@@ -3,7 +3,7 @@ import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
-import '../content/subcontent/text_element.dart';
+import '../content/paragraph_tag.dart';
 
 enum RightType {
   copyrights('copyrights'),
@@ -17,7 +17,7 @@ enum RightType {
 
 class Right {
   late final RightType type;
-  final List<List<TextElement>> texts = [];
+  final List<ParagraphTag> paragraphs = [];
 
   // ignore: unused_element
   Right._();
@@ -35,17 +35,17 @@ class Right {
       type = RightType.unknown;
     }
 
-    final lines = xml.findAllElements('line');
+    final lineXml = xml.findAllElements('line');
 
-    if (lines.isNotEmpty) {
-      for (var l in lines) {
-        texts.add(getTextElementList(l));
+    if (lineXml.isNotEmpty) {
+      for (var l in lineXml) {
+        paragraphs.add(ParagraphTag.fromXml(l));
       }
     }
   }
 
   Json toJson() => {
-        'texts': texts.map((line) => line.map((text) => text.toJson()).toList()).toList(),
+        'paragraphs': paragraphs.map((paragraph) => paragraph.toJson()).toList().toList(),
         'type': type.value,
       };
 
