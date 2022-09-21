@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../../models/book/book.dart';
 import '../../models/booklist/booklist_item.dart';
 
@@ -20,6 +22,13 @@ class LoadBookSuccess {
   final String xml;
 
   LoadBookSuccess(this.xml, this.book);
+}
+
+class NavigateAction {
+  final GlobalKey<NavigatorState> navigator;
+  final String route;
+
+  NavigateAction(this.navigator, this.route);
 }
 
 class NextPageAction {}

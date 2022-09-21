@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../i18n/_generated_/translations.g.dart';
-import '../models/book/content/combat_tag.dart';
-import 'content_renderer.dart';
+import '../../i18n/_generated_/translations.g.dart';
+import '../../models/book/content/combat_tag.dart';
+import '../content.dart';
 
-class Combat extends StatelessWidget with ContentRenderer {
+class Combat extends StatelessWidget {
   final CombatTag tag;
   final trans = t.numbered; // get translation
 
@@ -12,8 +12,8 @@ class Combat extends StatelessWidget with ContentRenderer {
 
   @override
   Widget build(BuildContext context) {
-    return wrapContent(
-      RichText(
+    return Content(
+      child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
           children: [

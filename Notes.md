@@ -10,3 +10,7 @@
 
 - https://docs.flutter.dev/cookbook/effects/nested-nav
 - https://www.youtube.com/watch?v=nyIQT7Zo8TU
+
+## Translations
+
+> flutter pub run slang

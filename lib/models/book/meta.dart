@@ -3,6 +3,7 @@ import 'package:xml/xml.dart';
 
 import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
+import 'content/subcontent/text_element.dart';
 import 'meta/creator.dart';
 import 'meta/description.dart';
 import 'meta/right.dart';
@@ -37,6 +38,44 @@ class Meta {
     creators = xml.findElements('creator').map((elementXml) => Creator.fromXml(elementXml)).toList();
     descriptions = xml.findElements('description').map((elementXml) => Description.fromXml(elementXml)).toList();
     rights = xml.findElements('rights').map((elementXml) => Right.fromXml(elementXml)).toList();
+  }
+
+  String getCreator() {
+    final metaCreator = creators.where((creator) => creator.type == CreatorType.short);
+
+    if (metaCreator.isNotEmpty) {
+      return metaCreator.elementAt(0).text;
+    }
+
+    return '';
+  }
+
+  List<List<TextElement>> getDescriptionTexts([DescriptionType? type]) {
+    List<List<TextElement>> texts = [];
+
+    if (descriptions.isNotEmpty) {
+      final visibleDescriptions = type != null ? descriptions.where((descrip) => descrip.type == type) : descriptions;
+
+      for (var description in visibleDescriptions) {
+        texts.addAll(description.texts);
+      }
+    }
+
+    return texts;
+  }
+
+  List<List<TextElement>> getRightTexts([RightType? type]) {
+    List<List<TextElement>> texts = [];
+
+    if (rights.isNotEmpty) {
+      final visibleRights = type != null ? rights.where((right) => right.type == type) : rights;
+
+      for (var right in visibleRights) {
+        texts.addAll(right.texts);
+      }
+    }
+
+    return texts;
   }
 
   Json toJson() => {

@@ -5,6 +5,7 @@ import 'package:xml/xml.dart';
 
 import '../../models/book/book.dart';
 import '../../models/booklist/booklist_item.dart';
+import '../../routes/routes.dart';
 import '../../utils/get_aon_book_data.dart';
 import '../../utils/get_aon_book_file_data.dart';
 import '../../utils/xml/helpers.dart';
@@ -31,6 +32,7 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
       if (gamebook != null) {
         Book book = Book.fromXml(gamebook);
         store.dispatch(LoadBookSuccess(bookData, book));
+        store.dispatch(NavigateAction(bookNav, bookNumberedRoute));
       } else {
         store.dispatch(LoadBookFaliure('Book data does not contain a "gamebook" element'));
       }

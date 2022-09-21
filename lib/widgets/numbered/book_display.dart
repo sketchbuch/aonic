@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:lonewolf_new/widgets/signpost.dart';
 
-import '../models/book/book.dart';
-import '../models/book/content/blockquote.dart';
-import '../models/book/content/choice_tag.dart';
-import '../models/book/content/combat_tag.dart';
-import '../models/book/content/deadend_tag.dart';
-import '../models/book/content/illustration_tag.dart';
-import '../models/book/content/paragraph_tag.dart';
-import '../models/book/content/signpost_tag.dart';
-import '../models/book/section.dart';
-import '../models/book/section/data.dart';
+import '../../models/book/book.dart';
+import '../../models/book/content/blockquote.dart';
+import '../../models/book/content/choice_tag.dart';
+import '../../models/book/content/combat_tag.dart';
+import '../../models/book/content/deadend_tag.dart';
+import '../../models/book/content/illustration_tag.dart';
+import '../../models/book/content/paragraph_tag.dart';
+import '../../models/book/content/signpost_tag.dart';
+import '../../models/book/section.dart';
+import '../../models/book/section/data.dart';
 import 'blockquote.dart';
 import 'choice.dart';
 import 'combat.dart';
 import 'deadend.dart';
 import 'illustration.dart';
 import 'paragraph.dart';
+import 'signpost.dart';
 
 class BookDisplay extends StatelessWidget {
   final Book _book;

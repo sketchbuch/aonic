@@ -6,7 +6,7 @@ import '../../i18n/_generated_/translations.g.dart';
 import '../../routes/generate_book_route.dart';
 import '../../routes/routes.dart';
 import '../../store/models/app_state.dart';
-import 'view_models/book_view_model.dart';
+import 'book_view_model.dart';
 
 class BookPage extends StatefulWidget {
   final transBook = t.book;
@@ -63,11 +63,13 @@ class _BookPageState extends State<BookPage> {
       converter: (store) => BookViewModel.create(store),
       builder: (BuildContext context, BookViewModel viewModel) {
         var titleText = widget.transBook.titleSelection;
+        var tooltipText = widget.transBook.loadButton.load;
 
         if (viewModel.isLoading) {
           titleText = widget.transBook.titleLoading;
         } else if (viewModel.isBookLoaded) {
           titleText = widget.transBook.title;
+          tooltipText = widget.transBook.loadButton.unload;
         }
 
         return WillPopScope(
@@ -95,6 +97,22 @@ class _BookPageState extends State<BookPage> {
               initialRoute: bookRoute,
               onGenerateRoute: generateBookRoute,
             ),
+            floatingActionButton: viewModel.canShowActionButton
+                ? FloatingActionButton(
+                    onPressed: () {
+                      final selectedBook = viewModel.selectedBook;
+
+                      if (viewModel.isBookLoaded) {
+                        viewModel.onUnloadBook();
+                        bookNav.currentState!.pushNamed(bookRoute);
+                      } else if (selectedBook != null) {
+                        viewModel.onLoadBook(selectedBook);
+                      }
+                    },
+                    tooltip: tooltipText,
+                    child: Icon(viewModel.isBookLoaded ? Icons.home : Icons.download),
+                  )
+                : null,
           ),
         );
       },
