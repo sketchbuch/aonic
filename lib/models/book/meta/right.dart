@@ -17,6 +17,7 @@ enum RightType {
 
 class Right {
   late final RightType type;
+  @override
   final List<ParagraphTag> paragraphs = [];
 
   // ignore: unused_element

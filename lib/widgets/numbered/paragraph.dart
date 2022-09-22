@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../models/book/content/paragraph_tag.dart';
-import '../../utils/rendering/text_style.dart';
 import '../content.dart';
+import '../content_renderer.dart';
 
-class Paragraph extends StatelessWidget {
+class Paragraph extends StatelessWidget with ContentRenderer {
   final ParagraphTag tag;
 
   const Paragraph(this.tag, {Key? key}) : super(key: key);

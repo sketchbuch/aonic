@@ -13,6 +13,7 @@ enum DescriptionType {
 
 class Description {
   late final DescriptionType type;
+  @override
   final List<ParagraphTag> paragraphs = [];
 
   // ignore: unused_element

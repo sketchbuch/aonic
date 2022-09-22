@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../i18n/_generated_/translations.g.dart';
 import '../../models/book/meta.dart';
-import '../content_renderer.dart';
+import '../../models/book/meta/right.dart';
 import '../numbered/paragraph.dart';
+import '../numbered/text_paragraph.dart';
 
-class TitlePage extends StatelessWidget with ContentRenderer {
+class TitlePage extends StatelessWidget {
   final transBook = t.book;
   final Meta meta;
 
@@ -17,12 +17,11 @@ class TitlePage extends StatelessWidget with ContentRenderer {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(meta.title),
-        Text(meta.getCreator()),
-        Text(transBook.publicationDate(date: DateFormat('dd/MM/yyyy').format(meta.publicationDate!))),
-        ...meta.descriptions.map((description) => Paragraph(description.paragraphs.first))
-        /* ...meta.getDescriptionTexts().map((description) => ParagraphTextList(description)),
-        ...meta.getRightTexts(RightType.licenseNotification).map((description) => ParagraphTextList(description)), */
+        TextParagraph(meta.title),
+        TextParagraph(meta.getCreator()),
+        TextParagraph(transBook.publicationDate(date: meta.getFormattedPublicationDate())),
+        ...meta.getDescriptionParagraphs().map((para) => Paragraph(para)),
+        ...meta.getRightParagraphs(RightType.licenseNotification).map((para) => Paragraph(para)),
       ],
     );
   }

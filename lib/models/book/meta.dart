@@ -3,7 +3,7 @@ import 'package:xml/xml.dart';
 
 import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
-import 'content/subcontent/text_element.dart';
+import 'content/paragraph_tag.dart';
 import 'meta/creator.dart';
 import 'meta/description.dart';
 import 'meta/right.dart';
@@ -50,34 +50,6 @@ class Meta {
     return '';
   }
 
-  List<List<TextElement>> getDescriptionTexts([DescriptionType? type]) {
-    List<List<TextElement>> texts = [];
-
-    /* if (descriptions.isNotEmpty) {
-      final visibleDescriptions = type != null ? descriptions.where((descrip) => descrip.type == type) : descriptions;
-
-      for (var description in visibleDescriptions) {
-        texts.addAll(description.texts);
-      }
-    } */
-
-    return texts;
-  }
-
-  List<List<TextElement>> getRightTexts([RightType? type]) {
-    List<List<TextElement>> texts = [];
-
-    /* if (rights.isNotEmpty) {
-      final visibleRights = type != null ? rights.where((right) => right.type == type) : rights;
-
-      for (var right in visibleRights) {
-        texts.addAll(right.texts);
-      }
-    } */
-
-    return texts;
-  }
-
   Json toJson() => {
         'creators': creators.map((creator) => creator.toJson()).toList(),
         'descriptions': descriptions.map((description) => description.toJson()).toList(),
@@ -90,5 +62,45 @@ class Meta {
   @override
   String toString() {
     return toJson().toString();
+  }
+
+  List<ParagraphTag> getDescriptionParagraphs([DescriptionType? type]) {
+    final List<ParagraphTag> paragraphTags = [];
+
+    if (descriptions.isNotEmpty) {
+      final filteredDescriptions = type != null ? descriptions.where((model) => model.type == type) : descriptions;
+
+      if (filteredDescriptions.isNotEmpty) {
+        for (var description in filteredDescriptions) {
+          for (var paragraph in description.paragraphs) {
+            paragraphTags.add(paragraph);
+          }
+        }
+      }
+    }
+
+    return paragraphTags;
+  }
+
+  List<ParagraphTag> getRightParagraphs([RightType? type]) {
+    final List<ParagraphTag> paragraphTags = [];
+
+    if (rights.isNotEmpty) {
+      final filteredRights = type != null ? rights.where((model) => model.type == type) : rights;
+
+      if (filteredRights.isNotEmpty) {
+        for (var description in filteredRights) {
+          for (var paragraph in description.paragraphs) {
+            paragraphTags.add(paragraph);
+          }
+        }
+      }
+    }
+
+    return paragraphTags;
+  }
+
+  getFormattedPublicationDate([String dateFormat = 'dd/MM/yyyy']) {
+    return DateFormat(dateFormat).format(publicationDate!);
   }
 }

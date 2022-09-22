@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../models/book/content/signpost_tag.dart';
-import '../../utils/rendering/text_style.dart';
 import '../content.dart';
+import '../content_renderer.dart';
 
-class Signpost extends StatelessWidget {
+class Signpost extends StatelessWidget with ContentRenderer {
   final SignpostTag tag;
 
   const Signpost(this.tag, {Key? key}) : super(key: key);

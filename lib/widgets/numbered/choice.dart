@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../models/book/content/choice_tag.dart';
-import '../../utils/rendering/text_style.dart';
 import '../content.dart';
+import '../content_renderer.dart';
 
-class Choice extends StatelessWidget {
+class Choice extends StatelessWidget with ContentRenderer {
   final ChoiceTag tag;
 
   const Choice(this.tag, {Key? key}) : super(key: key);

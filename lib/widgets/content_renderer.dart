@@ -5,13 +5,6 @@ import '../models/book/content/subcontent/text_element.dart';
 mixin ContentRenderer {
   void getStyle(DisplayType displayType) {}
 
-  Widget wrapContent(Widget content, {double bottomPadding = 16.0}) {
-    return Container(
-      padding: EdgeInsets.only(bottom: bottomPadding),
-      child: content,
-    );
-  }
-
   FontStyle getTextElementStyle(TextElement text) {
     if (text.displayType == DisplayType.italic) {
       return FontStyle.italic;
