@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../i18n/_generated_/translations.g.dart';
-import '../../models/book/content/combat_tag.dart';
-import '../content.dart';
+import '../../../i18n/_generated_/translations.g.dart';
+import '../../../models/book/content/combat_tag.dart';
+import '../content_container.dart';
 
 class Combat extends StatelessWidget {
   final CombatTag tag;
@@ -12,7 +12,7 @@ class Combat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Content(
+    return ContentContainer(
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,

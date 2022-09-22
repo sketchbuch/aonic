@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../i18n/_generated_/translations.g.dart';
 import '../../models/book/meta.dart';
 import '../../models/book/meta/right.dart';
-import '../numbered/paragraph.dart';
-import '../numbered/text_paragraph.dart';
+import '../content/tags/paragraph.dart';
+import '../content/text_paragraph.dart';
 
 class TitlePage extends StatelessWidget {
   final transBook = t.book;

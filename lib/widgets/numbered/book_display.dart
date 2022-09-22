@@ -10,13 +10,13 @@ import '../../models/book/content/paragraph_tag.dart';
 import '../../models/book/content/signpost_tag.dart';
 import '../../models/book/section.dart';
 import '../../models/book/section/data.dart';
-import 'blockquote.dart';
-import 'choice.dart';
-import 'combat.dart';
-import 'deadend.dart';
-import 'illustration.dart';
-import 'paragraph.dart';
-import 'signpost.dart';
+import '../content/tags/blockquote.dart';
+import '../content/tags/choice.dart';
+import '../content/tags/combat.dart';
+import '../content/tags/deadend.dart';
+import '../content/tags/illustration.dart';
+import '../content/tags/paragraph.dart';
+import '../content/tags/signpost.dart';
 
 class BookDisplay extends StatelessWidget {
   final Book _book;

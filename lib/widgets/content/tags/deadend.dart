@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../models/book/content/deadend_tag.dart';
-import '../content.dart';
+import '../../../models/book/content/deadend_tag.dart';
+import '../content_container.dart';
 
 class Deadend extends StatelessWidget {
   final DeadendTag tag;
@@ -10,7 +10,7 @@ class Deadend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Content(
+    return ContentContainer(
       child: RichText(
         text: TextSpan(text: tag.text),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../content.dart';
+import 'content_container.dart';
 
 class TextParagraph extends StatelessWidget {
   final String text;
@@ -9,7 +9,7 @@ class TextParagraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Content(
+    return ContentContainer(
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,

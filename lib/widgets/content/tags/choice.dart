@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../models/book/content/choice_tag.dart';
-import '../content.dart';
-import '../content_renderer.dart';
+import '../../../models/book/content/choice_tag.dart';
+import '../../mixins/content_renderer.dart';
+import '../content_container.dart';
 
 class Choice extends StatelessWidget with ContentRenderer {
   final ChoiceTag tag;
@@ -13,7 +13,7 @@ class Choice extends StatelessWidget with ContentRenderer {
   Widget build(BuildContext context) {
     int textIndex = -1;
 
-    return Content(
+    return ContentContainer(
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/book/content/subcontent/text_element.dart';
+import '../../models/book/content/subcontent/text_element.dart';
 
 mixin ContentRenderer {
   void getStyle(DisplayType displayType) {}

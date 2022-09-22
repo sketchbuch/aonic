@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../models/book/content/illustration_tag.dart';
-import '../content.dart';
-import 'image/image_error.dart';
-import 'image/image_loading.dart';
+import '../../../models/book/content/illustration_tag.dart';
+import '../content_container.dart';
+import '../image/image_error.dart';
+import '../image/image_loading.dart';
 
 class Illustration extends StatelessWidget {
   final IllustrationTag tag;
@@ -12,7 +12,7 @@ class Illustration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Content(
+    return ContentContainer(
       child: Image.network(
         'https://www.projectaon.org/en/xhtml/lw/01fftd/small6.png',
         errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../models/book/content/signpost_tag.dart';
-import '../content.dart';
-import '../content_renderer.dart';
+import '../../../models/book/content/signpost_tag.dart';
+import '../../mixins/content_renderer.dart';
+import '../content_container.dart';
 
 class Signpost extends StatelessWidget with ContentRenderer {
   final SignpostTag tag;
@@ -11,7 +11,7 @@ class Signpost extends StatelessWidget with ContentRenderer {
 
   @override
   Widget build(BuildContext context) {
-    return Content(
+    return ContentContainer(
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,

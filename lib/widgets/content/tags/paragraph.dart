@@ -2,9 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lonewolf_new/models/book/content/subcontent/text_element.dart';
 
-import '../../models/book/content/paragraph_tag.dart';
-import '../content.dart';
-import '../content_renderer.dart';
+import '../../../models/book/content/paragraph_tag.dart';
+import '../../mixins/content_renderer.dart';
+import '../content_container.dart';
 
 class Paragraph extends StatelessWidget with ContentRenderer {
   final ParagraphTag tag;
@@ -13,7 +13,7 @@ class Paragraph extends StatelessWidget with ContentRenderer {
 
   @override
   Widget build(BuildContext context) {
-    return Content(
+    return ContentContainer(
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
