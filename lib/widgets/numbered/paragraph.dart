@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:lonewolf_new/models/book/content/subcontent/text_element.dart';
 
 import '../../models/book/content/paragraph_tag.dart';
 import '../content.dart';
@@ -18,8 +20,20 @@ class Paragraph extends StatelessWidget with ContentRenderer {
           children: tag.texts.map((text) {
             final style = getTextElementStyle(text);
             final weight = getTextElementWeight(text);
+            GestureRecognizer? recognizer;
 
-            return TextSpan(text: text.text, style: TextStyle(fontWeight: weight, fontStyle: style));
+            if (text.displayType == DisplayType.link) {
+              recognizer = TapGestureRecognizer()
+                ..onTap = () {
+                  return print('### Tap Here onTap ${text.attrs['href'] ?? text.attrs['idref'] ?? 'No link'}');
+                };
+            }
+
+            return TextSpan(
+              text: text.text,
+              recognizer: recognizer,
+              style: TextStyle(fontWeight: weight, fontStyle: style),
+            );
           }).toList(),
         ),
       ),

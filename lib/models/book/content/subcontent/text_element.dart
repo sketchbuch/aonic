@@ -26,7 +26,7 @@ class TextElement {
 
   TextElement.fromXml(XmlElement xml) {
     attrs = getAttributes(xml);
-    displayType = _getDisplayType(xml.name.toString());
+    displayType = _getDisplayType(xml);
     text = xml.text;
   }
 
@@ -36,10 +36,16 @@ class TextElement {
     text = txt;
   }
 
-  DisplayType _getDisplayType(String elementName) {
+  DisplayType _getDisplayType(XmlElement xml) {
+    final String elementName = xml.name.toString();
+
     switch (elementName) {
       case 'b':
       case 'strong':
+        if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'cite') {
+          return DisplayType.cite;
+        }
+
         return DisplayType.bold;
 
       case 'em':

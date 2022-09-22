@@ -6,7 +6,7 @@ mixin ContentRenderer {
   void getStyle(DisplayType displayType) {}
 
   FontStyle getTextElementStyle(TextElement text) {
-    if (text.displayType == DisplayType.italic) {
+    if (text.displayType == DisplayType.italic || text.displayType == DisplayType.cite) {
       return FontStyle.italic;
     }
 
@@ -14,7 +14,9 @@ mixin ContentRenderer {
   }
 
   FontWeight getTextElementWeight(TextElement text) {
-    if (text.displayType == DisplayType.bold || text.displayType == DisplayType.link) {
+    if (text.displayType == DisplayType.bold ||
+        text.displayType == DisplayType.link ||
+        text.displayType == DisplayType.cite) {
       return FontWeight.bold;
     }
 
