@@ -10,6 +10,7 @@ import '../../models/book/content/paragraph_tag.dart';
 import '../../models/book/content/signpost_tag.dart';
 import '../../models/book/section.dart';
 import '../../models/book/section/data.dart';
+import '../../types/types.dart';
 import '../content/tags/blockquote.dart';
 import '../content/tags/choice.dart';
 import '../content/tags/combat.dart';
@@ -21,8 +22,9 @@ import '../content/tags/signpost.dart';
 class BookDisplay extends StatelessWidget {
   final Book _book;
   final int _pageNumber;
+  final OnNavigate onNavigate;
 
-  const BookDisplay(this._book, this._pageNumber, {Key? key}) : super(key: key);
+  const BookDisplay(this._book, this._pageNumber, this.onNavigate, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,7 @@ class BookDisplay extends StatelessWidget {
                     return illy.isRealIllustration ? Illustration(illy) : const SizedBox();
 
                   case 'ParagraphTag':
-                    return Paragraph(tag as ParagraphTag);
+                    return Paragraph(tag as ParagraphTag, onNavigate);
 
                   case 'SignpostTag':
                     return Signpost(tag as SignpostTag);

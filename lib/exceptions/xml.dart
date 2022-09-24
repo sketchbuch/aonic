@@ -9,3 +9,9 @@ class ContentXmlException implements Exception {
 
   ContentXmlException(this.message);
 }
+
+class XmlCleaningException implements Exception {
+  String message;
+
+  XmlCleaningException(this.message);
+}

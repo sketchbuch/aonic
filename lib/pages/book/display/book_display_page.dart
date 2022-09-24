@@ -14,7 +14,7 @@ class BookDisplayPage extends StatelessWidget {
       converter: (store) => BookDisplayViewModel.create(store),
       builder: (BuildContext context, BookDisplayViewModel viewModel) {
         return Scaffold(
-          body: Center(child: TitlePage(viewModel.book!.meta)),
+          body: Center(child: TitlePage(viewModel.book!.meta, viewModel.onNavigate)),
         );
       },
     );

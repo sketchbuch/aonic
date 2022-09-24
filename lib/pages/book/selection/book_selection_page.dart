@@ -13,6 +13,7 @@ class BookSelectionPage extends StatelessWidget {
 
   BookSelectionPage({Key? key}) : super(key: key);
 
+// TODO - Handle error
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, BookSelectionViewModel>(

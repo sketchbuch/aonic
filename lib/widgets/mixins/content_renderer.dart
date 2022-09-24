@@ -22,4 +22,24 @@ mixin ContentRenderer {
 
     return FontWeight.normal;
   }
+
+  TextDecoration getTextElementDecoration(TextElement text) {
+    if (text.displayType == DisplayType.link) {
+      return TextDecoration.underline;
+    }
+
+    return TextDecoration.none;
+  }
+
+  Color? getTextElementBackroundColor(TextElement text) {
+    return null;
+  }
+
+  Color? getTextElementHoverBackroundColor(TextElement text) {
+    if (text.displayType == DisplayType.link) {
+      return Colors.blueAccent.withOpacity(0.33);
+    }
+
+    return null;
+  }
 }

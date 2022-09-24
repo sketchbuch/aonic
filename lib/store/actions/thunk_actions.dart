@@ -3,11 +3,13 @@ import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:xml/xml.dart';
 
+import '../../exceptions/xml.dart';
 import '../../models/book/book.dart';
 import '../../models/booklist/booklist_item.dart';
 import '../../routes/routes.dart';
 import '../../utils/get_aon_book_data.dart';
 import '../../utils/get_aon_book_file_data.dart';
+import '../../utils/i18n/map_urls.dart';
 import '../../utils/xml/helpers.dart';
 import 'actions.dart';
 
@@ -15,6 +17,8 @@ const useLocalFile = true;
 
 ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
   return (Store<AppState> store) async {
+    final includeLinks = mapUrls();
+
     store.dispatch(LoadBookRequest());
 
     try {
@@ -26,7 +30,15 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
         bookData = await getAonBookData(selectedBook);
       }
 
-      final bookXml = XmlDocument.parse(cleanXmlString(bookData));
+      final cleanedXmlString = cleanXmlString(bookData, includeLinks);
+
+      if (cleanedXmlString.contains('<ch.')) {
+        throw XmlCleaningException('Unreplaced character tags detected');
+      } else if (cleanedXmlString.contains('&link.')) {
+        throw XmlCleaningException('Unreplaced include links detected');
+      }
+
+      final bookXml = XmlDocument.parse(cleanedXmlString);
       final gamebook = bookXml.getElement('gamebook');
 
       if (gamebook != null) {
@@ -36,6 +48,8 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
       } else {
         store.dispatch(LoadBookFaliure('Book data does not contain a "gamebook" element'));
       }
+    } on XmlCleaningException catch (error) {
+      store.dispatch(LoadBookFaliure(error.message));
     } catch (error) {
       print('### loadBookAction() Error: "${error.toString()}"');
       store.dispatch(LoadBookFaliure(error.toString()));

@@ -1,12 +1,16 @@
+import 'package:lonewolf_new/utils/xml/replace_include_links.dart';
 import 'package:xml/xml.dart';
 
 import '../../models/book/content/subcontent/text_element.dart';
 import '../../types/types.dart';
 import 'replace_character_tags.dart';
 
-String cleanXmlString(String xmlString) {
+String cleanXmlString(String xmlString, Map<String, String> includeLinks) {
   var cleanedString = xmlString.trim().replaceAll(RegExp(r'>\s*<'), '><').replaceAll('\n', '');
-  return replaceCharacterTags(cleanedString);
+  cleanedString = replaceCharacterTags(cleanedString);
+  cleanedString = replaceIncludeLinks(cleanedString, includeLinks);
+
+  return '$cleanedString&link.';
 }
 
 String getAttribute(String name, XmlElement xmlNode, [String fallbackValue = '']) {
