@@ -7,7 +7,7 @@ void main() {
       const xml = '''   <data>   <choice idref="sect275">If <ch.copy/>
 you wish to follow the left track, <link-text>turn to 275</link-text>.</choice>    
         </data> ''';
-      final cleanedXml = cleanXmlString(xml);
+      final cleanedXml = cleanXmlString(xml, {});
 
       expect(
           cleanedXml,
