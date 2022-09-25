@@ -10,7 +10,7 @@ String cleanXmlString(String xmlString, Map<String, String> includeLinks) {
   cleanedString = replaceCharacterTags(cleanedString);
   cleanedString = replaceIncludeLinks(cleanedString, includeLinks);
 
-  return '$cleanedString&link.';
+  return cleanedString;
 }
 
 String getAttribute(String name, XmlElement xmlNode, [String fallbackValue = '']) {

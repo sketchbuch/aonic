@@ -18,8 +18,8 @@ class IllustrationTag extends Tag {
   final List<IllustrationInstance> instances = [];
   late final bool isRealIllustration;
   late final IllustrationType type;
-  late final String creator;
-  late final String description;
+  late final BookText creator;
+  late final BookText description;
 
   // ignore: unused_element
   IllustrationTag._();

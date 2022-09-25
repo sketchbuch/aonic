@@ -1,10 +1,10 @@
-import 'package:lonewolf_new/models/book/meta.dart';
+import 'package:lonewolf_new/models/book/meta/meta.dart';
 import 'package:test/test.dart';
 
-import '../../helpers.dart';
-import 'meta/creator_test.dart';
-import 'meta/description_test.dart';
-import 'meta/right_test.dart';
+import '../../../helpers.dart';
+import 'creator_test.dart';
+import 'description_test.dart';
+import 'right_test.dart';
 
 const metaPublisher = 'Project Aon';
 const metaTitle = 'Flight from the Dark';

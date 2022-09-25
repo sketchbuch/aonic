@@ -4,7 +4,7 @@ import '../../../types/types.dart';
 import 'tag.dart';
 
 class DeadendTag extends Tag {
-  late final String text;
+  late final BookText text;
 
   // ignore: unused_element
   DeadendTag._();

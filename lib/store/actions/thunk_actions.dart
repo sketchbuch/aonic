@@ -48,9 +48,6 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
       } else {
         store.dispatch(LoadBookFaliure('Book data does not contain a "gamebook" element'));
       }
-    } on XmlCleaningException catch (error) {
-      print('### loadBookAction() XmlCleaningException: "${error.message}"');
-      store.dispatch(LoadBookFaliure(error.message));
     } catch (error) {
       print('### loadBookAction() Error: "${error.toString()}"');
       store.dispatch(LoadBookFaliure(error.toString()));

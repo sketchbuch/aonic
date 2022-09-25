@@ -9,7 +9,7 @@ const defaultAttrValue = 1;
 class CombatTag extends Tag {
   late final int combatskill;
   late final int endurance;
-  late final String enemy;
+  late final BookText enemy;
 
   // ignore: unused_element
   CombatTag._();

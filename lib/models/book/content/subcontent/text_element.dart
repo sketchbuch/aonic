@@ -19,7 +19,7 @@ enum DisplayType {
 class TextElement {
   late final Attrs attrs;
   late final DisplayType displayType;
-  late final String text;
+  late final BookText text;
 
   // ignore: unused_element
   TextElement._();

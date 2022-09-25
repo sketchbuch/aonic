@@ -1,10 +1,10 @@
-import 'package:lonewolf_new/models/book/section.dart';
+import 'package:lonewolf_new/models/book/section/section.dart';
 import 'package:test/test.dart';
 
-import '../../helpers.dart';
-import 'section/data_test.dart';
-import 'section/footnote_test.dart';
-import 'section/section_meta_test.dart';
+import '../../../helpers.dart';
+import 'data_test.dart';
+import 'footnote_test.dart';
+import 'section_meta_test.dart';
 
 const sectionId = 'dedicate';
 const sectionText = 'To Mel and Yin';
@@ -21,6 +21,7 @@ final sectionJson = {
   "footnotes": [footnoteJson],
   "id": sectionId,
   "meta": sectionMetaJson,
+  "sections": [],
   "type": sectionType
 };
 

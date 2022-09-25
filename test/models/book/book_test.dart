@@ -2,15 +2,32 @@ import 'package:lonewolf_new/models/book/book.dart';
 import 'package:test/test.dart';
 
 import '../../helpers.dart';
-import 'meta_test.dart';
-import 'section_test.dart';
+import 'meta/meta_test.dart';
+import 'section/section_test.dart';
 
 const lang = 'en-UK';
+const titlePage = 'Title Page';
+const numberedPage = 'Numbered Sections';
 const title = 'Flight from the Dark';
 const version = '0.12';
 const bookXml = '''<gamebook xml:lang="$lang" version="$version">
   $metaXml
-  $sectionXml
+  <section id="title">
+    <meta>
+    <title>$titlePage</title>
+    <link class="next" idref="dedicate" />
+    </meta>
+  
+    <data>
+      $sectionXml
+      <section class="numbered" id="numbered">
+        <meta><title>$numberedPage</title></meta>
+
+        <data>
+        </data>
+      </section>
+    </data>
+  </section>
 </gamebook>''';
 final bookJson = {
   "backmatter": [],
@@ -18,8 +35,10 @@ final bookJson = {
   "lang": lang,
   "meta": metaJson,
   "numbered": [],
+  "numberedPageTitle": numberedPage,
   "title": title,
-  "version": version
+  "titlePageTitle": titlePage,
+  "version": version,
 };
 
 void main() {

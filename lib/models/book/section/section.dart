@@ -1,11 +1,11 @@
 import 'package:recase/recase.dart';
 import 'package:xml/xml.dart';
 
-import '../../types/types.dart';
-import '../../utils/xml/helpers.dart';
-import 'section/data.dart';
-import 'section/footnote.dart';
-import 'section/section_meta.dart';
+import '../../../types/types.dart';
+import '../../../utils/xml/helpers.dart';
+import 'data.dart';
+import 'footnote.dart';
+import 'section_meta.dart';
 
 enum SectionType {
   backmatter('backmatter'),
@@ -13,6 +13,7 @@ enum SectionType {
   frontmatterSeparate('frontmatter-separate'),
   none('none'),
   numbered('numbered'),
+  title('title'),
   unknown('unknown');
 
   const SectionType(this.value);
@@ -21,8 +22,9 @@ enum SectionType {
 
 class Section {
   late Data data;
-  late SectionMeta meta;
   late List<Footnote> footnotes;
+  late List<Section> sections;
+  late SectionMeta meta;
   late SectionType type;
   late String id;
 
@@ -46,6 +48,7 @@ class Section {
 
     final dataXml = xml.getElement('data');
     final metaXml = xml.getElement('meta');
+    final footnotesXml = xml.getElement('footnotes');
 
     if (metaXml != null) {
       meta = SectionMeta.fromXml(metaXml);
@@ -53,9 +56,9 @@ class Section {
 
     if (dataXml != null) {
       data = Data.fromXml(dataXml);
+      sections = dataXml.findElements('section').map((section) => Section.fromXml(section)).toList();
     }
 
-    final footnotesXml = xml.getElement('footnotes');
     footnotes = footnotesXml != null
         ? footnotesXml.findElements('footnote').map((footnote) => Footnote.fromXml(footnote)).toList()
         : [];
@@ -66,6 +69,7 @@ class Section {
         'footnotes': footnotes.map((footnote) => footnote.toJson()).toList(),
         'id': id,
         'meta': meta.toJson(),
+        'sections': sections.map((section) => section.toJson()).toList(),
         'type': type.name,
       };
 

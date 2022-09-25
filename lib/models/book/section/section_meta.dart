@@ -5,8 +5,8 @@ import '../../../utils/xml/helpers.dart';
 import 'meta_link.dart';
 
 class SectionMeta {
+  late final BookText title;
   late final List<MetaLink> links = [];
-  late final String title;
 
   // ignore: unused_element
   SectionMeta._();

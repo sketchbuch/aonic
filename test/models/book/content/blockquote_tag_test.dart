@@ -46,7 +46,7 @@ void main() {
 
     void testListType(String type, String xml, Object json) {
       group('$type:', () {
-        final tag = BlockquoteTag.fromXml(getRootXmlElement(blockquoteXml));
+        final tag = BlockquoteTag.fromXml(getRootXmlElement(xml));
 
         test('Returns expected JSON', () {
           expect(tag.toJson(), equals(json));

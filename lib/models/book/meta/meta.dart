@@ -1,20 +1,20 @@
 import 'package:intl/intl.dart';
 import 'package:xml/xml.dart';
 
-import '../../types/types.dart';
-import '../../utils/xml/helpers.dart';
-import 'content/paragraph_tag.dart';
-import 'meta/creator.dart';
-import 'meta/description.dart';
-import 'meta/right.dart';
+import '../../../types/types.dart';
+import '../../../utils/xml/helpers.dart';
+import '../content/paragraph_tag.dart';
+import 'creator.dart';
+import 'description.dart';
+import 'right.dart';
 
 class Meta {
+  late BookText publisher = '';
+  late BookText title = '';
   late DateTime? publicationDate;
   late List<Creator> creators = [];
   late List<Description> descriptions = [];
   late List<Right> rights = [];
-  late String publisher = '';
-  late String title = '';
 
   // ignore: unused_element
   Meta._();
