@@ -13,7 +13,7 @@ import '../../utils/i18n/map_urls.dart';
 import '../../utils/xml/helpers.dart';
 import 'actions.dart';
 
-const useLocalFile = true;
+const useLocalFile = false;
 
 ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
   return (Store<AppState> store) async {
@@ -46,7 +46,8 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
         store.dispatch(LoadBookSuccess(bookData, book));
         store.dispatch(NavigateAction(bookNav, bookNumberedRoute));
       } else {
-        store.dispatch(LoadBookFaliure('Book data does not contain a "gamebook" element'));
+        store.dispatch(
+            LoadBookFaliure('Book data does not contain a "gamebook" element'));
       }
     } catch (error) {
       print('### loadBookAction() Error: "${error.toString()}"');
