@@ -32,7 +32,8 @@ class App extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: homeRoute,
-        locale: TranslationProvider.of(context).flutterLocale,
+        // locale: TranslationProvider.of(context).flutterLocale,
+        locale: const Locale('en'),
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
         navigatorKey: mainNav,
         onGenerateRoute: generateMainRoute,
