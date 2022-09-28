@@ -34,4 +34,8 @@ dev_dependencies:
   test: ^1.21.1
 
 flutter:
+  assets:
+    - samples/sample.xml
+  
   uses-material-design: true
+

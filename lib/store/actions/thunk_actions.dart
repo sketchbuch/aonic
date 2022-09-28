@@ -13,7 +13,7 @@ import '../../utils/i18n/map_urls.dart';
 import '../../utils/xml/helpers.dart';
 import 'actions.dart';
 
-const useLocalFile = false;
+const useLocalFile = true;
 
 ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
   return (Store<AppState> store) async {
