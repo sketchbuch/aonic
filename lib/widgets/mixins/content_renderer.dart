@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../models/book/content/subcontent/text_element.dart';
 
+final hoverBackgroundColour = Colors.blueAccent.withOpacity(0.33);
+
 mixin ContentRenderer {
   void getStyle(DisplayType displayType) {}
 
   FontStyle getTextElementStyle(TextElement text) {
-    if (text.displayType == DisplayType.italic || text.displayType == DisplayType.cite) {
+    if (text.displayType == DisplayType.italic ||
+        text.displayType == DisplayType.cite) {
       return FontStyle.italic;
     }
 
@@ -37,7 +40,7 @@ mixin ContentRenderer {
 
   Color? getTextElementHoverBackroundColor(TextElement text) {
     if (text.displayType == DisplayType.link) {
-      return Colors.blueAccent.withOpacity(0.33);
+      return hoverBackgroundColour;
     }
 
     return null;

@@ -1,9 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../i18n/_generated_/translations.g.dart';
 import '../../models/book/book.dart';
-import '../content/content_container.dart';
+import 'index_item.dart';
 
 class BookIndex extends StatelessWidget {
   final transBook = t.book;
@@ -15,7 +14,12 @@ class BookIndex extends StatelessWidget {
   Widget build(BuildContext context) {
     final bookIndex = book.getBookIndex();
 
-    return ContentContainer(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: bookIndex.map<Widget>((item) => IndexItem(item)).toList(),
+    );
+
+    /* return ContentContainer(
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
@@ -40,6 +44,6 @@ class BookIndex extends StatelessWidget {
           }).toList(),
         ),
       ),
-    );
+    ); */
   }
 }
