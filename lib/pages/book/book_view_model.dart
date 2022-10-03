@@ -2,7 +2,7 @@ import 'package:redux/redux.dart';
 
 import '../../models/booklist/booklist_item.dart';
 import '../../store/actions/actions.dart';
-import '../../store/actions/thunk_actions.dart';
+import '../../store/actions/load_book_action.dart';
 import '../../store/models/app_state.dart';
 import '../../store/models/book_state.dart';
 
@@ -33,30 +33,31 @@ class BookViewModel {
     final state = store.state;
     final bookState = state.bookState;
 
-    void _onNextPage() {
+    void onNextPage() {
       store.dispatch(NextPageAction());
     }
 
-    void _onPrevPage() {
+    void onPrevPage() {
       store.dispatch(PrevPageAction());
     }
 
-    void _onLoadBook(BooklistItem selectedBook) {
+    void onLoadBook(BooklistItem selectedBook) {
       store.dispatch(loadBookAction(selectedBook));
     }
 
-    void _onUnloadBook() {
+    void onUnloadBook() {
       store.dispatch(UnloadBookAction());
     }
 
     return BookViewModel(
-      canShowActionButton: state.selectedBook != null && bookState.status != BookStateStatus.loading,
+      canShowActionButton: state.selectedBook != null &&
+          bookState.status != BookStateStatus.loading,
       isBookLoaded: bookState.status == BookStateStatus.succeeded,
       isLoading: bookState.status == BookStateStatus.loading,
-      onLoadBook: _onLoadBook,
-      onNextPage: _onNextPage,
-      onPrevPage: _onPrevPage,
-      onUnloadBook: _onUnloadBook,
+      onLoadBook: onLoadBook,
+      onNextPage: onNextPage,
+      onPrevPage: onPrevPage,
+      onUnloadBook: onUnloadBook,
       page: state.page,
       selectedBook: state.selectedBook,
     );

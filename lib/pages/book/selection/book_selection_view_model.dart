@@ -20,13 +20,14 @@ class BookSelectionViewModel {
     final state = store.state;
     final bookState = state.bookState;
 
-    void _onSelectBook(BooklistItem? selectedBook) {
+    void onSelectBook(BooklistItem? selectedBook) {
       store.dispatch(SelectBookAction(selectedBook));
     }
 
     return BookSelectionViewModel(
-      isLoading: bookState.status == BookStateStatus.loading || bookState.status == BookStateStatus.succeeded,
-      onSelectBook: _onSelectBook,
+      isLoading: bookState.status == BookStateStatus.loading ||
+          bookState.status == BookStateStatus.succeeded,
+      onSelectBook: onSelectBook,
       selectedBook: state.selectedBook,
     );
   }

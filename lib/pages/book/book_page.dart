@@ -33,7 +33,8 @@ class _BookPageState extends State<BookPage> {
             builder: (context) {
               return AlertDialog(
                 title: const Text('Are you sure?'),
-                content: const Text('If you exit device setup, your progress will be lost.'),
+                content: const Text(
+                    'If you exit device setup, your progress will be lost.'),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -80,12 +81,16 @@ class _BookPageState extends State<BookPage> {
                   ? [
                       IconButton(
                         icon: const Icon(Icons.navigate_before),
-                        onPressed: viewModel.page > pageMin ? viewModel.onPrevPage : null,
+                        onPressed: viewModel.page > pageMin
+                            ? viewModel.onPrevPage
+                            : null,
                         tooltip: widget.transCommon.prev,
                       ),
                       IconButton(
                         icon: const Icon(Icons.navigate_next),
-                        onPressed: viewModel.page < pageMax ? viewModel.onNextPage : null,
+                        onPressed: viewModel.page < pageMax
+                            ? viewModel.onNextPage
+                            : null,
                         tooltip: widget.transCommon.next,
                       ),
                     ]
@@ -110,7 +115,8 @@ class _BookPageState extends State<BookPage> {
                       }
                     },
                     tooltip: tooltipText,
-                    child: Icon(viewModel.isBookLoaded ? Icons.home : Icons.download),
+                    child: Icon(
+                        viewModel.isBookLoaded ? Icons.home : Icons.download),
                   )
                 : null,
           ),

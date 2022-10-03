@@ -21,7 +21,9 @@ class AppState {
         page = pageMin,
         selectedBook = null;
 
-  AppState copyWith({BookState? bookState, int? page, BooklistItem? selectedBook}) => AppState(
+  AppState copyWith(
+          {BookState? bookState, int? page, BooklistItem? selectedBook}) =>
+      AppState(
         bookState: bookState ?? this.bookState,
         page: page ?? this.page,
         selectedBook: selectedBook ?? this.selectedBook,

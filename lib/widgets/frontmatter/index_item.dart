@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 
 import '../../i18n/_generated_/translations.g.dart';
 import '../../models/book/index/book_index_item.dart';
+import '../../types/types.dart';
 import '../content/content_container.dart';
 import '../mixins/content_renderer.dart';
 
 class IndexItem extends StatefulWidget with ContentRenderer {
   final transBook = t.book;
   final BookIndexItem item;
+  final OnNavigate onNavigate;
 
-  IndexItem(this.item, {Key? key}) : super(key: key);
+  IndexItem(this.item, this.onNavigate, {Key? key}) : super(key: key);
 
   @override
   State<IndexItem> createState() => _IndexItemState();
@@ -37,7 +39,7 @@ class _IndexItemState extends State<IndexItem> {
               text: label,
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  print('ID: "${widget.item.id}"');
+                  widget.onNavigate(widget.item.id);
                 },
               style: TextStyle(
                 backgroundColor: _hover ? hoverBackgroundColour : null,

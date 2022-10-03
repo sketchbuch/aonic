@@ -19,14 +19,18 @@ class BookDisplayViewModel {
     final state = store.state;
     final bookState = state.bookState;
 
-    void _onNavigate(String link) {
-      print('### Link: "$link"');
+    void onNavigate(String link) {
+      if (link.startsWith('sect')) {
+        print('### Section: "$link"');
+      } else {
+        print('### Frontmatter/Backmatter: "$link"');
+      }
       // store.dispatch(NavigateAction(bookNav, bookNumberedRoute));
     }
 
     return BookDisplayViewModel(
       book: bookState.book,
-      onNavigate: _onNavigate,
+      onNavigate: onNavigate,
       page: state.page,
     );
   }
