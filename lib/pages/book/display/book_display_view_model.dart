@@ -1,6 +1,8 @@
 import 'package:redux/redux.dart';
 
 import '../../../models/book/book.dart';
+import '../../../routes/routes.dart';
+import '../../../store/actions/actions.dart';
 import '../../../store/models/app_state.dart';
 import '../../../types/types.dart';
 
@@ -20,12 +22,7 @@ class BookDisplayViewModel {
     final bookState = state.bookState;
 
     void onNavigate(String link) {
-      if (link.startsWith('sect')) {
-        print('### Section: "$link"');
-      } else {
-        print('### Frontmatter/Backmatter: "$link"');
-      }
-      // store.dispatch(NavigateAction(bookNav, bookNumberedRoute));
+      store.dispatch(NavigateAction(bookNav, link));
     }
 
     return BookDisplayViewModel(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../constants/books.dart';
 import '../../models/booklist/booklist_item.dart';
 import 'book_state.dart';
-import 'page_State.dart';
+import 'page_state.dart';
 
 @immutable
 class AppState {
