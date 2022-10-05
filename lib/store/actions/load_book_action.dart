@@ -44,7 +44,7 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
       if (gamebook != null) {
         Book book = Book.fromXml(gamebook);
         store.dispatch(LoadBookSuccess(bookData, book));
-        store.dispatch(NavigateAction(bookNav, bookNumberedRoute));
+        store.dispatch(NavigateAction(bookNav, bookPlayRoute));
       } else {
         store.dispatch(
             LoadBookFaliure('Book data does not contain a "gamebook" element'));

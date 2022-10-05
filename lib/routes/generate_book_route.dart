@@ -9,9 +9,7 @@ Route<dynamic> generateBookRoute(RouteSettings settings) {
   late Widget page;
 
   switch (settings.name) {
-    case bookBackmatterRoute:
-    case bookFrontmatterRoute:
-    case bookNumberedRoute:
+    case bookPlayRoute:
       page = const BookDisplayPage();
       break;
 
@@ -20,7 +18,8 @@ Route<dynamic> generateBookRoute(RouteSettings settings) {
       break;
 
     default:
-      return MaterialPageRoute(builder: (_) => NotFoundPage(settings, showAppBar: false));
+      return MaterialPageRoute(
+          builder: (_) => NotFoundPage(settings, showAppBar: false));
   }
 
   return MaterialPageRoute<dynamic>(

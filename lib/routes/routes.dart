@@ -3,9 +3,7 @@ import 'package:flutter/cupertino.dart';
 const homeRoute = '/';
 
 const bookRoute = '/book';
-const bookBackmatterRoute = '$bookRoute/backmatter';
-const bookFrontmatterRoute = '$bookRoute/frontmatter';
-const bookNumberedRoute = '$bookRoute/numbered';
+const bookPlayRoute = '/book/play';
 
 const settingsRoute = '/settings';
 

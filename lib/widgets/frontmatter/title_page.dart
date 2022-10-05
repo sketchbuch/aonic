@@ -21,9 +21,14 @@ class TitlePage extends StatelessWidget {
       children: [
         TextParagraph(meta.title),
         TextParagraph(meta.getCreator()),
-        TextParagraph(transBook.publicationDate(date: meta.getFormattedPublicationDate())),
-        ...meta.getDescriptionParagraphs().map((para) => Paragraph(para, onNavigate)),
-        ...meta.getRightParagraphs(RightType.licenseNotification).map((para) => Paragraph(para, onNavigate)),
+        TextParagraph(transBook.publicationDate(
+            date: meta.getFormattedPublicationDate())),
+        ...meta
+            .getDescriptionParagraphs()
+            .map((para) => Paragraph(para, onNavigate)),
+        ...meta
+            .getRightParagraphs(RightType.licenseNotification)
+            .map((para) => Paragraph(para, onNavigate)),
       ],
     );
   }

@@ -33,6 +33,13 @@ class NavigateAction {
 
 class NextPageAction {}
 
+class PageNavigateAction {
+  final GlobalKey<NavigatorState> navigator;
+  final String route;
+
+  PageNavigateAction(this.navigator, this.route);
+}
+
 class PrevPageAction {}
 
 class SelectBookAction {

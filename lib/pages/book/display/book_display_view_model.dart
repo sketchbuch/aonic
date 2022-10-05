@@ -7,13 +7,17 @@ import '../../../store/models/app_state.dart';
 import '../../../types/types.dart';
 
 class BookDisplayViewModel {
-  final Book? book;
+  final Book book;
+  final bool isMatter;
+  final bool isSection;
   final int sectionNumber;
   final OnNavigate onNavigate;
   final String pageId;
 
   BookDisplayViewModel({
     required this.book,
+    required this.isMatter,
+    required this.isSection,
     required this.onNavigate,
     required this.pageId,
     required this.sectionNumber,
@@ -25,11 +29,13 @@ class BookDisplayViewModel {
     final pageState = state.pageState;
 
     void onNavigate(String link) {
-      store.dispatch(NavigateAction(bookNav, link));
+      store.dispatch(PageNavigateAction(bookNav, link));
     }
 
     return BookDisplayViewModel(
-      book: bookState.book,
+      book: bookState.book!,
+      isMatter: pageState.isMatter(),
+      isSection: pageState.isSection(),
       onNavigate: onNavigate,
       pageId: pageState.pageId,
       sectionNumber: pageState.sectionNumber,
