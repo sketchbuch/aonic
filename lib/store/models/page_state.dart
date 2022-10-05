@@ -20,4 +20,8 @@ class PageState {
         pageId: pageId ?? this.pageId,
         sectionNumber: sectionNumber ?? this.sectionNumber,
       );
+
+  int getSectionNumber(String link) {
+    return int.parse(link.replaceFirst(sectionPrefix, ''));
+  }
 }

@@ -8,18 +8,21 @@ import '../../../types/types.dart';
 
 class BookDisplayViewModel {
   final Book? book;
-  final int page;
+  final int sectionNumber;
   final OnNavigate onNavigate;
+  final String pageId;
 
   BookDisplayViewModel({
     required this.book,
     required this.onNavigate,
-    required this.page,
+    required this.pageId,
+    required this.sectionNumber,
   });
 
   factory BookDisplayViewModel.create(Store<AppState> store) {
     final state = store.state;
     final bookState = state.bookState;
+    final pageState = state.pageState;
 
     void onNavigate(String link) {
       store.dispatch(NavigateAction(bookNav, link));
@@ -28,7 +31,8 @@ class BookDisplayViewModel {
     return BookDisplayViewModel(
       book: bookState.book,
       onNavigate: onNavigate,
-      page: state.page,
+      pageId: pageState.pageId,
+      sectionNumber: pageState.sectionNumber,
     );
   }
 }

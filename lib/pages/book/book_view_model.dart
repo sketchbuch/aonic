@@ -11,7 +11,8 @@ class BookViewModel {
   final bool canShowActionButton;
   final bool isBookLoaded;
   final bool isLoading;
-  final int page;
+  final int sectionNumber;
+  final String pageId;
   final void Function() onNextPage;
   final void Function() onPrevPage;
   final void Function() onUnloadBook;
@@ -25,13 +26,15 @@ class BookViewModel {
     required this.onNextPage,
     required this.onPrevPage,
     required this.onUnloadBook,
-    required this.page,
+    required this.pageId,
+    required this.sectionNumber,
     required this.selectedBook,
   });
 
   factory BookViewModel.create(Store<AppState> store) {
     final state = store.state;
     final bookState = state.bookState;
+    final pageState = state.pageState;
 
     void onNextPage() {
       store.dispatch(NextPageAction());
@@ -58,7 +61,8 @@ class BookViewModel {
       onNextPage: onNextPage,
       onPrevPage: onPrevPage,
       onUnloadBook: onUnloadBook,
-      page: state.page,
+      pageId: pageState.pageId,
+      sectionNumber: pageState.sectionNumber,
       selectedBook: state.selectedBook,
     );
   }

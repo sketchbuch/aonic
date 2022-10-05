@@ -81,14 +81,14 @@ class _BookPageState extends State<BookPage> {
                   ? [
                       IconButton(
                         icon: const Icon(Icons.navigate_before),
-                        onPressed: viewModel.page > pageMin
+                        onPressed: viewModel.sectionNumber > pageMin
                             ? viewModel.onPrevPage
                             : null,
                         tooltip: widget.transCommon.prev,
                       ),
                       IconButton(
                         icon: const Icon(Icons.navigate_next),
-                        onPressed: viewModel.page < pageMax
+                        onPressed: viewModel.sectionNumber < pageMax
                             ? viewModel.onNextPage
                             : null,
                         tooltip: widget.transCommon.next,

@@ -9,19 +9,16 @@ import 'page_state.dart';
 class AppState {
   final BookState bookState;
   final BooklistItem? selectedBook;
-  final int page;
   final PageState pageState;
 
   const AppState({
     required this.bookState,
-    required this.page,
     required this.selectedBook,
     required this.pageState,
   });
 
   const AppState.initialState()
       : bookState = const BookState.initialState(),
-        page = pageMin,
         pageState = const PageState.initialState(),
         selectedBook = null;
 
@@ -32,7 +29,6 @@ class AppState {
           BooklistItem? selectedBook}) =>
       AppState(
         bookState: bookState ?? this.bookState,
-        page: page ?? this.page,
         pageState: pageState ?? this.pageState,
         selectedBook: selectedBook ?? this.selectedBook,
       );

@@ -10,7 +10,6 @@ AppState appStateReducer(
 ) {
   return AppState(
     bookState: bookStateReducer(state.bookState, action),
-    page: pageReducer(state.page, action),
     pageState: pageStateReducer(state.pageState, action),
     selectedBook: selectedBookReducer(state.selectedBook, action),
   );
