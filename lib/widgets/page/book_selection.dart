@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../models/booklist/booklist_item.dart';
+import '../../models/booklist/booklist_item.dart';
 
 class BookSelection extends StatelessWidget {
   final List<BooklistItem> _bookData;
   final void Function(BooklistItem?) _onChanged;
   final BooklistItem? _selectedBook;
 
-  const BookSelection(this._bookData, this._selectedBook, this._onChanged, {Key? key}) : super(key: key);
+  const BookSelection(this._bookData, this._selectedBook, this._onChanged,
+      {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

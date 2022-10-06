@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../i18n/_generated_/translations.g.dart';
-import '../../widgets/status_display.dart';
+import '../../widgets/page/status_display.dart';
 
 class NotFoundPage extends StatelessWidget {
   final RouteSettings settings;
   final trans = t.notfound;
   final bool showAppBar;
 
-  NotFoundPage(this.settings, {this.showAppBar = true, Key? key}) : super(key: key);
+  NotFoundPage(this.settings, {this.showAppBar = true, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

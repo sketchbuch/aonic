@@ -5,11 +5,12 @@ import '../../../constants/books.dart';
 import '../../../i18n/_generated_/translations.g.dart';
 import '../../../models/booklist/booklist.dart';
 import '../../../store/models/app_state.dart';
-import '../../../widgets/book_selection.dart';
+import '../../../widgets/page/book_selection.dart';
 import 'book_selection_view_model.dart';
 
 class BookSelectionPage extends StatelessWidget {
-  final booklist = Booklist(t.booksLonewolf.books, lonewolfSupportedBooks, 'en').getBooks();
+  final booklist =
+      Booklist(t.booksLonewolf.books, lonewolfSupportedBooks, 'en').getBooks();
 
   BookSelectionPage({Key? key}) : super(key: key);
 
@@ -23,7 +24,8 @@ class BookSelectionPage extends StatelessWidget {
           body: Center(
             child: viewModel.isLoading
                 ? const CircularProgressIndicator()
-                : BookSelection(booklist, viewModel.selectedBook, viewModel.onSelectBook),
+                : BookSelection(
+                    booklist, viewModel.selectedBook, viewModel.onSelectBook),
           ),
         );
       },

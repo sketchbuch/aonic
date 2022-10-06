@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../types/types.dart';
+import '../../types/types.dart';
 
 class StatusDisplay extends StatelessWidget {
   final IconData icon;
   final TranslatedText title;
   final TranslatedText? message;
 
-  const StatusDisplay(this.title, this.icon, {this.message, Key? key}) : super(key: key);
+  const StatusDisplay(this.title, this.icon, {this.message, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

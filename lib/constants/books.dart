@@ -1,5 +1,8 @@
-const bookStartPage = 'index';
 const lonewolfSupportedBooks = [1, 2, 3];
 const pageMax = 349;
 const pageMin = 0;
 const sectionPrefix = 'sect';
+
+const bookIdNumbered = 'numbered';
+const bookIdStart = 'index';
+const bookIdTitle = 'title';
