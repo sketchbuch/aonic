@@ -35,7 +35,9 @@ class Book {
       title = meta.title;
     }
 
-    final baseSection = xml.findElements('section').where((element) => element.getAttribute('id') == 'title');
+    final baseSection = xml
+        .findElements('section')
+        .where((element) => element.getAttribute('id') == 'title');
 
     if (baseSection.isEmpty) {
       throw BookXmlException('Title section not found');
@@ -54,35 +56,41 @@ class Book {
     final sections = titleData.findElements('section');
 
     backmatter = sections
-        .where((sec) => sec.getAttribute('class') == SectionType.backmatter.name)
+        .where(
+            (sec) => sec.getAttribute('class') == SectionType.backmatter.name)
         .map((xml) => Section.fromXml(xml))
         .toList();
 
     frontmatter = sections
         .where((sec) {
           final className = sec.getAttribute('class');
-          return className == SectionType.frontmatter.name || className == SectionType.frontmatterSeparate.value;
+          return className == SectionType.frontmatter.name ||
+              className == SectionType.frontmatterSeparate.value;
         })
         .map((xml) => Section.fromXml(xml))
         .toList();
 
-    numbered = sections
-        .where((sec) =>
-            sec.getAttribute('class') == SectionType.numbered.name &&
-            sec.getAttribute('id') != SectionType.numbered.name)
-        .map((xml) => Section.fromXml(xml))
-        .toList();
-
     final numberedBaseSection = sections.where((sec) =>
-        sec.getAttribute('class') == SectionType.numbered.name && sec.getAttribute('id') == SectionType.numbered.name);
+        sec.getAttribute('class') == SectionType.numbered.name &&
+        sec.getAttribute('id') == SectionType.numbered.name);
 
     if (numberedBaseSection.isEmpty) {
       throw BookXmlException('Numbered base section not found');
     }
 
-    final numberedBaseMeta = numberedBaseSection.elementAt(0).getElement('meta');
+    final numberedBaseMeta = numberedBaseSection.first.getElement('meta');
+    final numberedBaseData = numberedBaseSection.first.getElement('data');
 
-    numberedPageTitle = numberedBaseMeta != null ? getValue('title', numberedBaseMeta) : '';
+    if (numberedBaseData == null) {
+      throw BookXmlException('Numbered base data not found');
+    }
+
+    final numberedBaseSections = numberedBaseData.findElements('section');
+
+    numberedPageTitle =
+        numberedBaseMeta != null ? getValue('title', numberedBaseMeta) : '';
+
+    numbered = numberedBaseSections.map((xml) => Section.fromXml(xml)).toList();
   }
 
   Json toJson() => {
@@ -105,7 +113,8 @@ class Book {
   BookIndex _buildBookIndex() {
     final BookIndex bookIndex = [];
 
-    bookIndex.add(BookIndexItem(titlePageTitle, SectionType.title.name, SectionType.title, false));
+    bookIndex.add(BookIndexItem(
+        titlePageTitle, SectionType.title.name, SectionType.title, false));
 
     for (var section in frontmatter) {
       bookIndex.add(BookIndexItem.fromSection(section, false));
@@ -119,7 +128,8 @@ class Book {
       }
     }
 
-    bookIndex.add(BookIndexItem(numberedPageTitle, SectionType.numbered.name, SectionType.numbered, false));
+    bookIndex.add(BookIndexItem(numberedPageTitle, SectionType.numbered.name,
+        SectionType.numbered, false));
 
     for (var section in backmatter) {
       bookIndex.add(BookIndexItem.fromSection(section, false));

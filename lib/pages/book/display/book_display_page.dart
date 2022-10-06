@@ -6,13 +6,15 @@ import '../../../exceptions/render.dart';
 import '../../../store/models/app_state.dart';
 import '../../../widgets/frontmatter/book_index.dart';
 import '../../../widgets/frontmatter/title_page.dart';
+import '../../../widgets/numbered/book_display.dart';
 import 'book_display_view_model.dart';
 
 class BookDisplayPage extends StatelessWidget {
   const BookDisplayPage({Key? key}) : super(key: key);
 
   Widget getPageWidget(BookDisplayViewModel viewModel) {
-    final meta = viewModel.book.meta;
+    final book = viewModel.book;
+    final meta = book.meta;
     final isSection = viewModel.isSection;
     final pageId = viewModel.pageId;
     final sectionNumber = viewModel.sectionNumber;
@@ -22,6 +24,9 @@ class BookDisplayPage extends StatelessWidget {
     }
 
     switch (pageId) {
+      case 'numbered':
+        return BookDisplay(book, sectionNumber, viewModel.onNavigate);
+
       case 'title':
         return TitlePage(meta, viewModel.onNavigate);
 

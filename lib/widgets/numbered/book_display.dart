@@ -24,10 +24,13 @@ class BookDisplay extends StatelessWidget {
   final int _pageNumber;
   final OnNavigate onNavigate;
 
-  const BookDisplay(this._book, this._pageNumber, this.onNavigate, {Key? key}) : super(key: key);
+  const BookDisplay(this._book, this._pageNumber, this.onNavigate, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('### BookDisplay(): _pageNumber: "$_pageNumber"');
+    print('### BookDisplay(): _book.numbered: "${_book.numbered.length}"');
     try {
       Section section = _book.numbered.elementAt(_pageNumber);
       Data data = section.data;
@@ -55,7 +58,9 @@ class BookDisplay extends StatelessWidget {
 
                   case 'IllustrationTag':
                     final illy = tag as IllustrationTag;
-                    return illy.isRealIllustration ? Illustration(illy) : const SizedBox();
+                    return illy.isRealIllustration
+                        ? Illustration(illy)
+                        : const SizedBox();
 
                   case 'ParagraphTag':
                     return Paragraph(tag as ParagraphTag, onNavigate);
@@ -68,7 +73,8 @@ class BookDisplay extends StatelessWidget {
                     return Text('Unsupported Tag: "$tagType"');
                 }
               })
-              .where((Widget widget) => widget.runtimeType.toString() != 'SizedBox')
+              .where((Widget widget) =>
+                  widget.runtimeType.toString() != 'SizedBox')
               .toList()
         ],
       );

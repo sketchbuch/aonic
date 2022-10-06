@@ -34,8 +34,14 @@ class _IndexItemState extends State<IndexItem> {
           style: DefaultTextStyle.of(context).style,
           children: [
             TextSpan(
-              onEnter: (_) => setState(() => _hover = true),
-              onExit: (_) => setState(() => _hover = false),
+              onEnter: (_) {
+                setState(() => _hover = true);
+              },
+              onExit: (_) {
+                if (mounted) {
+                  setState(() => _hover = false);
+                }
+              },
               text: label,
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
