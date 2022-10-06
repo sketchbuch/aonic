@@ -31,7 +31,7 @@ class BookDisplayPage extends StatelessWidget {
         return TitlePage(meta, viewModel.onNavigate);
 
       case bookStartPage:
-        return BookIndex(viewModel.book!, viewModel.onNavigate);
+        return BookIndex(viewModel.book, viewModel.onNavigate);
 
       default:
         print('### Unknown matter id: "$pageId"');

@@ -29,8 +29,6 @@ class BookDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('### BookDisplay(): _pageNumber: "$_pageNumber"');
-    print('### BookDisplay(): _book.numbered: "${_book.numbered.length}"');
     try {
       Section section = _book.numbered.elementAt(_pageNumber);
       Data data = section.data;
