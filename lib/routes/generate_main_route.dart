@@ -6,7 +6,6 @@ import '../pages/home/home_page.dart';
 import 'routes.dart';
 
 Route<dynamic> generateMainRoute(RouteSettings settings) {
-  print('### generateMainRoute(): "${settings.name}"');
   switch (settings.name) {
     case homeRoute:
       return MaterialPageRoute(builder: (_) => HomePage());

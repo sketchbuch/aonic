@@ -25,14 +25,6 @@ class PageState {
     return int.parse(link.replaceFirst(sectionPrefix, ''));
   }
 
-  bool isMatter() {
-    return !pageId.startsWith(sectionPrefix);
-  }
-
-  bool isMatterLink(String link) {
-    return !link.startsWith(sectionPrefix);
-  }
-
   bool isSection() {
     return pageId.startsWith(sectionPrefix);
   }

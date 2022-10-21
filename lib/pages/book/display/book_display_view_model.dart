@@ -1,5 +1,6 @@
 import 'package:redux/redux.dart';
 
+import '../../../constants/books.dart';
 import '../../../models/book/book.dart';
 import '../../../routes/routes.dart';
 import '../../../store/actions/actions.dart';
@@ -8,7 +9,6 @@ import '../../../types/types.dart';
 
 class BookDisplayViewModel {
   final Book book;
-  final bool isMatter;
   final bool isSection;
   final int sectionNumber;
   final OnNavigate onNavigate;
@@ -16,7 +16,6 @@ class BookDisplayViewModel {
 
   BookDisplayViewModel({
     required this.book,
-    required this.isMatter,
     required this.isSection,
     required this.onNavigate,
     required this.pageId,
@@ -34,8 +33,7 @@ class BookDisplayViewModel {
 
     return BookDisplayViewModel(
       book: bookState.book!,
-      isMatter: pageState.isMatter(),
-      isSection: pageState.isSection(),
+      isSection: pageState.isSection() || pageState.pageId == bookIdNumbered,
       onNavigate: onNavigate,
       pageId: pageState.pageId,
       sectionNumber: pageState.sectionNumber,
