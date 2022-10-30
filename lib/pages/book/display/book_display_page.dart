@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import '../../../constants/books.dart';
+import '../../../exceptions/render.dart';
 import '../../../store/models/app_state.dart';
-import '../../../widgets/content/text_paragraph.dart';
-import '../../../widgets/matter/book_index.dart';
+import '../../../widgets/matter/book_index_page.dart';
+import '../../../widgets/matter/matter_display.dart';
 import '../../../widgets/matter/title_page.dart';
 import '../../../widgets/numbered/book_display.dart';
 import 'book_display_view_model.dart';
@@ -20,24 +21,28 @@ class BookDisplayPage extends StatelessWidget {
         return Scaffold(
           body: Center(
             child: () {
-              if (viewModel.isSection) {
-                return BookDisplay(
-                  viewModel.book,
-                  viewModel.sectionNumber,
-                  viewModel.onNavigate,
-                );
-              }
-
               switch (viewModel.pageId) {
                 case bookIdTitle:
                   return TitlePage(viewModel.book.meta, viewModel.onNavigate);
 
                 case bookIdStart:
-                  return BookIndex(viewModel.book, viewModel.onNavigate);
+                  return BookIndexPage(viewModel.book.bookIndex, viewModel.onNavigate);
 
                 default:
-                  return TextParagraph(
-                      'Unknown matter id: "${viewModel.pageId}"');
+                  final section = viewModel.book.getSection(
+                    viewModel.pageId,
+                    viewModel.isSection ? viewModel.sectionNumber : null,
+                  );
+
+                  if (section == null) {
+                    throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
+                  }
+
+                  if (viewModel.isSection) {
+                    return BookDisplay(section, viewModel.onNavigate);
+                  }
+
+                  return MatterDisplay(section, viewModel.onNavigate);
               }
             }(),
           ),

@@ -17,11 +17,11 @@ import '../content/tags/illustration.dart';
 import '../content/tags/paragraph.dart';
 import '../content/tags/signpost.dart';
 
-class BookDisplay extends StatelessWidget {
+class MatterDisplay extends StatelessWidget {
   final OnNavigate onNavigate;
   final Section section;
 
-  const BookDisplay(this.section, this.onNavigate, {Key? key}) : super(key: key);
+  const MatterDisplay(this.section, this.onNavigate, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

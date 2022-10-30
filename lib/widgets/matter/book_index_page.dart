@@ -5,17 +5,15 @@ import '../../models/book/book.dart';
 import '../../types/types.dart';
 import 'index_item.dart';
 
-class BookIndex extends StatelessWidget {
+class BookIndexPage extends StatelessWidget {
   final transBook = t.book;
-  final Book book;
+  final BookIndex bookIndex;
   final OnNavigate onNavigate;
 
-  BookIndex(this.book, this.onNavigate, {Key? key}) : super(key: key);
+  BookIndexPage(this.bookIndex, this.onNavigate, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final bookIndex = book.getBookIndex();
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: bookIndex.map<Widget>((item) {

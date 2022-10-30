@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:xml/xml.dart';
 
 import '../../exceptions/xml.dart';
@@ -10,7 +11,7 @@ import 'section/section.dart';
 typedef BookIndex = List<BookIndexItem>;
 
 class Book {
-  BookIndex? _bookIndex;
+  late BookIndex bookIndex;
   late BookText numberedPageTitle = '';
   late BookText title = '';
   late BookText titlePageTitle = '';
@@ -35,9 +36,7 @@ class Book {
       title = meta.title;
     }
 
-    final baseSection = xml
-        .findElements('section')
-        .where((element) => element.getAttribute('id') == 'title');
+    final baseSection = xml.findElements('section').where((element) => element.getAttribute('id') == 'title');
 
     if (baseSection.isEmpty) {
       throw BookXmlException('Title section not found');
@@ -56,23 +55,20 @@ class Book {
     final sections = titleData.findElements('section');
 
     backmatter = sections
-        .where(
-            (sec) => sec.getAttribute('class') == SectionType.backmatter.name)
+        .where((sec) => sec.getAttribute('class') == SectionType.backmatter.name)
         .map((xml) => Section.fromXml(xml))
         .toList();
 
     frontmatter = sections
         .where((sec) {
           final className = sec.getAttribute('class');
-          return className == SectionType.frontmatter.name ||
-              className == SectionType.frontmatterSeparate.value;
+          return className == SectionType.frontmatter.name || className == SectionType.frontmatterSeparate.value;
         })
         .map((xml) => Section.fromXml(xml))
         .toList();
 
     final numberedBaseSection = sections.where((sec) =>
-        sec.getAttribute('class') == SectionType.numbered.name &&
-        sec.getAttribute('id') == SectionType.numbered.name);
+        sec.getAttribute('class') == SectionType.numbered.name && sec.getAttribute('id') == SectionType.numbered.name);
 
     if (numberedBaseSection.isEmpty) {
       throw BookXmlException('Numbered base section not found');
@@ -87,10 +83,11 @@ class Book {
 
     final numberedBaseSections = numberedBaseData.findElements('section');
 
-    numberedPageTitle =
-        numberedBaseMeta != null ? getValue('title', numberedBaseMeta) : '';
+    numberedPageTitle = numberedBaseMeta != null ? getValue('title', numberedBaseMeta) : '';
 
     numbered = numberedBaseSections.map((xml) => Section.fromXml(xml)).toList();
+
+    bookIndex = _buildBookIndex();
   }
 
   Json toJson() => {
@@ -113,8 +110,7 @@ class Book {
   BookIndex _buildBookIndex() {
     final BookIndex bookIndex = [];
 
-    bookIndex.add(BookIndexItem(
-        titlePageTitle, SectionType.title.name, SectionType.title, false));
+    bookIndex.add(BookIndexItem(titlePageTitle, SectionType.title.name, SectionType.title, false));
 
     for (var section in frontmatter) {
       bookIndex.add(BookIndexItem.fromSection(section, false));
@@ -128,18 +124,35 @@ class Book {
       }
     }
 
-    bookIndex.add(BookIndexItem(numberedPageTitle, SectionType.numbered.name,
-        SectionType.numbered, false));
+    bookIndex.add(BookIndexItem(numberedPageTitle, SectionType.numbered.name, SectionType.numbered, false));
 
     for (var section in backmatter) {
       bookIndex.add(BookIndexItem.fromSection(section, false));
     }
 
-    _bookIndex = [...bookIndex];
     return bookIndex;
   }
 
-  BookIndex getBookIndex() {
-    return _bookIndex ??= _buildBookIndex();
+  Section? getSection(String pageId, int? sectionNumber) {
+    print('### getSection() 1');
+    print('###  - "$pageId"');
+    print('###  - "$sectionNumber"');
+
+    if (pageId.isNotEmpty) {
+      print('### getSection() 2');
+      if (sectionNumber != null) {
+        print('### getSection() 5');
+        return numbered.firstWhereOrNull((section) => section.id == pageId);
+      }
+
+      final frontSection = frontmatter.firstWhereOrNull((section) => section.id == pageId);
+      final backSection = backmatter.firstWhereOrNull((section) => section.id == pageId);
+
+      print('### getSection() 3');
+      return frontSection ?? backSection;
+    }
+    print('### getSection() 4');
+
+    return null;
   }
 }
