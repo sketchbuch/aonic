@@ -4,10 +4,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 import '../../../constants/books.dart';
 import '../../../exceptions/render.dart';
 import '../../../store/models/app_state.dart';
+import '../../../widgets/book/section_display.dart';
 import '../../../widgets/matter/book_index_page.dart';
-import '../../../widgets/matter/matter_display.dart';
 import '../../../widgets/matter/title_page.dart';
-import '../../../widgets/numbered/book_display.dart';
 import 'book_display_view_model.dart';
 
 class BookDisplayPage extends StatelessWidget {
@@ -38,11 +37,7 @@ class BookDisplayPage extends StatelessWidget {
                     throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
                   }
 
-                  if (viewModel.isSection) {
-                    return BookDisplay(section, viewModel.onNavigate);
-                  }
-
-                  return MatterDisplay(section, viewModel.onNavigate);
+                  return SectionDisplay(section, viewModel.onNavigate);
               }
             }(),
           ),
