@@ -21,11 +21,11 @@ class BookDisplayPage extends StatelessWidget {
           body: Center(
             child: () {
               switch (viewModel.pageId) {
-                case bookIdTitle:
-                  return TitlePage(viewModel.book.meta, viewModel.onNavigate);
-
                 case bookIdStart:
                   return BookIndexPage(viewModel.book.bookIndex, viewModel.onNavigate);
+
+                case bookIdTitle:
+                  return TitlePage(viewModel.book.meta, viewModel.onNavigate);
 
                 default:
                   final section = viewModel.book.getSection(
