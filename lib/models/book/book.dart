@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:xml/xml.dart';
 
+import '../../constants/books.dart';
 import '../../exceptions/xml.dart';
 import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
@@ -134,24 +135,23 @@ class Book {
   }
 
   Section? getSection(String pageId, int? sectionNumber) {
-    print('### getSection() 1');
-    print('###  - "$pageId"');
-    print('###  - "$sectionNumber"');
-
     if (pageId.isNotEmpty) {
-      print('### getSection() 2');
       if (sectionNumber != null) {
-        print('### getSection() 5');
-        return numbered.firstWhereOrNull((section) => section.id == pageId);
+        return numbered.firstWhereOrNull((section) => section.id == '$sectionPrefix${sectionNumber + 1}');
       }
 
       final frontSection = frontmatter.firstWhereOrNull((section) => section.id == pageId);
+
+      if (frontSection != null) {
+        return frontSection;
+      }
+
       final backSection = backmatter.firstWhereOrNull((section) => section.id == pageId);
 
-      print('### getSection() 3');
-      return frontSection ?? backSection;
+      if (backSection != null) {
+        return backSection;
+      }
     }
-    print('### getSection() 4');
 
     return null;
   }

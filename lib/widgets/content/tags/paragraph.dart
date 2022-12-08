@@ -44,8 +44,7 @@ class _ParagraphState extends State<Paragraph> {
                 };
 
               if (_hoverIndex == index) {
-                backgroundColor =
-                    widget.getTextElementHoverBackroundColor(text);
+                backgroundColor = widget.getTextElementHoverBackroundColor(text);
               }
             }
 

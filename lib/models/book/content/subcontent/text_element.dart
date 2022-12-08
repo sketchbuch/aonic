@@ -72,6 +72,10 @@ class TextElement {
         return DisplayType.dd;
 
       case 'quote':
+        if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'cite') {
+          return DisplayType.cite;
+        }
+
         return DisplayType.quote;
 
       default:

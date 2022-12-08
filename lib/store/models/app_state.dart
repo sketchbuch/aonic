@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/books.dart';
 import '../../models/booklist/booklist_item.dart';
 import 'book_state.dart';
 import 'page_state.dart';
@@ -22,12 +21,7 @@ class AppState {
         pageState = const PageState.initialState(),
         selectedBook = null;
 
-  AppState copyWith(
-          {BookState? bookState,
-          int? page,
-          PageState? pageState,
-          BooklistItem? selectedBook}) =>
-      AppState(
+  AppState copyWith({BookState? bookState, int? page, PageState? pageState, BooklistItem? selectedBook}) => AppState(
         bookState: bookState ?? this.bookState,
         pageState: pageState ?? this.pageState,
         selectedBook: selectedBook ?? this.selectedBook,

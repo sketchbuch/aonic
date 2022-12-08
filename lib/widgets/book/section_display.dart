@@ -24,6 +24,7 @@ class SectionDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> sectionContent = [];
+    final List<Widget> subsectionContent = [];
 
     for (var tag in section.data.content) {
       final tagType = tag.tagType();
@@ -34,7 +35,7 @@ class SectionDisplay extends StatelessWidget {
           break;
 
         case 'ChoiceTag':
-          sectionContent.add(Choice(tag as ChoiceTag));
+          sectionContent.add(Choice(tag as ChoiceTag, onNavigate));
           break;
 
         case 'CombatTag':
@@ -69,11 +70,60 @@ class SectionDisplay extends StatelessWidget {
       }
     }
 
+    for (var subSection in section.sections) {
+      if (subSection.type != SectionType.frontmatterSeparate) {
+        for (var tag in subSection.data.content) {
+          final tagType = tag.tagType();
+
+          switch (tagType) {
+            case 'BlockquoteTag':
+              sectionContent.add(Blockquote(tag as BlockquoteTag));
+              break;
+
+            case 'ChoiceTag':
+              sectionContent.add(Choice(tag as ChoiceTag, onNavigate));
+              break;
+
+            case 'CombatTag':
+              sectionContent.add(Combat(tag as CombatTag));
+              break;
+
+            case 'DeadendTag':
+              sectionContent.add(Deadend(tag as DeadendTag));
+              break;
+
+            case 'IllustrationTag':
+              final illy = tag as IllustrationTag;
+
+              if (illy.isRealIllustration) {
+                sectionContent.add(Illustration(illy));
+              }
+
+              break;
+
+            case 'ParagraphTag':
+              sectionContent.add(Paragraph(tag as ParagraphTag, onNavigate));
+              break;
+
+            case 'SignpostTag':
+              sectionContent.add(Blockquote(tag as BlockquoteTag));
+              break;
+
+            default:
+              print('Unsupported Tag: "$tagType"');
+              sectionContent.add(Text('Unsupported Tag: "$tagType"'));
+              break;
+          }
+        }
+      }
+    }
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(section.meta.title),
         ...sectionContent,
+        ...subsectionContent,
       ],
     );
   }
