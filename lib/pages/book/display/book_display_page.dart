@@ -28,10 +28,7 @@ class BookDisplayPage extends StatelessWidget {
                   return TitlePage(viewModel.book.meta, viewModel.onNavigate);
 
                 default:
-                  final section = viewModel.book.getSection(
-                    viewModel.pageId,
-                    viewModel.isSection ? viewModel.sectionNumber : null,
-                  );
+                  final section = viewModel.book.getSection(viewModel.pageId);
 
                   if (section == null) {
                     throw RenderException('Unable to find section for display: "${viewModel.pageId}"');

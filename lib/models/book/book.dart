@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:lonewolf_new/models/book/helpers/section_cache.dart';
 import 'package:xml/xml.dart';
 
 import '../../constants/books.dart';
@@ -12,6 +13,7 @@ import 'section/section.dart';
 typedef BookIndex = List<BookIndexItem>;
 
 class Book {
+  final _sectionCache = SectionCache();
   late BookIndex bookIndex;
   late BookText numberedPageTitle = '';
   late BookText title = '';
@@ -134,23 +136,46 @@ class Book {
     return bookIndex;
   }
 
-  Section? getSection(String pageId, int? sectionNumber) {
-    if (pageId.isNotEmpty) {
-      if (sectionNumber != null) {
-        return numbered.firstWhereOrNull((section) => section.id == '$sectionPrefix${sectionNumber + 1}');
+  int getSectionNumber(String sectionId) {
+    return int.parse(sectionId.replaceFirst(sectionPrefix, ''));
+  }
+
+  bool isNumberedSection(String sectionId) {
+    return sectionId.startsWith(sectionPrefix);
+  }
+
+  Section? getSection(String sectionId) {
+    final isNumbered = isNumberedSection(sectionId);
+    final sectionNumber = isNumbered ? getSectionNumber(sectionId) : -1;
+    final cachedSection = _sectionCache.get(sectionId);
+
+    // TODO - check cache is working
+    if (cachedSection != null) {
+      return cachedSection;
+    }
+
+    if (isNumbered) {
+      final numberedSection =
+          numbered.firstWhereOrNull((section) => section.id == '$sectionPrefix${sectionNumber + 1}');
+
+      if (numberedSection != null) {
+        _sectionCache.set(sectionId, numberedSection);
+        return numberedSection;
       }
+    }
 
-      final frontSection = frontmatter.firstWhereOrNull((section) => section.id == pageId);
+    final frontSection = frontmatter.firstWhereOrNull((section) => section.id == sectionId);
 
-      if (frontSection != null) {
-        return frontSection;
-      }
+    if (frontSection != null) {
+      _sectionCache.set(sectionId, frontSection);
+      return frontSection;
+    }
 
-      final backSection = backmatter.firstWhereOrNull((section) => section.id == pageId);
+    final backSection = backmatter.firstWhereOrNull((section) => section.id == sectionId);
 
-      if (backSection != null) {
-        return backSection;
-      }
+    if (backSection != null) {
+      _sectionCache.set(sectionId, backSection);
+      return backSection;
     }
 
     return null;
