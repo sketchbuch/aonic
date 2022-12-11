@@ -1,8 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:lonewolf_new/models/book/helpers/section_cache.dart';
 import 'package:xml/xml.dart';
 
-import '../../constants/books.dart';
 import '../../exceptions/xml.dart';
 import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
@@ -14,13 +12,10 @@ typedef BookIndex = List<BookIndexItem>;
 
 class Book {
   final _sectionCache = SectionCache();
+  final List<Section> sections = [];
   late BookIndex bookIndex;
-  late BookText numberedPageTitle = '';
+  late BookIndex bookIndex2;
   late BookText title = '';
-  late BookText titlePageTitle = '';
-  late List<Section> backmatter = [];
-  late List<Section> frontmatter = [];
-  late List<Section> numbered = [];
   late Meta meta;
   late String lang = '';
   late String version = '';
@@ -47,61 +42,58 @@ class Book {
 
     final titleSection = baseSection.elementAt(0);
     final titleData = titleSection.getElement('data');
-    final titleMeta = titleSection.getElement('meta');
-
-    titlePageTitle = titleMeta != null ? getValue('title', titleMeta) : '';
 
     if (titleData == null) {
       throw BookXmlException("Title section's data not found");
     }
 
-    final sections = titleData.findElements('section');
+    final allSections = titleData.findElements('section');
 
-    backmatter = sections
-        .where((sec) => sec.getAttribute('class') == SectionType.backmatter.name)
-        .map((xml) => Section.fromXml(xml))
-        .toList();
-
-    frontmatter = sections
-        .where((sec) {
-          final className = sec.getAttribute('class');
-          return className == SectionType.frontmatter.name || className == SectionType.frontmatterSeparate.value;
-        })
-        .map((xml) => Section.fromXml(xml))
-        .toList();
-
-    final numberedBaseSection = sections.where((sec) =>
+    final numberedBaseSection = allSections.where((sec) =>
         sec.getAttribute('class') == SectionType.numbered.name && sec.getAttribute('id') == SectionType.numbered.name);
 
     if (numberedBaseSection.isEmpty) {
       throw BookXmlException('Numbered base section not found');
     }
 
-    final numberedBaseMeta = numberedBaseSection.first.getElement('meta');
-    final numberedBaseData = numberedBaseSection.first.getElement('data');
+    final numberedSection = numberedBaseSection.first;
+    final numberedBaseData = numberedSection.getElement('data');
 
     if (numberedBaseData == null) {
       throw BookXmlException('Numbered base data not found');
     }
 
-    final numberedBaseSections = numberedBaseData.findElements('section');
+    final frontmatter = allSections
+        .where((sec) {
+          final className = sec.getAttribute('class');
+          return className == SectionType.frontmatter.name;
+        })
+        .map((xml) => Section.fromXml(xml))
+        .toList();
 
-    numberedPageTitle = numberedBaseMeta != null ? getValue('title', numberedBaseMeta) : '';
+    frontmatter.insert(0, Section.fromXml(titleSection, addSubsections: false, forcedType: SectionType.frontmatter));
+    frontmatter.add(Section.fromXml(numberedSection, addSubsections: false, forcedType: SectionType.frontmatter));
 
-    numbered = numberedBaseSections.map((xml) => Section.fromXml(xml)).toList();
+    final numbered = numberedBaseData.findElements('section').map((xml) => Section.fromXml(xml)).toList();
+
+    final backmatter = allSections
+        .where((sec) => sec.getAttribute('class') == SectionType.backmatter.name)
+        .map((xml) => Section.fromXml(xml))
+        .toList();
+
+    sections.addAll(frontmatter);
+    sections.addAll(numbered);
+    sections.addAll(backmatter);
 
     bookIndex = _buildBookIndex();
   }
 
+// TODO - Add bookIndex
   Json toJson() => {
-        'backmatter': backmatter.map((section) => section.toJson()).toList(),
-        'frontmatter': frontmatter.map((section) => section.toJson()).toList(),
         'lang': lang,
         'meta': meta.toJson(),
-        'numbered': numbered.map((section) => section.toJson()).toList(),
-        'numberedPageTitle': numberedPageTitle,
+        'sections': sections.map((section) => section.toJson()).toList(),
         'title': title,
-        'titlePageTitle': titlePageTitle,
         'version': version,
       };
 
@@ -113,69 +105,52 @@ class Book {
   BookIndex _buildBookIndex() {
     final BookIndex bookIndex = [];
 
-    bookIndex.add(BookIndexItem(titlePageTitle, SectionType.title.name, SectionType.title, false));
+    for (var section in sections) {
+      if (section.canAddToIndex()) {
+        bookIndex.add(BookIndexItem.fromSection(section, false));
 
-    for (var section in frontmatter) {
-      bookIndex.add(BookIndexItem.fromSection(section, false));
-
-      if (section.sections.isNotEmpty) {
-        for (var subSection in section.sections) {
-          if (subSection.type == SectionType.frontmatterSeparate) {
-            bookIndex.add(BookIndexItem.fromSection(subSection, true));
+        if (section.isFrontmatter() && section.hasSubsections()) {
+          for (var subsection in section.subsections) {
+            if (subsection.canAddToIndex(isSubsection: true)) {
+              bookIndex.add(BookIndexItem.fromSection(subsection, true));
+            }
           }
         }
       }
     }
 
-    bookIndex.add(BookIndexItem(numberedPageTitle, SectionType.numbered.name, SectionType.numbered, false));
-
-    for (var section in backmatter) {
-      bookIndex.add(BookIndexItem.fromSection(section, false));
-    }
-
     return bookIndex;
   }
 
-  int getSectionNumber(String sectionId) {
-    return int.parse(sectionId.replaceFirst(sectionPrefix, ''));
-  }
-
-  bool isNumberedSection(String sectionId) {
-    return sectionId.startsWith(sectionPrefix);
-  }
-
   Section? getSection(String sectionId) {
-    final isNumbered = isNumberedSection(sectionId);
-    final sectionNumber = isNumbered ? getSectionNumber(sectionId) : -1;
-    final cachedSection = _sectionCache.get(sectionId);
-
     // TODO - check cache is working
-    if (cachedSection != null) {
-      return cachedSection;
+    if (_sectionCache.contains(sectionId)) {
+      return _sectionCache.get(sectionId);
     }
 
-    if (isNumbered) {
-      final numberedSection =
-          numbered.firstWhereOrNull((section) => section.id == '$sectionPrefix${sectionNumber + 1}');
+    Section? requiredSection;
 
-      if (numberedSection != null) {
-        _sectionCache.set(sectionId, numberedSection);
-        return numberedSection;
+    for (var section in sections) {
+      if (requiredSection != null) {
+        break;
+      }
+
+      if (section.id == sectionId) {
+        requiredSection = section;
+        break;
+      } else if (section.hasSubsections()) {
+        for (var subsection in section.subsections) {
+          if (subsection.id == sectionId) {
+            requiredSection = subsection;
+            break;
+          }
+        }
       }
     }
 
-    final frontSection = frontmatter.firstWhereOrNull((section) => section.id == sectionId);
-
-    if (frontSection != null) {
-      _sectionCache.set(sectionId, frontSection);
-      return frontSection;
-    }
-
-    final backSection = backmatter.firstWhereOrNull((section) => section.id == sectionId);
-
-    if (backSection != null) {
-      _sectionCache.set(sectionId, backSection);
-      return backSection;
+    if (requiredSection != null) {
+      _sectionCache.set(sectionId, requiredSection);
+      return requiredSection;
     }
 
     return null;

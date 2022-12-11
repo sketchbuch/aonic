@@ -13,7 +13,6 @@ enum SectionType {
   frontmatterSeparate('frontmatter-separate'),
   none('none'),
   numbered('numbered'),
-  title('title'),
   unknown('unknown');
 
   const SectionType(this.value);
@@ -23,7 +22,7 @@ enum SectionType {
 class Section {
   late Data data;
   late List<Footnote> footnotes;
-  late List<Section> sections;
+  late List<Section> subsections;
   late SectionMeta meta;
   late SectionType type;
   late String id;
@@ -31,16 +30,24 @@ class Section {
   // ignore: unused_element
   Section._();
 
-  Section.fromXml(XmlElement xml) {
+  Section.fromXml(
+    XmlElement xml, {
+    bool addSubsections = true,
+    SectionType? forcedType,
+  }) {
     id = getAttribute('id', xml);
 
     try {
-      final typeName = getAttribute('class', xml);
-
-      if (typeName.isEmpty) {
-        type = SectionType.none;
+      if (forcedType != null) {
+        type = forcedType;
       } else {
-        type = SectionType.values.byName(ReCase(typeName).camelCase);
+        final typeName = getAttribute('class', xml);
+
+        if (typeName.isEmpty) {
+          type = SectionType.none;
+        } else {
+          type = SectionType.values.byName(ReCase(typeName).camelCase);
+        }
       }
     } on ArgumentError {
       type = SectionType.unknown;
@@ -56,7 +63,12 @@ class Section {
 
     if (dataXml != null) {
       data = Data.fromXml(dataXml);
-      sections = dataXml.findElements('section').map((section) => Section.fromXml(section)).toList();
+
+      if (addSubsections) {
+        subsections = dataXml.findElements('section').map((section) => Section.fromXml(section)).toList();
+      } else {
+        subsections = [];
+      }
     }
 
     footnotes = footnotesXml != null
@@ -69,12 +81,43 @@ class Section {
         'footnotes': footnotes.map((footnote) => footnote.toJson()).toList(),
         'id': id,
         'meta': meta.toJson(),
-        'sections': sections.map((section) => section.toJson()).toList(),
+        'subsections': subsections.map((section) => section.toJson()).toList(),
         'type': type.name,
       };
 
   @override
   String toString() {
     return toJson().toString();
+  }
+
+  bool canAddToIndex({bool isSubsection = false}) {
+    final isIndexableSub = isSubsection && isFrontmatterSeperate();
+    final isIndexableMain = !isSubsection && (isFrontmatter() || isBackmatter());
+
+    return isIndexableSub || isIndexableMain;
+  }
+
+  List<Section> getVisibleSubsections() {
+    return subsections.where((section) => !section.isFrontmatterSeperate()).toList();
+  }
+
+  bool hasSubsections() {
+    return subsections.isNotEmpty;
+  }
+
+  bool isBackmatter() {
+    return type == SectionType.backmatter;
+  }
+
+  bool isFrontmatter() {
+    return type == SectionType.frontmatter;
+  }
+
+  bool isFrontmatterSeperate() {
+    return type == SectionType.frontmatterSeparate;
+  }
+
+  bool isNumbered() {
+    return type == SectionType.numbered;
   }
 }

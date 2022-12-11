@@ -70,7 +70,9 @@ class SectionDisplay extends StatelessWidget {
       }
     }
 
-    for (var subSection in section.sections) {
+    final subSections = section.getVisibleSubsections();
+
+    for (var subSection in subSections) {
       if (subSection.type != SectionType.frontmatterSeparate) {
         for (var tag in subSection.data.content) {
           final tagType = tag.tagType();

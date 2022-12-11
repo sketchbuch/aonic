@@ -10,7 +10,7 @@ class SectionCache {
   }
 
   void deleteOne(String key) {
-    if (exists(key)) {
+    if (contains(key)) {
       _cache.remove(key);
     }
   }
@@ -19,7 +19,7 @@ class SectionCache {
     return _cache[key];
   }
 
-  bool exists(String key) {
+  bool contains(String key) {
     return _cache.containsKey(key);
   }
 
