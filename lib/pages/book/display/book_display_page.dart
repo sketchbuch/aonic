@@ -18,25 +18,27 @@ class BookDisplayPage extends StatelessWidget {
       converter: (store) => BookDisplayViewModel.create(store),
       builder: (BuildContext context, BookDisplayViewModel viewModel) {
         return Scaffold(
-          body: Center(
-            child: () {
-              switch (viewModel.pageId) {
-                case bookIdStart:
-                  return BookIndexPage(viewModel.book.bookIndex, viewModel.onNavigate);
+          body: SingleChildScrollView(
+            child: Center(
+              child: () {
+                switch (viewModel.pageId) {
+                  case bookIdStart:
+                    return BookIndexPage(viewModel.book.bookIndex, viewModel.onNavigate);
 
-                case bookIdTitle:
-                  return TitlePage(viewModel.book.meta, viewModel.onNavigate);
+                  case bookIdTitle:
+                    return TitlePage(viewModel.book.meta, viewModel.onNavigate);
 
-                default:
-                  final section = viewModel.book.getSection(viewModel.pageId);
+                  default:
+                    final section = viewModel.book.getSection(viewModel.pageId);
 
-                  if (section == null) {
-                    throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
-                  }
+                    if (section == null) {
+                      throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
+                    }
 
-                  return SectionDisplay(section, viewModel.onNavigate);
-              }
-            }(),
+                    return SectionDisplay(section, viewModel.onNavigate);
+                }
+              }(),
+            ),
           ),
         );
       },

@@ -18,8 +18,7 @@ Route<dynamic> generateBookRoute(RouteSettings settings) {
       break;
 
     default:
-      return MaterialPageRoute(
-          builder: (_) => NotFoundPage(settings, showAppBar: false));
+      return MaterialPageRoute(builder: (_) => NotFoundPage(settings, showAppBar: false));
   }
 
   return MaterialPageRoute<dynamic>(

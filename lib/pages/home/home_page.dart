@@ -15,23 +15,25 @@ class HomePage extends StatelessWidget {
         title: Text(trans.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Pick an option'),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, bookRoute);
-              },
-              child: const Text('Book'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, settingsRoute);
-              },
-              child: const Text('Settings'),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Pick an option'),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, bookRoute);
+                },
+                child: const Text('Book'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, settingsRoute);
+                },
+                child: const Text('Settings'),
+              ),
+            ],
+          ),
         ),
       ),
     );

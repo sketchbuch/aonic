@@ -9,8 +9,7 @@ import '../../../widgets/page/book_selection.dart';
 import 'book_selection_view_model.dart';
 
 class BookSelectionPage extends StatelessWidget {
-  final booklist =
-      Booklist(t.booksLonewolf.books, lonewolfSupportedBooks, 'en').getBooks();
+  final booklist = Booklist(t.booksLonewolf.books, lonewolfSupportedBooks, 'en').getBooks();
 
   BookSelectionPage({Key? key}) : super(key: key);
 
@@ -22,10 +21,11 @@ class BookSelectionPage extends StatelessWidget {
       builder: (BuildContext context, BookSelectionViewModel viewModel) {
         return Scaffold(
           body: Center(
-            child: viewModel.isLoading
-                ? const CircularProgressIndicator()
-                : BookSelection(
-                    booklist, viewModel.selectedBook, viewModel.onSelectBook),
+            child: SingleChildScrollView(
+              child: viewModel.isLoading
+                  ? const CircularProgressIndicator()
+                  : BookSelection(booklist, viewModel.selectedBook, viewModel.onSelectBook),
+            ),
           ),
         );
       },

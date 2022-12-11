@@ -17,8 +17,10 @@ class SectionDisplay extends StatelessWidget {
 
     final subSections = section.getVisibleSubsections();
 
-    for (var subSection in subSections) {
-      subsectionContent.addAll(getTagList(subSection.data.content, onNavigate));
+    if (subSections.isNotEmpty) {
+      for (var subSection in subSections) {
+        subsectionContent.addAll(getTagList(subSection.data.content, onNavigate));
+      }
     }
 
     return Column(

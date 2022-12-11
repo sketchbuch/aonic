@@ -4,6 +4,7 @@ import '../../models/book/content/blockquote.dart';
 import '../../models/book/content/choice_tag.dart';
 import '../../models/book/content/combat_tag.dart';
 import '../../models/book/content/deadend_tag.dart';
+import '../../models/book/content/description_list_tag.dart';
 import '../../models/book/content/illustration_tag.dart';
 import '../../models/book/content/paragraph_tag.dart';
 import '../../models/book/content/tag.dart';
@@ -12,6 +13,7 @@ import '../content/tags/blockquote.dart';
 import '../content/tags/choice.dart';
 import '../content/tags/combat.dart';
 import '../content/tags/deadend.dart';
+import '../content/tags/description_list.dart';
 import '../content/tags/illustration.dart';
 import '../content/tags/paragraph.dart';
 
@@ -36,6 +38,10 @@ List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate) {
 
       case 'DeadendTag':
         sectionContent.add(Deadend(tag as DeadendTag));
+        break;
+
+      case 'DescriptionListTag':
+        sectionContent.add(DescriptionList(tag as DescriptionListTag));
         break;
 
       case 'IllustrationTag':
