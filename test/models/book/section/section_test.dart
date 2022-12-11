@@ -21,7 +21,7 @@ final sectionJson = {
   "footnotes": [footnoteJson],
   "id": sectionId,
   "meta": sectionMetaJson,
-  "sections": [],
+  "subsections": [],
   "type": sectionType
 };
 
