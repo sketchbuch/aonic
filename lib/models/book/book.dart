@@ -35,11 +35,11 @@ class Book {
     }
 
     final titleSection = _getTitleSection(xml);
-    final allSections = _getAllSections(titleSection);
-    final numberedSection = _getNumberedSection(allSections);
+    final titleSubsections = _getTitleSubsections(titleSection);
+    final numberedSection = _getNumberedSection(titleSubsections);
     final numberedBaseData = _getNumberedData(numberedSection);
 
-    final frontmatter = allSections
+    final frontmatter = titleSubsections
         .where((sec) {
           final className = sec.getAttribute('class');
           return className == SectionType.frontmatter.name;
@@ -52,7 +52,7 @@ class Book {
 
     final numbered = numberedBaseData.findElements('section').map((xml) => Section.fromXml(xml)).toList();
 
-    final backmatter = allSections
+    final backmatter = titleSubsections
         .where((sec) => sec.getAttribute('class') == SectionType.backmatter.name)
         .map((xml) => Section.fromXml(xml))
         .toList();
@@ -98,7 +98,7 @@ class Book {
     return bookIndex;
   }
 
-  Iterable<XmlElement> _getAllSections(XmlElement titleSection) {
+  Iterable<XmlElement> _getTitleSubsections(XmlElement titleSection) {
     final titleData = titleSection.getElement('data');
 
     if (titleData == null) {
@@ -108,8 +108,8 @@ class Book {
     return titleData.findElements('section');
   }
 
-  XmlElement _getNumberedSection(Iterable<XmlElement> allSections) {
-    final numberedBaseSection = allSections.where((sec) =>
+  XmlElement _getNumberedSection(Iterable<XmlElement> titleSubsections) {
+    final numberedBaseSection = titleSubsections.where((sec) =>
         sec.getAttribute('class') == SectionType.numbered.name && sec.getAttribute('id') == SectionType.numbered.name);
 
     if (numberedBaseSection.isEmpty) {
@@ -128,8 +128,8 @@ class Book {
     return numberedBaseData;
   }
 
-  XmlElement _getTitleSection(XmlElement xml) {
-    final baseSection = xml.findElements('section').where((element) => element.getAttribute('id') == 'title');
+  XmlElement _getTitleSection(XmlElement bookXml) {
+    final baseSection = bookXml.findElements('section').where((element) => element.getAttribute('id') == 'title');
 
     if (baseSection.isEmpty) {
       throw BookXmlException('Title section not found');

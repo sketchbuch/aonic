@@ -58,7 +58,7 @@ class _ParagraphState extends State<Paragraph> {
                 fontStyle: style,
                 fontWeight: weight,
               ),
-              text: text.text,
+              text: widget.wrapText(text),
             );
           }).toList(),
         ),

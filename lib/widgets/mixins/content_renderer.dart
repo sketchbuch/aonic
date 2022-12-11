@@ -9,7 +9,8 @@ mixin ContentRenderer {
 
   FontStyle getTextElementStyle(TextElement text) {
     if (text.displayType == DisplayType.italic ||
-        text.displayType == DisplayType.cite) {
+        text.displayType == DisplayType.cite ||
+        text.displayType == DisplayType.quoteCite) {
       return FontStyle.italic;
     }
 
@@ -19,7 +20,7 @@ mixin ContentRenderer {
   FontWeight getTextElementWeight(TextElement text) {
     if (text.displayType == DisplayType.bold ||
         text.displayType == DisplayType.link ||
-        text.displayType == DisplayType.cite) {
+        text.displayType == DisplayType.boldCite) {
       return FontWeight.bold;
     }
 
@@ -44,5 +45,13 @@ mixin ContentRenderer {
     }
 
     return null;
+  }
+
+  wrapText(TextElement text) {
+    if (text.displayType == DisplayType.quote || text.displayType == DisplayType.quoteCite) {
+      return '‘${text.text}’';
+    }
+
+    return text.text;
   }
 }

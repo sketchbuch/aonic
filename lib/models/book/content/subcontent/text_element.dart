@@ -5,6 +5,7 @@ import '../../../../utils/xml/helpers.dart';
 
 enum DisplayType {
   bold,
+  boldCite,
   bookref,
   cite,
   dd,
@@ -13,6 +14,7 @@ enum DisplayType {
   link,
   plain,
   quote,
+  quoteCite,
   typ;
 }
 
@@ -43,7 +45,7 @@ class TextElement {
       case 'b':
       case 'strong':
         if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'cite') {
-          return DisplayType.cite;
+          return DisplayType.boldCite;
         }
 
         return DisplayType.bold;
@@ -73,7 +75,7 @@ class TextElement {
 
       case 'quote':
         if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'cite') {
-          return DisplayType.cite;
+          return DisplayType.quoteCite;
         }
 
         return DisplayType.quote;
