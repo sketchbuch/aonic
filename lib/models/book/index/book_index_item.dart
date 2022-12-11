@@ -9,9 +9,9 @@ class BookIndexItem {
 
   BookIndexItem(this.label, this.id, this.type, this.isSubItem);
 
-  BookIndexItem.fromSection(Section section, isSub) {
+  BookIndexItem.fromSection(Section section, [bool isSubsection = false]) {
     id = section.id;
-    isSubItem = isSub;
+    isSubItem = isSubsection;
     label = section.meta.title;
     type = section.type;
   }

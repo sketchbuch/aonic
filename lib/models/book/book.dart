@@ -34,34 +34,10 @@ class Book {
       title = meta.title;
     }
 
-    final baseSection = xml.findElements('section').where((element) => element.getAttribute('id') == 'title');
-
-    if (baseSection.isEmpty) {
-      throw BookXmlException('Title section not found');
-    }
-
-    final titleSection = baseSection.elementAt(0);
-    final titleData = titleSection.getElement('data');
-
-    if (titleData == null) {
-      throw BookXmlException("Title section's data not found");
-    }
-
-    final allSections = titleData.findElements('section');
-
-    final numberedBaseSection = allSections.where((sec) =>
-        sec.getAttribute('class') == SectionType.numbered.name && sec.getAttribute('id') == SectionType.numbered.name);
-
-    if (numberedBaseSection.isEmpty) {
-      throw BookXmlException('Numbered base section not found');
-    }
-
-    final numberedSection = numberedBaseSection.first;
-    final numberedBaseData = numberedSection.getElement('data');
-
-    if (numberedBaseData == null) {
-      throw BookXmlException('Numbered base data not found');
-    }
+    final titleSection = _getTitleSection(xml);
+    final allSections = _getAllSections(titleSection);
+    final numberedSection = _getNumberedSection(allSections);
+    final numberedBaseData = _getNumberedData(numberedSection);
 
     final frontmatter = allSections
         .where((sec) {
@@ -107,11 +83,11 @@ class Book {
 
     for (var section in sections) {
       if (section.canAddToIndex()) {
-        bookIndex.add(BookIndexItem.fromSection(section, false));
+        bookIndex.add(BookIndexItem.fromSection(section));
 
         if (section.isFrontmatter() && section.hasSubsections()) {
           for (var subsection in section.subsections) {
-            if (subsection.canAddToIndex(isSubsection: true)) {
+            if (subsection.canAddToIndex(true)) {
               bookIndex.add(BookIndexItem.fromSection(subsection, true));
             }
           }
@@ -120,6 +96,46 @@ class Book {
     }
 
     return bookIndex;
+  }
+
+  Iterable<XmlElement> _getAllSections(XmlElement titleSection) {
+    final titleData = titleSection.getElement('data');
+
+    if (titleData == null) {
+      throw BookXmlException("Title section's data not found");
+    }
+
+    return titleData.findElements('section');
+  }
+
+  XmlElement _getNumberedSection(Iterable<XmlElement> allSections) {
+    final numberedBaseSection = allSections.where((sec) =>
+        sec.getAttribute('class') == SectionType.numbered.name && sec.getAttribute('id') == SectionType.numbered.name);
+
+    if (numberedBaseSection.isEmpty) {
+      throw BookXmlException('Numbered base section not found');
+    }
+
+    return numberedBaseSection.first;
+  }
+
+  XmlElement _getNumberedData(XmlElement numberedSection) {
+    final numberedBaseData = numberedSection.getElement('data');
+
+    if (numberedBaseData == null) {
+      throw BookXmlException('Numbered base data not found');
+    }
+    return numberedBaseData;
+  }
+
+  XmlElement _getTitleSection(XmlElement xml) {
+    final baseSection = xml.findElements('section').where((element) => element.getAttribute('id') == 'title');
+
+    if (baseSection.isEmpty) {
+      throw BookXmlException('Title section not found');
+    }
+
+    return baseSection.first;
   }
 
   Section? getSection(String sectionId) {

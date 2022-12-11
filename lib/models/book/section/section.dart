@@ -90,7 +90,7 @@ class Section {
     return toJson().toString();
   }
 
-  bool canAddToIndex({bool isSubsection = false}) {
+  bool canAddToIndex([bool isSubsection = false]) {
     final isIndexableSub = isSubsection && isFrontmatterSeperate();
     final isIndexableMain = !isSubsection && (isFrontmatter() || isBackmatter());
 
