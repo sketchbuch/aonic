@@ -1,0 +1,2 @@
+const endQuote = '’';
+const startQuote = '‘';

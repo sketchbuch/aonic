@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/characters.dart';
 import '../../models/book/content/subcontent/text_element.dart';
 
 final hoverBackgroundColour = Colors.blueAccent.withOpacity(0.33);
@@ -47,9 +48,9 @@ mixin ContentRenderer {
     return null;
   }
 
-  wrapText(TextElement text) {
+  String wrapText(TextElement text) {
     if (text.displayType == DisplayType.quote || text.displayType == DisplayType.quoteCite) {
-      return '‘${text.text}’';
+      return '$startQuote${text.text}$endQuote';
     }
 
     return text.text;
