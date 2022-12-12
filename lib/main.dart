@@ -32,6 +32,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: homeRoute,
+        // TODO - Put back to dynamic
         // locale: TranslationProvider.of(context).flutterLocale,
         locale: const Locale('en'),
         localizationsDelegates: GlobalMaterialLocalizations.delegates,

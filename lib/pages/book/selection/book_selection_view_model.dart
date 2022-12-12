@@ -25,8 +25,7 @@ class BookSelectionViewModel {
     }
 
     return BookSelectionViewModel(
-      isLoading: bookState.status == BookStateStatus.loading ||
-          bookState.status == BookStateStatus.succeeded,
+      isLoading: bookState.status == BookStateStatus.loading || bookState.status == BookStateStatus.succeeded,
       onSelectBook: onSelectBook,
       selectedBook: state.selectedBook,
     );

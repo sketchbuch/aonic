@@ -53,8 +53,7 @@ class BookViewModel {
     }
 
     return BookViewModel(
-      canShowActionButton: state.selectedBook != null &&
-          bookState.status != BookStateStatus.loading,
+      canShowActionButton: state.selectedBook != null && bookState.status != BookStateStatus.loading,
       isBookLoaded: bookState.status == BookStateStatus.succeeded,
       isLoading: bookState.status == BookStateStatus.loading,
       onLoadBook: onLoadBook,

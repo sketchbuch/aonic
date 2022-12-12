@@ -33,7 +33,7 @@ class _BookPageState extends State<BookPage> {
             builder: (context) {
               return AlertDialog(
                 title: const Text('Are you sure?'),
-                content: const Text('If you exit device setup, your progress will be lost.'),
+                content: const Text('If you leave the book, your progress will be lost.'),
                 actions: [
                   TextButton(
                     onPressed: () {

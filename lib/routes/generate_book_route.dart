@@ -10,10 +10,12 @@ Route<dynamic> generateBookRoute(RouteSettings settings) {
 
   switch (settings.name) {
     case bookPlayRoute:
+      print('### bookPlayRoute route');
       page = const BookDisplayPage();
       break;
 
     case bookRoute:
+      print('### bookRoute route');
       page = BookSelectionPage();
       break;
 
