@@ -15,6 +15,10 @@
 - <https://docs.flutter.dev/cookbook/effects/nested-nav>
 - <https://www.youtube.com/watch?v=nyIQT7Zo8TU>
 
+### Operators
+
+- <https://jelenaaa.medium.com/what-are-in-dart-df1f11706dd6>
+
 ### Render Overflow
 
 - <https://stackoverflow.com/questions/49480051/flutter-dart-exceptions-caused-by-rendering-a-renderflex-overflowed>
