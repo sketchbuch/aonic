@@ -6,15 +6,27 @@ import '../pages/home/home_page.dart';
 import 'routes.dart';
 
 Route<dynamic> generateMainRoute(RouteSettings settings) {
+  Widget page;
+
   switch (settings.name) {
     case homeRoute:
-      return MaterialPageRoute(builder: (_) => HomePage());
+      page = HomePage();
+      break;
 
     case bookRoute:
     case bookPlayRoute:
-      return MaterialPageRoute(builder: (_) => BookPage());
+      page = BookPage();
+      break;
 
     default:
-      return MaterialPageRoute(builder: (_) => NotFoundPage(settings));
+      page = NotFoundPage(settings);
+      break;
   }
+
+  return MaterialPageRoute<dynamic>(
+    builder: (context) {
+      return page;
+    },
+    settings: settings,
+  );
 }

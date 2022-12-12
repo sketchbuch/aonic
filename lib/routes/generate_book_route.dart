@@ -6,7 +6,7 @@ import '../pages/not_found/not_found_page.dart';
 import 'routes.dart';
 
 Route<dynamic> generateBookRoute(RouteSettings settings) {
-  late Widget page;
+  Widget page;
 
   switch (settings.name) {
     case bookPlayRoute:
@@ -18,7 +18,8 @@ Route<dynamic> generateBookRoute(RouteSettings settings) {
       break;
 
     default:
-      return MaterialPageRoute(builder: (_) => NotFoundPage(settings, showAppBar: false));
+      page = NotFoundPage(settings, showAppBar: false);
+      break;
   }
 
   return MaterialPageRoute<dynamic>(
