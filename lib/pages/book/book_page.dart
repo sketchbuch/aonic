@@ -19,15 +19,15 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
-  Future<void> _onExitPressed() async {
+  /* Future<void> _onExitPressed() async {
     final isConfirmed = await _canExitBook();
 
     if (isConfirmed && mounted) {
       _exitSetup();
     }
-  }
+  } */
 
-  Future<bool> _canExitBook() async {
+  Future<bool> _canExitBook(BookViewModel viewModel) async {
     return await showDialog<bool>(
             context: context,
             builder: (context) {
@@ -37,6 +37,7 @@ class _BookPageState extends State<BookPage> {
                 actions: [
                   TextButton(
                     onPressed: () {
+                      viewModel.onUnloadBook();
                       Navigator.of(context).pop(true);
                     },
                     child: const Text('Leave'),
@@ -53,15 +54,22 @@ class _BookPageState extends State<BookPage> {
         false;
   }
 
-  void _exitSetup() {
+  /* void _exitSetup() {
     Navigator.of(context).pop();
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, BookViewModel>(
       converter: (store) => BookViewModel.create(store),
       builder: (BuildContext context, BookViewModel viewModel) {
+        /*        print('###########');
+        print('### isBookLoaded: "${viewModel.isBookLoaded}"');
+        print('### isLoading: "${viewModel.isLoading}"');
+        print('### pageId: "${viewModel.pageId}"');
+        print('### sectionNumber: "${viewModel.sectionNumber}"');
+        print('### selectedBook: "${viewModel.selectedBook}"');
+        print('###########'); */
         var titleText = widget.transBook.titleSelection;
         var tooltipText = widget.transBook.loadButton.load;
 
@@ -73,7 +81,7 @@ class _BookPageState extends State<BookPage> {
         }
 
         return WillPopScope(
-          onWillPop: _canExitBook,
+          onWillPop: () => _canExitBook(viewModel),
           child: Scaffold(
             appBar: AppBar(
               actions: viewModel.isBookLoaded
