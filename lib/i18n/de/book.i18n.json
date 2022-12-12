@@ -4,7 +4,8 @@
     "unload": "DE Back to book selection"
   },
   "publicationDate": "DE Publication Date: $date",
-  "title": "DE LoneWolf",
-  "titleLoading": "Loading book...",
+  "title": "DE LoneWolf: $bookTitle - $pageTitle",
+  "titleLoading": "DE Loading book...",
+  "titleSection": "DE LoneWolf: $bookTitle - #$sectionTitle",
   "titleSelection": "DE Select a book"
 }
