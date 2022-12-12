@@ -17,7 +17,7 @@ class Choice extends StatefulWidget with ContentRenderer {
 }
 
 class _ChoiceState extends State<Choice> {
-  int _hoverIndex = -1;
+  int? _hoverIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +47,17 @@ class _ChoiceState extends State<Choice> {
                   widget.onNavigate(route);
                 };
 
-              if (_hoverIndex == index) {
+              if (_hoverIndex != null && _hoverIndex == index) {
                 backgroundColor = widget.getTextElementHoverBackroundColor(text);
               }
             }
             return TextSpan(
               onEnter: (_) => setState(() => _hoverIndex = index),
-              onExit: (_) => setState(() => _hoverIndex = -1),
+              onExit: (_) {
+                if (mounted) {
+                  setState(() => _hoverIndex = null);
+                }
+              },
               recognizer: recognizer,
               style: TextStyle(
                 backgroundColor: backgroundColor,
