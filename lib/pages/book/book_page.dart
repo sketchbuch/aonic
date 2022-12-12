@@ -76,7 +76,13 @@ class _BookPageState extends State<BookPage> {
         if (viewModel.isLoading) {
           titleText = widget.transBook.titleLoading;
         } else if (viewModel.isBookLoaded) {
-          titleText = widget.transBook.title;
+          if (viewModel.isSection) {
+            titleText =
+                widget.transBook.titleSection(bookTitle: viewModel.bookTitle, sectionTitle: viewModel.sectionTitle);
+          } else {
+            titleText = widget.transBook.title(bookTitle: viewModel.bookTitle, pageTitle: viewModel.sectionTitle);
+          }
+
           tooltipText = widget.transBook.loadButton.unload;
         }
 

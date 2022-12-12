@@ -1,3 +1,4 @@
+import 'package:lonewolf_new/types/types.dart';
 import 'package:redux/redux.dart';
 
 import '../../models/booklist/booklist_item.dart';
@@ -8,9 +9,12 @@ import '../../store/models/book_state.dart';
 
 class BookViewModel {
   final BooklistItem? selectedBook;
+  final BookText bookTitle;
+  final BookText sectionTitle;
   final bool canShowActionButton;
   final bool isBookLoaded;
   final bool isLoading;
+  final bool isSection;
   final int sectionNumber;
   final String pageId;
   final void Function() onNextPage;
@@ -19,15 +23,18 @@ class BookViewModel {
   final void Function(BooklistItem) onLoadBook;
 
   BookViewModel({
+    required this.bookTitle,
     required this.canShowActionButton,
     required this.isBookLoaded,
     required this.isLoading,
+    required this.isSection,
     required this.onLoadBook,
     required this.onNextPage,
     required this.onPrevPage,
     required this.onUnloadBook,
     required this.pageId,
     required this.sectionNumber,
+    required this.sectionTitle,
     required this.selectedBook,
   });
 
@@ -35,6 +42,7 @@ class BookViewModel {
     final state = store.state;
     final bookState = state.bookState;
     final pageState = state.pageState;
+    final book = bookState.book;
 
     void onNextPage() {
       store.dispatch(NextPageAction());
@@ -52,16 +60,21 @@ class BookViewModel {
       store.dispatch(UnloadBookAction());
     }
 
+    final currentSection = book?.getSection(pageState.pageId);
+
     return BookViewModel(
+      bookTitle: book != null ? book.title : '',
       canShowActionButton: state.selectedBook != null && bookState.status != BookStateStatus.loading,
       isBookLoaded: bookState.status == BookStateStatus.succeeded,
       isLoading: bookState.status == BookStateStatus.loading,
       onLoadBook: onLoadBook,
       onNextPage: onNextPage,
+      isSection: currentSection != null ? currentSection.isNumbered() : false,
       onPrevPage: onPrevPage,
       onUnloadBook: onUnloadBook,
       pageId: pageState.pageId,
       sectionNumber: pageState.sectionNumber,
+      sectionTitle: currentSection != null ? currentSection.meta.title : '',
       selectedBook: state.selectedBook,
     );
   }
