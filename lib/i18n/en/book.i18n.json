@@ -1,4 +1,5 @@
 {
+  "headlineSection": "#$sectionTitle",
   "loadButton": {
     "load": "Download book XML",
     "unload": "Back to book selection"

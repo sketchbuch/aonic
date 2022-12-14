@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
 import './get_tag_list.dart';
+import '../../i18n/_generated_/translations.g.dart';
 import '../../models/book/section/section.dart';
 import '../../types/types.dart';
+import '../typography/headline.dart';
 
 class SectionDisplay extends StatelessWidget {
+  final transBook = t.book;
   final OnNavigate onNavigate;
   final Section section;
 
-  const SectionDisplay(this.section, this.onNavigate, {Key? key}) : super(key: key);
+  SectionDisplay(this.section, this.onNavigate, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,9 @@ class SectionDisplay extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(section.meta.title),
+        Headline(
+          section.isNumbered() ? transBook.headlineSection(sectionTitle: section.meta.title) : section.meta.title,
+        ),
         ...sectionContent,
         ...subsectionContent,
       ],

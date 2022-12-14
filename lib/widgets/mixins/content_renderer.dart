@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../constants/characters.dart';
 import '../../models/book/content/subcontent/text_element.dart';
 
-final hoverBackgroundColour = Colors.blueAccent.withOpacity(0.33);
+final hoverBackgroundColour = Color(0xffcce0c1);
 
 mixin ContentRenderer {
   void getStyle(DisplayType displayType) {}
