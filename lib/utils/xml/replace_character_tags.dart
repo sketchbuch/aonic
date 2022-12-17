@@ -17,7 +17,7 @@ const Map<String, String> chTags = {
 };
 
 String replaceCharacterTags(String xmlString) {
-  var replacedStr = xmlString;
+  String replacedStr = xmlString;
 
   chTags.forEach((key, value) {
     replacedStr = replacedStr.replaceAll('<ch.$key/>', value);

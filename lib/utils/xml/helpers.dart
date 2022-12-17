@@ -6,7 +6,7 @@ import '../../types/types.dart';
 import 'replace_character_tags.dart';
 
 String cleanXmlString(String xmlString, Map<String, String> includeLinks) {
-  var cleanedString = xmlString.trim().replaceAll(RegExp(r'>\s*<'), '><').replaceAll('\n', '');
+  String cleanedString = xmlString.trim().replaceAll(RegExp(r'>\s*<'), '><').replaceAll('\n', '');
   cleanedString = replaceCharacterTags(cleanedString);
   cleanedString = replaceIncludeLinks(cleanedString, includeLinks);
 
@@ -34,7 +34,7 @@ DateTime getDate(String year, String month, String day) {
 }
 
 List<TextElement> getTextElementList(XmlElement xml) {
-  var elementCount = -1;
+  int elementCount = -1;
 
   return xml.children.map((child) {
     if (child.nodeType == XmlNodeType.ELEMENT) {

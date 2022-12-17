@@ -31,9 +31,9 @@ class _ParagraphState extends State<Paragraph> {
 
             GestureRecognizer? recognizer;
 
-            final style = widget.getTextElementStyle(text);
-            final weight = widget.getTextElementWeight(text);
-            final decoration = widget.getTextElementDecoration(text);
+            FontStyle style = widget.getTextElementStyle(text);
+            FontWeight weight = widget.getTextElementWeight(text);
+            TextDecoration decoration = widget.getTextElementDecoration(text);
             Color? backgroundColor = widget.getTextElementBackroundColor(text);
 
             if (text.displayType == DisplayType.link) {

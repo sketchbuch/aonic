@@ -13,7 +13,7 @@ const dtJson = {
   "type": "dt"
 };
 
-const ddLinexXml = '''<dd>
+const ddLineXml = '''<dd>
   <line>Jonathan Blake</line>
   <line>Pedro Almeida, Jan Charv<ch.aacute/>t, Christian Cognigni, Tony Lenzo, Dewi Morgan, Laurence O<ch.apos/>Toole, Timothy Pederick</line>
 </dd>''';
@@ -50,7 +50,7 @@ void main() {
   group('Model - DescriptionListItem()', () {
     final TestIterationData descriptionListItems = {
       "<dt>": {"xml": dtXml, "json": dtJson},
-      "<dd> lines": {"xml": ddLinexXml, "json": ddLinexJson},
+      "<dd> lines": {"xml": ddLineXml, "json": ddLinexJson},
       "<dd> non-lines": {"xml": ddXml, "json": ddJson},
     };
 

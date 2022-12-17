@@ -1,19 +1,19 @@
-import 'package:lonewolf_new/models/book/content/list_tag.dart';
+import 'package:lonewolf_new/models/book/content/plain_list_tag.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
 import '../../../types.dart';
-import 'subcontent/list_item_test.dart';
+import 'subcontent/plain_list_item_test.dart';
 
-const listUlXml = '''<ul class="unbulleted">
-  $listItemXml
+const plainListUlXml = '''<ul class="unbulleted">
+  $plainListItemXml
   <li>Illustration II (<a idref="sect23">Section 23</a>)</li>
   <li><a idref="equipmnt">Equipment</a></li>
   <li><a idref="discplnz">Kai Disciplines</a></li>
 </ul>''';
-final listUlJson = {
+final plainListUlJson = {
   "items": [
-    listItemJson,
+    plainListItemJson,
     {
       "texts": [
         {"attrs": {}, "displayType": "plain", "text": "Illustration II ("},
@@ -44,29 +44,29 @@ final listUlJson = {
       ]
     }
   ],
-  "listType": "ul",
+  "plainListType": "ul",
   "type": "unbulleted",
 };
 
-const lisOlXml = '''<ol class="unbulleted">$listItemXml</ol>''';
-final listOlJson = {
+const plainListOlXml = '''<ol class="unbulleted">$plainListItemXml</ol>''';
+final plainListOlJson = {
   "items": [
-    listItemJson,
+    plainListItemJson,
   ],
-  "listType": "ol",
+  "plainListType": "ol",
   "type": "unbulleted",
 };
 
 void main() {
   group('Model - ListTag():', () {
-    final TestIterationData lists = {
-      "ul": {"xml": listUlXml, "json": listUlJson},
-      "ol": {"xml": lisOlXml, "json": listOlJson},
+    final TestIterationData plainLists = {
+      "ul": {"xml": plainListUlXml, "json": plainListUlJson},
+      "ol": {"xml": plainListOlXml, "json": plainListOlJson},
     };
 
     void testListType(String type, String xml, Object json) {
       group('$type:', () {
-        final tag = ListTag.fromXml(getRootXmlElement(xml));
+        final tag = PlainListTag.fromXml(getRootXmlElement(xml));
 
         test('Returns expected JSON', () {
           expect(tag.toJson(), equals(json));
@@ -78,7 +78,7 @@ void main() {
       });
     }
 
-    lists.forEach((type, data) {
+    plainLists.forEach((type, data) {
       testListType(type, data['xml']!.toString(), data['json']!);
     });
   });

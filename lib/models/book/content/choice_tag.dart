@@ -16,7 +16,7 @@ class ChoiceTag extends Tag {
   ChoiceTag.fromXml(XmlElement xml) {
     idref = getAttribute('idref', xml);
 
-    var elementCount = 0;
+    int elementCount = 0;
 
     for (var index = 0; index < xml.children.length; index++) {
       final child = xml.children.elementAt(index);

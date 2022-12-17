@@ -33,9 +33,9 @@ class _ChoiceState extends State<Choice> {
             GestureRecognizer? recognizer;
             textIndex += 1;
 
-            final style = widget.getTextElementStyle(text);
-            var weight = widget.getTextElementWeight(text);
-            final decoration = widget.getTextElementDecoration(text);
+            FontStyle style = widget.getTextElementStyle(text);
+            FontWeight weight = widget.getTextElementWeight(text);
+            TextDecoration decoration = widget.getTextElementDecoration(text);
             Color? backgroundColor = widget.getTextElementBackroundColor(text);
 
             if (widget.tag.linkTextIndex == textIndex) {
@@ -65,7 +65,7 @@ class _ChoiceState extends State<Choice> {
                 fontStyle: style,
                 fontWeight: weight,
               ),
-              text: text.text,
+              text: widget.wrapText(text),
             );
           }).toList(),
         ),

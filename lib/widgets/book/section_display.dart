@@ -22,6 +22,10 @@ class SectionDisplay extends StatelessWidget {
 
     if (subSections.isNotEmpty) {
       for (var subSection in subSections) {
+        subsectionContent.add(Headline(
+          subSection.meta.title,
+          level: 2,
+        ));
         subsectionContent.addAll(getTagList(subSection.data.content, onNavigate));
       }
     }

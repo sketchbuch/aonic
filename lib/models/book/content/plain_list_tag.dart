@@ -2,52 +2,52 @@ import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
-import 'subcontent/list_item.dart';
+import 'subcontent/plain_list_item.dart';
 import 'tag.dart';
 
-enum ListTagType {
+enum PlainListTagType {
   ol,
   ul,
 }
 
-enum ListType {
+enum PlainListType {
   none,
   paragraphed,
   unbulleted,
   unknown,
 }
 
-class ListTag extends Tag {
-  final List<ListItem> items = [];
-  late final ListTagType listType;
-  late final ListType type;
+class PlainListTag extends Tag {
+  final List<PlainListItem> items = [];
+  late final PlainListTagType listType;
+  late final PlainListType type;
 
   // ignore: unused_element
-  ListTag._();
+  PlainListTag._();
 
-  ListTag.fromXml(XmlElement xml) {
+  PlainListTag.fromXml(XmlElement xml) {
     final typeName = xml.name.toString();
 
     if (typeName == 'ul') {
-      listType = ListTagType.ul;
+      listType = PlainListTagType.ul;
     } else {
-      listType = ListTagType.ol;
+      listType = PlainListTagType.ol;
     }
 
     try {
       final typeName = getAttribute('class', xml);
 
       if (typeName.isEmpty) {
-        type = ListType.none;
+        type = PlainListType.none;
       } else {
-        type = ListType.values.byName(typeName);
+        type = PlainListType.values.byName(typeName);
       }
     } on ArgumentError {
-      type = ListType.unknown;
+      type = PlainListType.unknown;
     }
 
     xml.findElements('li').forEach((li) {
-      items.add(ListItem.fromXml(li));
+      items.add(PlainListItem.fromXml(li));
     });
   }
 

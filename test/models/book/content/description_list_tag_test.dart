@@ -18,7 +18,7 @@ final dlJson = {
 
 const dlLinesXml = '''<dl>
     $dtXml
-    $ddLinexXml
+    $ddLineXml
 </dl>''';
 final dlLinesJson = {
   "items": [

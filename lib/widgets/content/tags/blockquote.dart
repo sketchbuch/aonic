@@ -16,8 +16,8 @@ class Blockquote extends StatelessWidget with ContentRenderer {
         text: TextSpan(
             style: DefaultTextStyle.of(context).style,
             children: tag.texts.map((text) {
-              final style = getTextElementStyle(text);
-              final weight = getTextElementWeight(text);
+              FontStyle style = getTextElementStyle(text);
+              FontWeight weight = getTextElementWeight(text);
 
               return TextSpan(text: text.text, style: TextStyle(fontWeight: weight, fontStyle: style));
             }).toList()),

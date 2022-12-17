@@ -7,6 +7,7 @@ import '../../models/book/content/deadend_tag.dart';
 import '../../models/book/content/description_list_tag.dart';
 import '../../models/book/content/illustration_tag.dart';
 import '../../models/book/content/paragraph_tag.dart';
+import '../../models/book/content/plain_list_tag.dart';
 import '../../models/book/content/tag.dart';
 import '../../types/types.dart';
 import '../content/tags/blockquote.dart';
@@ -16,6 +17,7 @@ import '../content/tags/deadend.dart';
 import '../content/tags/description_list.dart';
 import '../content/tags/illustration.dart';
 import '../content/tags/paragraph.dart';
+import '../content/tags/plain_list.dart';
 
 List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate) {
   final List<Widget> sectionContent = [];
@@ -44,6 +46,10 @@ List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate) {
         sectionContent.add(DescriptionList(tag as DescriptionListTag));
         break;
 
+      case 'PlainListTag':
+        sectionContent.add(PlainList(tag as PlainListTag));
+        break;
+
       case 'IllustrationTag':
         final illy = tag as IllustrationTag;
 
@@ -51,6 +57,10 @@ List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate) {
           sectionContent.add(Illustration(illy));
         }
 
+        break;
+
+      case 'ListTag':
+        sectionContent.add(PlainList(tag as PlainListTag));
         break;
 
       case 'ParagraphTag':

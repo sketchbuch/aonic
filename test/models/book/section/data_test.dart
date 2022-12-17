@@ -9,8 +9,8 @@ import '../content/combat_tag_test.dart';
 import '../content/deadend_tag_test.dart';
 import '../content/description_list_tag_test.dart';
 import '../content/illustration_tag_test.dart';
-import '../content/list_tag_test.dart';
 import '../content/paragraph_tag_test.dart';
+import '../content/plain_list_tag_test.dart';
 import '../content/signpost_tag_test.dart';
 
 const dataXml = '''<data>
@@ -21,8 +21,8 @@ const dataXml = '''<data>
   $dlXml
   $dlLinesXml
   $illustrationXml
-  $listUlXml
-  $lisOlXml
+  $plainListUlXml
+  $plainListOlXml
   $paragraphXml
   $signpostXml
 </data>''';
@@ -35,8 +35,8 @@ final dataJson = {
     dlJson,
     dlLinesJson,
     illustrationJson,
-    listUlJson,
-    listOlJson,
+    plainListUlJson,
+    plainListOlJson,
     paragraphJson,
     signpostJson,
   ]

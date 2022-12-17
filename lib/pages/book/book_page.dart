@@ -70,8 +70,8 @@ class _BookPageState extends State<BookPage> {
         print('### sectionNumber: "${viewModel.sectionNumber}"');
         print('### selectedBook: "${viewModel.selectedBook}"');
         print('###########'); */
-        var titleText = widget.transBook.titleSelection;
-        var tooltipText = widget.transBook.loadButton.load;
+        String titleText = widget.transBook.titleSelection;
+        String tooltipText = widget.transBook.loadButton.load;
 
         if (viewModel.isLoading) {
           titleText = widget.transBook.titleLoading;

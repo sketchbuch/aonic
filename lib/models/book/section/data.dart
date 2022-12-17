@@ -8,8 +8,8 @@ import '../content/combat_tag.dart';
 import '../content/deadend_tag.dart';
 import '../content/description_list_tag.dart';
 import '../content/illustration_tag.dart';
-import '../content/list_tag.dart';
 import '../content/paragraph_tag.dart';
+import '../content/plain_list_tag.dart';
 import '../content/signpost_tag.dart';
 import '../content/tag.dart';
 
@@ -37,7 +37,7 @@ class Data {
         } else if (childName == 'illustration') {
           content.add(IllustrationTag.fromXml(child));
         } else if (childName == 'ol' || childName == 'ul') {
-          content.add(ListTag.fromXml(child));
+          content.add(PlainListTag.fromXml(child));
         } else if (childName == 'p') {
           content.add(ParagraphTag.fromXml(child));
         } else if (childName == 'section') {

@@ -4,13 +4,13 @@ import '../../../../types/types.dart';
 import '../../../../utils/xml/helpers.dart';
 import 'text_element.dart';
 
-class ListItem {
+class PlainListItem {
   final List<TextElement> texts = [];
 
   // ignore: unused_element
-  ListItem._();
+  PlainListItem._();
 
-  ListItem.fromXml(XmlElement xml) {
+  PlainListItem.fromXml(XmlElement xml) {
     texts.addAll(getTextElementList(xml));
   }
 
