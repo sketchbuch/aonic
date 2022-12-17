@@ -4,6 +4,10 @@
 
 - <cite>&lt;bookref</cite>
 
+- Why links in Combat Rules Summary are not clickable
+- cmbtrulz has a list within a LI element!!!
+- Links not working on illustartion page
+
 ## References
 
 ### Links in Flutter
