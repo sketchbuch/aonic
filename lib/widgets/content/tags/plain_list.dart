@@ -20,10 +20,10 @@ class PlainList extends StatelessWidget {
           itemIndex += 1;
 
           if (tag.listType == PlainListTagType.ol) {
-            return NumberedListItem(item, itemIndex);
+            return NumberedListItem(item, tag.items.length, itemIndex);
           }
 
-          return BulletListItem(item);
+          return BulletListItem(item, tag.items.length);
         }).toList(),
       ),
     );

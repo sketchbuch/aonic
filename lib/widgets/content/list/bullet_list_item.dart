@@ -6,9 +6,10 @@ import '../../mixins/content_renderer.dart';
 const bulletSymbol = '\u2022';
 
 class BulletListItem extends StatelessWidget with ContentRenderer {
+  final int listSize;
   final PlainListItem item;
 
-  const BulletListItem(this.item, {Key? key}) : super(key: key);
+  const BulletListItem(this.item, this.listSize, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
