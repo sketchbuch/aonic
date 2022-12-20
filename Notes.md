@@ -5,8 +5,10 @@
 - <cite>&lt;bookref</cite>
 
 - Why links in Combat Rules Summary are not clickable
+
 - cmbtrulz has a list within a LI element!!!
 - Links not working on illustartion page
+- discplnz: last para has links to next book that do not work
 
 ## References
 
