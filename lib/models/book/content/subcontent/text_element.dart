@@ -26,15 +26,15 @@ class TextElement {
   // ignore: unused_element
   TextElement._();
 
-  TextElement.fromXml(XmlElement xml) {
+  TextElement.fromXml(XmlElement xml, [DisplayType? type]) {
     attrs = getAttributes(xml);
-    displayType = _getDisplayType(xml);
+    displayType = type ?? _getDisplayType(xml);
     text = xml.text;
   }
 
-  TextElement.fromTxt(String txt) {
+  TextElement.fromTxt(String txt, [DisplayType? type]) {
     attrs = {};
-    displayType = DisplayType.plain;
+    displayType = type ?? DisplayType.plain;
     text = txt;
   }
 
