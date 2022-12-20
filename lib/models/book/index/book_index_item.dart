@@ -1,5 +1,5 @@
 import '../../../types/types.dart';
-import '../section/section_tag.dart';
+import '../content/section_tag.dart';
 
 class BookIndexItem {
   late final BookText label;

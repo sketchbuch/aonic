@@ -1,4 +1,4 @@
-import '../section/section_tag.dart';
+import '../content/section_tag.dart';
 
 class SectionCache {
   Map<String, SectionTag> _cache = {};

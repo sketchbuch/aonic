@@ -10,9 +10,9 @@ import '../content/description_list_tag.dart';
 import '../content/illustration_tag.dart';
 import '../content/paragraph_tag.dart';
 import '../content/plain_list_tag.dart';
+import '../content/section_tag.dart';
 import '../content/signpost_tag.dart';
 import '../content/tag.dart';
-import 'section_tag.dart';
 
 class Data {
   final List<Tag> content = [];

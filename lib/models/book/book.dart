@@ -4,9 +4,9 @@ import 'package:xml/xml.dart';
 import '../../exceptions/xml.dart';
 import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
+import 'content/section_tag.dart';
 import 'index/book_index_item.dart';
 import 'meta/meta.dart';
-import 'section/section_tag.dart';
 
 typedef BookIndex = List<BookIndexItem>;
 

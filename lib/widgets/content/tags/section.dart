@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../i18n/_generated_/translations.g.dart';
-import '../../../models/book/section/section_tag.dart';
+import '../../../models/book/content/section_tag.dart';
 import '../../../types/types.dart';
 import '../../book/get_tag_list.dart';
 import '../../typography/headline.dart';

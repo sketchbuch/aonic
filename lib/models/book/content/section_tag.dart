@@ -3,10 +3,10 @@ import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
-import '../content/tag.dart';
-import 'data.dart';
-import 'footnote.dart';
-import 'section_meta.dart';
+import '../section/data.dart';
+import '../section/footnote.dart';
+import '../section/section_meta.dart';
+import 'tag.dart';
 
 enum SectionType {
   backmatter('backmatter'),
