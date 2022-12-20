@@ -1,36 +1,5 @@
 # Notes
 
-## Edgecases still to check:
-
-- <cite>&lt;bookref</cite>
-
-- Why links in Combat Rules Summary are not clickable
-
-- cmbtrulz
-
-  - has a list within a LI element!!!
-  - Links in list items not working
-
-- cmbtrulz summary
-
-  - Links in list items not working
-
-- Links not working on illustartion page
-
-- discplnz: last para has links to next book that do not work
-
-- combat results table list: im,ages not rendering
-
-- random number table: last para has links to next book that do not work
-
-- footnotes not rendering
-
-- table of illustrations not link to sections
-
-- No licence
-
-- No includes
-
 ## References
 
 ### Links in Flutter
