@@ -3,6 +3,7 @@ import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
+import '../content/tag.dart';
 import 'data.dart';
 import 'footnote.dart';
 import 'section_meta.dart';
@@ -19,18 +20,17 @@ enum SectionType {
   final String value;
 }
 
-class Section {
+class SectionTag extends Tag {
   late Data data;
   late List<Footnote> footnotes;
-  late List<Section> subsections;
   late SectionMeta meta;
   late SectionType type;
   late String id;
 
   // ignore: unused_element
-  Section._();
+  SectionTag._();
 
-  Section.fromXml(
+  SectionTag.fromXml(
     XmlElement xml, {
     bool addSubsections = true,
     SectionType? forcedType,
@@ -63,12 +63,6 @@ class Section {
 
     if (dataXml != null) {
       data = Data.fromXml(dataXml);
-
-      if (addSubsections) {
-        subsections = dataXml.findElements('section').map((section) => Section.fromXml(section)).toList();
-      } else {
-        subsections = [];
-      }
     }
 
     footnotes = footnotesXml != null
@@ -76,12 +70,12 @@ class Section {
         : [];
   }
 
+  @override
   Json toJson() => {
         'data': data.toJson(),
         'footnotes': footnotes.map((footnote) => footnote.toJson()).toList(),
         'id': id,
         'meta': meta.toJson(),
-        'subsections': subsections.map((section) => section.toJson()).toList(),
         'type': type.name,
       };
 
@@ -97,12 +91,19 @@ class Section {
     return isIndexableSub || isIndexableMain;
   }
 
-  List<Section> getVisibleSubsections() {
-    return subsections.where((section) => !section.isFrontmatterSeperate()).toList();
+  List<SectionTag> getSubsections() {
+    return data.content
+        .where((element) => element.tagType() == 'SectionTag')
+        .map((section) => section as SectionTag)
+        .toList();
+  }
+
+  List<SectionTag> getVisibleSubsections() {
+    return getSubsections().where((section) => !section.isFrontmatterSeperate()).toList();
   }
 
   bool hasSubsections() {
-    return subsections.isNotEmpty;
+    return getSubsections().isNotEmpty;
   }
 
   bool isBackmatter() {

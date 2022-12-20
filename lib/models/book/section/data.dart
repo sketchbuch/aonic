@@ -12,6 +12,7 @@ import '../content/paragraph_tag.dart';
 import '../content/plain_list_tag.dart';
 import '../content/signpost_tag.dart';
 import '../content/tag.dart';
+import 'section_tag.dart';
 
 class Data {
   final List<Tag> content = [];
@@ -41,7 +42,7 @@ class Data {
         } else if (childName == 'p') {
           content.add(ParagraphTag.fromXml(child));
         } else if (childName == 'section') {
-          print('### section WITHIN section');
+          content.add(SectionTag.fromXml(child));
         } else if (childName == 'signpost') {
           content.add(SignpostTag.fromXml(child));
         } else {

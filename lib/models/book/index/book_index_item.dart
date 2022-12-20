@@ -1,5 +1,5 @@
 import '../../../types/types.dart';
-import '../section/section.dart';
+import '../section/section_tag.dart';
 
 class BookIndexItem {
   late final BookText label;
@@ -9,7 +9,7 @@ class BookIndexItem {
 
   BookIndexItem(this.label, this.id, this.type, this.isSubItem);
 
-  BookIndexItem.fromSection(Section section, [bool isSubsection = false]) {
+  BookIndexItem.fromSection(SectionTag section, [bool isSubsection = false]) {
     id = section.id;
     isSubItem = isSubsection;
     label = section.meta.title;

@@ -6,15 +6,14 @@ import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
 import 'index/book_index_item.dart';
 import 'meta/meta.dart';
-import 'section/section.dart';
+import 'section/section_tag.dart';
 
 typedef BookIndex = List<BookIndexItem>;
 
 class Book {
   final _sectionCache = SectionCache();
-  final List<Section> sections = [];
+  final List<SectionTag> sections = [];
   late BookIndex bookIndex;
-  late BookIndex bookIndex2;
   late BookText title = '';
   late Meta meta;
   late String lang = '';
@@ -44,17 +43,17 @@ class Book {
           final className = sec.getAttribute('class');
           return className == SectionType.frontmatter.name;
         })
-        .map((xml) => Section.fromXml(xml))
+        .map((xml) => SectionTag.fromXml(xml))
         .toList();
 
-    frontmatter.insert(0, Section.fromXml(titleSection, addSubsections: false, forcedType: SectionType.frontmatter));
-    frontmatter.add(Section.fromXml(numberedSection, addSubsections: false, forcedType: SectionType.frontmatter));
+    frontmatter.insert(0, SectionTag.fromXml(titleSection, addSubsections: false, forcedType: SectionType.frontmatter));
+    frontmatter.add(SectionTag.fromXml(numberedSection, addSubsections: false, forcedType: SectionType.frontmatter));
 
-    final numbered = numberedBaseData.findElements('section').map((xml) => Section.fromXml(xml)).toList();
+    final numbered = numberedBaseData.findElements('section').map((xml) => SectionTag.fromXml(xml)).toList();
 
     final backmatter = titleSubsections
         .where((sec) => sec.getAttribute('class') == SectionType.backmatter.name)
-        .map((xml) => Section.fromXml(xml))
+        .map((xml) => SectionTag.fromXml(xml))
         .toList();
 
     sections.addAll(frontmatter);
@@ -85,8 +84,14 @@ class Book {
       if (section.canAddToIndex()) {
         bookIndex.add(BookIndexItem.fromSection(section));
 
+        /*       if (section.isFrontmatter()) {
+          print('### ${section.meta.title}: ${section.hasSubsections()}');
+        } */
+
         if (section.isFrontmatter() && section.hasSubsections()) {
-          for (var subsection in section.subsections) {
+          final List<SectionTag> subsections = section.getSubsections();
+
+          for (var subsection in subsections) {
             if (subsection.canAddToIndex(true)) {
               bookIndex.add(BookIndexItem.fromSection(subsection, true));
             }
@@ -138,13 +143,13 @@ class Book {
     return baseSection.first;
   }
 
-  Section? getSection(String sectionId) {
+  SectionTag? getSection(String sectionId) {
     // TODO - check cache is working
     if (_sectionCache.contains(sectionId)) {
       return _sectionCache.get(sectionId);
     }
 
-    Section? requiredSection;
+    SectionTag? requiredSection;
 
     for (var section in sections) {
       if (requiredSection != null) {
@@ -155,7 +160,9 @@ class Book {
         requiredSection = section;
         break;
       } else if (section.hasSubsections()) {
-        for (var subsection in section.subsections) {
+        final List<SectionTag> subsections = section.getSubsections();
+
+        for (var subsection in subsections) {
           if (subsection.id == sectionId) {
             requiredSection = subsection;
             break;

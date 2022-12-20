@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/models/book/section/section.dart';
+import 'package:lonewolf_new/models/book/section/section_tag.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
@@ -27,7 +27,7 @@ final sectionJson = {
 
 void main() {
   group('Model - Section()', () {
-    final tag = Section.fromXml(getRootXmlElement(sectionXml));
+    final tag = SectionTag.fromXml(getRootXmlElement(sectionXml));
 
     test('Returns expected JSON', () {
       expect(tag.toJson(), equals(sectionJson));

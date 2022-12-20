@@ -9,6 +9,7 @@ import '../../models/book/content/illustration_tag.dart';
 import '../../models/book/content/paragraph_tag.dart';
 import '../../models/book/content/plain_list_tag.dart';
 import '../../models/book/content/tag.dart';
+import '../../models/book/section/section_tag.dart';
 import '../../types/types.dart';
 import '../content/tags/blockquote.dart';
 import '../content/tags/choice.dart';
@@ -18,6 +19,7 @@ import '../content/tags/description_list.dart';
 import '../content/tags/illustration.dart';
 import '../content/tags/paragraph.dart';
 import '../content/tags/plain_list.dart';
+import '../content/tags/section.dart';
 
 List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate) {
   final List<Widget> sectionContent = [];
@@ -65,6 +67,15 @@ List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate) {
 
       case 'ParagraphTag':
         sectionContent.add(Paragraph(tag as ParagraphTag, onNavigate));
+        break;
+
+      case 'SectionTag':
+        final sec = tag as SectionTag;
+
+        if (!sec.isFrontmatterSeperate()) {
+          sectionContent.add(Section(sec, onNavigate));
+        }
+
         break;
 
       case 'SignpostTag':

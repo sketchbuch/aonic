@@ -1,7 +1,7 @@
-import '../section/section.dart';
+import '../section/section_tag.dart';
 
 class SectionCache {
-  Map<String, Section> _cache = {};
+  Map<String, SectionTag> _cache = {};
 
   SectionCache();
 
@@ -15,7 +15,7 @@ class SectionCache {
     }
   }
 
-  Section? get(String key) {
+  SectionTag? get(String key) {
     return _cache[key];
   }
 
@@ -23,7 +23,7 @@ class SectionCache {
     return _cache.containsKey(key);
   }
 
-  void set(String key, Section section) {
+  void set(String key, SectionTag section) {
     _cache[key] = section;
   }
 }

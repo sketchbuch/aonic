@@ -1,5 +1,5 @@
 import 'package:lonewolf_new/models/book/index/book_index_item.dart';
-import 'package:lonewolf_new/models/book/section/section.dart';
+import 'package:lonewolf_new/models/book/section/section_tag.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
@@ -15,7 +15,7 @@ const biiSectionXml = '''<section class="frontmatter" id="$biiId">
   </meta>
   <data />
 </section>''';
-final biiSection = Section.fromXml(getRootXmlElement(biiSectionXml));
+final biiSection = SectionTag.fromXml(getRootXmlElement(biiSectionXml));
 
 final biiJson = {
   'id': biiId,
