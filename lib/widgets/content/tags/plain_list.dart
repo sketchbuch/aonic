@@ -23,7 +23,7 @@ class PlainList extends StatelessWidget {
             return NumberedListItem(item, tag.items.length, itemIndex);
           }
 
-          return BulletListItem(item, tag.items.length);
+          return BulletListItem(item);
         }).toList(),
       ),
     );

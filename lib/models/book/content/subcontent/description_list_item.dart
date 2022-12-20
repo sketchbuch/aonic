@@ -4,7 +4,7 @@ import '../../../../types/types.dart';
 import '../../../../utils/xml/helpers.dart';
 import 'text_element.dart';
 
-enum DescriptionIemType {
+enum DescriptionItemType {
   dt,
   dd,
 }
@@ -12,7 +12,7 @@ enum DescriptionIemType {
 class DescriptionListItem {
   final List<TextElement> texts = [];
   late final bool displayAsLines;
-  late final DescriptionIemType type;
+  late final DescriptionItemType type;
 
   // ignore: unused_element
   DescriptionListItem._();
@@ -21,13 +21,13 @@ class DescriptionListItem {
     final typeName = xml.name.toString();
 
     if (typeName == 'dt') {
-      type = DescriptionIemType.dt;
+      type = DescriptionItemType.dt;
     } else {
-      type = DescriptionIemType.dd;
+      type = DescriptionItemType.dd;
     }
 
     texts.addAll(getTextElementList(xml));
-    displayAsLines = type == DescriptionIemType.dd && xml.children.toString().contains("<line>");
+    displayAsLines = type == DescriptionItemType.dd && xml.children.toString().contains("<line>");
   }
 
   Json toJson() => {

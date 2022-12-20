@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants/typography.dart';
 import '../../../models/book/content/subcontent/plain_list_item.dart';
 import '../../mixins/content_renderer.dart';
 
@@ -30,18 +31,18 @@ class NumberedListItem extends StatelessWidget with ContentRenderer {
         SizedBox(
           width: numberWidth,
           child: Text(
-            '$itemNumber.'.toString(),
+            '$itemNumber.',
             textAlign: TextAlign.right,
           ),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: stdOffset),
         Expanded(
           child: RichText(
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
               children: item.texts.map((text) {
-                FontStyle style = getTextElementStyle(text);
-                FontWeight weight = getTextElementWeight(text);
+                final FontStyle style = getTextElementStyle(text);
+                final FontWeight weight = getTextElementWeight(text);
 
                 return TextSpan(text: wrapText(text), style: TextStyle(fontWeight: weight, fontStyle: style));
               }).toList(),

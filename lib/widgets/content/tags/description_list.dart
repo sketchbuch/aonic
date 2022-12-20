@@ -4,8 +4,9 @@ import '../../../models/book/content/description_list_tag.dart';
 import '../../../models/book/content/subcontent/description_list_item.dart';
 import '../../mixins/content_renderer.dart';
 import '../content_container.dart';
-
-const newline = '\n';
+import '../list/description_detail_list_item.dart';
+import '../list/description_detail_text_list_item.dart';
+import '../list/description_term_list_item.dart';
 
 class DescriptionList extends StatelessWidget with ContentRenderer {
   final DescriptionListTag tag;
@@ -14,27 +15,26 @@ class DescriptionList extends StatelessWidget with ContentRenderer {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: tag.items.map<Widget>((item) {
-        return ContentContainer(
-          child: RichText(
-            text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: item.texts.map((text) {
-                String textContent = item.displayAsLines ? '${text.text}$newline' : text.text;
-                FontStyle style = getTextElementStyle(text);
-                FontWeight weight = getTextElementWeight(text);
+    final List<Widget> listItems = [];
 
-                if (item.type == DescriptionIemType.dt) {
-                  weight = FontWeight.bold;
-                }
+    for (var item in tag.items) {
+      if (item.type == DescriptionItemType.dt) {
+        listItems.add(DescriptionTermListItem(item));
+      } else {
+        if (item.displayAsLines) {
+          for (var text in item.texts) {
+            listItems.add(DescriptionDetailTextListItem(text));
+          }
+        } else {
+          listItems.add(DescriptionDetailListItem(item));
+        }
+      }
+    }
 
-                return TextSpan(text: textContent, style: TextStyle(fontWeight: weight, fontStyle: style));
-              }).toList(),
-            ),
-          ),
-        );
-      }).toList(),
+    return ContentContainer(
+      child: Column(
+        children: listItems,
+      ),
     );
   }
 }

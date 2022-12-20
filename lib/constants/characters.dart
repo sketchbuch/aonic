@@ -1,2 +1,2 @@
-const endQuote = '’';
-const startQuote = '‘';
+const String endQuote = '’';
+const String startQuote = '‘';

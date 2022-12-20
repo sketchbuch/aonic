@@ -1,9 +1,9 @@
-const lonewolfSupportedBooks = [1, 2, 3];
-const pageMax = 349;
-const pageMin = 0;
-const sectionPrefix = 'sect';
+const List<int> lonewolfSupportedBooks = [1, 2, 3];
+const int pageMax = 349;
+const int pageMin = 0;
+const String sectionPrefix = 'sect';
 
-const bookIdDedication = 'dedicate';
-const bookIdNumbered = 'numbered';
-const bookIdStart = 'index';
-const bookIdTitle = 'title';
+const String bookIdDedication = 'dedicate';
+const String bookIdNumbered = 'numbered';
+const String bookIdStart = 'index';
+const String bookIdTitle = 'title';
