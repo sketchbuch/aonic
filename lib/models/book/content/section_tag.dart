@@ -66,7 +66,7 @@ class SectionTag extends Tag {
     }
 
     footnotes = footnotesXml != null
-        ? footnotesXml.findElements('footnote').map((footnote) => Footnote.fromXml(footnote)).toList()
+        ? footnotesXml.findElements('footnote').map((footnote) => Footnote.fromXml(footnote, meta.title, id)).toList()
         : [];
   }
 

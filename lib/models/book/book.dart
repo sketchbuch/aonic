@@ -1,4 +1,3 @@
-import 'package:lonewolf_new/models/book/helpers/section_cache.dart';
 import 'package:xml/xml.dart';
 
 import '../../exceptions/xml.dart';
@@ -6,15 +5,18 @@ import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
 import 'content/plain_list_tag.dart';
 import 'content/section_tag.dart';
+import 'helpers/section_cache.dart';
 import 'meta/meta.dart';
+import 'section/footnote.dart';
 import 'toc/toc_index_section.dart';
 
 class Book {
   final _sectionCache = SectionCache();
+  final List<Footnote> footnoteSections = [];
   final List<SectionTag> sections = [];
-  late PlainListTag toc;
   late BookText title = '';
   late Meta meta;
+  late PlainListTag toc;
   late String lang = '';
   late String version = '';
 
@@ -40,7 +42,7 @@ class Book {
     final frontmatter = titleSubsections
         .where((sec) {
           final className = sec.getAttribute('class');
-          return className == SectionType.frontmatter.name;
+          return className == SectionType.frontmatter.name || className == SectionType.frontmatterSeparate.name;
         })
         .map((xml) => SectionTag.fromXml(xml))
         .toList();
@@ -59,10 +61,28 @@ class Book {
     sections.addAll(numbered);
     sections.addAll(backmatter);
 
+    for (var section in sections) {
+      if (section.footnotes.isNotEmpty) {
+        footnoteSections.addAll(section.footnotes);
+      }
+
+      final subsections = section.getSubsections();
+
+      if (subsections.isEmpty) {
+        for (var subsection in subsections) {
+          if (subsection.footnotes.isNotEmpty) {
+            footnoteSections.addAll(subsection.footnotes);
+          }
+        }
+      }
+    }
+
+    print('### footnoteSections: "${footnoteSections.length}"');
+
     toc = _buildToc();
   }
 
-// TODO - Add bookIndex
+// TODO - Add toc
   Json toJson() => {
         'lang': lang,
         'meta': meta.toJson(),

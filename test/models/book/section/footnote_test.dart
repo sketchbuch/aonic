@@ -36,7 +36,7 @@ const footnoteJson = {
 
 void main() {
   group('Model - Footnote()', () {
-    final tag = Footnote.fromXml(getRootXmlElement(footnoteXml));
+    final tag = Footnote.fromXml(getRootXmlElement(footnoteXml), '', '');
 
     test('Returns expected JSON', () {
       expect(tag.toJson(), equals(footnoteJson));
