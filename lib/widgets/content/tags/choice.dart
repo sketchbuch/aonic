@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../models/book/content/choice_tag.dart';
 import '../../../types/types.dart';
+import '../../layout/content_container.dart';
 import '../../mixins/content_renderer.dart';
-import '../content_container.dart';
 
 class Choice extends StatefulWidget with ContentRenderer {
   final ChoiceTag tag;

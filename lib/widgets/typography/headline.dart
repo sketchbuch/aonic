@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../types/types.dart';
-import '../content/content_container.dart';
+import '../layout/content_container.dart';
 import '../mixins/content_renderer.dart';
 
 class Headline extends StatelessWidget with ContentRenderer {

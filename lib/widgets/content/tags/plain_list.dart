@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/book/content/plain_list_tag.dart';
-import '../content_container.dart';
+import '../../layout/content_container.dart';
 import '../list/bullet_list_item.dart';
 import '../list/numbered_list_item.dart';
 
@@ -16,6 +16,7 @@ class PlainList extends StatelessWidget {
 
     return ContentContainer(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: tag.items.map((item) {
           itemIndex += 1;
 

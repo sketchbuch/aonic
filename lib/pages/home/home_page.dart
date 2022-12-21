@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

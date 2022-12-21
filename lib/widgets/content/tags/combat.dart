@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants/layout.dart';
 import '../../../i18n/_generated_/translations.g.dart';
 import '../../../models/book/content/combat_tag.dart';
-import '../content_container.dart';
+import '../../layout/content_container.dart';
 
 class Combat extends StatelessWidget {
   final CombatTag tag;
@@ -18,16 +19,17 @@ class Combat extends StatelessWidget {
           style: DefaultTextStyle.of(context).style,
           children: [
             WidgetSpan(
-              child: Padding(padding: const EdgeInsets.only(right: 8.0), child: Text('${tag.enemy}:')),
+              child: Padding(padding: const EdgeInsets.only(right: paddingNormal), child: Text('${tag.enemy}:')),
             ),
             WidgetSpan(
-              child: Padding(padding: const EdgeInsets.only(right: 8.0), child: Text(trans.combatSkill)),
+              child: Padding(padding: const EdgeInsets.only(right: paddingNormal), child: Text(trans.combatSkill)),
             ),
             WidgetSpan(
-              child: Padding(padding: const EdgeInsets.only(right: 16.0), child: Text(tag.combatskill.toString())),
+              child:
+                  Padding(padding: const EdgeInsets.only(right: paddingLarge), child: Text(tag.combatskill.toString())),
             ),
             WidgetSpan(
-              child: Padding(padding: const EdgeInsets.only(right: 8.0), child: Text(trans.endurance)),
+              child: Padding(padding: const EdgeInsets.only(right: paddingNormal), child: Text(trans.endurance)),
             ),
             TextSpan(text: tag.endurance.toString()),
           ],

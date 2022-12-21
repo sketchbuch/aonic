@@ -2,16 +2,18 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lonewolf_new/models/book/content/subcontent/text_element.dart';
 
+import '../../../constants/layout.dart';
 import '../../../models/book/content/paragraph_tag.dart';
 import '../../../types/types.dart';
+import '../../layout/content_container.dart';
 import '../../mixins/content_renderer.dart';
-import '../content_container.dart';
 
 class Paragraph extends StatefulWidget with ContentRenderer {
-  final ParagraphTag tag;
+  final double bottomPadding;
   final OnNavigate onNavigate;
+  final ParagraphTag tag;
 
-  const Paragraph(this.tag, this.onNavigate, {Key? key}) : super(key: key);
+  const Paragraph(this.tag, this.onNavigate, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
 
   @override
   State<Paragraph> createState() => _ParagraphState();
@@ -23,6 +25,7 @@ class _ParagraphState extends State<Paragraph> {
   @override
   Widget build(BuildContext context) {
     return ContentContainer(
+      bottomPadding: widget.bottomPadding,
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,

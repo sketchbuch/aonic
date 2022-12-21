@@ -14,6 +14,7 @@ class StatusDisplay extends StatelessWidget {
     final optionalMessage = message;
 
     return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

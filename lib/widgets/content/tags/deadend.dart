@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/book/content/deadend_tag.dart';
-import '../content_container.dart';
+import '../../layout/content_container.dart';
 
 class Deadend extends StatelessWidget {
   final DeadendTag tag;

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../i18n/_generated_/translations.g.dart';
 import '../../models/book/index/book_index_item.dart';
 import '../../types/types.dart';
-import '../content/content_container.dart';
+import '../layout/content_container.dart';
 import '../mixins/content_renderer.dart';
 
 class IndexItem extends StatefulWidget with ContentRenderer {
@@ -23,9 +23,7 @@ class _IndexItemState extends State<IndexItem> {
 
   @override
   Widget build(BuildContext context) {
-    final label = widget.item.isSubItem
-        ? ' ----- ${widget.item.label}'
-        : widget.item.label;
+    final label = widget.item.isSubItem ? ' ----- ${widget.item.label}' : widget.item.label;
 
     return ContentContainer(
       bottomPadding: 4.0,

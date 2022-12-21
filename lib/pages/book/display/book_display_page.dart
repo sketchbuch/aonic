@@ -21,6 +21,7 @@ class BookDisplayPage extends StatelessWidget {
 
         return Scaffold(
           body: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
             child: () {
               if (viewModel.isLoading || book == null) {
                 return const CircularProgressIndicator();

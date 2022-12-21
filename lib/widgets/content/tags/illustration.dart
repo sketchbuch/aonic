@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/book/content/illustration_tag.dart';
-import '../content_container.dart';
+import '../../layout/content_container.dart';
 import '../image/image_error.dart';
 import '../image/image_loading.dart';
 

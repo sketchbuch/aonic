@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/book/content/signpost_tag.dart';
+import '../../layout/content_container.dart';
 import '../../mixins/content_renderer.dart';
-import '../content_container.dart';
 
 class Signpost extends StatelessWidget with ContentRenderer {
   final SignpostTag tag;

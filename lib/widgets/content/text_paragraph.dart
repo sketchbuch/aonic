@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'content_container.dart';
+import '../layout/content_container.dart';
 
 class TextParagraph extends StatelessWidget {
   final String text;
