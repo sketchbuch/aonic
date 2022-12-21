@@ -16,10 +16,12 @@ class DescriptionList extends StatelessWidget with ContentRenderer {
   @override
   Widget build(BuildContext context) {
     final List<Widget> listItems = [];
+    bool isFirstTerm = true;
 
     for (var item in tag.items) {
       if (item.type == DescriptionItemType.dt) {
-        listItems.add(DescriptionTermListItem(item));
+        listItems.add(DescriptionTermListItem(item, isFirstTerm));
+        isFirstTerm = false;
       } else {
         if (item.displayAsLines) {
           for (var text in item.texts) {
