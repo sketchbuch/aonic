@@ -18,7 +18,7 @@ const plainListItemJson = {
 
 void main() {
   group('Model - ListItem()', () {
-    final tag = PlainListItem.fromXml(getRootXmlElement(plainListItemXml));
+    final tag = PlainListItem.fromXml(getRootXmlElement(plainListItemXml), 1);
 
     test('Returns expected JSON', () {
       expect(tag.toJson(), equals(plainListItemJson));

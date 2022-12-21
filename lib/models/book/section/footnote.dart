@@ -7,15 +7,19 @@ import '../content/subcontent/text_element.dart';
 
 class Footnote {
   final List<TextElement> texts = [];
+  late final BookText sectionTitle;
   late final String id;
   late final String idRef;
+  late final String sectionId;
 
   // ignore: unused_element
   Footnote._();
 
-  Footnote.fromXml(XmlElement xml) {
+  Footnote.fromXml(XmlElement xml, BookText title, String id) {
     id = getAttribute('id', xml);
     idRef = getAttribute('idref', xml);
+    sectionId = id;
+    sectionTitle = title;
 
     final textXml = xml.getElement('p');
     if (textXml != null) {
@@ -26,6 +30,8 @@ class Footnote {
   Json toJson() => {
         'id': id,
         'idRef': idRef,
+        'sectionId': sectionId,
+        'sectionTitle': sectionTitle,
         'texts': texts.map((text) => text.toJson()).toList(),
       };
 
@@ -51,7 +57,7 @@ class Footnote {
 
     sectionPrefix.add(TextElement.fromTxt('('));
     sectionPrefix.add(TextElement.fromTxt(
-      _isNumberedFootnote() ? prefixText.replaceFirst('#', _getSectionNumberStr()) : _getSectionIdRef(),
+      _isNumberedFootnote() ? prefixText.replaceFirst('#', _getSectionNumberStr()) : sectionTitle,
       type: DisplayType.link,
       attributes: {'idref': _getSectionIdRef()},
     ));
