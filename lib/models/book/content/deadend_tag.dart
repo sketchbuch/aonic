@@ -3,6 +3,7 @@ import 'package:xml/xml.dart';
 import '../../../types/types.dart';
 import 'tag.dart';
 
+// TODO - Use a texelementlist
 class DeadendTag extends Tag {
   late final BookText text;
 

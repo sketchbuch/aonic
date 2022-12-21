@@ -15,6 +15,7 @@ final plainListUlJson = {
   "items": [
     plainListItemJson,
     {
+      "depth": 1,
       "texts": [
         {"attrs": {}, "displayType": "plain", "text": "Illustration II ("},
         {
@@ -26,6 +27,7 @@ final plainListUlJson = {
       ]
     },
     {
+      "depth": 1,
       "texts": [
         {
           "attrs": {"idref": "equipmnt"},
@@ -35,6 +37,7 @@ final plainListUlJson = {
       ]
     },
     {
+      "depth": 1,
       "texts": [
         {
           "attrs": {"idref": "discplnz"},
@@ -44,7 +47,7 @@ final plainListUlJson = {
       ]
     }
   ],
-  "plainListType": "ul",
+  "listType": "ul",
   "type": "unbulleted",
 };
 
@@ -53,12 +56,12 @@ final plainListOlJson = {
   "items": [
     plainListItemJson,
   ],
-  "plainListType": "ol",
+  "listType": "ol",
   "type": "unbulleted",
 };
 
 void main() {
-  group('Model - ListTag():', () {
+  group('Model - PlainListTag():', () {
     final TestIterationData plainLists = {
       "ul": {"xml": plainListUlXml, "json": plainListUlJson},
       "ol": {"xml": plainListOlXml, "json": plainListOlJson},

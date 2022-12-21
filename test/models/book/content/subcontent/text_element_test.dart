@@ -49,7 +49,7 @@ void main() {
       }
     });
 
-    group('fromTxt() - Text only', () {
+    group('fromTxt() - Text only:', () {
       final tag = TextElement.fromTxt('If you would rather press on, ');
 
       final expectedJson = {
@@ -67,7 +67,7 @@ void main() {
       });
     });
 
-    group('fromTxt() - Text, type, and attrs.', () {
+    group('fromTxt() - Text, type, and attrs:', () {
       final tag = TextElement.fromTxt(
         'If you would rather press on, ',
         type: DisplayType.italic,
