@@ -16,7 +16,7 @@ class Section extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Headline(
           section.isNumbered() ? transBook.headlineSection(sectionTitle: section.meta.title) : section.meta.title,

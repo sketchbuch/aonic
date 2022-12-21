@@ -15,7 +15,7 @@ class BookIndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: bookIndex.map<Widget>((item) {
         return IndexItem(item, onNavigate);
       }).toList(),

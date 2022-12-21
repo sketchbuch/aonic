@@ -15,7 +15,7 @@ class StatusDisplay extends StatelessWidget {
 
     return SingleChildScrollView(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Icon(icon),
           Text(title),
