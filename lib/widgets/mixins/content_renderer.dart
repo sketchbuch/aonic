@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants/characters.dart';
 import '../../models/book/content/subcontent/text_element.dart';
+import '../../theme/theme.dart';
 
 final hoverBackgroundColour = Color(0xffcce0c1);
 
@@ -34,6 +35,14 @@ mixin ContentRenderer {
     }
 
     return TextDecoration.none;
+  }
+
+  Color? getTextElementLinkColor(TextElement text) {
+    if (text.displayType == DisplayType.link) {
+      return colourPrimary;
+    }
+
+    return null;
   }
 
   Color? getTextElementBackroundColor(TextElement text) {

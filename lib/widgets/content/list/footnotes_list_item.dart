@@ -48,6 +48,7 @@ class _FootnotesListItemState extends State<FootnotesListItem> {
                   final FontStyle style = widget.getTextElementStyle(text);
                   final FontWeight weight = widget.getTextElementWeight(text);
                   final TextDecoration decoration = widget.getTextElementDecoration(text);
+                  final Color? foregrondColor = widget.getTextElementLinkColor(text);
                   Color? backgroundColor = widget.getTextElementBackroundColor(text);
 
                   if (text.displayType == DisplayType.link) {
@@ -72,6 +73,7 @@ class _FootnotesListItemState extends State<FootnotesListItem> {
                     recognizer: recognizer,
                     style: TextStyle(
                       backgroundColor: backgroundColor,
+                      color: foregrondColor,
                       decoration: decoration,
                       fontStyle: style,
                       fontWeight: weight,
