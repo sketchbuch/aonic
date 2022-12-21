@@ -5,5 +5,5 @@ const String sectionPrefix = 'sect';
 
 const String bookIdDedication = 'dedicate';
 const String bookIdNumbered = 'numbered';
-const String bookIdStart = 'index';
 const String bookIdTitle = 'title';
+const String bookIdToc = 'index';

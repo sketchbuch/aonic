@@ -1,27 +1,40 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/typography.dart';
 import '../../../models/book/content/subcontent/plain_list_item.dart';
+import '../../../models/book/content/subcontent/text_element.dart';
+import '../../../types/types.dart';
 import '../../mixins/content_renderer.dart';
 
 const double oneDigitWidth = 20;
 const double twoDigitWidth = 25;
 const double threeDigitWidth = 30;
 
-class NumberedListItem extends StatelessWidget with ContentRenderer {
+class NumberedListItem extends StatefulWidget with ContentRenderer {
+  final int depth;
   final int itemNumber;
   final int listSize;
+  final OnNavigate onNavigate;
   final PlainListItem item;
 
-  const NumberedListItem(this.item, this.listSize, this.itemNumber, {Key? key}) : super(key: key);
+  const NumberedListItem(this.item, this.onNavigate, this.depth, this.listSize, this.itemNumber, {Key? key})
+      : super(key: key);
+
+  @override
+  State<NumberedListItem> createState() => _NumberedListItemState();
+}
+
+class _NumberedListItemState extends State<NumberedListItem> {
+  int? _hoverIndex;
 
   @override
   Widget build(BuildContext context) {
     double numberWidth = oneDigitWidth;
 
-    if (listSize >= 10) {
+    if (widget.listSize >= 10) {
       numberWidth = twoDigitWidth;
-    } else if (listSize >= 100) {
+    } else if (widget.listSize >= 100) {
       numberWidth = threeDigitWidth;
     }
 
@@ -31,7 +44,7 @@ class NumberedListItem extends StatelessWidget with ContentRenderer {
         SizedBox(
           width: numberWidth,
           child: Text(
-            '$itemNumber.',
+            '${widget.itemNumber}.',
             textAlign: TextAlign.right,
           ),
         ),
@@ -40,11 +53,44 @@ class NumberedListItem extends StatelessWidget with ContentRenderer {
           child: RichText(
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
-              children: item.texts.map((text) {
-                final FontStyle style = getTextElementStyle(text);
-                final FontWeight weight = getTextElementWeight(text);
+              children: widget.item.texts.map((text) {
+                final int index = widget.item.texts.indexOf(text);
 
-                return TextSpan(text: wrapText(text), style: TextStyle(fontWeight: weight, fontStyle: style));
+                GestureRecognizer? recognizer;
+
+                final FontStyle style = widget.getTextElementStyle(text);
+                final FontWeight weight = widget.getTextElementWeight(text);
+                final TextDecoration decoration = widget.getTextElementDecoration(text);
+                Color? backgroundColor = widget.getTextElementBackroundColor(text);
+
+                if (text.displayType == DisplayType.link) {
+                  recognizer = TapGestureRecognizer()
+                    ..onTap = () {
+                      final route = text.attrs['href'] ?? text.attrs['idref'] ?? '';
+                      widget.onNavigate(route);
+                    };
+
+                  if (_hoverIndex != null && _hoverIndex == index) {
+                    backgroundColor = widget.getTextElementHoverBackroundColor(text);
+                  }
+                }
+
+                return TextSpan(
+                  onEnter: (_) => setState(() => _hoverIndex = index),
+                  onExit: (_) {
+                    if (mounted) {
+                      setState(() => _hoverIndex = null);
+                    }
+                  },
+                  recognizer: recognizer,
+                  style: TextStyle(
+                    backgroundColor: backgroundColor,
+                    decoration: decoration,
+                    fontStyle: style,
+                    fontWeight: weight,
+                  ),
+                  text: widget.wrapText(text),
+                );
               }).toList(),
             ),
           ), //text

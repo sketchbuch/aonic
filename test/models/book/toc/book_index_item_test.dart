@@ -1,5 +1,5 @@
-import 'package:lonewolf_new/models/book/content/section_tag.dart';
-import 'package:lonewolf_new/models/book/index/book_index_item.dart';
+/* import 'package:lonewolf_new/models/book/content/section_tag.dart';
+import 'package:lonewolf_new/models/book/toc/toc_index_item.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
@@ -33,7 +33,7 @@ final biiSectionJson = {
 
 void main() {
   group('Model - BookIndexItem()', () {
-    final tag = BookIndexItem(biiLabel, biiId, biiType, biiIsSubItem);
+    final tag = TocIndexItem(biiLabel, biiId, biiType, biiIsSubItem);
 
     test('Returns expected JSON', () {
       expect(tag.toJson(), equals(biiJson));
@@ -45,7 +45,7 @@ void main() {
   });
 
   group('Model - BookIndexItem.fromSection()', () {
-    final tag = BookIndexItem.fromSection(biiSection, true);
+    final tag = TocIndexItem.fromSection(biiSection, true);
 
     test('Returns expected JSON', () {
       expect(tag.toJson(), equals(biiSectionJson));
@@ -56,3 +56,4 @@ void main() {
     });
   });
 }
+ */

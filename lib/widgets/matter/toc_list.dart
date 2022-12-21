@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../../i18n/_generated_/translations.g.dart';
-import '../../models/book/book.dart';
+import '../../models/book/content/plain_list_tag.dart';
 import '../../types/types.dart';
+import '../content/tags/plain_list.dart';
 import '../typography/headline.dart';
-import 'index_item.dart';
 
-class BookIndexPage extends StatelessWidget {
+class TocList extends StatelessWidget {
   final transBook = t.book;
-  final BookIndex bookIndex;
+  final PlainListTag toc;
   final OnNavigate onNavigate;
 
-  BookIndexPage(this.bookIndex, this.onNavigate, {Key? key}) : super(key: key);
+  TocList(this.toc, this.onNavigate, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,7 @@ class BookIndexPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Headline(transBook.pageTtles.tableOfContents),
-        ...bookIndex.map<Widget>((item) {
-          return IndexItem(item, onNavigate);
-        }).toList()
+        PlainList(toc, onNavigate),
       ],
     );
   }

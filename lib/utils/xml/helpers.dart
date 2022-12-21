@@ -47,7 +47,7 @@ List<TextElement> getTextElementList(XmlElement xml, [DisplayType? type]) {
         return TextElement.fromTxt(child.text);
       }
     } else {
-      return TextElement.fromTxt(child.text, type);
+      return TextElement.fromTxt(child.text, type: type);
     }
   }).toList();
 }

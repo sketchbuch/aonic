@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/book/content/plain_list_tag.dart';
+import '../../../types/types.dart';
 import '../../layout/content_container.dart';
 import '../list/bullet_list_item.dart';
 import '../list/numbered_list_item.dart';
 
 class PlainList extends StatelessWidget {
+  final OnNavigate onNavigate;
   final PlainListTag tag;
 
-  const PlainList(this.tag, {Key? key}) : super(key: key);
+  const PlainList(this.tag, this.onNavigate, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,10 @@ class PlainList extends StatelessWidget {
           itemIndex += 1;
 
           if (tag.listType == PlainListTagType.ol) {
-            return NumberedListItem(item, tag.items.length, itemIndex);
+            return NumberedListItem(item, onNavigate, item.depth, tag.items.length, itemIndex);
           }
 
-          return BulletListItem(item);
+          return BulletListItem(item, onNavigate, item.depth);
         }).toList(),
       ),
     );

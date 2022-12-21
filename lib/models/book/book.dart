@@ -4,16 +4,15 @@ import 'package:xml/xml.dart';
 import '../../exceptions/xml.dart';
 import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
+import 'content/plain_list_tag.dart';
 import 'content/section_tag.dart';
-import 'index/book_index_item.dart';
 import 'meta/meta.dart';
-
-typedef BookIndex = List<BookIndexItem>;
+import 'toc/toc_index_section.dart';
 
 class Book {
   final _sectionCache = SectionCache();
   final List<SectionTag> sections = [];
-  late BookIndex bookIndex;
+  late PlainListTag toc;
   late BookText title = '';
   late Meta meta;
   late String lang = '';
@@ -60,7 +59,7 @@ class Book {
     sections.addAll(numbered);
     sections.addAll(backmatter);
 
-    bookIndex = _buildBookIndex();
+    toc = _buildToc();
   }
 
 // TODO - Add bookIndex
@@ -77,30 +76,26 @@ class Book {
     return toJson().toString();
   }
 
-  BookIndex _buildBookIndex() {
-    final BookIndex bookIndex = [];
+  PlainListTag _buildToc() {
+    final TocIndexSections tocIndexSections = [];
 
     for (var section in sections) {
       if (section.canAddToIndex()) {
-        bookIndex.add(BookIndexItem.fromSection(section));
-
-        /*       if (section.isFrontmatter()) {
-          print('### ${section.meta.title}: ${section.hasSubsections()}');
-        } */
+        tocIndexSections.add(TocIndexSection(section, 1));
 
         if (section.isFrontmatter() && section.hasSubsections()) {
           final List<SectionTag> subsections = section.getSubsections();
 
           for (var subsection in subsections) {
             if (subsection.canAddToIndex(true)) {
-              bookIndex.add(BookIndexItem.fromSection(subsection, true));
+              tocIndexSections.add(TocIndexSection(subsection, 2));
             }
           }
         }
       }
     }
 
-    return bookIndex;
+    return PlainListTag.fromTocIndexSections(tocIndexSections);
   }
 
   Iterable<XmlElement> _getTitleSubsections(XmlElement titleSection) {

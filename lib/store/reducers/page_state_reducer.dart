@@ -19,7 +19,7 @@ PageState pageStateReducer(PageState pageState, action) {
   } else if (action is LoadBookSuccess) {
     const initialState = PageState.initialState();
     return initialState.copyWith(
-      pageId: bookIdStart,
+      pageId: bookIdToc,
     );
   } else if (action is LoadBookFaliure) {
     return const PageState.initialState();

@@ -13,7 +13,7 @@ class PageState {
   });
 
   const PageState.initialState()
-      : pageId = bookIdStart,
+      : pageId = bookIdToc,
         sectionNumber = pageMin;
 
   PageState copyWith({String? pageId, int? sectionNumber}) => PageState(

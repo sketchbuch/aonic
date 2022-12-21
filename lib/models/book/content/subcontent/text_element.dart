@@ -32,8 +32,8 @@ class TextElement {
     text = xml.text;
   }
 
-  TextElement.fromTxt(String txt, [DisplayType? type]) {
-    attrs = {};
+  TextElement.fromTxt(String txt, {DisplayType? type, Attrs? attributes}) {
+    attrs = attributes ?? {};
     displayType = type ?? DisplayType.plain;
     text = txt;
   }

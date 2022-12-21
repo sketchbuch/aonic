@@ -49,7 +49,7 @@ List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate, int level) {
         break;
 
       case 'PlainListTag':
-        sectionContent.add(PlainList(tag as PlainListTag));
+        sectionContent.add(PlainList(tag as PlainListTag, onNavigate));
         break;
 
       case 'IllustrationTag':
@@ -62,7 +62,7 @@ List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate, int level) {
         break;
 
       case 'ListTag':
-        sectionContent.add(PlainList(tag as PlainListTag));
+        sectionContent.add(PlainList(tag as PlainListTag, onNavigate));
         break;
 
       case 'ParagraphTag':

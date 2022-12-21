@@ -5,8 +5,8 @@ import '../../../constants/books.dart';
 import '../../../exceptions/render.dart';
 import '../../../store/models/app_state.dart';
 import '../../../widgets/content/tags/section.dart';
-import '../../../widgets/matter/book_index_page.dart';
 import '../../../widgets/matter/title_page.dart';
+import '../../../widgets/matter/toc_list.dart';
 import 'book_display_view_model.dart';
 
 class BookDisplayPage extends StatelessWidget {
@@ -27,8 +27,8 @@ class BookDisplayPage extends StatelessWidget {
                 return const CircularProgressIndicator();
               } else {
                 switch (viewModel.pageId) {
-                  case bookIdStart:
-                    return BookIndexPage(book.bookIndex, viewModel.onNavigate);
+                  case bookIdToc:
+                    return TocList(book.toc, viewModel.onNavigate);
 
                   case bookIdTitle:
                     return TitlePage(book.meta, viewModel.onNavigate);
