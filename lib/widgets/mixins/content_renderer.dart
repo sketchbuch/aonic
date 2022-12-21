@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/characters.dart';
 import '../../models/book/content/subcontent/text_element.dart';
 import '../../theme/theme.dart';
 
@@ -58,9 +57,9 @@ mixin ContentRenderer {
   }
 
   String wrapText(TextElement text) {
-    if (text.displayType == DisplayType.quote || text.displayType == DisplayType.quoteCite) {
+    /* if (text.displayType == DisplayType.quote || text.displayType == DisplayType.quoteCite) {
       return '$startQuote${text.text}$endQuote';
-    }
+    } */
 
     return text.text;
   }

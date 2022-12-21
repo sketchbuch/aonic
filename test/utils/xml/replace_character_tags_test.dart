@@ -1,8 +1,8 @@
-import 'package:lonewolf_new/utils/xml/replace_character_tags.dart';
+import 'package:lonewolf_new/utils/xml/replace_typographic_tags.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Util - replaceCharacterTags():', () {
+  group('Util - replaceTypographicTags():', () {
     const Map<String, String> testChTags = {
       'aacute': 'á',
       'ampersand': '&',
@@ -23,7 +23,7 @@ void main() {
 
     void testChString(String chTag, String chReplacement) {
       test('Replaces "$chTag" with "$chReplacement"', () {
-        expect(replaceCharacterTags('A test a <ch.$chTag/> tag.'), equals('A test a $chReplacement tag.'));
+        expect(replaceTypographicTags('A test a <ch.$chTag/> tag.'), equals('A test a $chReplacement tag.'));
       });
     }
 

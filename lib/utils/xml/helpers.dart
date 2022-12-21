@@ -3,11 +3,11 @@ import 'package:xml/xml.dart';
 
 import '../../models/book/content/subcontent/text_element.dart';
 import '../../types/types.dart';
-import 'replace_character_tags.dart';
+import 'replace_typographic_tags.dart';
 
 String cleanXmlString(String xmlString, Map<String, String> includeLinks) {
   String cleanedString = xmlString.trim().replaceAll(RegExp(r'>\s*<'), '><').replaceAll('\n', '');
-  cleanedString = replaceCharacterTags(cleanedString);
+  cleanedString = replaceTypographicTags(cleanedString);
   cleanedString = replaceIncludeLinks(cleanedString, includeLinks);
 
   return cleanedString;
