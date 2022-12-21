@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../i18n/_generated_/translations.g.dart';
 import '../../models/book/book.dart';
 import '../../types/types.dart';
+import '../typography/headline.dart';
 import 'index_item.dart';
 
 class BookIndexPage extends StatelessWidget {
@@ -16,9 +17,12 @@ class BookIndexPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
-      children: bookIndex.map<Widget>((item) {
-        return IndexItem(item, onNavigate);
-      }).toList(),
+      children: [
+        Headline(transBook.pageTtles.tableOfContents),
+        ...bookIndex.map<Widget>((item) {
+          return IndexItem(item, onNavigate);
+        }).toList()
+      ],
     );
   }
 }

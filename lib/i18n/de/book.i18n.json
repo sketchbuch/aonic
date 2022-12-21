@@ -4,6 +4,9 @@
     "load": "DE Download book XML",
     "unload": "DE Back to book selection"
   },
+  "pageTtles": {
+    "tableOfContents": "DE Table of Contents"
+  },
   "publicationDate": "DE Publication Date: $date",
   "title": "DE LoneWolf: $bookTitle - $pageTitle",
   "titleLoading": "DE Loading book...",
