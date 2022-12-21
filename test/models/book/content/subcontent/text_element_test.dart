@@ -5,6 +5,7 @@ import '../../../../helpers.dart';
 
 void main() {
   group('Model - TextElement()', () {
+    // TODO - Add test forboldCite
     const tags = [
       {'type': 'bold', 'tag': 'b'},
       {'type': 'bold', 'tag': 'strong'},
@@ -15,7 +16,6 @@ void main() {
       {'type': 'link', 'tag': 'a'},
       {'type': 'link', 'tag': 'link-text'},
       {'type': 'plain', 'tag': 'unknown-tag'},
-      {'type': 'quote', 'tag': 'quote'},
       {'type': 'typ', 'tag': 'typ'},
     ];
 
@@ -49,7 +49,7 @@ void main() {
       }
     });
 
-    group('fromTxt()', () {
+    group('fromTxt() - Text only', () {
       final tag = TextElement.fromTxt('If you would rather press on, ');
 
       final expectedJson = {
@@ -57,6 +57,29 @@ void main() {
         "displayType": "plain",
         "text": "If you would rather press on, ",
       };
+
+      test('Returns expected JSON', () {
+        expect(tag.toJson(), equals(expectedJson));
+      });
+
+      test('Returns expected string', () {
+        expect(tag.toString(), equals(expectedJson.toString()));
+      });
+    });
+
+    group('fromTxt() - Text, type, and attrs.', () {
+      final tag = TextElement.fromTxt(
+        'If you would rather press on, ',
+        type: DisplayType.italic,
+        attributes: {"idref": "test-id"},
+      );
+
+      final expectedJson = {
+        "attrs": {"idref": "test-id"},
+        "displayType": "italic",
+        "text": "If you would rather press on, ",
+      };
+
       test('Returns expected JSON', () {
         expect(tag.toJson(), equals(expectedJson));
       });

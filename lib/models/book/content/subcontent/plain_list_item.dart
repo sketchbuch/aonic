@@ -24,7 +24,7 @@ class PlainListItem {
   }
 
   Json toJson() => {
-        'depth': depth.toString(),
+        'depth': depth,
         'texts': texts.map((text) => text.toJson()).toList(),
       };
 
