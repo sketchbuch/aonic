@@ -1,4 +1,5 @@
 {
+  "footnotePrefix": "Section #",
   "headlineSection": "#$sectionTitle",
   "loadButton": {
     "load": "Download book XML",

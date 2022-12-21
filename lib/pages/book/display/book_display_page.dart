@@ -5,6 +5,7 @@ import '../../../constants/books.dart';
 import '../../../exceptions/render.dart';
 import '../../../store/models/app_state.dart';
 import '../../../widgets/content/tags/section.dart';
+import '../../../widgets/matter/footnotes_list.dart';
 import '../../../widgets/matter/title_page.dart';
 import '../../../widgets/matter/toc_list.dart';
 import 'book_display_view_model.dart';
@@ -38,6 +39,10 @@ class BookDisplayPage extends StatelessWidget {
 
                     if (section == null) {
                       throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
+                    }
+
+                    if (viewModel.pageId == bookIdFootnotes) {
+                      return FootnotesList(section, book.footnoteSections, viewModel.onNavigate);
                     }
 
                     return Section(section, viewModel.onNavigate, 1);
