@@ -21,7 +21,7 @@ import '../content/tags/paragraph.dart';
 import '../content/tags/plain_list.dart';
 import '../content/tags/section.dart';
 
-List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate) {
+List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate, int level) {
   final List<Widget> sectionContent = [];
 
   for (var tag in tagList) {
@@ -73,7 +73,11 @@ List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate) {
         final sec = tag as SectionTag;
 
         if (!sec.isFrontmatterSeperate()) {
-          sectionContent.add(Section(sec, onNavigate));
+          sectionContent.add(Section(
+            sec,
+            onNavigate,
+            level + 1,
+          ));
         }
 
         break;

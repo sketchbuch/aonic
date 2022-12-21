@@ -10,8 +10,9 @@ class Section extends StatelessWidget {
   final transBook = t.book;
   final OnNavigate onNavigate;
   final SectionTag section;
+  final int level;
 
-  Section(this.section, this.onNavigate, {Key? key}) : super(key: key);
+  Section(this.section, this.onNavigate, this.level, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,9 @@ class Section extends StatelessWidget {
       children: [
         Headline(
           section.isNumbered() ? transBook.headlineSection(sectionTitle: section.meta.title) : section.meta.title,
+          level: level,
         ),
-        ...getTagList(section.data.content, onNavigate),
+        ...getTagList(section.data.content, onNavigate, level),
       ],
     );
   }

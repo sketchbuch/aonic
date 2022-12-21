@@ -21,30 +21,28 @@ class BookDisplayPage extends StatelessWidget {
 
         return Scaffold(
           body: SingleChildScrollView(
-            child: Center(
-              child: () {
-                if (viewModel.isLoading || book == null) {
-                  return const CircularProgressIndicator();
-                } else {
-                  switch (viewModel.pageId) {
-                    case bookIdStart:
-                      return BookIndexPage(book.bookIndex, viewModel.onNavigate);
+            child: () {
+              if (viewModel.isLoading || book == null) {
+                return const CircularProgressIndicator();
+              } else {
+                switch (viewModel.pageId) {
+                  case bookIdStart:
+                    return BookIndexPage(book.bookIndex, viewModel.onNavigate);
 
-                    case bookIdTitle:
-                      return TitlePage(book.meta, viewModel.onNavigate);
+                  case bookIdTitle:
+                    return TitlePage(book.meta, viewModel.onNavigate);
 
-                    default:
-                      final section = book.getSection(viewModel.pageId);
+                  default:
+                    final section = book.getSection(viewModel.pageId);
 
-                      if (section == null) {
-                        throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
-                      }
+                    if (section == null) {
+                      throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
+                    }
 
-                      return Section(section, viewModel.onNavigate);
-                  }
+                    return Section(section, viewModel.onNavigate, 1);
                 }
-              }(),
-            ),
+              }
+            }(),
           ),
         );
       },
