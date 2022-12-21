@@ -1,4 +1,6 @@
 import 'package:lonewolf_new/models/book/content/plain_list_tag.dart';
+import 'package:lonewolf_new/models/book/content/section_tag.dart';
+import 'package:lonewolf_new/models/book/toc/toc_index_section.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
@@ -61,7 +63,7 @@ final plainListOlJson = {
 };
 
 void main() {
-  group('Model - PlainListTag():', () {
+  group('Model - PlainListTag.fromXml():', () {
     final TestIterationData plainLists = {
       "ul": {"xml": plainListUlXml, "json": plainListUlJson},
       "ol": {"xml": plainListOlXml, "json": plainListOlJson},
@@ -83,6 +85,26 @@ void main() {
 
     plainLists.forEach((type, data) {
       testListType(type, data['xml']!.toString(), data['json']!);
+    });
+  });
+
+  group('Model - PlainListTag.fromTocIndexSections():', () {
+    final indexSection = SectionTag.fromXml(getRootXmlElement(plainListSectionXml));
+    final indexSections = [TocIndexSection(indexSection, 1)];
+    final tag = PlainListTag.fromTocIndexSections(indexSections);
+
+    final expectedJson = {
+      "items": [plainListSectionJson],
+      "listType": "ul",
+      "type": "toc"
+    };
+
+    test('Returns expected JSON', () {
+      expect(tag.toJson(), equals(expectedJson));
+    });
+
+    test('Returns expected string', () {
+      expect(tag.toString(), equals(expectedJson.toString()));
     });
   });
 }
