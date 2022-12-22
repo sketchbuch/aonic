@@ -15,6 +15,7 @@ const numberedPageId = 'numbered';
 const numberedPageTitle = 'Numbered Sections';
 const title = 'Flight from the Dark';
 const version = '0.12';
+const sectionOneId = 'sect1';
 
 final titleSectionJson = {
   "data": {"content": []},
@@ -29,7 +30,6 @@ final titleSectionJson = {
     ],
     'title': titlePageTitle,
   },
-  "subsections": [],
   "type": sectionType
 };
 
@@ -41,8 +41,18 @@ final numberedSectionJson = {
     'links': [],
     'title': numberedPageTitle,
   },
-  "subsections": [],
   "type": sectionType
+};
+
+final sectionOneJson = {
+  "data": {"content": []},
+  "footnotes": [],
+  "id": sectionOneId,
+  "meta": {
+    'links': [],
+    'title': '1',
+  },
+  "type": numberedPageId
 };
 
 final bookXml = '''<gamebook xml:lang="$lang" version="$version">
@@ -55,10 +65,18 @@ final bookXml = '''<gamebook xml:lang="$lang" version="$version">
   
     <data>
       $sectionXml
-      <section class="numbered" id="$numberedPageId">
-        <meta><title>$numberedPageTitle</title></meta>
+      <section class="$numberedPageId" id="$numberedPageId">
+        <meta>
+          <title>Numbered Sections</title>
+        </meta>
 
         <data>
+          <section class="$numberedPageId" id="$sectionOneId">
+            <meta><title>1</title></meta>
+
+            <data>
+            </data>
+          </section>
         </data>
       </section>
     </data>
@@ -67,7 +85,12 @@ final bookXml = '''<gamebook xml:lang="$lang" version="$version">
 final bookJson = {
   "lang": lang,
   "meta": metaJson,
-  "sections": [titleSectionJson, sectionJson, numberedSectionJson],
+  "sections": [
+    titleSectionJson,
+    sectionJson,
+    numberedSectionJson,
+    sectionOneJson,
+  ],
   "title": title,
   "version": version,
 };

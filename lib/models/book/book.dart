@@ -47,8 +47,8 @@ class Book {
         .map((xml) => SectionTag.fromXml(xml))
         .toList();
 
-    frontmatter.insert(0, SectionTag.fromXml(titleSection, addSubsections: false, forcedType: SectionType.frontmatter));
-    frontmatter.add(SectionTag.fromXml(numberedSection, addSubsections: false, forcedType: SectionType.frontmatter));
+    frontmatter.insert(0, SectionTag.fromXml(titleSection, addSubcontent: false, forcedType: SectionType.frontmatter));
+    frontmatter.add(SectionTag.fromXml(numberedSection, addSubcontent: false, forcedType: SectionType.frontmatter));
 
     final numbered = numberedBaseData.findElements('section').map((xml) => SectionTag.fromXml(xml)).toList();
 
@@ -76,8 +76,6 @@ class Book {
         }
       }
     }
-
-    print('### footnoteSections: "${footnoteSections.length}"');
 
     toc = _buildToc();
   }

@@ -20,8 +20,8 @@ class Data {
   // ignore: unused_element
   Data._();
 
-  Data.fromXml(XmlElement xml) {
-    if (xml.childElements.isNotEmpty) {
+  Data.fromXml(XmlElement xml, bool addSubcontent) {
+    if (addSubcontent && xml.childElements.isNotEmpty) {
       for (var child in xml.childElements) {
         final childName = child.name.toString();
 

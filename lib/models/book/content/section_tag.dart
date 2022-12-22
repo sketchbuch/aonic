@@ -32,7 +32,7 @@ class SectionTag extends Tag {
 
   SectionTag.fromXml(
     XmlElement xml, {
-    bool addSubsections = true,
+    bool addSubcontent = true,
     SectionType? forcedType,
   }) {
     id = getAttribute('id', xml);
@@ -62,7 +62,7 @@ class SectionTag extends Tag {
     }
 
     if (dataXml != null) {
-      data = Data.fromXml(dataXml);
+      data = Data.fromXml(dataXml, addSubcontent);
     }
 
     footnotes = footnotesXml != null

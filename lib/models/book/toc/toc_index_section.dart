@@ -11,7 +11,7 @@ class TocIndexSection {
 
   Json toJson() => {
         'depth': depth,
-        'section': section,
+        'section': section.toJson(),
       };
 
   @override

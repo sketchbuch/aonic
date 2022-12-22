@@ -44,7 +44,7 @@ final dataJson = {
 
 void main() {
   group('Model - Data()', () {
-    final tag = Data.fromXml(getRootXmlElement(dataXml));
+    final tag = Data.fromXml(getRootXmlElement(dataXml), true);
 
     test('Returns expected JSON', () {
       expect(tag.toJson(), equals(dataJson));
@@ -56,7 +56,7 @@ void main() {
 
     test('Empty data does not throw', () {
       const emptyXml = '<data></data>';
-      final emptyTag = Data.fromXml(getRootXmlElement(emptyXml));
+      final emptyTag = Data.fromXml(getRootXmlElement(emptyXml), true);
 
       expect(emptyTag.toJson(), equals({"content": []}));
     });
@@ -64,7 +64,12 @@ void main() {
     test('Uknown tags should throw', () {
       const throwXml = '<data><uknown-tag>Lone Wolf</uknown-tag></data>';
 
-      expect(() => Data.fromXml(getRootXmlElement(throwXml)), throwsA(isA<ContentXmlException>()));
+      expect(() => Data.fromXml(getRootXmlElement(throwXml), true), throwsA(isA<ContentXmlException>()));
+    });
+
+    test('Ignores subcontent if addSubcontent is false', () {
+      final tag = Data.fromXml(getRootXmlElement(dataXml), false);
+      expect(tag.toJson(), equals({"content": []}));
     });
   });
 }
