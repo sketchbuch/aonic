@@ -11,7 +11,7 @@ final signpostJson = {
 };
 
 void main() {
-  group('Model - SignpostTag():', () {
+  group('Model - SignpostTag()', () {
     final tag = SignpostTag.fromXml(getRootXmlElement(signpostXml));
 
     test('Returns expected JSON', () {

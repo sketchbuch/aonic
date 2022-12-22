@@ -38,14 +38,14 @@ final blockquoteTextJson = {
 };
 
 void main() {
-  group('Model - BlockquoteTag():', () {
+  group('Model - BlockquoteTag()', () {
     final TestIterationData blockquotes = {
       "Paragraph": {"xml": blockquoteXml, "json": blockquoteJson},
       "Text": {"xml": blockquoteTextXml, "json": blockquoteTextJson},
     };
 
     void testListType(String type, String xml, Object json) {
-      group('$type:', () {
+      group('$type', () {
         final tag = BlockquoteTag.fromXml(getRootXmlElement(xml));
 
         test('Returns expected JSON', () {

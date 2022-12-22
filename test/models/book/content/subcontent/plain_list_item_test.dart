@@ -47,7 +47,7 @@ final plainListSectionJson = {
 };
 
 void main() {
-  group('Model - PlainListItem.fromXml():', () {
+  group('Model - PlainListItem.fromXml()', () {
     final tag = PlainListItem.fromXml(getRootXmlElement(plainListItemXml), 1);
 
     test('Returns expected JSON', () {
@@ -59,7 +59,7 @@ void main() {
     });
   });
 
-  group('Model - PlainListItem.fromTocIndexSection():', () {
+  group('Model - PlainListItem.fromTocIndexSection()', () {
     final section = SectionTag.fromXml(getRootXmlElement(plainListSectionXml));
     final tocSection = TocIndexSection(section, 1);
     final tag = PlainListItem.fromTocIndexSection(tocSection);

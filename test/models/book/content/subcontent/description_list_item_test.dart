@@ -55,7 +55,7 @@ void main() {
     };
 
     void testDescriptionListItemType(String type, String xml, Object json) {
-      group('$type:', () {
+      group('$type', () {
         final tag = DescriptionListItem.fromXml(getRootXmlElement(xml));
 
         test('Returns expected JSON', () {

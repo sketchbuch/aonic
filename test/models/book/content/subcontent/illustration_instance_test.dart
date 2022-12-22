@@ -61,7 +61,7 @@ void main() {
     };
 
     void testInstanceType(String type, String xml, Object json) {
-      group('$type:', () {
+      group('$type', () {
         final tag = IllustrationInstance.fromXml(getRootXmlElement(xml));
 
         test('Returns expected JSON', () {

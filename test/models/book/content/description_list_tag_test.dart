@@ -28,14 +28,14 @@ final dlLinesJson = {
 };
 
 void main() {
-  group('Model - DescriptionListTag():', () {
+  group('Model - DescriptionListTag()', () {
     final TestIterationData descriptionLists = {
       "Without lines": {"xml": dlXml, "json": dlJson},
       "With lines": {"xml": dlLinesXml, "json": dlLinesJson},
     };
 
     void testDescriptionListType(String type, String xml, Object json) {
-      group('$type:', () {
+      group('$type', () {
         final tag = DescriptionListTag.fromXml(getRootXmlElement(xml));
 
         test('Returns expected JSON', () {

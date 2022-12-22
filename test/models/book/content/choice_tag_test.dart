@@ -28,7 +28,7 @@ const choiceJson = {
 };
 
 void main() {
-  group('Model - ChoiceTag():', () {
+  group('Model - ChoiceTag()', () {
     final tag = ChoiceTag.fromXml(getRootXmlElement(choiceXml));
 
     test('Returns expected JSON', () {

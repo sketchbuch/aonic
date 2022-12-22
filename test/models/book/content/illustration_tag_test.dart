@@ -26,7 +26,7 @@ final illustrationJson = {
 };
 
 void main() {
-  group('Model - IllustrationTag():', () {
+  group('Model - IllustrationTag()', () {
     final tag = IllustrationTag.fromXml(getRootXmlElement(illustrationXml));
 
     test('Returns expected JSON', () {

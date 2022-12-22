@@ -39,7 +39,7 @@ final paragraphDedicationJson = {
 };
 
 void main() {
-  group('Model - ParagraphTag():', () {
+  group('Model - ParagraphTag()', () {
     final tag = ParagraphTag.fromXml(getRootXmlElement(paragraphXml));
 
     test('Returns expected JSON', () {
@@ -51,7 +51,7 @@ void main() {
     });
   });
 
-  group('Model - ParagraphTag() - With dedication class:', () {
+  group('Model - ParagraphTag() - With dedication class', () {
     final tag = ParagraphTag.fromXml(getRootXmlElement(paragraphDedicationXml));
 
     test('Returns expected JSON', () {

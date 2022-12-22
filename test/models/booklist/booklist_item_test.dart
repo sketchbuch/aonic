@@ -2,7 +2,7 @@ import 'package:lonewolf_new/models/booklist/booklist_item.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Model - BooklistItem():', () {
+  group('Model - BooklistItem()', () {
     const code = '01fftd';
     const isSupported = true;
     const language = 'en';

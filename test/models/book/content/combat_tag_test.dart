@@ -12,7 +12,7 @@ const combatJson = {
 };
 
 void main() {
-  group('Model - CombatTag():', () {
+  group('Model - CombatTag()', () {
     final tag = CombatTag.fromXml(getRootXmlElement(combatXml));
 
     test('Returns expected JSON', () {

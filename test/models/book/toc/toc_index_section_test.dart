@@ -13,7 +13,7 @@ final tocJson = {
 };
 
 void main() {
-  group('Model - TocIndexSections():', () {
+  group('Model - TocIndexSections()', () {
     final section = SectionTag.fromXml(getRootXmlElement(sectionXml));
     final tocSection = TocIndexSection(section, tocDepth);
 

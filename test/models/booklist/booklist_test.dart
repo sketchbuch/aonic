@@ -9,7 +9,7 @@ class MockTranslationObject {
 }
 
 void main() {
-  group('Model - Booklist():', () {
+  group('Model - Booklist()', () {
     const bookOneCode = '01fftd';
     const bookOneTitle = 'Flight from the Dark';
     const bookTwoCode = '02fotw';

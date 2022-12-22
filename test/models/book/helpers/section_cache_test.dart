@@ -10,7 +10,7 @@ void main() {
   const cachKey1 = 'cache-key-1';
   const cachKey2 = 'cache-key-2';
 
-  group('Model Helper - SectionCache():', () {
+  group('Model Helper - SectionCache()', () {
     test('Can set and get data as expected', () {
       final cache = SectionCache();
 

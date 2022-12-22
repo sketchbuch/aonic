@@ -87,7 +87,7 @@ void main() {
       expect(tag.toString(), equals(sectionJson.toString()));
     });
 
-    group('isNumbered():', () {
+    group('isNumbered()', () {
       isNumberedTest(data) {
         test('Returns ${data['result']} for a ${data['type']} section', () {
           final tag = SectionTag.fromXml(getRootXmlElement(data['xml']));
@@ -103,7 +103,7 @@ void main() {
       ].forEach(isNumberedTest);
     });
 
-    group('isFrontmatterSeperate():', () {
+    group('isFrontmatterSeperate()', () {
       isFrontmatterSeperateTest(data) {
         test('Returns ${data['result']} for a ${data['type']}section', () {
           final tag = SectionTag.fromXml(getRootXmlElement(data['xml']));
@@ -119,7 +119,7 @@ void main() {
       ].forEach(isFrontmatterSeperateTest);
     });
 
-    group('isFrontmatter():', () {
+    group('isFrontmatter()', () {
       isFrontmatterTest(data) {
         test('Returns ${data['result']} for a ${data['type']} section', () {
           final tag = SectionTag.fromXml(getRootXmlElement(data['xml']));
@@ -135,7 +135,7 @@ void main() {
       ].forEach(isFrontmatterTest);
     });
 
-    group('isBackmatter():', () {
+    group('isBackmatter()', () {
       isBackmatterTest(data) {
         test('Returns ${data['result']} for a ${data['type']} section', () {
           final tag = SectionTag.fromXml(getRootXmlElement(data['xml']));
@@ -151,7 +151,7 @@ void main() {
       ].forEach(isBackmatterTest);
     });
 
-    group('canAddToIndex():', () {
+    group('canAddToIndex()', () {
       canAddToIndexTest(data) {
         String labelSuffix = data['isSub'] == true ? 'that is a subsection' : 'that is NOT a subsection';
 
@@ -176,7 +176,7 @@ void main() {
       ].forEach(canAddToIndexTest);
     });
 
-    group('hasSubsections():', () {
+    group('hasSubsections()', () {
       final xml = getSectionXmlWithSubsections(numbered, 'sect141');
 
       test('Returns true for a section with subsections', () {
@@ -190,7 +190,7 @@ void main() {
       });
     });
 
-    group('getSubsections():', () {
+    group('getSubsections()', () {
       final xml = getSectionXmlWithSubsections(numbered, 'sect141');
 
       test('Returns an array of just the subsections from section data', () {
@@ -200,7 +200,7 @@ void main() {
       });
     });
 
-    group('getVisibleSubsections():', () {
+    group('getVisibleSubsections()', () {
       final xml = getSectionXmlWithSubsections(numbered, 'sect141');
 
       test('Returns an array of just the non-frontmatter-separate subsections from section data', () {

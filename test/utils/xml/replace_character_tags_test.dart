@@ -2,7 +2,7 @@ import 'package:lonewolf_new/utils/xml/replace_typographic_tags.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Util - replaceTypographicTags():', () {
+  group('Util - replaceTypographicTags()', () {
     const Map<String, String> testChTags = {
       'aacute': 'á',
       'ampersand': '&',

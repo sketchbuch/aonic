@@ -9,7 +9,7 @@ const deadendJson = {
 };
 
 void main() {
-  group('Model - DeadendTag():', () {
+  group('Model - DeadendTag()', () {
     final tag = DeadendTag.fromXml(getRootXmlElement(deadendXml));
 
     test('Returns expected JSON', () {
