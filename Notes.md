@@ -26,3 +26,13 @@
 ## Translations
 
 > flutter pub run slang
+
+### Models
+
+- Use constants for named section ids
+
+## Tests
+
+- Add test for Tag
+- Remove colon from test group titles
+- Test all tag models for tagType
