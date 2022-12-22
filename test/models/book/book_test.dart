@@ -3,8 +3,8 @@ import 'package:lonewolf_new/models/book/section/meta_link.dart';
 import 'package:test/test.dart';
 
 import '../../helpers.dart';
+import 'content/section_test.dart';
 import 'meta/meta_test.dart';
-import 'section/section_test.dart';
 
 const lang = 'en-UK';
 const titlePageId = 'title';

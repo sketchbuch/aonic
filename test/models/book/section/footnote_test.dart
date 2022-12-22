@@ -3,6 +3,8 @@ import 'package:test/test.dart';
 
 import '../../../helpers.dart';
 
+const footnoteSectionTitle = 'Dedication';
+const footnoteSectionId = 'dedication-1-foot';
 const footnoteId = 'sect113-1-foot';
 const footnoteIdRef = 'sect113-1';
 const footnoteXml = '''<footnote id="$footnoteId" idref="$footnoteIdRef">
@@ -11,6 +13,8 @@ const footnoteXml = '''<footnote id="$footnoteId" idref="$footnoteIdRef">
 const footnoteJson = {
   "id": footnoteId,
   "idRef": footnoteIdRef,
+  "sectionId": footnoteSectionId,
+  "sectionTitle": footnoteSectionTitle,
   "texts": [
     {"attrs": {}, "displayType": "plain", "text": "The wording of this section assumes that you have come from "},
     {
@@ -24,19 +28,30 @@ const footnoteJson = {
       "displayType": "link",
       "text": "Section 42"
     },
-    {"attrs": {}, "displayType": "plain", "text": ", read the last sentence and two choices as follows: "},
     {
       "attrs": {},
-      "displayType": "quote",
+      "displayType": "plain",
       "text":
-          "…As you eat you notice that the path starts to curve towards the north. If you wish to follow it, turn to 28. If you wish to return the way you have come, turn to 42."
-    }
+          ", read the last sentence and two choices as follows: ‘…As you eat you notice that the path starts to curve towards the north. If you wish to follow it, "
+    },
+    {
+      "attrs": {"idref": "sect28"},
+      "displayType": "link",
+      "text": "turn to 28"
+    },
+    {"attrs": {}, "displayType": "plain", "text": ". If you wish to return the way you have come, "},
+    {
+      "attrs": {"idref": "sect42"},
+      "displayType": "link",
+      "text": "turn to 42"
+    },
+    {"attrs": {}, "displayType": "plain", "text": ".’"}
   ]
 };
 
 void main() {
   group('Model - Footnote()', () {
-    final tag = Footnote.fromXml(getRootXmlElement(footnoteXml), '', '');
+    final tag = Footnote.fromXml(getRootXmlElement(footnoteXml), footnoteSectionTitle, footnoteSectionId);
 
     test('Returns expected JSON', () {
       expect(tag.toJson(), equals(footnoteJson));

@@ -15,11 +15,11 @@ class Footnote {
   // ignore: unused_element
   Footnote._();
 
-  Footnote.fromXml(XmlElement xml, BookText title, String id) {
+  Footnote.fromXml(XmlElement xml, BookText secTitle, String secId) {
     id = getAttribute('id', xml);
     idRef = getAttribute('idref', xml);
-    sectionId = id;
-    sectionTitle = title;
+    sectionId = secId;
+    sectionTitle = secTitle;
 
     final textXml = xml.getElement('p');
     if (textXml != null) {

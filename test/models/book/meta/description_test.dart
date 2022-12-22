@@ -23,7 +23,7 @@ const descriptionjson = {
     {
       "texts": [
         {"attrs": {}, "displayType": "plain", "text": "In "},
-        {"attrs": {}, "displayType": "cite", "text": "Flight from the Dark"},
+        {"attrs": {}, "displayType": "boldCite", "text": "Flight from the Dark"},
         {
           "attrs": {},
           "displayType": "plain",

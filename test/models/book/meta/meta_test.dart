@@ -8,18 +8,21 @@ import 'right_test.dart';
 
 const metaPublisher = 'Project Aon';
 const metaTitle = 'Flight from the Dark';
+const metaDay = '15';
+const metaMonth = '02';
+const metaYear = '2018';
 const metaXml = '''<meta>
   <title>$metaTitle</title>
   $creatorXml
   <publisher>$metaPublisher</publisher>
-  <date class="publication"><year>2018</year><month>2</month><day>15</day></date>
+  <date class="publication"><year>$metaYear</year><month>$metaMonth</month><day>$metaDay</day></date>
   $descriptionXml
   $rightXml
 </meta>''';
 const metaJson = {
   "creators": [creatorJson],
   "descriptions": [descriptionjson],
-  "publicationDate": "15-02-2018",
+  "publicationDate": "$metaDay-$metaMonth-$metaYear",
   "publisher": metaPublisher,
   "rights": [rightJson],
   "title": metaTitle
