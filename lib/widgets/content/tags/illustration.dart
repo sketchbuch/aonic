@@ -14,7 +14,7 @@ class Illustration extends StatelessWidget {
   Widget build(BuildContext context) {
     return ContentContainer(
       child: Image.network(
-        'https://www.projectaon.org/en/xhtml/lw/01fftd/small6.png',
+        'https://www.projectaon.org/en/xhtml/lw/01fftd/${tag.getHtmlInstanceFilename()}',
         errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
           if (exception.runtimeType == NetworkImageLoadException) {
             final imageException = exception as NetworkImageLoadException;

@@ -56,4 +56,14 @@ class IllustrationTag extends Tag {
         'isRealIllustration': isRealIllustration,
         'type': type.name,
       };
+
+  String getHtmlInstanceFilename() {
+    final matchinInstances = instances.where((instance) => instance.type == InstanceType.html);
+
+    if (matchinInstances.isNotEmpty) {
+      return matchinInstances.first.fileName;
+    }
+
+    return '';
+  }
 }

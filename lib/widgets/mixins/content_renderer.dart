@@ -9,11 +9,11 @@ mixin ContentRenderer on Widget {
   void getStyle(DisplayType displayType) {}
 
   TextStyle getTextElementTextStyle(TextElement text, {bool isHover = false}) {
+    Color? backgroundColor;
+    Color? foregrondColor;
     FontStyle style = FontStyle.normal;
     FontWeight weight = FontWeight.normal;
     TextDecoration decoration = TextDecoration.none;
-    Color? foregrondColor;
-    Color? backgroundColor;
 
     if (text.displayType == DisplayType.italic ||
         text.displayType == DisplayType.cite ||
