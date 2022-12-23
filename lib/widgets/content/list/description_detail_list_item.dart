@@ -20,10 +20,9 @@ class DescriptionDetailListItem extends StatelessWidget with ContentRenderer {
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
               children: item.texts.map((text) {
-                final FontStyle style = getTextElementStyle(text);
-                final FontWeight weight = getTextElementWeight(text);
+                final style = getTextElementTextStyle(text);
 
-                return TextSpan(text: wrapText(text), style: TextStyle(fontWeight: weight, fontStyle: style));
+                return TextSpan(text: text.text, style: style);
               }).toList(),
             ),
           ), //text

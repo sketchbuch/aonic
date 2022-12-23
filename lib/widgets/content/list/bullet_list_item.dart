@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../constants/typography.dart';
 import '../../../models/book/content/subcontent/plain_list_item.dart';
-import '../../../models/book/content/subcontent/text_element.dart';
 import '../../../types/types.dart';
 import '../../mixins/content_renderer.dart';
+import '../../mixins/hoverable_text_element.dart';
 
 const bulletSymbol = '\u2022';
 
@@ -20,9 +20,7 @@ class BulletListItem extends StatefulWidget with ContentRenderer {
   State<BulletListItem> createState() => _BulletListItemState();
 }
 
-class _BulletListItemState extends State<BulletListItem> {
-  int? _hoverIndex;
-
+class _BulletListItemState extends State<BulletListItem> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
     final depthIndent = widget.depth * listIndent;
@@ -38,44 +36,23 @@ class _BulletListItemState extends State<BulletListItem> {
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
               children: widget.item.texts.map((text) {
-                final int index = widget.item.texts.indexOf(text);
-
-                GestureRecognizer? recognizer;
-
-                final FontStyle style = widget.getTextElementStyle(text);
-                final FontWeight weight = widget.getTextElementWeight(text);
-                final TextDecoration decoration = widget.getTextElementDecoration(text);
-                final Color? foregrondColor = widget.getTextElementLinkColor(text);
-                Color? backgroundColor = widget.getTextElementBackroundColor(text);
-
-                if (text.displayType == DisplayType.link) {
-                  recognizer = TapGestureRecognizer()
-                    ..onTap = () {
-                      final route = text.attrs['href'] ?? text.attrs['idref'] ?? '';
-                      widget.onNavigate(route);
-                    };
-
-                  if (_hoverIndex != null && _hoverIndex == index) {
-                    backgroundColor = widget.getTextElementHoverBackroundColor(text);
-                  }
-                }
+                final int textIndex = widget.item.texts.indexOf(text);
+                final isHover = isHoverIndex(textIndex);
+                final isLink = isHoverable(text);
+                final style = widget.getTextElementTextStyle(text, isHover: isHover);
 
                 return TextSpan(
-                  onEnter: (_) => setState(() => _hoverIndex = index),
-                  onExit: (_) {
-                    if (mounted) {
-                      setState(() => _hoverIndex = null);
-                    }
-                  },
-                  recognizer: recognizer,
-                  style: TextStyle(
-                    backgroundColor: backgroundColor,
-                    color: foregrondColor,
-                    decoration: decoration,
-                    fontStyle: style,
-                    fontWeight: weight,
-                  ),
-                  text: widget.wrapText(text),
+                  onEnter: isLink ? (_) => handleOnEnter(textIndex) : null,
+                  onExit: isLink ? (_) => handleOnExit() : null,
+                  recognizer: isLink
+                      ? (TapGestureRecognizer()
+                        ..onTap = () {
+                          final route = text.attrs['href'] ?? text.attrs['idref'] ?? '';
+                          widget.onNavigate(route);
+                        })
+                      : null,
+                  style: style,
+                  text: text.text,
                 );
               }).toList(),
             ),

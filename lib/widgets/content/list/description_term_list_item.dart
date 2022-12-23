@@ -22,10 +22,9 @@ class DescriptionTermListItem extends StatelessWidget with ContentRenderer {
               text: TextSpan(
                 style: DefaultTextStyle.of(context).style,
                 children: item.texts.map((text) {
-                  final FontStyle style = getTextElementStyle(text);
-                  const FontWeight weight = FontWeight.bold;
+                  final style = getTextElementTextStyle(text).copyWith(fontWeight: FontWeight.bold);
 
-                  return TextSpan(text: wrapText(text), style: TextStyle(fontWeight: weight, fontStyle: style));
+                  return TextSpan(text: text.text, style: style);
                 }).toList(),
               ),
             ),

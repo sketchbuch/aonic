@@ -16,10 +16,9 @@ class Signpost extends StatelessWidget with ContentRenderer {
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
           children: tag.texts.map((text) {
-            final FontStyle style = getTextElementStyle(text);
-            final FontWeight weight = getTextElementWeight(text);
+            final style = getTextElementTextStyle(text);
 
-            return TextSpan(text: wrapText(text), style: TextStyle(fontWeight: weight, fontStyle: style));
+            return TextSpan(style: style, text: text.text);
           }).toList(),
         ),
       ),

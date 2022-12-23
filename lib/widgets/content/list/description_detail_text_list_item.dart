@@ -11,10 +11,7 @@ class DescriptionDetailTextListItem extends StatelessWidget with ContentRenderer
 
   @override
   Widget build(BuildContext context) {
-    final FontStyle style = getTextElementStyle(text);
-    final FontWeight weight = getTextElementWeight(text);
-
-    final TextSpan textSpan = TextSpan(text: wrapText(text), style: TextStyle(fontWeight: weight, fontStyle: style));
+    final style = getTextElementTextStyle(text);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +21,7 @@ class DescriptionDetailTextListItem extends StatelessWidget with ContentRenderer
           child: RichText(
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
-              children: [textSpan],
+              children: [TextSpan(text: text.text, style: style)],
             ),
           ), //text
         ),

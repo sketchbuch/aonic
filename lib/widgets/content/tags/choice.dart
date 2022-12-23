@@ -5,6 +5,7 @@ import '../../../models/book/content/choice_tag.dart';
 import '../../../types/types.dart';
 import '../../layout/content_container.dart';
 import '../../mixins/content_renderer.dart';
+import '../../mixins/hoverable_text_element.dart';
 
 class Choice extends StatefulWidget with ContentRenderer {
   final ChoiceTag tag;
@@ -16,58 +17,39 @@ class Choice extends StatefulWidget with ContentRenderer {
   State<Choice> createState() => _ChoiceState();
 }
 
-class _ChoiceState extends State<Choice> {
-  int? _hoverIndex;
-
+class _ChoiceState extends State<Choice> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
-    int textIndex = -1;
+    int linkTextIndex = -1;
 
     return ContentContainer(
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
           children: widget.tag.texts.map((text) {
-            final int index = widget.tag.texts.indexOf(text);
+            final int textIndex = widget.tag.texts.indexOf(text);
+            final isHover = isHoverIndex(textIndex);
+            final isLink = isHoverable(text);
+            var style = widget.getTextElementTextStyle(text, isHover: isHover);
 
-            GestureRecognizer? recognizer;
-            textIndex += 1;
+            linkTextIndex += 1;
 
-            final FontStyle style = widget.getTextElementStyle(text);
-            FontWeight weight = widget.getTextElementWeight(text);
-            TextDecoration decoration = widget.getTextElementDecoration(text);
-            final Color? foregrondColor = widget.getTextElementLinkColor(text);
-            Color? backgroundColor = widget.getTextElementBackroundColor(text);
-
-            if (widget.tag.linkTextIndex == textIndex) {
-              weight = FontWeight.bold;
-
-              recognizer = TapGestureRecognizer()
-                ..onTap = () {
-                  final route = widget.tag.idref;
-                  widget.onNavigate(route);
-                };
-
-              if (_hoverIndex != null && _hoverIndex == index) {
-                backgroundColor = widget.getTextElementHoverBackroundColor(text);
-              }
+            if (widget.tag.linkTextIndex == linkTextIndex) {
+              style = style.copyWith(fontWeight: FontWeight.bold);
             }
+
             return TextSpan(
-              onEnter: (_) => setState(() => _hoverIndex = index),
-              onExit: (_) {
-                if (mounted) {
-                  setState(() => _hoverIndex = null);
-                }
-              },
-              recognizer: recognizer,
-              style: TextStyle(
-                backgroundColor: backgroundColor,
-                color: foregrondColor,
-                decoration: decoration,
-                fontStyle: style,
-                fontWeight: weight,
-              ),
-              text: widget.wrapText(text),
+              onEnter: isLink ? (_) => handleOnEnter(textIndex) : null,
+              onExit: isLink ? (_) => handleOnExit() : null,
+              recognizer: isLink
+                  ? (TapGestureRecognizer()
+                    ..onTap = () {
+                      final route = widget.tag.idref;
+                      widget.onNavigate(route);
+                    })
+                  : null,
+              style: style,
+              text: text.text,
             );
           }).toList(),
         ),
