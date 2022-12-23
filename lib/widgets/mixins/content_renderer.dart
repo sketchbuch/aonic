@@ -5,7 +5,7 @@ import '../../theme/theme.dart';
 
 final hoverBackgroundColour = Color(0xffcce0c1);
 
-mixin ContentRenderer {
+mixin ContentRenderer on Widget {
   void getStyle(DisplayType displayType) {}
 
   FontStyle getTextElementStyle(TextElement text) {
