@@ -87,6 +87,11 @@ void main() {
       expect(tag.toString(), equals(sectionJson.toString()));
     });
 
+    test('Returns expected tagType', () {
+      final tag = SectionTag.fromXml(getRootXmlElement(sectionXml));
+      expect(tag.tagType(), equals('SectionTag'));
+    });
+
     group('isNumbered()', () {
       isNumberedTest(data) {
         test('Returns ${data['result']} for a ${data['type']} section', () {

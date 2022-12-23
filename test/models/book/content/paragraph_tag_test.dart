@@ -49,6 +49,10 @@ void main() {
     test('Returns expected string', () {
       expect(tag.toString(), equals(paragraphJson.toString()));
     });
+
+    test('Returns expected tagType', () {
+      expect(tag.tagType(), equals('ParagraphTag'));
+    });
   });
 
   group('Model - ParagraphTag() - With dedication class', () {

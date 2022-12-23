@@ -38,5 +38,9 @@ void main() {
     test('Returns expected string', () {
       expect(tag.toString(), equals(choiceJson.toString()));
     });
+
+    test('Returns expected tagType', () {
+      expect(tag.tagType(), equals('ChoiceTag'));
+    });
   });
 }

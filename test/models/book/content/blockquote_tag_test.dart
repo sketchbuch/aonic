@@ -61,5 +61,10 @@ void main() {
     blockquotes.forEach((type, data) {
       testListType(type, data['xml']!.toString(), data['json']!);
     });
+
+    test('Returns expected tagType', () {
+      final tag = BlockquoteTag.fromXml(getRootXmlElement(blockquoteXml));
+      expect(tag.tagType(), equals('BlockquoteTag'));
+    });
   });
 }

@@ -86,6 +86,11 @@ void main() {
     plainLists.forEach((type, data) {
       testListType(type, data['xml']!.toString(), data['json']!);
     });
+
+    test('Returns expected tagType', () {
+      final tag = PlainListTag.fromXml(getRootXmlElement(plainListUlXml));
+      expect(tag.tagType(), equals('PlainListTag'));
+    });
   });
 
   group('Model - PlainListTag.fromTocIndexSections()', () {

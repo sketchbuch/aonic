@@ -92,5 +92,9 @@ void main() {
 
       expect(tag.toJson(), equals(expected));
     });
+
+    test('Returns expected tagType', () {
+      expect(tag.tagType(), equals('IllustrationTag'));
+    });
   });
 }

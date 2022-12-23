@@ -51,5 +51,10 @@ void main() {
     descriptionLists.forEach((type, data) {
       testDescriptionListType(type, data['xml']!.toString(), data['json']!);
     });
+
+    test('Returns expected tagType', () {
+      final tag = DescriptionListTag.fromXml(getRootXmlElement(dlXml));
+      expect(tag.tagType(), equals('DescriptionListTag'));
+    });
   });
 }

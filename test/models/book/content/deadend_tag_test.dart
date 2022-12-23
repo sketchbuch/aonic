@@ -19,5 +19,9 @@ void main() {
     test('Returns expected string', () {
       expect(tag.toString(), equals(deadendJson.toString()));
     });
+
+    test('Returns expected tagType', () {
+      expect(tag.tagType(), equals('DeadendTag'));
+    });
   });
 }

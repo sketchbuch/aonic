@@ -22,5 +22,9 @@ void main() {
     test('Returns expected string', () {
       expect(tag.toString(), equals(combatJson.toString()));
     });
+
+    test('Returns expected tagType', () {
+      expect(tag.tagType(), equals('CombatTag'));
+    });
   });
 }

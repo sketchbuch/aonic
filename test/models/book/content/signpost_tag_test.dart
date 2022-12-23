@@ -21,5 +21,9 @@ void main() {
     test('Returns expected string', () {
       expect(tag.toString(), equals(signpostJson.toString()));
     });
+
+    test('Returns expected tagType', () {
+      expect(tag.tagType(), equals('SignpostTag'));
+    });
   });
 }
