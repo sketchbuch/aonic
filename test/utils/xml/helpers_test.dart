@@ -25,6 +25,22 @@ you wish to follow the <quote>left track</quote>, <link-text>turn to 275</link-t
               '''<data><choice idref="sect275">If ©you wish to follow the ‘left track’, <link-text>turn to 275</link-text>.</choice></data>'''),
         );
       });
+
+      test('Removes html comments', () {
+        const xml = '''   <data>   <choice idref="sect275">If <!-- <ch.copy/> -->
+you wish to follow the <quote>left track</quote>, <link-text>turn to 275</link-text>. <!-- this
+ is a multiline 
+ comment -->
+</choice>    
+        </data> ''';
+        final cleanedXml = cleanXmlString(xml, {});
+
+        expect(
+          cleanedXml,
+          equals(
+              '''<data><choice idref="sect275">If you wish to follow the ‘left track’, <link-text>turn to 275</link-text>. </choice></data>'''),
+        );
+      });
     });
 
     group('getAttribute()', () {

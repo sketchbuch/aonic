@@ -9,6 +9,7 @@ String cleanXmlString(String xmlString, Map<String, String> includeLinks) {
   String cleanedString = xmlString.trim().replaceAll(RegExp(r'>\s*<'), '><').replaceAll('\n', '');
   cleanedString = replaceTypographicTags(cleanedString);
   cleanedString = replaceIncludeLinks(cleanedString, includeLinks);
+  cleanedString = cleanedString.replaceAll(RegExp(r"<\!--.+?-->"), '');
 
   return cleanedString;
 }
