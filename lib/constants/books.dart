@@ -6,5 +6,6 @@ const String sectionPrefix = 'sect';
 const String bookIdDedication = 'dedicate';
 const String bookIdFootnotes = 'footnotz';
 const String bookIdNumbered = 'numbered';
+const String bookIdRandomNumberTable = 'random';
 const String bookIdTitle = 'title';
 const String bookIdToc = 'index';

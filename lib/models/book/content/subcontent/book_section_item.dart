@@ -1,13 +1,13 @@
-import '../../../types/types.dart';
-import '../content/section_tag.dart';
+import '../../../../types/types.dart';
+import '../section_tag.dart';
 
-typedef TocIndexSections = List<TocIndexSection>;
+typedef BookSectionItems = List<BookSectionItem>;
 
-class TocIndexSection {
+class BookSectionItem {
   late final int depth;
   late final SectionTag section;
 
-  TocIndexSection(this.section, this.depth);
+  BookSectionItem(this.section, this.depth);
 
   Json toJson() => {
         'depth': depth,

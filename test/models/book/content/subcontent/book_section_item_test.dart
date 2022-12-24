@@ -1,9 +1,9 @@
 import 'package:lonewolf_new/models/book/content/section_tag.dart';
-import 'package:lonewolf_new/models/book/toc/toc_index_section.dart';
+import 'package:lonewolf_new/models/book/content/subcontent/book_section_item.dart';
 import 'package:test/test.dart';
 
-import '../../../helpers.dart';
-import '../content/section_test.dart';
+import '../../../../helpers.dart';
+import '../section_test.dart';
 
 const tocDepth = 2;
 
@@ -13,9 +13,9 @@ final tocJson = {
 };
 
 void main() {
-  group('Model - TocIndexSections()', () {
+  group('Model - BookSectionItem()', () {
     final section = SectionTag.fromXml(getRootXmlElement(sectionXml));
-    final tocSection = TocIndexSection(section, tocDepth);
+    final tocSection = BookSectionItem(section, tocDepth);
 
     test('Returns expected JSON', () {
       expect(tocSection.toJson(), equals(tocJson));

@@ -1,6 +1,6 @@
 import 'package:lonewolf_new/models/book/content/plain_list_tag.dart';
 import 'package:lonewolf_new/models/book/content/section_tag.dart';
-import 'package:lonewolf_new/models/book/toc/toc_index_section.dart';
+import 'package:lonewolf_new/models/book/content/subcontent/book_section_item.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
@@ -95,8 +95,8 @@ void main() {
 
   group('Model - PlainListTag.fromTocIndexSections()', () {
     final indexSection = SectionTag.fromXml(getRootXmlElement(plainListSectionXml));
-    final indexSections = [TocIndexSection(indexSection, 1)];
-    final tag = PlainListTag.fromTocIndexSections(indexSections);
+    final indexSections = [BookSectionItem(indexSection, 1)];
+    final tag = PlainListTag.fromBookSectionItems(indexSections);
 
     final expectedJson = {
       "items": [plainListSectionJson],
