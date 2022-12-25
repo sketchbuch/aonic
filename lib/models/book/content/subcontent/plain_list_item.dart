@@ -2,8 +2,9 @@ import 'package:xml/xml.dart';
 
 import '../../../../types/types.dart';
 import '../../../../utils/xml/helpers.dart';
-import 'book_section_item.dart';
+import 'numbered_section_item.dart';
 import 'text_element.dart';
+import 'toc_item.dart';
 
 class PlainListItem {
   late final int depth;
@@ -17,18 +18,23 @@ class PlainListItem {
     texts.addAll(getTextElementList(xml));
   }
 
-  PlainListItem.fromBookSectionItem(BookSectionItem section) {
-    depth = section.depth;
+  PlainListItem.fromTocItem(TocItem tocItem) {
+    depth = tocItem.depth;
 
     texts.add(
       TextElement.fromTxt(
-        section.section.meta.title,
+        tocItem.title,
         type: DisplayType.link,
         attributes: {
-          "idref": section.section.id,
+          "idref": tocItem.id,
         },
       ),
     );
+  }
+
+  PlainListItem.fromNumberedSectionItem(NumberedSectionItem numberedSectionItem) {
+    depth = 1;
+    texts.addAll(numberedSectionItem.texts);
   }
 
   Json toJson() => {

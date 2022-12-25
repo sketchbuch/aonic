@@ -1,17 +1,20 @@
 import '../../../../types/types.dart';
 import '../section_tag.dart';
 
-typedef BookSectionItems = List<BookSectionItem>;
-
-class BookSectionItem {
+class TocItem {
+  late final BookText title;
   late final int depth;
-  late final SectionTag section;
+  late final String id;
 
-  BookSectionItem(this.section, this.depth);
+  TocItem(SectionTag section, this.depth) {
+    id = section.id;
+    title = section.meta.title;
+  }
 
   Json toJson() => {
         'depth': depth,
-        'section': section.toJson(),
+        'id': id,
+        'title': title,
       };
 
   @override

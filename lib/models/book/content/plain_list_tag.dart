@@ -1,9 +1,10 @@
+import 'package:lonewolf_new/models/book/content/subcontent/numbered_section_item.dart';
 import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
-import 'subcontent/book_section_item.dart';
 import 'subcontent/plain_list_item.dart';
+import 'subcontent/toc_item.dart';
 import 'tag.dart';
 
 enum PlainListTagType {
@@ -53,12 +54,21 @@ class PlainListTag extends Tag {
     });
   }
 
-  PlainListTag.fromBookSectionItems(BookSectionItems bookSectionItems) {
+  PlainListTag.fromTocItems(List<TocItem> bookSectionItems) {
     listType = PlainListTagType.ul;
     type = PlainListType.toc;
 
     for (var bookSectionItem in bookSectionItems) {
-      items.add(PlainListItem.fromBookSectionItem(bookSectionItem));
+      items.add(PlainListItem.fromTocItem(bookSectionItem));
+    }
+  }
+
+  PlainListTag.fromNumberedSectionItems(List<NumberedSectionItem> numberedSectionItems) {
+    listType = PlainListTagType.ul;
+    type = PlainListType.none;
+
+    for (var numberedSectionItem in numberedSectionItems) {
+      items.add(PlainListItem.fromNumberedSectionItem(numberedSectionItem));
     }
   }
 

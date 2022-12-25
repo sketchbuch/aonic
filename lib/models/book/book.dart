@@ -6,7 +6,8 @@ import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
 import 'content/plain_list_tag.dart';
 import 'content/section_tag.dart';
-import 'content/subcontent/book_section_item.dart';
+import 'content/subcontent/numbered_section_item.dart';
+import 'content/subcontent/toc_item.dart';
 import 'helpers/section_cache.dart';
 import 'meta/meta.dart';
 import 'section/footnote.dart';
@@ -17,7 +18,7 @@ class Book {
   final List<SectionTag> sections = [];
   late BookText title = '';
   late Meta meta;
-  late PlainListTag? numberedSectionList;
+  late PlainListTag numberedSectionList;
   late PlainListTag toc;
   late String lang = '';
   late String version = '';
@@ -36,9 +37,9 @@ class Book {
       title = meta.title;
     }
 
-    _createSections(xml);
+    final numberedSections = _createSections(xml);
     _collectFootnotes();
-    //numberedSectionList = _createNumberedSectionList();
+    numberedSectionList = _createNumberedSectionList(numberedSections);
     toc = _createToc();
   }
 
@@ -74,20 +75,32 @@ class Book {
     }
   }
 
-  PlainListTag _createNumberedSectionList() {
-    final numberedSections = sections.where((section) => section.type == SectionType.numbered).toList();
+  PlainListTag _createNumberedSectionList(List<SectionTag> sections) {
+    final List<NumberedSectionItem> numberedSections = [];
+    const blockSize = 10;
+    final blocks = sections.slices(blockSize);
+    var prevBlock = 0;
+    var blockNumber = 1;
 
-    if (numberedSections.isNotEmpty) {
-      const blockSize = 10;
-      final blocks = numberedSections.slices(blockSize);
+    for (var block in blocks) {
+      final blockStart = prevBlock + 1;
+      final blockEnd = blockNumber * blockSize;
+      final List<SectionTag> blockSections = [];
 
-      for (var block in blocks) {}
+      prevBlock = blockEnd;
+      blockNumber += 1;
+
+      for (var section in block) {
+        blockSections.add(section);
+      }
+
+      numberedSections.add(NumberedSectionItem(blockSections, '$blockStart-$blockEnd:'));
     }
 
-    return {} as PlainListTag;
+    return PlainListTag.fromNumberedSectionItems(numberedSections);
   }
 
-  void _createSections(XmlElement xml) {
+  List<SectionTag> _createSections(XmlElement xml) {
     final titleSection = _getTitleSection(xml);
     final titleSubsections = _getTitleSubsections(titleSection);
     final numberedSection = _getNumberedSection(titleSubsections);
@@ -114,28 +127,30 @@ class Book {
     sections.addAll(frontmatter);
     sections.addAll(numbered);
     sections.addAll(backmatter);
+
+    return numbered;
   }
 
   PlainListTag _createToc() {
-    final BookSectionItems tocIndexSections = [];
+    final List<TocItem> tocIndexSections = [];
 
     for (var section in sections) {
       if (section.canAddToIndex()) {
-        tocIndexSections.add(BookSectionItem(section, 1));
+        tocIndexSections.add(TocItem(section, 1));
 
         if (section.isFrontmatter() && section.hasSubsections()) {
           final List<SectionTag> subsections = section.getSubsections();
 
           for (var subsection in subsections) {
             if (subsection.canAddToIndex(true)) {
-              tocIndexSections.add(BookSectionItem(subsection, 2));
+              tocIndexSections.add(TocItem(subsection, 2));
             }
           }
         }
       }
     }
 
-    return PlainListTag.fromBookSectionItems(tocIndexSections);
+    return PlainListTag.fromTocItems(tocIndexSections);
   }
 
   Iterable<XmlElement> _getTitleSubsections(XmlElement titleSection) {

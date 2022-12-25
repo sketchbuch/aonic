@@ -45,7 +45,7 @@ class BookDisplayPage extends StatelessWidget {
                     if (viewModel.pageId == bookIdFootnotes) {
                       return FootnotesList(section, book.footnoteSections, viewModel.onNavigate);
                     } else if (viewModel.pageId == bookIdNumbered) {
-                      return NumberedSection(section, book.getNumberedSections(), viewModel.onNavigate);
+                      return NumberedSection(section.meta.title, book.numberedSectionList, viewModel.onNavigate);
                     }
 
                     return Section(section, viewModel.onNavigate, 1);
