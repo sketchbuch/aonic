@@ -13,7 +13,7 @@ PageState pageStateReducer(PageState pageState, action) {
     } else {
       return pageState.copyWith(
         pageId: action.route,
-        sectionNumber: pageMin,
+        sectionNumber: pageDefault,
       );
     }
   } else if (action is LoadBookSuccess) {

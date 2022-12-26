@@ -1,4 +1,3 @@
-import 'package:lonewolf_new/models/book/content/subcontent/numbered_section_item.dart';
 import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
@@ -60,15 +59,6 @@ class PlainListTag extends Tag {
 
     for (var bookSectionItem in bookSectionItems) {
       items.add(PlainListItem.fromTocItem(bookSectionItem));
-    }
-  }
-
-  PlainListTag.fromNumberedSectionItems(List<NumberedSectionItem> numberedSectionItems) {
-    listType = PlainListTagType.ul;
-    type = PlainListType.none;
-
-    for (var numberedSectionItem in numberedSectionItems) {
-      items.add(PlainListItem.fromNumberedSectionItem(numberedSectionItem));
     }
   }
 

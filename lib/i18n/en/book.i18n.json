@@ -5,6 +5,11 @@
     "load": "Download book XML",
     "unload": "Back to book selection"
   },
+  "numberedSection": {
+    "searchField": {
+      "hintText": "Section number..."
+    }
+  },
   "pageTtles": {
     "tableOfContents": "Table of Contents"
   },

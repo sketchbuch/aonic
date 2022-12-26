@@ -2,7 +2,6 @@ import 'package:xml/xml.dart';
 
 import '../../../../types/types.dart';
 import '../../../../utils/xml/helpers.dart';
-import 'numbered_section_item.dart';
 import 'text_element.dart';
 import 'toc_item.dart';
 
@@ -30,11 +29,6 @@ class PlainListItem {
         },
       ),
     );
-  }
-
-  PlainListItem.fromNumberedSectionItem(NumberedSectionItem numberedSectionItem) {
-    depth = 1;
-    texts.addAll(numberedSectionItem.texts);
   }
 
   Json toJson() => {

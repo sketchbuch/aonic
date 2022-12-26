@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/layout.dart';
 import '../../types/types.dart';
 
 class StatusDisplay extends StatelessWidget {
@@ -14,7 +15,7 @@ class StatusDisplay extends StatelessWidget {
     final optionalMessage = message;
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+      padding: const EdgeInsets.all(paddingExtraLarge),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

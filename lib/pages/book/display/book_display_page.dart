@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import '../../../constants/books.dart';
+import '../../../constants/layout.dart';
 import '../../../exceptions/render.dart';
 import '../../../store/models/app_state.dart';
 import '../../../widgets/content/tags/section.dart';
@@ -23,7 +24,7 @@ class BookDisplayPage extends StatelessWidget {
 
         return Scaffold(
           body: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+            padding: const EdgeInsets.all(paddingExtraLarge),
             child: () {
               if (viewModel.isLoading || book == null) {
                 return const CircularProgressIndicator();
@@ -45,7 +46,7 @@ class BookDisplayPage extends StatelessWidget {
                     if (viewModel.pageId == bookIdFootnotes) {
                       return FootnotesList(section, book.footnoteSections, viewModel.onNavigate);
                     } else if (viewModel.pageId == bookIdNumbered) {
-                      return NumberedSection(section.meta.title, book.numberedSectionList, viewModel.onNavigate);
+                      return NumberedSection(section.meta.title, book.numberedSectionItems, viewModel.onNavigate);
                     }
 
                     return Section(section, viewModel.onNavigate, 1);

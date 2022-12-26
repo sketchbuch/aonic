@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:xml/xml.dart';
 
 import '../../exceptions/xml.dart';
@@ -15,10 +14,10 @@ import 'section/footnote.dart';
 class Book {
   final _sectionCache = SectionCache();
   final List<Footnote> footnoteSections = [];
+  final List<NumberedSectionItem> numberedSectionItems = [];
   final List<SectionTag> sections = [];
   late BookText title = '';
   late Meta meta;
-  late PlainListTag numberedSectionList;
   late PlainListTag toc;
   late String lang = '';
   late String version = '';
@@ -39,7 +38,7 @@ class Book {
 
     final numberedSections = _createSections(xml);
     _collectFootnotes();
-    numberedSectionList = _createNumberedSectionList(numberedSections);
+    _createNumberedSectionList(numberedSections);
     toc = _createToc();
   }
 
@@ -75,29 +74,10 @@ class Book {
     }
   }
 
-  PlainListTag _createNumberedSectionList(List<SectionTag> sections) {
-    final List<NumberedSectionItem> numberedSections = [];
-    const blockSize = 10;
-    final blocks = sections.slices(blockSize);
-    var prevBlock = 0;
-    var blockNumber = 1;
-
-    for (var block in blocks) {
-      final blockStart = prevBlock + 1;
-      final blockEnd = blockNumber * blockSize;
-      final List<SectionTag> blockSections = [];
-
-      prevBlock = blockEnd;
-      blockNumber += 1;
-
-      for (var section in block) {
-        blockSections.add(section);
-      }
-
-      numberedSections.add(NumberedSectionItem(blockSections, '$blockStart-$blockEnd:'));
+  void _createNumberedSectionList(List<SectionTag> numberedSections) {
+    for (var section in numberedSections) {
+      numberedSectionItems.add(NumberedSectionItem(section.meta.title, section.id));
     }
-
-    return PlainListTag.fromNumberedSectionItems(numberedSections);
   }
 
   List<SectionTag> _createSections(XmlElement xml) {
