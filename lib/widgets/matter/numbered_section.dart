@@ -25,14 +25,22 @@ class NumberedSection extends StatefulWidget {
 }
 
 class _NumberedSectionState extends State<NumberedSection> {
-  String term = '';
+  final _textEditingController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final visibleSections = term.isEmpty
+    final visibleSections = _textEditingController.text.isEmpty
         ? widget.numberedSections
-        : widget.numberedSections.where((section) => section.title.startsWith(term)).toList();
+        : widget.numberedSections.where((section) => section.title.startsWith(_textEditingController.text)).toList();
     final itemCount = visibleSections.length;
+
+    const borderRadiusAll = BorderRadius.all(Radius.circular(borderRadius));
 
     return ContentContainer(
       child: Column(
@@ -41,16 +49,32 @@ class _NumberedSectionState extends State<NumberedSection> {
           Headline(widget.sectionTitle),
           TextField(
             autofocus: true,
+            controller: _textEditingController,
             decoration: InputDecoration(
-              border: const OutlineInputBorder(),
+              border: const OutlineInputBorder(borderRadius: borderRadiusAll),
+              enabledBorder: const OutlineInputBorder(borderRadius: borderRadiusAll),
               hintText: widget.transBook.numberedSection.searchField.hintText,
+              helperText: widget.transBook.numberedSection.searchField.helperText(pageMin: pageMin, pageMax: pageMax),
+              suffixIcon: _textEditingController.text.isEmpty
+                  ? null
+                  : IconButton(
+                      onPressed: () {
+                        if (mounted) {
+                          _textEditingController.clear();
+                          setState(() {});
+                        }
+                      },
+                      icon: const Icon(Icons.clear),
+                    ),
             ),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly, LimitRange(pageMin, pageMax)],
             maxLength: 3,
             onChanged: (value) {
               if (mounted) {
-                setState(() => term = value);
+                _textEditingController.text = value;
+                _textEditingController.selection = TextSelection.collapsed(offset: _textEditingController.text.length);
+                setState(() {});
               }
             },
           ),
@@ -67,7 +91,7 @@ class _NumberedSectionState extends State<NumberedSection> {
 
               return Container(
                 alignment: Alignment.center,
-                decoration: BoxDecoration(color: colourSplash, borderRadius: BorderRadius.circular(borderRaius)),
+                decoration: BoxDecoration(color: colourSplash, borderRadius: BorderRadius.circular(borderRadius)),
                 child: Text(section.title),
               );
             },
