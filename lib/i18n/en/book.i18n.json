@@ -1,5 +1,10 @@
 {
   "footnotePrefix": "Section #",
+  "header": {
+    "actions": {
+      "random": "Pick a random number"
+    }
+  },
   "headlineSection": "#$sectionTitle",
   "loadButton": {
     "load": "Download book XML",
