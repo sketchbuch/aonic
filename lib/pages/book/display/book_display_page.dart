@@ -28,27 +28,27 @@ class BookDisplayPage extends StatelessWidget {
             child: () {
               if (viewModel.isLoading || book == null) {
                 return const CircularProgressIndicator();
-              } else {
-                switch (viewModel.pageId) {
-                  case bookIdToc:
-                    return TocList(book.toc, viewModel.onNavigate);
+              }
 
-                  case bookIdTitle:
-                    return TitlePage(book.meta, viewModel.onNavigate);
+              if (viewModel.pageId == bookIdToc) {
+                return TocList(book.toc, viewModel.onNavigate);
+              } else if (viewModel.pageId == bookIdTitle) {
+                return TitlePage(book.meta, viewModel.onNavigate);
+              } else {
+                final section = book.getSection(viewModel.pageId);
+
+                if (section == null) {
+                  throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
+                }
+
+                switch (viewModel.pageId) {
+                  case bookIdFootnotes:
+                    return FootnotesList(section, book.footnoteSections, viewModel.onNavigate);
+
+                  case bookIdNumbered:
+                    return NumberedSection(section.meta.title, book.numberedSectionItems, viewModel.onNavigate);
 
                   default:
-                    final section = book.getSection(viewModel.pageId);
-
-                    if (section == null) {
-                      throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
-                    }
-
-                    if (viewModel.pageId == bookIdFootnotes) {
-                      return FootnotesList(section, book.footnoteSections, viewModel.onNavigate);
-                    } else if (viewModel.pageId == bookIdNumbered) {
-                      return NumberedSection(section.meta.title, book.numberedSectionItems, viewModel.onNavigate);
-                    }
-
                     return Section(section, viewModel.onNavigate, 1);
                 }
               }
