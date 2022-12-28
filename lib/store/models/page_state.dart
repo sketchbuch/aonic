@@ -14,7 +14,7 @@ class PageState {
 
   const PageState.initialState()
       : pageId = bookIdToc,
-        sectionNumber = pageMin;
+        sectionNumber = pageDefault;
 
   PageState copyWith({String? pageId, int? sectionNumber}) => PageState(
         pageId: pageId ?? this.pageId,

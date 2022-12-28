@@ -5,6 +5,12 @@
     "load": "DE Download book XML",
     "unload": "DE Back to book selection"
   },
+  "numberedSection": {
+    "searchField": {
+      "helperText": "DE Enter a number in the range of $pageMin-$pageMax",
+      "hintText": "DE Search sections…"
+    }
+  },
   "pageTtles": {
     "tableOfContents": "DE Table of Contents"
   },

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import '../../../constants/books.dart';
+import '../../../constants/layout.dart';
 import '../../../exceptions/render.dart';
 import '../../../store/models/app_state.dart';
 import '../../../widgets/content/tags/section.dart';
-import '../../../widgets/matter/footnotes_list.dart';
+import '../../../widgets/matter/footnotes.dart';
+import '../../../widgets/matter/numbered_sections.dart';
 import '../../../widgets/matter/title_page.dart';
-import '../../../widgets/matter/toc_list.dart';
+import '../../../widgets/matter/toc.dart';
 import 'book_display_view_model.dart';
 
 class BookDisplayPage extends StatelessWidget {
@@ -22,29 +24,31 @@ class BookDisplayPage extends StatelessWidget {
 
         return Scaffold(
           body: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+            padding: const EdgeInsets.all(paddingExtraLarge),
             child: () {
               if (viewModel.isLoading || book == null) {
                 return const CircularProgressIndicator();
-              } else {
-                switch (viewModel.pageId) {
-                  case bookIdToc:
-                    return TocList(book.toc, viewModel.onNavigate);
+              }
 
-                  case bookIdTitle:
-                    return TitlePage(book.meta, viewModel.onNavigate);
+              if (viewModel.pageId == bookIdToc) {
+                return Toc(book.toc, viewModel.onNavigate);
+              } else if (viewModel.pageId == bookIdTitle) {
+                return TitlePage(book.meta, viewModel.onNavigate);
+              } else {
+                final section = book.getSection(viewModel.pageId);
+
+                if (section == null) {
+                  throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
+                }
+
+                switch (viewModel.pageId) {
+                  case bookIdFootnotes:
+                    return Footnotes(section.meta.title, viewModel.onNavigate, book.footnoteSections);
+
+                  case bookIdNumbered:
+                    return NumberedSections(section.meta.title, viewModel.onNavigate, book.numberedSectionItems);
 
                   default:
-                    final section = book.getSection(viewModel.pageId);
-
-                    if (section == null) {
-                      throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
-                    }
-
-                    if (viewModel.pageId == bookIdFootnotes) {
-                      return FootnotesList(section, book.footnoteSections, viewModel.onNavigate);
-                    }
-
                     return Section(section, viewModel.onNavigate, 1);
                 }
               }

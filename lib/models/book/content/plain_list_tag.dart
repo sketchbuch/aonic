@@ -2,8 +2,8 @@ import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
-import '../toc/toc_index_section.dart';
 import 'subcontent/plain_list_item.dart';
+import 'subcontent/toc_item.dart';
 import 'tag.dart';
 
 enum PlainListTagType {
@@ -53,12 +53,12 @@ class PlainListTag extends Tag {
     });
   }
 
-  PlainListTag.fromTocIndexSections(TocIndexSections tocIndexSections) {
+  PlainListTag.fromTocItems(List<TocItem> bookSectionItems) {
     listType = PlainListTagType.ul;
     type = PlainListType.toc;
 
-    for (var tocIndexSection in tocIndexSections) {
-      items.add(PlainListItem.fromTocIndexSection(tocIndexSection));
+    for (var bookSectionItem in bookSectionItems) {
+      items.add(PlainListItem.fromTocItem(bookSectionItem));
     }
   }
 

@@ -2,8 +2,8 @@ import 'package:xml/xml.dart';
 
 import '../../../../types/types.dart';
 import '../../../../utils/xml/helpers.dart';
-import '../../toc/toc_index_section.dart';
 import 'text_element.dart';
+import 'toc_item.dart';
 
 class PlainListItem {
   late final int depth;
@@ -17,10 +17,18 @@ class PlainListItem {
     texts.addAll(getTextElementList(xml));
   }
 
-  PlainListItem.fromTocIndexSection(TocIndexSection tocIndexSection) {
-    depth = tocIndexSection.depth;
-    texts.add(TextElement.fromTxt(tocIndexSection.section.meta.title,
-        type: DisplayType.link, attributes: {"idref": tocIndexSection.section.id}));
+  PlainListItem.fromTocItem(TocItem tocItem) {
+    depth = tocItem.depth;
+
+    texts.add(
+      TextElement.fromTxt(
+        tocItem.title,
+        type: DisplayType.link,
+        attributes: {
+          "idref": tocItem.id,
+        },
+      ),
+    );
   }
 
   Json toJson() => {

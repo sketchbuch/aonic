@@ -5,14 +5,16 @@ import '../../types/types.dart';
 import '../../utils/xml/helpers.dart';
 import 'content/plain_list_tag.dart';
 import 'content/section_tag.dart';
+import 'content/subcontent/numbered_section_item.dart';
+import 'content/subcontent/toc_item.dart';
 import 'helpers/section_cache.dart';
 import 'meta/meta.dart';
 import 'section/footnote.dart';
-import 'toc/toc_index_section.dart';
 
 class Book {
   final _sectionCache = SectionCache();
   final List<Footnote> footnoteSections = [];
+  final List<NumberedSectionItem> numberedSectionItems = [];
   final List<SectionTag> sections = [];
   late BookText title = '';
   late Meta meta;
@@ -34,6 +36,51 @@ class Book {
       title = meta.title;
     }
 
+    final numberedSections = _createSections(xml);
+    _collectFootnotes();
+    _createNumberedSectionList(numberedSections);
+    toc = _createToc();
+  }
+
+// TODO - Add toc
+  Json toJson() => {
+        'lang': lang,
+        'meta': meta.toJson(),
+        'sections': sections.map((section) => section.toJson()).toList(),
+        'title': title,
+        'version': version,
+      };
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
+
+  void _collectFootnotes() {
+    for (var section in sections) {
+      if (section.footnotes.isNotEmpty) {
+        footnoteSections.addAll(section.footnotes);
+      }
+
+      final subsections = section.getSubsections();
+
+      if (subsections.isEmpty) {
+        for (var subsection in subsections) {
+          if (subsection.footnotes.isNotEmpty) {
+            footnoteSections.addAll(subsection.footnotes);
+          }
+        }
+      }
+    }
+  }
+
+  void _createNumberedSectionList(List<SectionTag> numberedSections) {
+    for (var section in numberedSections) {
+      numberedSectionItems.add(NumberedSectionItem(section.meta.title, section.id));
+    }
+  }
+
+  List<SectionTag> _createSections(XmlElement xml) {
     final titleSection = _getTitleSection(xml);
     final titleSubsections = _getTitleSubsections(titleSection);
     final numberedSection = _getNumberedSection(titleSubsections);
@@ -61,59 +108,29 @@ class Book {
     sections.addAll(numbered);
     sections.addAll(backmatter);
 
-    for (var section in sections) {
-      if (section.footnotes.isNotEmpty) {
-        footnoteSections.addAll(section.footnotes);
-      }
-
-      final subsections = section.getSubsections();
-
-      if (subsections.isEmpty) {
-        for (var subsection in subsections) {
-          if (subsection.footnotes.isNotEmpty) {
-            footnoteSections.addAll(subsection.footnotes);
-          }
-        }
-      }
-    }
-
-    toc = _buildToc();
+    return numbered;
   }
 
-// TODO - Add toc
-  Json toJson() => {
-        'lang': lang,
-        'meta': meta.toJson(),
-        'sections': sections.map((section) => section.toJson()).toList(),
-        'title': title,
-        'version': version,
-      };
-
-  @override
-  String toString() {
-    return toJson().toString();
-  }
-
-  PlainListTag _buildToc() {
-    final TocIndexSections tocIndexSections = [];
+  PlainListTag _createToc() {
+    final List<TocItem> tocIndexSections = [];
 
     for (var section in sections) {
       if (section.canAddToIndex()) {
-        tocIndexSections.add(TocIndexSection(section, 1));
+        tocIndexSections.add(TocItem(section, 1));
 
         if (section.isFrontmatter() && section.hasSubsections()) {
           final List<SectionTag> subsections = section.getSubsections();
 
           for (var subsection in subsections) {
             if (subsection.canAddToIndex(true)) {
-              tocIndexSections.add(TocIndexSection(subsection, 2));
+              tocIndexSections.add(TocItem(subsection, 2));
             }
           }
         }
       }
     }
 
-    return PlainListTag.fromTocIndexSections(tocIndexSections);
+    return PlainListTag.fromTocItems(tocIndexSections);
   }
 
   Iterable<XmlElement> _getTitleSubsections(XmlElement titleSection) {
@@ -190,5 +207,9 @@ class Book {
     }
 
     return null;
+  }
+
+  List<SectionTag> getNumberedSections() {
+    return sections.where((section) => section.type == SectionType.numbered).toList();
   }
 }

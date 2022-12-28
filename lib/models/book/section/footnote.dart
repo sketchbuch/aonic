@@ -1,6 +1,7 @@
 import 'package:xml/xml.dart';
 
 import '../../../constants/books.dart';
+import '../../../constants/characters.dart';
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
 import '../content/subcontent/text_element.dart';
@@ -55,28 +56,13 @@ class Footnote {
   List<TextElement> getSectionPrefix(TranslatedText prefixText) {
     final List<TextElement> sectionPrefix = [];
 
-    sectionPrefix.add(TextElement.fromTxt('('));
     sectionPrefix.add(TextElement.fromTxt(
       _isNumberedFootnote() ? prefixText.replaceFirst('#', _getSectionNumberStr()) : sectionTitle,
       type: DisplayType.link,
       attributes: {'idref': _getSectionIdRef()},
     ));
-    sectionPrefix.add(TextElement.fromTxt(') '));
+    sectionPrefix.add(TextElement.fromTxt(': $newLine'));
 
     return sectionPrefix;
-  }
-
-  List<TextElement> getFootnoteNumber(int footnoteIndexNumber) {
-    final List<TextElement> footnoteNumber = [];
-
-    footnoteNumber.add(TextElement.fromTxt('['));
-    footnoteNumber.add(TextElement.fromTxt(
-      footnoteIndexNumber.toString(),
-      type: DisplayType.link,
-      attributes: {'idref': '$_getSectionIdRef()#$idRef'},
-    ));
-    footnoteNumber.add(TextElement.fromTxt('] '));
-
-    return footnoteNumber;
   }
 }

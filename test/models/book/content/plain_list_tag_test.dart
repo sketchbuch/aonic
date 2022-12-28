@@ -1,6 +1,6 @@
 import 'package:lonewolf_new/models/book/content/plain_list_tag.dart';
 import 'package:lonewolf_new/models/book/content/section_tag.dart';
-import 'package:lonewolf_new/models/book/toc/toc_index_section.dart';
+import 'package:lonewolf_new/models/book/content/subcontent/toc_item.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
@@ -70,7 +70,7 @@ void main() {
     };
 
     void testListType(String type, String xml, Object json) {
-      group('$type', () {
+      group(type, () {
         final tag = PlainListTag.fromXml(getRootXmlElement(xml));
 
         test('Returns expected JSON', () {
@@ -95,8 +95,8 @@ void main() {
 
   group('Model - PlainListTag.fromTocIndexSections()', () {
     final indexSection = SectionTag.fromXml(getRootXmlElement(plainListSectionXml));
-    final indexSections = [TocIndexSection(indexSection, 1)];
-    final tag = PlainListTag.fromTocIndexSections(indexSections);
+    final indexSections = [TocItem(indexSection, 1)];
+    final tag = PlainListTag.fromTocItems(indexSections);
 
     final expectedJson = {
       "items": [plainListSectionJson],

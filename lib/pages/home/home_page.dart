@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/layout.dart';
 import '../../i18n/_generated_/translations.g.dart';
 import '../../routes/routes.dart';
 
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+          padding: const EdgeInsets.all(paddingExtraLarge),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
