@@ -10,6 +10,7 @@ enum DisplayType {
   cite,
   dd,
   dt,
+  footref,
   italic,
   link,
   plain,
@@ -42,6 +43,10 @@ class TextElement {
     final String elementName = xml.name.toString();
 
     switch (elementName) {
+      case 'a':
+      case 'link-text':
+        return DisplayType.link;
+
       case 'b':
       case 'strong':
         if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'cite') {
@@ -50,28 +55,27 @@ class TextElement {
 
         return DisplayType.bold;
 
-      case 'em':
-      case 'i':
-        return DisplayType.italic;
+      case 'bookref':
+        return DisplayType.bookref;
 
       case 'cite':
         return DisplayType.cite;
-
-      case 'a':
-      case 'link-text':
-        return DisplayType.link;
-
-      case 'typ':
-        return DisplayType.typ;
-
-      case 'bookref':
-        return DisplayType.bookref;
 
       case 'dt':
         return DisplayType.dt;
 
       case 'dd':
         return DisplayType.dd;
+
+      case 'em':
+      case 'i':
+        return DisplayType.italic;
+
+      case 'footref':
+        return DisplayType.footref;
+
+      case 'typ':
+        return DisplayType.typ;
 
       default:
         return DisplayType.plain;
