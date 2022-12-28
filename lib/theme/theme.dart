@@ -7,6 +7,7 @@ const colourPrimary = Color(0xff006633);
 const colourPrimaryTint = Color(0xff004422);
 const colourSplash = Color.fromARGB(32, 0, 51, 0);
 const colourText = Color(0xff003300);
+const colourSecondary = Color.fromARGB(255, 88, 150, 119);
 
 const themeProjectAon = ColorScheme(
   background: colourPaper,
@@ -38,6 +39,11 @@ ThemeData getTheme() {
       ),
     ),
     highlightColor: colourSplash,
+    inputDecorationTheme: const InputDecorationTheme(
+      helperStyle: TextStyle(fontSize: 14),
+      hintStyle: TextStyle(color: colourText, fontSize: 16),
+      labelStyle: TextStyle(color: colourText, fontSize: 16),
+    ),
     radioTheme: RadioThemeData(
       fillColor: MaterialStateColor.resolveWith((states) => colourPrimary),
       overlayColor: MaterialStateColor.resolveWith((states) => colourOverlay),
@@ -54,6 +60,8 @@ ThemeData getTheme() {
       headline6: TextStyle(color: colourHeadline, fontSize: 20, fontWeight: FontWeight.bold),
       bodyText1: TextStyle(color: colourPaper, fontSize: 16),
       bodyText2: TextStyle(color: colourText, fontSize: 16),
+      subtitle1: TextStyle(color: colourText, fontSize: 16),
+      subtitle2: TextStyle(color: colourText, fontSize: 14),
       button: TextStyle(color: colourPaper, fontSize: 16),
     ),
     unselectedWidgetColor: colourPrimary,
