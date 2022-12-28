@@ -12,19 +12,19 @@ import '../helpers/limit_range.dart';
 import '../layout/content_container.dart';
 import '../typography/headline.dart';
 
-class NumberedSection extends StatefulWidget {
+class NumberedSections extends StatefulWidget {
   final transBook = t.book;
   final OnNavigate onNavigate;
   final BookText sectionTitle;
   final List<NumberedSectionItem> numberedSections;
 
-  NumberedSection(this.sectionTitle, this.numberedSections, this.onNavigate, {Key? key}) : super(key: key);
+  NumberedSections(this.sectionTitle, this.onNavigate, this.numberedSections, {Key? key}) : super(key: key);
 
   @override
-  State<NumberedSection> createState() => _NumberedSectionState();
+  State<NumberedSections> createState() => _NumberedSectionsState();
 }
 
-class _NumberedSectionState extends State<NumberedSection> {
+class _NumberedSectionsState extends State<NumberedSections> {
   final _textEditingController = TextEditingController();
 
   @override

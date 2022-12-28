@@ -6,12 +6,12 @@ import '../../types/types.dart';
 import '../content/tags/plain_list.dart';
 import '../typography/headline.dart';
 
-class TocList extends StatelessWidget {
+class Toc extends StatelessWidget {
   final transBook = t.book;
   final PlainListTag toc;
   final OnNavigate onNavigate;
 
-  TocList(this.toc, this.onNavigate, {Key? key}) : super(key: key);
+  Toc(this.toc, this.onNavigate, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

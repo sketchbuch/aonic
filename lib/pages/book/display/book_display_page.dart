@@ -6,10 +6,10 @@ import '../../../constants/layout.dart';
 import '../../../exceptions/render.dart';
 import '../../../store/models/app_state.dart';
 import '../../../widgets/content/tags/section.dart';
-import '../../../widgets/matter/footnotes_list.dart';
-import '../../../widgets/matter/numbered_section.dart';
+import '../../../widgets/matter/footnotes.dart';
+import '../../../widgets/matter/numbered_sections.dart';
 import '../../../widgets/matter/title_page.dart';
-import '../../../widgets/matter/toc_list.dart';
+import '../../../widgets/matter/toc.dart';
 import 'book_display_view_model.dart';
 
 class BookDisplayPage extends StatelessWidget {
@@ -31,7 +31,7 @@ class BookDisplayPage extends StatelessWidget {
               }
 
               if (viewModel.pageId == bookIdToc) {
-                return TocList(book.toc, viewModel.onNavigate);
+                return Toc(book.toc, viewModel.onNavigate);
               } else if (viewModel.pageId == bookIdTitle) {
                 return TitlePage(book.meta, viewModel.onNavigate);
               } else {
@@ -43,10 +43,10 @@ class BookDisplayPage extends StatelessWidget {
 
                 switch (viewModel.pageId) {
                   case bookIdFootnotes:
-                    return FootnotesList(section, book.footnoteSections, viewModel.onNavigate);
+                    return Footnotes(section.meta.title, viewModel.onNavigate, book.footnoteSections);
 
                   case bookIdNumbered:
-                    return NumberedSection(section.meta.title, book.numberedSectionItems, viewModel.onNavigate);
+                    return NumberedSections(section.meta.title, viewModel.onNavigate, book.numberedSectionItems);
 
                   default:
                     return Section(section, viewModel.onNavigate, 1);
