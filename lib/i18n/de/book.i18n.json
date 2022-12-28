@@ -1,5 +1,10 @@
 {
   "footnotePrefix": "DE Section #",
+  "header": {
+    "actions": {
+      "random": "DE Pick a random number"
+    }
+  },
   "headlineSection": "DE #$sectionTitle",
   "loadButton": {
     "load": "DE Download book XML",

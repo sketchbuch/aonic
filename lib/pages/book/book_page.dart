@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -11,6 +13,7 @@ import 'book_view_model.dart';
 class BookPage extends StatefulWidget {
   final transBook = t.book;
   final transCommon = t.common;
+  final random = Random();
 
   BookPage({Key? key}) : super(key: key);
 
@@ -19,6 +22,7 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
+  int? randomNumber;
   /* Future<void> _onExitPressed() async {
     final isConfirmed = await _canExitBook();
 
@@ -58,18 +62,17 @@ class _BookPageState extends State<BookPage> {
     Navigator.of(context).pop();
   } */
 
+  void handleRandomNumberPicker() {
+    setState(() {
+      randomNumber = widget.random.nextInt(9);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, BookViewModel>(
       converter: (store) => BookViewModel.create(store),
       builder: (BuildContext context, BookViewModel viewModel) {
-        /*        print('###########');
-        print('### isBookLoaded: "${viewModel.isBookLoaded}"');
-        print('### isLoading: "${viewModel.isLoading}"');
-        print('### pageId: "${viewModel.pageId}"');
-        print('### sectionNumber: "${viewModel.sectionNumber}"');
-        print('### selectedBook: "${viewModel.selectedBook}"');
-        print('###########'); */
         String titleText = widget.transBook.titleSelection;
         String tooltipText = widget.transBook.loadButton.load;
 
@@ -101,6 +104,20 @@ class _BookPageState extends State<BookPage> {
                         icon: const Icon(Icons.navigate_next),
                         onPressed: viewModel.sectionNumber < pageMax ? viewModel.onNextPage : null,
                         tooltip: widget.transCommon.next,
+                      ),
+                      SizedBox(
+                        width: 80,
+                        child: ElevatedButton(
+                          onPressed: handleRandomNumberPicker,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(randomNumber == null ? '-' : randomNumber.toString()),
+                              const SizedBox(width: 5),
+                              const Icon(Icons.casino, size: 24.0),
+                            ],
+                          ),
+                        ),
                       ),
                     ]
                   : [],
