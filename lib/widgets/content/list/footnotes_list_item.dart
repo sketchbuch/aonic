@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/layout.dart';
+import '../../../constants/typography.dart';
 import '../../../i18n/_generated_/translations.g.dart';
 import '../../../models/book/section/footnote.dart';
 import '../../../types/types.dart';
@@ -23,8 +24,8 @@ class FootnotesListItem extends StatefulWidget with ContentRenderer {
 class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
+    final itemPadding = widget.footnoteNumber > 1 ? const EdgeInsets.only(top: paddingLarge) : EdgeInsets.zero;
     final chldren = [
-      ...widget.footnote.getFootnoteNumber(widget.footnoteNumber),
       ...widget.footnote.getSectionPrefix(widget.transBook.footnotePrefix),
       ...widget.footnote.texts,
     ];
@@ -32,9 +33,14 @@ class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTex
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Padding(
+          padding: itemPadding,
+          child: Text(widget.footnoteNumber.toString()),
+        ),
+        const SizedBox(width: offsetStd),
         Expanded(
           child: Padding(
-            padding: widget.footnoteNumber > 1 ? const EdgeInsets.only(top: paddingLarge) : EdgeInsets.zero,
+            padding: itemPadding,
             child: RichText(
               text: TextSpan(
                 style: DefaultTextStyle.of(context).style,
@@ -60,7 +66,7 @@ class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTex
                 }).toList(),
               ),
             ),
-          ), //text
+          ),
         ),
       ],
     );
