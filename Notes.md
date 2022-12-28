@@ -36,6 +36,12 @@
 - Add test for Tag
 - Test all tag models for tagType
 
+## Testing
+
+- <https://medium.com/@artemosipov/ultimate-guide-of-how-to-test-in-flutter-7b3cd4509b56>
+- <https://docs.flutter.dev/cookbook/testing/widget/introduction>
+- <https://medium.flutterdevs.com/widget-testing-with-flutter-59cbc020156f>
+
 ## Regexes in Dart
 
 - <https://www.regextester.com/100066>
