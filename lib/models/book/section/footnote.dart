@@ -8,6 +8,7 @@ import '../content/subcontent/text_element.dart';
 
 class Footnote {
   final List<TextElement> texts = [];
+  int footnoteNumber = 1;
   late final BookText sectionTitle;
   late final String id;
   late final String idRef;
@@ -29,6 +30,7 @@ class Footnote {
   }
 
   Json toJson() => {
+        'footnoteNumber': footnoteNumber,
         'id': id,
         'idRef': idRef,
         'sectionId': sectionId,

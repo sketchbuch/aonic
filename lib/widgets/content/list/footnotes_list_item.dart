@@ -5,17 +5,18 @@ import '../../../constants/layout.dart';
 import '../../../constants/typography.dart';
 import '../../../i18n/_generated_/translations.g.dart';
 import '../../../models/book/section/footnote.dart';
+import '../../../theme/theme.dart';
 import '../../../types/types.dart';
 import '../../mixins/content_renderer.dart';
 import '../../mixins/hoverable_text_element.dart';
 
 class FootnotesListItem extends StatefulWidget with ContentRenderer {
   final transBook = t.book;
+  final bool isInSection;
   final Footnote footnote;
-  final int footnoteNumber;
   final OnNavigate onNavigate;
 
-  FootnotesListItem(this.footnote, this.footnoteNumber, this.onNavigate, {Key? key}) : super(key: key);
+  FootnotesListItem(this.footnote, this.onNavigate, {Key? key, this.isInSection = false}) : super(key: key);
 
   @override
   State<FootnotesListItem> createState() => _FootnotesListItemState();
@@ -24,9 +25,11 @@ class FootnotesListItem extends StatefulWidget with ContentRenderer {
 class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
-    final itemPadding = widget.footnoteNumber > 1 ? const EdgeInsets.only(top: paddingLarge) : EdgeInsets.zero;
+    final fontSize = widget.isInSection ? fontSizeS : fontSizeM;
+
+    final itemPadding = widget.footnote.footnoteNumber > 1 ? const EdgeInsets.only(top: paddingLarge) : EdgeInsets.zero;
     final chldren = [
-      ...widget.footnote.getSectionPrefix(widget.transBook.footnotePrefix),
+      if (!widget.isInSection) ...widget.footnote.getSectionPrefix(widget.transBook.footnotePrefix),
       ...widget.footnote.texts,
     ];
 
@@ -35,9 +38,9 @@ class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTex
       children: [
         Padding(
           padding: itemPadding,
-          child: Text(widget.footnoteNumber.toString()),
+          child: Text(widget.footnote.footnoteNumber.toString(), style: TextStyle(fontSize: fontSize)),
         ),
-        const SizedBox(width: offsetStd),
+        const SizedBox(width: offsetSmall),
         Expanded(
           child: Padding(
             padding: itemPadding,
@@ -48,7 +51,8 @@ class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTex
                   final int textIndex = chldren.indexOf(text);
                   final isHover = isHoverIndex(textIndex);
                   final isLink = isHoverable(text);
-                  final style = widget.getTextElementTextStyle(text, isHover: isHover);
+                  var style = widget.getTextElementTextStyle(text, isHover: isHover);
+                  style = style.copyWith(fontSize: fontSize);
 
                   return TextSpan(
                     onEnter: isLink ? (_) => handleOnEnter(textIndex) : null,

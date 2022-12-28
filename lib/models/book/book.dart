@@ -72,6 +72,13 @@ class Book {
         }
       }
     }
+
+    int footnoteNumber = 1;
+
+    for (var footnote in footnoteSections) {
+      footnote.footnoteNumber = footnoteNumber;
+      footnoteNumber += 1;
+    }
   }
 
   void _createNumberedSectionList(List<SectionTag> numberedSections) {

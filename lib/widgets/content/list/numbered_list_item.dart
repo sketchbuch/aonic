@@ -46,7 +46,7 @@ class _NumberedListItemState extends State<NumberedListItem> with HoverableTextE
             textAlign: TextAlign.right,
           ),
         ),
-        const SizedBox(width: offsetStd),
+        const SizedBox(width: offsetMedium),
         Expanded(
           child: RichText(
             text: TextSpan(

@@ -30,7 +30,7 @@ class _BulletListItemState extends State<BulletListItem> with HoverableTextEleme
       children: [
         if (widget.depth > 1) SizedBox(width: depthIndent),
         const Text(bulletSymbol),
-        const SizedBox(width: offsetStd),
+        const SizedBox(width: offsetMedium),
         Expanded(
           child: RichText(
             text: TextSpan(
