@@ -15,20 +15,12 @@ class Footnotes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int footnoteNumber = 1;
-    List<FootnotesListItem> footnoteItems = [];
-
-    for (var footnote in footnotes) {
-      footnoteItems.add(FootnotesListItem(footnote, footnoteNumber, onNavigate));
-      footnoteNumber += 1;
-    }
-
     return ContentContainer(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Headline(sectionTitle),
-          ...footnoteItems,
+          ...footnotes.map((footnote) => FootnotesListItem(footnote, onNavigate)),
         ],
       ),
     );

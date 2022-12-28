@@ -5,6 +5,7 @@ import '../../../models/book/content/section_tag.dart';
 import '../../../types/types.dart';
 import '../../helpers/get_tag_list.dart';
 import '../../typography/headline.dart';
+import 'footnotes.dart';
 
 class Section extends StatelessWidget {
   final transBook = t.book;
@@ -24,6 +25,7 @@ class Section extends StatelessWidget {
           level: level,
         ),
         ...getTagList(section.data.content, onNavigate, level),
+        if (section.footnotes.isNotEmpty) Footnotes(section.footnotes, onNavigate),
       ],
     );
   }
