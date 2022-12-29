@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../models/book/content/description_list_tag.dart';
 import '../../../models/book/content/subcontent/description_list_item.dart';
-import '../../layout/content_container.dart';
-import '../../mixins/content_renderer.dart';
-import '../list/description_detail_list_item.dart';
-import '../list/description_detail_text_list_item.dart';
-import '../list/description_term_list_item.dart';
+import '../layout/content_container.dart';
+import '../mixins/content_renderer.dart';
+import 'list/description_detail_list_item.dart';
+import 'list/description_detail_text_list_item.dart';
+import 'list/description_term_list_item.dart';
 
 class DescriptionList extends StatelessWidget with ContentRenderer {
   final DescriptionListTag tag;

@@ -5,7 +5,7 @@ import '../../../constants/books.dart';
 import '../../../constants/layout.dart';
 import '../../../exceptions/render.dart';
 import '../../../store/models/app_state.dart';
-import '../../../widgets/content/tags/section.dart';
+import '../../../widgets/content/section.dart';
 import '../../../widgets/matter/footnotes.dart';
 import '../../../widgets/matter/numbered_sections.dart';
 import '../../../widgets/matter/title_page.dart';

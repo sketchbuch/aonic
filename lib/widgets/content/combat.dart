@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../constants/layout.dart';
 import '../../../i18n/_generated_/translations.g.dart';
 import '../../../models/book/content/combat_tag.dart';
-import '../../layout/content_container.dart';
+import '../layout/content_container.dart';
 
 class Combat extends StatelessWidget {
   final CombatTag tag;

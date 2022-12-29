@@ -5,7 +5,7 @@ import '../../i18n/_generated_/translations.g.dart';
 import '../../models/book/meta/meta.dart';
 import '../../models/book/meta/right.dart';
 import '../../types/types.dart';
-import '../content/tags/paragraph.dart';
+import '../content/paragraph.dart';
 import '../content/text_paragraph.dart';
 import '../layout/dividing_line.dart';
 import '../typography/headline.dart';

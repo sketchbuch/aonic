@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/book/content/blockquote.dart';
-import '../../layout/content_container.dart';
-import '../../mixins/content_renderer.dart';
+import '../layout/content_container.dart';
+import '../mixins/content_renderer.dart';
 
 class Blockquote extends StatelessWidget with ContentRenderer {
   final BlockquoteTag tag;
