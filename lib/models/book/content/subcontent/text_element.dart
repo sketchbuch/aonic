@@ -45,7 +45,7 @@ class TextElement {
 
     if (displayType == DisplayType.citeBookref) {
       if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'bookref') {
-        attrs = getAttributes(xml.childElements.elementAt(0));
+        attrs = {...attrs, ...getAttributes(xml.childElements.elementAt(0))};
       }
     }
 
