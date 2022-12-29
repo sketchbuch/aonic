@@ -6,7 +6,7 @@ import '../../../theme/theme.dart';
 class ImageBox extends StatelessWidget {
   final Widget child;
 
-  const ImageBox(this.child, {Key? key}) : super(key: key);
+  const ImageBox({required this.child, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

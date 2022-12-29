@@ -19,7 +19,7 @@ class Illustration extends StatelessWidget {
     if (htmlInstance == null) {
       return const ContentContainer(
         child: ImageBox(
-          ImageError('No HTML instance found'),
+          child: ImageError('No HTML instance found'),
         ),
       );
     }
@@ -27,7 +27,7 @@ class Illustration extends StatelessWidget {
     return ContentContainer(
       width: sizeZero,
       child: ImageBox(
-        Image.network(
+        child: Image.network(
           'https://www.projectaon.org/en/xhtml/lw/01fftd/${htmlInstance.fileName}',
           errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
             if (exception.runtimeType == NetworkImageLoadException) {
