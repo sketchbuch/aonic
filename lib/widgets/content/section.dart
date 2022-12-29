@@ -24,7 +24,7 @@ class Section extends StatelessWidget {
           section.isNumbered() ? transBook.headlineSection(sectionTitle: section.meta.title) : section.meta.title,
           level: level,
         ),
-        ...getTagList(section.data.content, onNavigate, level),
+        ...getTagList(section, onNavigate, level),
         if (section.footnotes.isNotEmpty) Footnotes(section.footnotes, onNavigate),
       ],
     );

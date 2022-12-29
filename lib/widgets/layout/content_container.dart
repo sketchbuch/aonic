@@ -5,15 +5,18 @@ import '../../constants/layout.dart';
 class ContentContainer extends StatelessWidget {
   final Widget child;
   final double bottomPadding;
+  final double width;
 
-  const ContentContainer({required this.child, this.bottomPadding = paddingLarge, Key? key}) : super(key: key);
+  const ContentContainer(
+      {required this.child, this.bottomPadding = paddingLarge, this.width = maxContentWidth, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
         padding: EdgeInsets.only(bottom: bottomPadding),
-        width: maxContentWidth,
+        width: width > sizeZero ? width : null,
         child: child,
       ),
     );

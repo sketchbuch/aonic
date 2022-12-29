@@ -30,7 +30,7 @@ class TitlePage extends StatelessWidget {
         ...meta.getRightParagraphs(RightType.licenseNotification).map((para) => Paragraph(
               para,
               onNavigate,
-              bottomPadding: 0.0,
+              bottomPadding: sizeZero,
             )),
         const SizedBox(height: paddingLarge),
       ],

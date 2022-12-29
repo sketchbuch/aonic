@@ -17,7 +17,7 @@ class DescriptionTermListItem extends StatelessWidget with ContentRenderer {
       children: [
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(top: isFirstTerm ? 0.0 : paddingNormal),
+            padding: EdgeInsets.only(top: isFirstTerm ? sizeZero : paddingNormal),
             child: RichText(
               text: TextSpan(
                 style: DefaultTextStyle.of(context).style,
