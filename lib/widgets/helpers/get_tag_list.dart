@@ -21,7 +21,8 @@ import '../content/paragraph.dart';
 import '../content/plain_list.dart';
 import '../content/section.dart';
 
-List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate, int level) {
+List<Widget> getTagList(SectionTag section, OnNavigate onNavigate, int level) {
+  List<Tag> tagList = section.data.content;
   final List<Widget> sectionContent = [];
 
   for (var tag in tagList) {
@@ -55,7 +56,7 @@ List<Widget> getTagList(List<Tag> tagList, OnNavigate onNavigate, int level) {
       case 'IllustrationTag':
         final illy = tag as IllustrationTag;
 
-        if (illy.isRealIllustration) {
+        if ((!section.isNumbered() || illy.isRealIllustration) && illy.getHtmlInstance() != null) {
           sectionContent.add(Illustration(illy));
         }
 

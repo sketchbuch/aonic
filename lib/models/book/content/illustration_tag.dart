@@ -57,13 +57,13 @@ class IllustrationTag extends Tag {
         'type': type.name,
       };
 
-  String getHtmlInstanceFilename() {
+  IllustrationInstance? getHtmlInstance() {
     final matchinInstances = instances.where((instance) => instance.type == InstanceType.html);
 
     if (matchinInstances.isNotEmpty) {
-      return matchinInstances.first.fileName;
+      return matchinInstances.first;
     }
 
-    return '';
+    return null;
   }
 }

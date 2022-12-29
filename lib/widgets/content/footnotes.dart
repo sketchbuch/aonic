@@ -4,6 +4,7 @@ import 'package:lonewolf_new/theme/theme.dart';
 import '../../../constants/typography.dart';
 import '../../../models/book/section/footnote.dart';
 import '../../../types/types.dart';
+import '../../constants/layout.dart';
 import '../layout/content_container.dart';
 import '../layout/dividing_line.dart';
 import '../mixins/content_renderer.dart';
@@ -32,7 +33,7 @@ class Footnotes extends StatelessWidget with ContentRenderer {
               SizedBox(width: offsetSmall),
               Expanded(
                   child: DividingLine(
-                bottomPadding: 0.0,
+                bottomPadding: sizeZero,
               )),
             ],
           ),
