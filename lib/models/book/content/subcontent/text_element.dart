@@ -8,6 +8,7 @@ enum DisplayType {
   boldCite,
   bookref,
   cite,
+  citeBookref,
   dd,
   dt,
   footref,
@@ -28,8 +29,8 @@ class TextElement {
   TextElement._();
 
   TextElement.fromXml(XmlElement xml, [DisplayType? type]) {
-    attrs = getAttributes(xml);
     displayType = type ?? _getDisplayType(xml);
+    attrs = _getAttrs(xml, displayType);
     text = xml.text;
   }
 
@@ -37,6 +38,25 @@ class TextElement {
     attrs = attributes ?? {};
     displayType = type ?? DisplayType.plain;
     text = txt;
+  }
+
+  Attrs _getAttrs(XmlElement xml, DisplayType displayType) {
+    var attrs = getAttributes(xml);
+
+    if (displayType == DisplayType.citeBookref) {
+      if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'bookref') {
+        attrs = getAttributes(xml.childElements.elementAt(0));
+      }
+    }
+
+    if (displayType == DisplayType.citeBookref || displayType == DisplayType.bookref) {
+      final book = attrs['book'];
+      final series = attrs['series'];
+
+      attrs['href'] = 'https://www.projectaon.org/en/xhtml/$series/$book/title.htm';
+    }
+
+    return attrs;
   }
 
   DisplayType _getDisplayType(XmlElement xml) {
@@ -59,6 +79,10 @@ class TextElement {
         return DisplayType.bookref;
 
       case 'cite':
+        if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'bookref') {
+          return DisplayType.citeBookref;
+        }
+
         return DisplayType.cite;
 
       case 'dt':

@@ -15,19 +15,23 @@ mixin ContentRenderer on Widget {
     FontWeight weight = FontWeight.normal;
     TextDecoration decoration = TextDecoration.none;
 
-    if (text.displayType == DisplayType.italic ||
-        text.displayType == DisplayType.cite ||
+    if (text.displayType == DisplayType.cite ||
+        text.displayType == DisplayType.italic ||
         text.displayType == DisplayType.quoteCite) {
       style = FontStyle.italic;
     }
 
     if (text.displayType == DisplayType.bold ||
-        text.displayType == DisplayType.link ||
-        text.displayType == DisplayType.boldCite) {
+        text.displayType == DisplayType.boldCite ||
+        text.displayType == DisplayType.bookref ||
+        text.displayType == DisplayType.citeBookref ||
+        text.displayType == DisplayType.link) {
       weight = FontWeight.bold;
     }
 
-    if (text.displayType == DisplayType.link) {
+    if (text.displayType == DisplayType.bookref ||
+        text.displayType == DisplayType.citeBookref ||
+        text.displayType == DisplayType.link) {
       decoration = TextDecoration.underline;
       foregrondColor = colourPrimary;
 
