@@ -38,16 +38,22 @@ class _ChoiceState extends State<Choice> with HoverableTextElement {
               style = style.copyWith(fontWeight: FontWeight.bold);
             }
 
+            TapGestureRecognizer? recognizer;
+
+            if (isLink) {
+              recognizer = TapGestureRecognizer()
+                ..onTap = () {
+                  final route = widget.tag.idref;
+                  widget.onNavigate(route);
+                };
+
+              hoverRecognizers.add(recognizer);
+            }
+
             return TextSpan(
               onEnter: isLink ? (_) => handleOnEnter(textIndex) : null,
               onExit: isLink ? (_) => handleOnExit() : null,
-              recognizer: isLink
-                  ? (TapGestureRecognizer()
-                    ..onTap = () {
-                      final route = widget.tag.idref;
-                      widget.onNavigate(route);
-                    })
-                  : null,
+              recognizer: recognizer,
               style: style,
               text: text.text,
             );
