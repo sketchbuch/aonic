@@ -54,16 +54,22 @@ class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTex
                   var style = widget.getTextElementTextStyle(text, isHover: isHover);
                   style = style.copyWith(fontSize: fontSize);
 
+                  TapGestureRecognizer? recognizer;
+
+                  if (isLink) {
+                    recognizer = TapGestureRecognizer()
+                      ..onTap = () {
+                        final route = text.attrs['href'] ?? text.attrs['idref'] ?? '';
+                        widget.onNavigate(route);
+                      };
+
+                    hoverRecognizers.add(recognizer);
+                  }
+
                   return TextSpan(
                     onEnter: isLink ? (_) => handleOnEnter(textIndex) : null,
                     onExit: isLink ? (_) => handleOnExit() : null,
-                    recognizer: isLink
-                        ? (TapGestureRecognizer()
-                          ..onTap = () {
-                            final route = text.attrs['href'] ?? text.attrs['idref'] ?? '';
-                            widget.onNavigate(route);
-                          })
-                        : null,
+                    recognizer: recognizer,
                     style: style,
                     text: text.text,
                   );

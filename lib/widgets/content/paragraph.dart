@@ -33,16 +33,22 @@ class _ParagraphState extends State<Paragraph> with HoverableTextElement {
             final isLink = isHoverable(text);
             final style = widget.getTextElementTextStyle(text, isHover: isHover);
 
+            TapGestureRecognizer? recognizer;
+
+            if (isLink) {
+              recognizer = TapGestureRecognizer()
+                ..onTap = () {
+                  final route = text.attrs['href'] ?? text.attrs['idref'] ?? '';
+                  widget.onNavigate(route);
+                };
+
+              hoverRecognizers.add(recognizer);
+            }
+
             return TextSpan(
               onEnter: isLink ? (_) => handleOnEnter(textIndex) : null,
               onExit: isLink ? (_) => handleOnExit() : null,
-              recognizer: isLink
-                  ? (TapGestureRecognizer()
-                    ..onTap = () {
-                      final route = text.attrs['href'] ?? text.attrs['idref'] ?? '';
-                      widget.onNavigate(route);
-                    })
-                  : null,
+              recognizer: recognizer,
               style: style,
               text: text.text,
             );

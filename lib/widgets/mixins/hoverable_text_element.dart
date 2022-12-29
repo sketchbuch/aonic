@@ -1,10 +1,21 @@
 // ignore_for_file: unused_field, unused_element
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:lonewolf_new/models/book/content/subcontent/text_element.dart';
 
 mixin HoverableTextElement<T extends StatefulWidget> on State<T> {
   int? hoverIndex;
+  final List<TapGestureRecognizer> hoverRecognizers = [];
+
+  @override
+  void dispose() {
+    for (var recognizer in hoverRecognizers) {
+      recognizer.dispose();
+    }
+
+    super.dispose();
+  }
 
   void handleOnEnter(int textIndex) {
     setState(() => hoverIndex = textIndex);
