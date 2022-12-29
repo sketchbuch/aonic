@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../../../constants/layout.dart';
 import '../../../models/book/content/paragraph_tag.dart';
 import '../../../types/types.dart';
-import '../../layout/content_container.dart';
-import '../../mixins/content_renderer.dart';
-import '../../mixins/hoverable_text_element.dart';
+import '../layout/content_container.dart';
+import '../mixins/content_renderer.dart';
+import '../mixins/hoverable_text_element.dart';
 
 class Paragraph extends StatefulWidget with ContentRenderer {
   final double bottomPadding;

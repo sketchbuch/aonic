@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/book/content/illustration_tag.dart';
-import '../../layout/content_container.dart';
-import '../image/image_error.dart';
-import '../image/image_loading.dart';
+import '../layout/content_container.dart';
+import 'image/image_error.dart';
+import 'image/image_loading.dart';
 
 class Illustration extends StatelessWidget {
   final IllustrationTag tag;

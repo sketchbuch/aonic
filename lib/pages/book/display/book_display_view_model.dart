@@ -1,5 +1,7 @@
 import 'package:redux/redux.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../exceptions/gameplay.dart';
 import '../../../models/book/book.dart';
 import '../../../routes/routes.dart';
 import '../../../store/actions/actions.dart';
@@ -25,8 +27,18 @@ class BookDisplayViewModel {
     final bookState = state.bookState;
     final pageState = state.pageState;
 
+    Future<void> _launchUrl(String link) async {
+      if (!await launchUrl(Uri.parse(link))) {
+        throw GameplayException('Could not launch $link');
+      }
+    }
+
     void onNavigate(String link) {
-      store.dispatch(PageNavigateAction(bookNav, link));
+      if (link.startsWith('http')) {
+        _launchUrl(link);
+      } else {
+        store.dispatch(PageNavigateAction(bookNav, link));
+      }
     }
 
     return BookDisplayViewModel(

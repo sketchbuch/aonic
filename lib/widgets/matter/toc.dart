@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../i18n/_generated_/translations.g.dart';
 import '../../models/book/content/plain_list_tag.dart';
 import '../../types/types.dart';
-import '../content/tags/plain_list.dart';
+import '../content/plain_list.dart';
 import '../typography/headline.dart';
 
 class Toc extends StatelessWidget {
