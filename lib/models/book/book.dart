@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:xml/xml.dart';
 
 import '../../exceptions/xml.dart';
@@ -6,7 +7,9 @@ import '../../utils/xml/helpers.dart';
 import 'content/plain_list_tag.dart';
 import 'content/section_tag.dart';
 import 'content/subcontent/numbered_section_item.dart';
+import 'content/subcontent/text_element.dart';
 import 'content/subcontent/toc_item.dart';
+import 'content/tag.dart';
 import 'helpers/section_cache.dart';
 import 'meta/meta.dart';
 import 'section/footnote.dart';
@@ -38,6 +41,7 @@ class Book {
 
     final numberedSections = _createSections(xml);
     _collectFootnotes();
+    _updateFootnoteRefs();
     _createNumberedSectionList(numberedSections);
     toc = _createToc();
   }
@@ -64,7 +68,7 @@ class Book {
 
       final subsections = section.getSubsections();
 
-      if (subsections.isEmpty) {
+      if (subsections.isNotEmpty) {
         for (var subsection in subsections) {
           if (subsection.footnotes.isNotEmpty) {
             footnoteSections.addAll(subsection.footnotes);
@@ -78,6 +82,42 @@ class Book {
     for (var footnote in footnoteSections) {
       footnote.footnoteNumber = footnoteNumber;
       footnoteNumber += 1;
+    }
+  }
+
+  void _updateFootnoteRefs() {
+    for (var section in sections) {
+      if (section.footnotes.isNotEmpty && section.data.content.isNotEmpty) {
+        _updateFootnoteRefsLinks(section.data.content, section.footnotes);
+
+        final subsections = section.getSubsections();
+
+        if (subsections.isNotEmpty) {
+          for (var subsection in subsections) {
+            if (subsection.footnotes.isNotEmpty && subsection.data.content.isNotEmpty) {
+              _updateFootnoteRefsLinks(subsection.data.content, subsection.footnotes);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  void _updateFootnoteRefsLinks(List<Tag> content, List<Footnote> footnotes) {
+    for (var tag in content) {
+      if (tag.texts.isNotEmpty) {
+        final footnoteRefs = tag.texts.where((text) => text.displayType == DisplayType.footref).toList();
+
+        if (footnoteRefs.isNotEmpty) {
+          for (var text in footnoteRefs) {
+            final footnote = footnotes.firstWhereOrNull((footnote) => footnote.idRef == text.attrs['id']);
+
+            if (footnote != null) {
+              text.text = footnote.footnoteNumber.toString();
+            }
+          }
+        }
+      }
     }
   }
 
