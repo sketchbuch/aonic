@@ -32,8 +32,6 @@ mixin HoverableTextElement<T extends StatefulWidget> on State<T> {
   }
 
   bool isHoverable(TextElement textElement) {
-    return textElement.displayType == DisplayType.link ||
-        textElement.displayType == DisplayType.bookref ||
-        textElement.displayType == DisplayType.citeBookref;
+    return textElement.displayType == DisplayType.link || textElement.displayType == DisplayType.bookref;
   }
 }

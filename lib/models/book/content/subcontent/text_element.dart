@@ -5,10 +5,8 @@ import '../../../../utils/xml/helpers.dart';
 
 enum DisplayType {
   bold,
-  boldCite,
   bookref,
   cite,
-  citeBookref,
   dd,
   dt,
   footref,
@@ -16,22 +14,35 @@ enum DisplayType {
   link,
   plain,
   quote,
-  quoteCite,
   typ;
 }
 
 class TextElement {
+  final List<TextElement> subelements = [];
+  late BookText text;
   late final Attrs attrs;
   late final DisplayType displayType;
-  late BookText text;
 
   // ignore: unused_element
   TextElement._();
 
   TextElement.fromXml(XmlElement xml, [DisplayType? type]) {
+    final hasChildren = xml.childElements.isNotEmpty;
+
     displayType = type ?? _getDisplayType(xml);
     attrs = _getAttrs(xml, displayType);
-    text = xml.text;
+    text = hasChildren ? '' : xml.text;
+
+    if (hasChildren) {
+      final childNodes = [...xml.childElements];
+      for (var child in xml.children) {
+        if (child.nodeType == XmlNodeType.ELEMENT) {
+          subelements.add(TextElement.fromXml(childNodes.removeAt(0)));
+        } else {
+          subelements.add(TextElement.fromTxt(child.text));
+        }
+      }
+    }
   }
 
   TextElement.fromTxt(String txt, {DisplayType? type, Attrs? attributes}) {
@@ -43,7 +54,7 @@ class TextElement {
   Attrs _getAttrs(XmlElement xml, DisplayType displayType) {
     var attrs = getAttributes(xml);
 
-    if (displayType == DisplayType.citeBookref) {
+    /* if (displayType == DisplayType.citeBookref) {
       if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'bookref') {
         attrs = {...attrs, ...getAttributes(xml.childElements.elementAt(0))};
       }
@@ -54,7 +65,7 @@ class TextElement {
       final series = attrs['series'];
 
       attrs['href'] = 'https://www.projectaon.org/en/xhtml/$series/$book/title.htm';
-    }
+    } */
 
     return attrs;
   }
@@ -69,20 +80,12 @@ class TextElement {
 
       case 'b':
       case 'strong':
-        if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'cite') {
-          return DisplayType.boldCite;
-        }
-
         return DisplayType.bold;
 
       case 'bookref':
         return DisplayType.bookref;
 
       case 'cite':
-        if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'bookref') {
-          return DisplayType.citeBookref;
-        }
-
         return DisplayType.cite;
 
       case 'dt':
@@ -109,6 +112,7 @@ class TextElement {
   Json toJson() => {
         'attrs': attrs,
         'displayType': displayType.name,
+        'subelements': subelements.map((subelement) => subelement.toJson()).toList(),
         'text': text,
       };
 

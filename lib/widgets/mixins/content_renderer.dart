@@ -17,24 +17,18 @@ mixin ContentRenderer on Widget {
     TextDecoration decoration = TextDecoration.none;
     List<FontFeature>? fontFeatures = [];
 
-    if (text.displayType == DisplayType.cite ||
-        text.displayType == DisplayType.italic ||
-        text.displayType == DisplayType.quoteCite) {
+    if (text.displayType == DisplayType.cite || text.displayType == DisplayType.italic) {
       style = FontStyle.italic;
     }
 
     if (text.displayType == DisplayType.bold ||
-        text.displayType == DisplayType.boldCite ||
         text.displayType == DisplayType.bookref ||
-        text.displayType == DisplayType.citeBookref ||
         text.displayType == DisplayType.footref ||
         text.displayType == DisplayType.link) {
       weight = FontWeight.bold;
     }
 
-    if (text.displayType == DisplayType.bookref ||
-        text.displayType == DisplayType.citeBookref ||
-        text.displayType == DisplayType.link) {
+    if (text.displayType == DisplayType.bookref || text.displayType == DisplayType.link) {
       decoration = TextDecoration.underline;
       foregrondColor = colourPrimary;
 
