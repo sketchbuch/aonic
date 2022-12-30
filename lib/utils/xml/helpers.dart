@@ -35,7 +35,7 @@ DateTime getDate(String year, String month, String day) {
   return DateTime.parse('$year-${month.padLeft(2, '0')}-${day.padLeft(2, '0')}');
 }
 
-List<TextElement> getTextElementList(XmlElement xml, [DisplayType? type]) {
+TextElements getTextElementList(XmlElement xml, [DisplayType? type]) {
   int elementCount = -1;
 
   return xml.children.map((child) {
@@ -44,7 +44,7 @@ List<TextElement> getTextElementList(XmlElement xml, [DisplayType? type]) {
 
       try {
         final childElement = xml.childElements.elementAt(elementCount);
-        return TextElement.fromXml(childElement, type);
+        return TextElement.fromXml(childElement, type: type);
       } on RangeError {
         return TextElement.fromTxt(child.text);
       }

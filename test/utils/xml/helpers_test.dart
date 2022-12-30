@@ -107,11 +107,23 @@ you wish to follow the <quote>left track</quote>, <link-text>turn to 275</link-t
         expect(elements.length, equals(2));
         expect(
           elements.first.toJson(),
-          equals({"attrs": {}, "displayType": "plain", "text": "This is a "}),
+          equals({
+            "attrs": {},
+            "displayType": "plain",
+            "parentType": "none",
+            "subelements": [],
+            "text": "This is a ",
+          }),
         );
         expect(
           elements.last.toJson(),
-          equals({"attrs": {}, "displayType": "bold", "text": "paragraph"}),
+          equals({
+            "attrs": {},
+            "displayType": "bold",
+            "parentType": "none",
+            "subelements": [],
+            "text": "paragraph",
+          }),
         );
       });
 
@@ -122,11 +134,23 @@ you wish to follow the <quote>left track</quote>, <link-text>turn to 275</link-t
         expect(elements.length, equals(2));
         expect(
           elements.first.toJson(),
-          equals({"attrs": {}, "displayType": "italic", "text": "This is a "}),
+          equals({
+            "attrs": {},
+            "displayType": "italic",
+            "parentType": "none",
+            "subelements": [],
+            "text": "This is a ",
+          }),
         );
         expect(
           elements.last.toJson(),
-          equals({"attrs": {}, "displayType": "italic", "text": "paragraph"}),
+          equals({
+            "attrs": {},
+            "displayType": "italic",
+            "parentType": "none",
+            "subelements": [],
+            "text": "paragraph",
+          }),
         );
       });
     });

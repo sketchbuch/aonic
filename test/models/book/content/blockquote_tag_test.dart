@@ -9,19 +9,41 @@ const blockquoteXml = '''<blockquote>
     </blockquote>''';
 final blockquoteJson = {
   "texts": [
-    {"attrs": {}, "displayType": "plain", "text": "If you lose, restore your "},
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": "If you lose, restore your ",
+    },
     {
       "attrs": {"class": "attribute"},
       "displayType": "typ",
+      "parentType": "none",
+      "subelements": [],
       "text": "ENDURANCE"
     },
-    {"attrs": {}, "displayType": "plain", "text": " points to the same total that you had before the contest, and "},
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": " points to the same total that you had before the contest, and ",
+    },
     {
       "attrs": {"idref": "sect192"},
       "displayType": "link",
+      "parentType": "none",
+      "subelements": [],
       "text": "turn to 192"
     },
-    {"attrs": {}, "displayType": "plain", "text": "."}
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": ".",
+    }
   ]
 };
 
@@ -32,6 +54,8 @@ final blockquoteTextJson = {
     {
       'attrs': {},
       'displayType': 'plain',
+      "parentType": "none",
+      "subelements": [],
       'text': 'The others are all seated at a large table waiting your appearance.'
     },
   ]

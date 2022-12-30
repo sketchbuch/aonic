@@ -20,23 +20,17 @@ class Choice extends StatefulWidget with ContentRenderer {
 class _ChoiceState extends State<Choice> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
-    int linkTextIndex = -1;
+    final flattenedTexts = widget.getFlattenedTexts(widget.tag.texts);
 
     return ContentContainer(
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
-          children: widget.tag.texts.map((text) {
+          children: flattenedTexts.map((text) {
             final int textIndex = widget.tag.texts.indexOf(text);
             final isHover = isHoverIndex(textIndex);
             final isLink = isHoverable(text);
             var style = widget.getTextElementTextStyle(text, isHover: isHover);
-
-            linkTextIndex += 1;
-
-            if (widget.tag.linkTextIndex == linkTextIndex) {
-              style = style.copyWith(fontWeight: FontWeight.bold);
-            }
 
             TapGestureRecognizer? recognizer;
 

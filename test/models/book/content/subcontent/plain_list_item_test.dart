@@ -9,13 +9,27 @@ const plainListItemXml = '<li>Illustration I (<a idref="sect7">Section 7</a>)</l
 const plainListItemJson = {
   "depth": 1,
   "texts": [
-    {"attrs": {}, "displayType": "plain", "text": "Illustration I ("},
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": "Illustration I (",
+    },
     {
       "attrs": {"idref": "sect7"},
       "displayType": "link",
+      "parentType": "none",
+      "subelements": [],
       "text": "Section 7"
     },
-    {"attrs": {}, "displayType": "plain", "text": ")"}
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": ")",
+    }
   ]
 };
 
@@ -41,6 +55,8 @@ final plainListSectionJson = {
     {
       "attrs": {"idref": "dedicate"},
       "displayType": "link",
+      "parentType": "none",
+      "subelements": [],
       "text": "Dedication"
     }
   ]

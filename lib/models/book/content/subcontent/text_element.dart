@@ -3,6 +3,8 @@ import 'package:xml/xml.dart';
 import '../../../../types/types.dart';
 import '../../../../utils/xml/helpers.dart';
 
+typedef TextElements = List<TextElement>;
+
 enum DisplayType {
   bold,
   bookref,
@@ -12,42 +14,46 @@ enum DisplayType {
   footref,
   italic,
   link,
+  none,
   plain,
   quote,
   typ;
 }
 
 class TextElement {
-  final List<TextElement> subelements = [];
+  final TextElements subelements = [];
   late BookText text;
   late final Attrs attrs;
   late final DisplayType displayType;
+  late final DisplayType parentType;
 
   // ignore: unused_element
   TextElement._();
 
-  TextElement.fromXml(XmlElement xml, [DisplayType? type]) {
+  TextElement.fromXml(XmlElement xml, {Attrs? attributes, DisplayType? parentDisplayType, DisplayType? type}) {
     final hasChildren = xml.childElements.isNotEmpty;
 
     displayType = type ?? _getDisplayType(xml);
-    attrs = _getAttrs(xml, displayType);
+    attrs = attributes ?? _getAttrs(xml, displayType);
+    parentType = parentDisplayType ?? DisplayType.none;
     text = hasChildren ? '' : xml.text;
 
     if (hasChildren) {
       final childNodes = [...xml.childElements];
       for (var child in xml.children) {
         if (child.nodeType == XmlNodeType.ELEMENT) {
-          subelements.add(TextElement.fromXml(childNodes.removeAt(0)));
+          subelements.add(TextElement.fromXml(childNodes.removeAt(0), parentDisplayType: displayType));
         } else {
-          subelements.add(TextElement.fromTxt(child.text));
+          subelements.add(TextElement.fromTxt(child.text, parentDisplayType: displayType));
         }
       }
     }
   }
 
-  TextElement.fromTxt(String txt, {DisplayType? type, Attrs? attributes}) {
+  TextElement.fromTxt(String txt, {Attrs? attributes, DisplayType? parentDisplayType, DisplayType? type}) {
     attrs = attributes ?? {};
     displayType = type ?? DisplayType.plain;
+    parentType = parentDisplayType ?? DisplayType.none;
     text = txt;
   }
 
@@ -106,6 +112,7 @@ class TextElement {
   Json toJson() => {
         'attrs': attrs,
         'displayType': displayType.name,
+        'parentType': parentType.name,
         'subelements': subelements.map((subelement) => subelement.toJson()).toList(),
         'text': text,
       };
@@ -113,5 +120,9 @@ class TextElement {
   @override
   String toString() {
     return toJson().toString();
+  }
+
+  bool isNode() {
+    return text.isEmpty && subelements.isNotEmpty;
   }
 }

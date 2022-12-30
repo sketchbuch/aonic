@@ -7,7 +7,7 @@ import 'toc_item.dart';
 
 class PlainListItem {
   late final int depth;
-  final List<TextElement> texts = [];
+  final TextElements texts = [];
 
   // ignore: unused_element
   PlainListItem._();

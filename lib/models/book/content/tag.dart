@@ -2,7 +2,7 @@ import '../../../types/types.dart';
 import 'subcontent/text_element.dart';
 
 abstract class Tag {
-  final List<TextElement> texts = [];
+  final TextElements texts = [];
 
   Tag();
 

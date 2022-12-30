@@ -10,31 +10,51 @@ final paragraphJson = {
     {
       "attrs": {},
       "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
       "text":
-          "Each Meal of Laumspur may be consumed when prompted for a Meal, in which case it fulfils the Meal requirement in addition to restoring 3 "
+          "Each Meal of Laumspur may be consumed when prompted for a Meal, in which case it fulfils the Meal requirement in addition to restoring 3 ",
     },
     {
       "attrs": {"class": "attribute"},
       "displayType": "typ",
+      "parentType": "none",
+      "subelements": [],
+      "text": "ENDURANCE",
+    },
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": " points. Laumspur may also be consumed at any other time to restore ",
+    },
+    {
+      "attrs": {"class": "attribute"},
+      "displayType": "typ",
+      "parentType": "none",
+      "subelements": [],
       "text": "ENDURANCE"
     },
     {
       "attrs": {},
       "displayType": "plain",
-      "text": " points. Laumspur may also be consumed at any other time to restore "
-    },
-    {
-      "attrs": {"class": "attribute"},
-      "displayType": "typ",
-      "text": "ENDURANCE"
-    },
-    {"attrs": {}, "displayType": "plain", "text": " without having any significance as a Meal."}
+      "parentType": "none",
+      "subelements": [],
+      "text": " without having any significance as a Meal.",
+    }
   ]
 };
 const paragraphDedicationXml = '<p class="dedication">Each Meal of Laumspur may be consumed...</p>';
 final paragraphDedicationJson = {
   "texts": [
-    {"attrs": {}, "displayType": "italic", "text": "Each Meal of Laumspur may be consumed..."}
+    {
+      "attrs": {},
+      "displayType": "italic",
+      "parentType": "none",
+      "subelements": [],
+      "text": "Each Meal of Laumspur may be consumed...",
+    }
   ]
 };
 

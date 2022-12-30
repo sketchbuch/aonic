@@ -10,7 +10,7 @@ enum DescriptionItemType {
 }
 
 class DescriptionListItem {
-  final List<TextElement> texts = [];
+  final TextElements texts = [];
   late final bool displayAsLines;
   late final DescriptionItemType type;
 

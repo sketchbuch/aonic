@@ -11,11 +11,13 @@ class Signpost extends StatelessWidget with ContentRenderer {
 
   @override
   Widget build(BuildContext context) {
+    final flattenedTexts = getFlattenedTexts(tag.texts);
+
     return ContentContainer(
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
-          children: tag.texts.map((text) {
+          children: flattenedTexts.map((text) {
             final style = getTextElementTextStyle(text);
 
             return TextSpan(style: style, text: text.text);
