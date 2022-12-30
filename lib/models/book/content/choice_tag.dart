@@ -6,7 +6,6 @@ import 'subcontent/text_element.dart';
 import 'tag.dart';
 
 class ChoiceTag extends Tag {
-  final List<TextElement> texts = [];
   late final int linkTextIndex;
   late final String idref;
 
