@@ -12,16 +12,22 @@ const choiceJson = {
     {
       "attrs": {},
       "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
       "text": "If you would rather press on, ",
     },
     {
       "attrs": {"class": "attr-test"},
       "displayType": "link",
+      "parentType": "none",
+      "subelements": [],
       "text": "turn to 213",
     },
     {
       "attrs": {},
       "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
       "text": ".",
     },
   ],

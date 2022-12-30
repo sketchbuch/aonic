@@ -3,53 +3,64 @@ import 'package:xml/xml.dart';
 import '../../../../types/types.dart';
 import '../../../../utils/xml/helpers.dart';
 
+typedef TextElements = List<TextElement>;
+
 enum DisplayType {
   bold,
-  boldCite,
   bookref,
   cite,
-  citeBookref,
   dd,
   dt,
   footref,
   italic,
   link,
+  none,
   plain,
   quote,
-  quoteCite,
   typ;
 }
 
 class TextElement {
+  final TextElements subelements = [];
+  late BookText text;
   late final Attrs attrs;
   late final DisplayType displayType;
-  late BookText text;
+  late final DisplayType parentType;
 
   // ignore: unused_element
   TextElement._();
 
-  TextElement.fromXml(XmlElement xml, [DisplayType? type]) {
+  TextElement.fromXml(XmlElement xml, {Attrs? attributes, DisplayType? parentDisplayType, DisplayType? type}) {
+    final hasChildren = xml.childElements.isNotEmpty;
+
     displayType = type ?? _getDisplayType(xml);
-    attrs = _getAttrs(xml, displayType);
-    text = xml.text;
+    attrs = attributes ?? _getAttrs(xml, displayType);
+    parentType = parentDisplayType ?? DisplayType.none;
+    text = hasChildren ? '' : xml.text;
+
+    if (hasChildren) {
+      final childNodes = [...xml.childElements];
+      for (var child in xml.children) {
+        if (child.nodeType == XmlNodeType.ELEMENT) {
+          subelements.add(TextElement.fromXml(childNodes.removeAt(0), parentDisplayType: displayType));
+        } else {
+          subelements.add(TextElement.fromTxt(child.text, parentDisplayType: displayType));
+        }
+      }
+    }
   }
 
-  TextElement.fromTxt(String txt, {DisplayType? type, Attrs? attributes}) {
+  TextElement.fromTxt(String txt, {Attrs? attributes, DisplayType? parentDisplayType, DisplayType? type}) {
     attrs = attributes ?? {};
     displayType = type ?? DisplayType.plain;
+    parentType = parentDisplayType ?? DisplayType.none;
     text = txt;
   }
 
   Attrs _getAttrs(XmlElement xml, DisplayType displayType) {
     var attrs = getAttributes(xml);
 
-    if (displayType == DisplayType.citeBookref) {
-      if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'bookref') {
-        attrs = {...attrs, ...getAttributes(xml.childElements.elementAt(0))};
-      }
-    }
-
-    if (displayType == DisplayType.citeBookref || displayType == DisplayType.bookref) {
+    if (displayType == DisplayType.bookref) {
       final book = attrs['book'];
       final series = attrs['series'];
 
@@ -69,20 +80,12 @@ class TextElement {
 
       case 'b':
       case 'strong':
-        if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'cite') {
-          return DisplayType.boldCite;
-        }
-
         return DisplayType.bold;
 
       case 'bookref':
         return DisplayType.bookref;
 
       case 'cite':
-        if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'bookref') {
-          return DisplayType.citeBookref;
-        }
-
         return DisplayType.cite;
 
       case 'dt':
@@ -109,11 +112,17 @@ class TextElement {
   Json toJson() => {
         'attrs': attrs,
         'displayType': displayType.name,
+        'parentType': parentType.name,
+        'subelements': subelements.map((subelement) => subelement.toJson()).toList(),
         'text': text,
       };
 
   @override
   String toString() {
     return toJson().toString();
+  }
+
+  bool isNode() {
+    return text.isEmpty && subelements.isNotEmpty;
   }
 }

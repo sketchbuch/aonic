@@ -17,36 +17,70 @@ const footnoteJson = {
   "sectionId": footnoteSectionId,
   "sectionTitle": footnoteSectionTitle,
   "texts": [
-    {"attrs": {}, "displayType": "plain", "text": "The wording of this section assumes that you have come from "},
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": "The wording of this section assumes that you have come from ",
+    },
     {
       "attrs": {"idref": "sect28"},
       "displayType": "link",
+      "parentType": "none",
+      "subelements": [],
       "text": "Section 28"
     },
-    {"attrs": {}, "displayType": "plain", "text": ". If you have just reached this section for the first time from "},
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": ". If you have just reached this section for the first time from ",
+    },
     {
       "attrs": {"idref": "sect42"},
       "displayType": "link",
+      "parentType": "none",
+      "subelements": [],
       "text": "Section 42"
     },
     {
       "attrs": {},
       "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
       "text":
-          ", read the last sentence and two choices as follows: ‘…As you eat you notice that the path starts to curve towards the north. If you wish to follow it, "
+          ", read the last sentence and two choices as follows: ‘…As you eat you notice that the path starts to curve towards the north. If you wish to follow it, ",
     },
     {
       "attrs": {"idref": "sect28"},
       "displayType": "link",
+      "parentType": "none",
+      "subelements": [],
       "text": "turn to 28"
     },
-    {"attrs": {}, "displayType": "plain", "text": ". If you wish to return the way you have come, "},
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": ". If you wish to return the way you have come, ",
+    },
     {
       "attrs": {"idref": "sect42"},
       "displayType": "link",
+      "parentType": "none",
+      "subelements": [],
       "text": "turn to 42"
     },
-    {"attrs": {}, "displayType": "plain", "text": ".’"}
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": ".’",
+    }
   ]
 };
 
@@ -80,6 +114,8 @@ void main() {
           equals({
             "attrs": {"idref": "sect113"},
             "displayType": "link",
+            "parentType": "none",
+            "subelements": [],
             "text": "Section 113",
           }));
       expect(
@@ -87,6 +123,8 @@ void main() {
           equals({
             "attrs": {},
             "displayType": "plain",
+            "parentType": "none",
+            "subelements": [],
             "text": ": \n"
                 ""
           }));

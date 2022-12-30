@@ -25,12 +25,13 @@ class FootnotesListItem extends StatefulWidget with ContentRenderer {
 class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
+    final flattenedTexts = widget.getFlattenedTexts(widget.footnote.texts);
     final fontSize = widget.isInSection ? fontSizeS : fontSizeM;
 
     final itemPadding = widget.footnote.footnoteNumber > 1 ? const EdgeInsets.only(top: paddingLarge) : EdgeInsets.zero;
     final chldren = [
       if (!widget.isInSection) ...widget.footnote.getSectionPrefix(widget.transBook.footnotePrefix),
-      ...widget.footnote.texts,
+      ...flattenedTexts,
     ];
 
     return Row(

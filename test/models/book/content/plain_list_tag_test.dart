@@ -19,13 +19,27 @@ final plainListUlJson = {
     {
       "depth": 1,
       "texts": [
-        {"attrs": {}, "displayType": "plain", "text": "Illustration II ("},
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text": "Illustration II (",
+        },
         {
           "attrs": {"idref": "sect23"},
           "displayType": "link",
+          "parentType": "none",
+          "subelements": [],
           "text": "Section 23"
         },
-        {"attrs": {}, "displayType": "plain", "text": ")"}
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text": ")",
+        }
       ]
     },
     {
@@ -34,7 +48,9 @@ final plainListUlJson = {
         {
           "attrs": {"idref": "equipmnt"},
           "displayType": "link",
-          "text": "Equipment"
+          "parentType": "none",
+          "subelements": [],
+          "text": "Equipment",
         }
       ]
     },
@@ -44,7 +60,9 @@ final plainListUlJson = {
         {
           "attrs": {"idref": "discplnz"},
           "displayType": "link",
-          "text": "Kai Disciplines"
+          "parentType": "none",
+          "subelements": [],
+          "text": "Kai Disciplines",
         }
       ]
     }

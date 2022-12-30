@@ -8,6 +8,28 @@ import '../../theme/theme.dart';
 const hoverBackgroundColour = Color(0xffcce0c1);
 
 mixin ContentRenderer on Widget {
+  TextElements _flattenTexts(TextElements textElements) {
+    final TextElements flattenedTexts = [];
+
+    for (var text in textElements) {
+      if (text.isNode()) {
+        flattenedTexts.addAll(_flattenTexts(text.subelements));
+      } else {
+        flattenedTexts.add(text);
+      }
+    }
+
+    return flattenedTexts;
+  }
+
+  TextElements getFlattenedTexts(TextElements textElements) {
+    if (textElements.isEmpty) {
+      return [];
+    }
+
+    return _flattenTexts(textElements);
+  }
+
   TextStyle getTextElementTextStyle(TextElement text, {bool isHover = false}) {
     Color? backgroundColor;
     Color? foregrondColor;
@@ -19,22 +41,19 @@ mixin ContentRenderer on Widget {
 
     if (text.displayType == DisplayType.cite ||
         text.displayType == DisplayType.italic ||
-        text.displayType == DisplayType.quoteCite) {
+        text.parentType == DisplayType.italic) {
       style = FontStyle.italic;
     }
 
     if (text.displayType == DisplayType.bold ||
-        text.displayType == DisplayType.boldCite ||
         text.displayType == DisplayType.bookref ||
-        text.displayType == DisplayType.citeBookref ||
         text.displayType == DisplayType.footref ||
-        text.displayType == DisplayType.link) {
+        text.displayType == DisplayType.link ||
+        text.parentType == DisplayType.bold) {
       weight = FontWeight.bold;
     }
 
-    if (text.displayType == DisplayType.bookref ||
-        text.displayType == DisplayType.citeBookref ||
-        text.displayType == DisplayType.link) {
+    if (text.displayType == DisplayType.bookref || text.displayType == DisplayType.link) {
       decoration = TextDecoration.underline;
       foregrondColor = colourPrimary;
 

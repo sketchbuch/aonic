@@ -15,20 +15,44 @@ const descriptionjson = {
         {
           "attrs": {},
           "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
           "text":
-              "You are Lone Wolf. In a devastating attack the Darklords have destroyed the monastery where you were learning the skills of the Kai Lords. You are the sole survivor."
+              "You are Lone Wolf. In a devastating attack the Darklords have destroyed the monastery where you were learning the skills of the Kai Lords. You are the sole survivor.",
         }
       ]
     },
     {
       "texts": [
-        {"attrs": {}, "displayType": "plain", "text": "In "},
-        {"attrs": {}, "displayType": "boldCite", "text": "Flight from the Dark"},
         {
           "attrs": {},
           "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text": "In ",
+        },
+        {
+          "attrs": {},
+          "displayType": "bold",
+          "parentType": "none",
+          "subelements": [
+            {
+              "attrs": {},
+              "displayType": "cite",
+              "parentType": "bold",
+              "subelements": [],
+              "text": "Flight from the Dark",
+            },
+          ],
+          "text": "",
+        },
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
           "text":
-              ", you swear revenge. But first you must reach Holmgard to warn the King of the gathering evil. Relentlessly the servants of darkness hunt you across your country and every turn of the page presents a new challenge. Choose your skills and your weapons carefully—for they can help you succeed in the most fantastic and terrifying journey of your life."
+              ", you swear revenge. But first you must reach Holmgard to warn the King of the gathering evil. Relentlessly the servants of darkness hunt you across your country and every turn of the page presents a new challenge. Choose your skills and your weapons carefully—for they can help you succeed in the most fantastic and terrifying journey of your life.",
         }
       ]
     }

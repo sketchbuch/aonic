@@ -7,7 +7,7 @@ import '../../../utils/xml/helpers.dart';
 import '../content/subcontent/text_element.dart';
 
 class Footnote {
-  final List<TextElement> texts = [];
+  final TextElements texts = [];
   int footnoteNumber = 1;
   late final BookText sectionTitle;
   late final String id;
@@ -55,8 +55,8 @@ class Footnote {
     return idRef.split('-').first;
   }
 
-  List<TextElement> getSectionPrefix(TranslatedText prefixText) {
-    final List<TextElement> sectionPrefix = [];
+  TextElements getSectionPrefix(TranslatedText prefixText) {
+    final TextElements sectionPrefix = [];
 
     sectionPrefix.add(TextElement.fromTxt(
       _isNumberedFootnote() ? prefixText.replaceFirst('#', _getSectionNumberStr()) : sectionTitle,

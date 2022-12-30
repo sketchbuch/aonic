@@ -23,6 +23,7 @@ class BulletListItem extends StatefulWidget with ContentRenderer {
 class _BulletListItemState extends State<BulletListItem> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
+    final flattenedTexts = widget.getFlattenedTexts(widget.item.texts);
     final depthIndent = widget.depth * listIndent;
 
     return Row(
@@ -35,7 +36,7 @@ class _BulletListItemState extends State<BulletListItem> with HoverableTextEleme
           child: RichText(
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
-              children: widget.item.texts.map((text) {
+              children: flattenedTexts.map((text) {
                 final int textIndex = widget.item.texts.indexOf(text);
                 final isHover = isHoverIndex(textIndex);
                 final isLink = isHoverable(text);

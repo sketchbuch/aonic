@@ -14,12 +14,13 @@ const rightJson = {
   "paragraphs": [
     {
       "texts": [
-        {"attrs": {}, "displayType": "plain", "text": "Text copyright © 1984 Joe Dever."}
-      ]
-    },
-    {
-      "texts": [
-        {"attrs": {}, "displayType": "plain", "text": "Illustrations copyright © 1984 Gary Chalk."}
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text": "Text copyright © 1984 Joe Dever.",
+        }
       ]
     },
     {
@@ -27,14 +28,35 @@ const rightJson = {
         {
           "attrs": {},
           "displayType": "plain",
-          "text": "Distribution of this Internet Edition is restricted under the terms of the "
+          "parentType": "none",
+          "subelements": [],
+          "text": "Illustrations copyright © 1984 Gary Chalk.",
+        }
+      ]
+    },
+    {
+      "texts": [
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text": "Distribution of this Internet Edition is restricted under the terms of the ",
         },
         {
           "attrs": {"idref": "license"},
           "displayType": "link",
+          "parentType": "none",
+          "subelements": [],
           "text": "Project Aon License"
         },
-        {"attrs": {}, "displayType": "plain", "text": "."}
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text": ".",
+        },
       ]
     }
   ],

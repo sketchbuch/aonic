@@ -11,6 +11,8 @@ class DescriptionDetailListItem extends StatelessWidget with ContentRenderer {
 
   @override
   Widget build(BuildContext context) {
+    final flattenedTexts = getFlattenedTexts(item.texts);
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -19,7 +21,7 @@ class DescriptionDetailListItem extends StatelessWidget with ContentRenderer {
           child: RichText(
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
-              children: item.texts.map((text) {
+              children: flattenedTexts.map((text) {
                 final style = getTextElementTextStyle(text);
 
                 return TextSpan(text: text.text, style: style);

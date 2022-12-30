@@ -22,12 +22,14 @@ class Paragraph extends StatefulWidget with ContentRenderer {
 class _ParagraphState extends State<Paragraph> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
+    final flattenedTexts = widget.getFlattenedTexts(widget.tag.texts);
+
     return ContentContainer(
       bottomPadding: widget.bottomPadding,
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
-          children: widget.tag.texts.map((text) {
+          children: flattenedTexts.map((text) {
             final int textIndex = widget.tag.texts.indexOf(text);
             final isHover = isHoverIndex(textIndex);
             final isLink = isHoverable(text);

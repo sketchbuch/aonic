@@ -1,128 +1,226 @@
 import 'package:lonewolf_new/models/book/content/subcontent/text_element.dart';
-import 'package:lonewolf_new/types/types.dart';
 import 'package:test/test.dart';
 
 import '../../../../helpers.dart';
 
 void main() {
-  const Attrs defaultAttrs = {};
-  const Attrs bookRefAttrs = {
-    'series': 'lw',
-    'book': '02fotw',
-    'href': 'https://www.projectaon.org/en/xhtml/lw/02fotw/title.htm'
-  };
+  group('Model - TextElement.fromXml()', () {
+    const xmlString = '<p>If you <b>would rather</b> press on, </p>';
+    final tag = TextElement.fromXml(getRootXmlElement(xmlString));
+    final expectedJson = {
+      "attrs": {},
+      "displayType": "plain",
+      'parentType': 'none',
+      "subelements": [
+        {
+          "attrs": {},
+          "displayType": "plain",
+          'parentType': 'plain',
+          "subelements": [],
+          "text": "If you ",
+        },
+        {
+          "attrs": {},
+          "displayType": "bold",
+          'parentType': 'plain',
+          "subelements": [],
+          "text": "would rather",
+        },
+        {
+          "attrs": {},
+          "displayType": "plain",
+          'parentType': 'plain',
+          "subelements": [],
+          "text": " press on, ",
+        },
+      ],
+      "text": "",
+    };
 
-  String getAttrStr(Attrs attrs) {
-    final attrKeys = attrs.keys;
-    var attrStr = '';
+    final optionalTag = TextElement.fromXml(
+      getRootXmlElement(xmlString),
+      type: DisplayType.cite,
+      parentDisplayType: DisplayType.italic,
+      attributes: {"lone": "wolf"},
+    );
+    final optionalExpectedJson = {
+      "attrs": {"lone": "wolf"},
+      "displayType": "cite",
+      'parentType': 'italic',
+      "subelements": [
+        {
+          "attrs": {},
+          "displayType": "plain",
+          'parentType': 'cite',
+          "subelements": [],
+          "text": "If you ",
+        },
+        {
+          "attrs": {},
+          "displayType": "bold",
+          'parentType': 'cite',
+          "subelements": [],
+          "text": "would rather",
+        },
+        {
+          "attrs": {},
+          "displayType": "plain",
+          'parentType': 'cite',
+          "subelements": [],
+          "text": " press on, ",
+        },
+      ],
+      "text": "",
+    };
 
-    if (attrKeys.isNotEmpty) {
-      for (var attrKey in attrKeys) {
-        attrStr += ' $attrKey="${attrs[attrKey]}"';
-      }
-    }
+    test('Returns expected JSON', () {
+      expect(tag.toJson(), equals(expectedJson));
+    });
 
-    return attrStr;
-  }
+    test('Returns expected string', () {
+      expect(tag.toString(), equals(expectedJson.toString()));
+    });
 
-  String getXmlString(Map<String, Object> testTag, String attrStr) {
-    var content = 'If you would rather press on, ';
+    test('Optional params returns expected JSON', () {
+      expect(optionalTag.toJson(), equals(optionalExpectedJson));
+    });
 
-    if (testTag['type'] == 'boldCite') {
-      content = '<cite>$content</cite>';
-    } else if (testTag['type'] == 'citeBookref') {
-      content = '<bookref${getAttrStr(testTag['attrs'] as Attrs)}>$content</bookref>';
-    }
+    test('Optional params returns expected string', () {
+      expect(optionalTag.toString(), equals(optionalExpectedJson.toString()));
+    });
 
-    return '<${testTag['tag']}$attrStr>$content</${testTag['tag']}>';
-  }
+    group('isNode()', () {
+      test('Returns true for element subelements and no text', () {
+        const xmlString = '<p>If you <b>would rather</b> press on, </p>';
+        final tag = TextElement.fromXml(getRootXmlElement(xmlString));
+        expect(tag.isNode(), equals(true));
+      });
 
-  group('Model - TextElement()', () {
-    final tags = [
-      {'type': 'bold', 'tag': 'b', 'attrs': defaultAttrs},
-      {'type': 'bold', 'tag': 'strong', 'attrs': defaultAttrs},
-      {'type': 'boldCite', 'tag': 'b', 'attrs': defaultAttrs},
-      {'type': 'boldCite', 'tag': 'strong', 'attrs': defaultAttrs},
-      {'type': 'bookref', 'tag': 'bookref', 'attrs': bookRefAttrs},
-      {'type': 'cite', 'tag': 'cite', 'attrs': defaultAttrs},
-      {'type': 'citeBookref', 'tag': 'cite', 'attrs': bookRefAttrs},
-      {'type': 'italic', 'tag': 'em', 'attrs': defaultAttrs},
-      {'type': 'italic', 'tag': 'i', 'attrs': defaultAttrs},
-      {'type': 'link', 'tag': 'a', 'attrs': defaultAttrs},
-      {'type': 'link', 'tag': 'link-text', 'attrs': defaultAttrs},
-      {'type': 'plain', 'tag': 'unknown-tag', 'attrs': defaultAttrs},
-      {'type': 'typ', 'tag': 'typ', 'attrs': defaultAttrs},
-    ];
+      test('Returns false for element without subelements and text', () {
+        const xmlString = '<p>If you would rather press on, </p>';
+        final tag = TextElement.fromXml(getRootXmlElement(xmlString));
+        expect(tag.isNode(), equals(false));
+      });
+    });
+  });
 
-    void testElement(Map<String, Object> testTag, String testType) {
-      test('Returns expected $testType with displayType "${testTag['type']}" when the tag is "${testTag['tag']}"', () {
-        final attrStr = getAttrStr(testTag['attrs'] as Attrs);
-        final xml = getXmlString(testTag, attrStr);
-        final tag = TextElement.fromXml(getRootXmlElement(xml));
-
-        final expectedJson = {
-          "attrs": testTag['attrs'],
-          "displayType": testTag['type'],
-          "text": "If you would rather press on, ",
-        };
-
-        if (testType == 'JSON') {
-          expect(tag.toJson(), equals(expectedJson));
-        } else {
-          expect(tag.toString(), equals(expectedJson.toString()));
+  group('Model - TextElement.fromXml() complex XML', () {
+    const xmlString =
+        '''<choice idref="sect347">If you <i>wish <b>to head</b> northeast</i>, <link-text>turn to 347</link-text>.</choice>''';
+    final tag = TextElement.fromXml(getRootXmlElement(xmlString));
+    final expectedJson = {
+      "attrs": {"idref": "sect347"},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "plain",
+          "subelements": [],
+          "text": "If you ",
+        },
+        {
+          "attrs": {},
+          "displayType": "italic",
+          "parentType": "plain",
+          "subelements": [
+            {
+              "attrs": {},
+              "displayType": "plain",
+              "parentType": "italic",
+              "subelements": [],
+              "text": "wish ",
+            },
+            {
+              "attrs": {},
+              "displayType": "bold",
+              "parentType": "italic",
+              "subelements": [],
+              "text": "to head",
+            },
+            {
+              "attrs": {},
+              "displayType": "plain",
+              "parentType": "italic",
+              "subelements": [],
+              "text": " northeast",
+            }
+          ],
+          "text": ""
+        },
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "plain",
+          "subelements": [],
+          "text": ", ",
+        },
+        {
+          "attrs": {},
+          "displayType": "link",
+          "parentType": "plain",
+          "subelements": [],
+          "text": "turn to 347",
+        },
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "plain",
+          "subelements": [],
+          "text": ".",
         }
-      });
-    }
+      ],
+      "text": ""
+    };
 
-    group('fromXml() toJson()', () {
-      for (var tag in tags) {
-        testElement(tag, 'JSON');
-      }
-    });
-    group('fromXml() toString()', () {
-      for (var tag in tags) {
-        testElement(tag, 'string');
-      }
+    test('Returns expected JSON', () {
+      expect(tag.toJson(), equals(expectedJson));
     });
 
-    group('fromTxt() - Text only', () {
-      final tag = TextElement.fromTxt('If you would rather press on, ');
+    test('Returns expected string', () {
+      expect(tag.toString(), equals(expectedJson.toString()));
+    });
+  });
 
-      final expectedJson = {
-        "attrs": {},
-        "displayType": "plain",
-        "text": "If you would rather press on, ",
-      };
+  group('Model - TextElement.fromTxt()', () {
+    final tag = TextElement.fromTxt('If you would rather press on, ');
+    final expectedJson = {
+      "attrs": {},
+      "displayType": "plain",
+      'parentType': 'none',
+      "subelements": [],
+      "text": "If you would rather press on, ",
+    };
 
-      test('Returns expected JSON', () {
-        expect(tag.toJson(), equals(expectedJson));
-      });
+    final optionalTag = TextElement.fromTxt(
+      'If you would rather press on, ',
+      type: DisplayType.cite,
+      parentDisplayType: DisplayType.bold,
+      attributes: {"lone": "wolf"},
+    );
+    final optionalExpectedJson = {
+      "attrs": {"lone": "wolf"},
+      "displayType": "cite",
+      'parentType': 'bold',
+      "subelements": [],
+      "text": "If you would rather press on, ",
+    };
 
-      test('Returns expected string', () {
-        expect(tag.toString(), equals(expectedJson.toString()));
-      });
+    test('Returns expected JSON', () {
+      expect(tag.toJson(), equals(expectedJson));
     });
 
-    group('fromTxt() - Text, type, and attrs', () {
-      final tag = TextElement.fromTxt(
-        'If you would rather press on, ',
-        type: DisplayType.italic,
-        attributes: {"idref": "test-id"},
-      );
+    test('Returns expected string', () {
+      expect(tag.toString(), equals(expectedJson.toString()));
+    });
 
-      final expectedJson = {
-        "attrs": {"idref": "test-id"},
-        "displayType": "italic",
-        "text": "If you would rather press on, ",
-      };
+    test('Optional params returns expected JSON', () {
+      expect(optionalTag.toJson(), equals(optionalExpectedJson));
+    });
 
-      test('Returns expected JSON', () {
-        expect(tag.toJson(), equals(expectedJson));
-      });
-
-      test('Returns expected string', () {
-        expect(tag.toString(), equals(expectedJson.toString()));
-      });
+    test('Optional params returns expected string', () {
+      expect(optionalTag.toString(), equals(optionalExpectedJson.toString()));
     });
   });
 }

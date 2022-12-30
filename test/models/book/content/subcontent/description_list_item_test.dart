@@ -8,7 +8,13 @@ const dtXml = '<dt>Illustration Transcription</dt>';
 const dtJson = {
   "displayAsLines": false,
   "texts": [
-    {"attrs": {}, "displayType": "plain", "text": "Illustration Transcription"}
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": "Illustration Transcription",
+    }
   ],
   "type": "dt"
 };
@@ -20,12 +26,20 @@ const ddLineXml = '''<dd>
 final ddLinexJson = {
   "displayAsLines": true,
   "texts": [
-    {"attrs": {}, "displayType": "plain", "text": "Jonathan Blake"},
     {
       "attrs": {},
       "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": "Jonathan Blake",
+    },
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
       "text":
-          "Pedro Almeida, Jan Charvát, Christian Cognigni, Tony Lenzo, Dewi Morgan, Laurence O’Toole, Timothy Pederick"
+          "Pedro Almeida, Jan Charvát, Christian Cognigni, Tony Lenzo, Dewi Morgan, Laurence O’Toole, Timothy Pederick",
     }
   ],
   "type": "dd"
@@ -39,8 +53,10 @@ final ddJson = {
     {
       "attrs": {},
       "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
       "text":
-          "Pedro Almeida, Jan Charvát, Christian Cognigni, Tony Lenzo, Dewi Morgan, Laurence O’Toole, Timothy Pederick"
+          "Pedro Almeida, Jan Charvát, Christian Cognigni, Tony Lenzo, Dewi Morgan, Laurence O’Toole, Timothy Pederick",
     }
   ],
   "type": "dd"

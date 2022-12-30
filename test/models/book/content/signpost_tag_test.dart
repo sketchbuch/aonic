@@ -6,7 +6,13 @@ import '../../../helpers.dart';
 const signpostXml = '<signpost>Port Bax<ch.emdash/>3 Miles</signpost>';
 final signpostJson = {
   "texts": [
-    {"attrs": {}, "displayType": "plain", "text": "Port Bax—3 Miles"}
+    {
+      "attrs": {},
+      "displayType": "plain",
+      "parentType": "none",
+      "subelements": [],
+      "text": "Port Bax—3 Miles",
+    }
   ]
 };
 

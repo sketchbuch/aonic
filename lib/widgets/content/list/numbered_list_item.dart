@@ -28,6 +28,7 @@ class NumberedListItem extends StatefulWidget with ContentRenderer {
 class _NumberedListItemState extends State<NumberedListItem> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
+    final flattenedTexts = widget.getFlattenedTexts(widget.item.texts);
     double numberWidth = oneDigitWidth;
 
     if (widget.listSize >= 10) {
@@ -52,7 +53,7 @@ class _NumberedListItemState extends State<NumberedListItem> with HoverableTextE
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
               children: widget.item.texts.map((text) {
-                final int textIndex = widget.item.texts.indexOf(text);
+                final int textIndex = flattenedTexts.indexOf(text);
                 final isHover = isHoverIndex(textIndex);
                 final isLink = isHoverable(text);
                 final style = widget.getTextElementTextStyle(text, isHover: isHover);
