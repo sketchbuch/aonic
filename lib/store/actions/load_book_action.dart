@@ -19,7 +19,7 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
   return (Store<AppState> store) async {
     final includeLinks = mapUrls();
 
-    store.dispatch(LoadBookRequest());
+    store.dispatch(LoadBookRequest(selectedBook.code, selectedBook.number));
 
     try {
       String bookData = '';
@@ -46,8 +46,7 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
         store.dispatch(LoadBookSuccess(bookData, book));
         store.dispatch(NavigateAction(bookNav, bookPlayRoute));
       } else {
-        store.dispatch(
-            LoadBookFaliure('Book data does not contain a "gamebook" element'));
+        store.dispatch(LoadBookFaliure('Book data does not contain a "gamebook" element'));
       }
     } catch (error) {
       print('### loadBookAction() Error: "${error.toString()}"');

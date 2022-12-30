@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../config/book_config.dart';
 import '../../models/book/content/blockquote.dart';
 import '../../models/book/content/choice_tag.dart';
 import '../../models/book/content/combat_tag.dart';
@@ -21,7 +22,7 @@ import '../content/paragraph.dart';
 import '../content/plain_list.dart';
 import '../content/section.dart';
 
-List<Widget> getTagList(SectionTag section, OnNavigate onNavigate, int level) {
+List<Widget> getTagList(SectionTag section, OnNavigate onNavigate, int level, BookConfig? bookConfig) {
   List<Tag> tagList = section.data.content;
   final List<Widget> sectionContent = [];
 
@@ -55,8 +56,17 @@ List<Widget> getTagList(SectionTag section, OnNavigate onNavigate, int level) {
 
       case 'IllustrationTag':
         final illy = tag as IllustrationTag;
+        final List<String> realIllustrators = bookConfig == null ? [] : bookConfig.useIllustrators.split(':');
+        var isRealIllustration = false;
 
-        if ((!section.isNumbered() || illy.isRealIllustration) && illy.getHtmlInstance() != null) {
+        for (var illustrator in realIllustrators) {
+          if (illy.creator.toLowerCase() == illustrator.toLowerCase()) {
+            isRealIllustration = true;
+            break;
+          }
+        }
+
+        if ((!section.isNumbered() || isRealIllustration) && illy.getHtmlInstance() != null) {
           sectionContent.add(Illustration(illy));
         }
 

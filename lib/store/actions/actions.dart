@@ -15,7 +15,12 @@ class LoadBookFaliure {
   LoadBookFaliure(this.errorMessage);
 }
 
-class LoadBookRequest {}
+class LoadBookRequest {
+  final String bookCode;
+  final int bookNumber;
+
+  LoadBookRequest(this.bookCode, this.bookNumber);
+}
 
 class LoadBookSuccess {
   final Book book;

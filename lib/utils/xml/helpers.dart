@@ -6,11 +6,14 @@ import '../../models/book/content/subcontent/text_element.dart';
 import '../../types/types.dart';
 import 'replace_typographic_tags.dart';
 
+final whitespaceBetweenTags = RegExp(r'>\s*<');
+final htmlComments = RegExp(r"<\!--.+?-->");
+
 String cleanXmlString(String xmlString, Map<String, String> includeLinks) {
-  String cleanedString = xmlString.trim().replaceAll(RegExp(r'>\s*<'), '><').replaceAll(newLine, '');
+  String cleanedString = xmlString.trim().replaceAll(whitespaceBetweenTags, '><').replaceAll(newLine, '');
   cleanedString = replaceTypographicTags(cleanedString);
   cleanedString = replaceIncludeLinks(cleanedString, includeLinks);
-  cleanedString = cleanedString.replaceAll(RegExp(r"<\!--.+?-->"), '');
+  cleanedString = cleanedString.replaceAll(htmlComments, '');
 
   return cleanedString;
 }
