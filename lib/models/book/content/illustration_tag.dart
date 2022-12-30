@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
@@ -16,7 +17,6 @@ enum IllustrationType {
 
 class IllustrationTag extends Tag {
   final List<IllustrationInstance> instances = [];
-  late final bool isRealIllustration;
   late final IllustrationType type;
   late final BookText creator;
   late final BookText description;
@@ -42,7 +42,6 @@ class IllustrationTag extends Tag {
     creator = metaXml != null ? getValue('creator', metaXml) : '';
     // TODO - Make a text element list
     description = metaXml != null ? getValue('description', metaXml) : '';
-    isRealIllustration = creator == realIllustrator ? true : false;
     xml.findElements('instance').forEach((instance) {
       instances.add(IllustrationInstance.fromXml(instance));
     });
@@ -53,17 +52,10 @@ class IllustrationTag extends Tag {
         'creator': creator,
         'description': description,
         'instances': instances.map((instance) => instance.toJson()).toList(),
-        'isRealIllustration': isRealIllustration,
         'type': type.name,
       };
 
   IllustrationInstance? getHtmlInstance() {
-    final matchinInstances = instances.where((instance) => instance.type == InstanceType.html);
-
-    if (matchinInstances.isNotEmpty) {
-      return matchinInstances.first;
-    }
-
-    return null;
+    return instances.firstWhereOrNull((instance) => instance.type == InstanceType.html);
   }
 }

@@ -21,7 +21,6 @@ final illustrationJson = {
     gifInstanceJson,
     pdfInstanceJson,
   ],
-  "isRealIllustration": true,
   "type": "inline",
 };
 
@@ -44,7 +43,6 @@ void main() {
         "creator": "",
         "description": "",
         "instances": [],
-        "isRealIllustration": false,
         "type": "unknown",
       };
 
@@ -58,36 +56,7 @@ void main() {
         "creator": "",
         "description": "",
         "instances": [],
-        "isRealIllustration": false,
         "type": "none",
-      };
-
-      expect(tag.toJson(), equals(expected));
-    });
-
-    test('isRealIllustration is true, if author is Gary Chalk', () {
-      const xml = '<illustration class="inline"><meta><creator>Gary Chalk</creator></meta></illustration>';
-      final tag = IllustrationTag.fromXml(getRootXmlElement(xml));
-      final expected = {
-        "creator": "Gary Chalk",
-        "description": "",
-        "instances": [],
-        "isRealIllustration": true,
-        "type": "inline",
-      };
-
-      expect(tag.toJson(), equals(expected));
-    });
-
-    test('isRealIllustration is false, if author is NOT Gary Chalk', () {
-      const xml = '<illustration class="inline"><meta><creator>JC Alvarez</creator></meta></illustration>';
-      final tag = IllustrationTag.fromXml(getRootXmlElement(xml));
-      final expected = {
-        "creator": "JC Alvarez",
-        "description": "",
-        "instances": [],
-        "isRealIllustration": false,
-        "type": "inline",
       };
 
       expect(tag.toJson(), equals(expected));
