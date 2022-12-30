@@ -6,8 +6,6 @@ import 'subcontent/text_element.dart';
 import 'tag.dart';
 
 class ParagraphTag extends Tag {
-  final List<TextElement> texts = [];
-
   // ignore: unused_element
   ParagraphTag._();
 

@@ -2,12 +2,9 @@ import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
 import '../../../utils/xml/helpers.dart';
-import 'subcontent/text_element.dart';
 import 'tag.dart';
 
 class SignpostTag extends Tag {
-  final List<TextElement> texts = [];
-
   // ignore: unused_element
   SignpostTag._();
 

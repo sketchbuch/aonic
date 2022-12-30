@@ -1,4 +1,3 @@
-import 'package:lonewolf_new/models/book/content/subcontent/text_element.dart';
 import 'package:xml/xml.dart';
 
 import '../../../types/types.dart';
@@ -6,8 +5,6 @@ import '../../../utils/xml/helpers.dart';
 import 'tag.dart';
 
 class BlockquoteTag extends Tag {
-  final List<TextElement> texts = [];
-
   // ignore: unused_element
   BlockquoteTag._();
 
