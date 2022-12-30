@@ -54,18 +54,12 @@ class TextElement {
   Attrs _getAttrs(XmlElement xml, DisplayType displayType) {
     var attrs = getAttributes(xml);
 
-    /* if (displayType == DisplayType.citeBookref) {
-      if (xml.childElements.isNotEmpty && xml.childElements.elementAt(0).name.toString() == 'bookref') {
-        attrs = {...attrs, ...getAttributes(xml.childElements.elementAt(0))};
-      }
-    }
-
-    if (displayType == DisplayType.citeBookref || displayType == DisplayType.bookref) {
+    if (displayType == DisplayType.bookref) {
       final book = attrs['book'];
       final series = attrs['series'];
 
       attrs['href'] = 'https://www.projectaon.org/en/xhtml/$series/$book/title.htm';
-    } */
+    }
 
     return attrs;
   }
