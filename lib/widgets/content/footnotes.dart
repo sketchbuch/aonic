@@ -11,14 +11,16 @@ import '../mixins/content_renderer.dart';
 import 'list/footnotes_list_item.dart';
 
 class Footnotes extends StatelessWidget with ContentRenderer {
+  final double bottomPadding;
   final List<Footnote> footnotes;
   final OnNavigate onNavigate;
 
-  const Footnotes(this.footnotes, this.onNavigate, {Key? key}) : super(key: key);
+  const Footnotes(this.footnotes, this.onNavigate, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ContentContainer(
+      bottomPadding: bottomPadding,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

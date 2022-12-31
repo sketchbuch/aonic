@@ -11,60 +11,86 @@ const plainListUlXml = '''<ul class="unbulleted">
   $plainListItemXml
   <li>Illustration II (<a idref="sect23">Section 23</a>)</li>
   <li><a idref="equipmnt">Equipment</a></li>
-  <li><a idref="discplnz">Kai Disciplines</a></li>
+  <li>The <a idref="discplnz">Kai Disciplines</a> List</li>
 </ul>''';
 final plainListUlJson = {
   "items": [
     plainListItemJson,
     {
-      "depth": 1,
-      "texts": [
+      "content": [
         {
-          "attrs": {},
-          "displayType": "plain",
-          "parentType": "none",
-          "subelements": [],
-          "text": "Illustration II (",
-        },
-        {
-          "attrs": {"idref": "sect23"},
-          "displayType": "link",
-          "parentType": "none",
-          "subelements": [],
-          "text": "Section 23"
-        },
-        {
-          "attrs": {},
-          "displayType": "plain",
-          "parentType": "none",
-          "subelements": [],
-          "text": ")",
+          "texts": [
+            {
+              "attrs": {},
+              "displayType": "plain",
+              "parentType": "none",
+              "subelements": [],
+              "text": "Illustration II (",
+            },
+            {
+              "attrs": {"idref": "sect23"},
+              "displayType": "link",
+              "parentType": "none",
+              "subelements": [],
+              "text": "Section 23"
+            },
+            {
+              "attrs": {},
+              "displayType": "plain",
+              "parentType": "none",
+              "subelements": [],
+              "text": ")",
+            }
+          ]
         }
-      ]
+      ],
+      "depth": 1
     },
     {
-      "depth": 1,
-      "texts": [
+      "content": [
         {
-          "attrs": {"idref": "equipmnt"},
-          "displayType": "link",
-          "parentType": "none",
-          "subelements": [],
-          "text": "Equipment",
+          "texts": [
+            {
+              "attrs": {"idref": "equipmnt"},
+              "displayType": "link",
+              "parentType": "none",
+              "subelements": [],
+              "text": "Equipment"
+            }
+          ]
         }
-      ]
+      ],
+      "depth": 1
     },
     {
-      "depth": 1,
-      "texts": [
+      "content": [
         {
-          "attrs": {"idref": "discplnz"},
-          "displayType": "link",
-          "parentType": "none",
-          "subelements": [],
-          "text": "Kai Disciplines",
+          "texts": [
+            {
+              "attrs": {},
+              "displayType": "plain",
+              "parentType": "none",
+              "subelements": [],
+              "text": "The ",
+            },
+            {
+              "attrs": {"idref": "discplnz"},
+              "displayType": "link",
+              "parentType": "none",
+              "subelements": [],
+              "text": "Kai Disciplines"
+            },
+            {
+              "attrs": {},
+              "displayType": "plain",
+              "parentType": "none",
+              "subelements": [],
+              "text": " List",
+            }
+          ]
         }
-      ]
+      ],
+      "depth": 1
     }
   ],
   "listType": "ul",

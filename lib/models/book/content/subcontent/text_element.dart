@@ -30,6 +30,13 @@ class TextElement {
   // ignore: unused_element
   TextElement._();
 
+  TextElement.fromTxt(String txt, {Attrs? attributes, DisplayType? parentDisplayType, DisplayType? type}) {
+    attrs = attributes ?? {};
+    displayType = type ?? DisplayType.plain;
+    parentType = parentDisplayType ?? DisplayType.none;
+    text = txt;
+  }
+
   TextElement.fromXml(XmlElement xml, {Attrs? attributes, DisplayType? parentDisplayType, DisplayType? type}) {
     final hasChildren = xml.childElements.isNotEmpty;
 
@@ -48,13 +55,6 @@ class TextElement {
         }
       }
     }
-  }
-
-  TextElement.fromTxt(String txt, {Attrs? attributes, DisplayType? parentDisplayType, DisplayType? type}) {
-    attrs = attributes ?? {};
-    displayType = type ?? DisplayType.plain;
-    parentType = parentDisplayType ?? DisplayType.none;
-    text = txt;
   }
 
   Attrs _getAttrs(XmlElement xml, DisplayType displayType) {
