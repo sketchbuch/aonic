@@ -1,6 +1,7 @@
 import 'package:xml/xml.dart';
 
 import '../../../../types/types.dart';
+import '../../../../utils/rendering/is_renderable_node.dart';
 import '../blockquote.dart';
 import '../choice_tag.dart';
 import '../combat_tag.dart';
@@ -31,28 +32,6 @@ class PlainListItem {
       },
       type: DisplayType.link,
     ));
-  }
-
-  bool isRenderableNode(XmlElement xml) {
-    final nodeName = xml.childElements.elementAt(0).name.toString();
-
-    switch (nodeName) {
-      case "blockquote":
-      case "choice":
-      case "combat":
-      case "deadend":
-      case "dl":
-      case "illustration":
-      case "ol":
-      case "ul":
-      case "p":
-      case "section":
-      case "signpost":
-        return true;
-
-      default:
-        return false;
-    }
   }
 
   PlainListItem.fromXml(XmlElement xml, int itemDepth) {

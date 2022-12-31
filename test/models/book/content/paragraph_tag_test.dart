@@ -1,10 +1,12 @@
 import 'package:lonewolf_new/models/book/content/paragraph_tag.dart';
+import 'package:lonewolf_new/models/book/content/subcontent/text_element.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
 
-const paragraphXml =
-    '<p>Each Meal of Laumspur may be consumed when prompted for a Meal, in which case it fulfils the Meal requirement in addition to restoring 3 <typ class="attribute">ENDURANCE</typ> points. Laumspur may also be consumed at any other time to restore <typ class="attribute">ENDURANCE</typ> without having any significance as a Meal.</p>';
+const paragraphText =
+    'Each Meal of Laumspur may be consumed when prompted for a Meal, in which case it fulfils the Meal requirement in addition to restoring 3 <typ class="attribute">ENDURANCE</typ> points. Laumspur may also be consumed at any other time to restore <typ class="attribute">ENDURANCE</typ> without having any significance as a Meal.';
+const paragraphXml = '<p>$paragraphText</p>';
 final paragraphJson = {
   "texts": [
     {
@@ -59,7 +61,7 @@ final paragraphDedicationJson = {
 };
 
 void main() {
-  group('Model - ParagraphTag()', () {
+  group('Model - ParagraphTag.fromXml()', () {
     final tag = ParagraphTag.fromXml(getRootXmlElement(paragraphXml));
 
     test('Returns expected JSON', () {
@@ -73,17 +75,94 @@ void main() {
     test('Returns expected tagType', () {
       expect(tag.tagType(), equals('ParagraphTag'));
     });
+
+    group('With dedication class', () {
+      final tag = ParagraphTag.fromXml(getRootXmlElement(paragraphDedicationXml));
+
+      test('Returns expected JSON', () {
+        expect(tag.toJson(), equals(paragraphDedicationJson));
+      });
+
+      test('Returns expected string', () {
+        expect(tag.toString(), equals(paragraphDedicationJson.toString()));
+      });
+    });
   });
 
-  group('Model - ParagraphTag() - With dedication class', () {
-    final tag = ParagraphTag.fromXml(getRootXmlElement(paragraphDedicationXml));
+  group('Model - ParagraphTag.fromTxt()', () {
+    final tag = ParagraphTag.fromTxt(paragraphText);
+    final textJson = {
+      "texts": [
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text":
+              'Each Meal of Laumspur may be consumed when prompted for a Meal, in which case it fulfils the Meal requirement in addition to restoring 3 <typ class="attribute">ENDURANCE</typ> points. Laumspur may also be consumed at any other time to restore <typ class="attribute">ENDURANCE</typ> without having any significance as a Meal.',
+        }
+      ]
+    };
+    const optionalParentType = DisplayType.italic;
+    const optionalType = DisplayType.bookref;
+    const optionalAttrs = {"lone": "wolf"};
+    final optionalTag = ParagraphTag.fromTxt(
+      paragraphText,
+      attributes: optionalAttrs,
+      parentDisplayType: optionalParentType,
+      type: optionalType,
+    );
+    final optionalJson = {
+      "texts": [
+        {
+          "attrs": optionalAttrs,
+          "displayType": optionalType.name,
+          "parentType": optionalParentType.name,
+          "subelements": [],
+          "text":
+              'Each Meal of Laumspur may be consumed when prompted for a Meal, in which case it fulfils the Meal requirement in addition to restoring 3 <typ class="attribute">ENDURANCE</typ> points. Laumspur may also be consumed at any other time to restore <typ class="attribute">ENDURANCE</typ> without having any significance as a Meal.',
+        }
+      ]
+    };
 
     test('Returns expected JSON', () {
-      expect(tag.toJson(), equals(paragraphDedicationJson));
+      expect(tag.toJson(), equals(textJson));
     });
 
     test('Returns expected string', () {
-      expect(tag.toString(), equals(paragraphDedicationJson.toString()));
+      expect(tag.toString(), equals(textJson.toString()));
+    });
+
+    test('Optional params returns expected JSON', () {
+      expect(optionalTag.toJson(), equals(optionalJson));
+    });
+
+    test('Optional params returns expected string', () {
+      expect(optionalTag.toString(), equals(optionalJson.toString()));
+    });
+  });
+
+  group('Model - ParagraphTag.fromNode()', () {
+    final xml = getRootXmlElement(paragraphXml);
+    final tag = ParagraphTag.fromNode(xml.childElements.elementAt(0));
+    final nodeJson = {
+      "texts": [
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text": "ENDURANCE",
+        }
+      ]
+    };
+
+    test('Returns expected JSON', () {
+      expect(tag.toJson(), equals(nodeJson));
+    });
+
+    test('Returns expected string', () {
+      expect(tag.toString(), equals(nodeJson.toString()));
     });
   });
 }
