@@ -9,7 +9,7 @@ void main() {
       });
     }
 
-    chTags.forEach((chTag, chReplacement) {
+    typographicTags.forEach((chTag, chReplacement) {
       testChString(chTag, chReplacement);
     });
   });

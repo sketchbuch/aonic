@@ -1,6 +1,9 @@
 import '../../constants/characters.dart';
 
-const Map<String, String> chTags = {
+/**
+ * onomatopoeia = Sounds, these are normally rendered italic
+ */
+const Map<String, String> typographicTags = {
   '<ch.aacute/>': 'á',
   '<ch.ampersand/>': '&',
   '<ch.apos/>': endQuote,
@@ -23,7 +26,7 @@ const Map<String, String> chTags = {
 String replaceTypographicTags(String xmlString) {
   String replacedStr = xmlString;
 
-  chTags.forEach((key, value) {
+  typographicTags.forEach((key, value) {
     replacedStr = replacedStr.replaceAll(key, value);
   });
 
