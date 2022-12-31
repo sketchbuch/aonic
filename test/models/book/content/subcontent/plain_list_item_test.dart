@@ -7,30 +7,34 @@ import '../../../../helpers.dart';
 
 const plainListItemXml = '<li>Illustration I (<a idref="sect7">Section 7</a>)</li>';
 const plainListItemJson = {
-  "depth": 1,
-  "texts": [
+  "content": [
     {
-      "attrs": {},
-      "displayType": "plain",
-      "parentType": "none",
-      "subelements": [],
-      "text": "Illustration I (",
-    },
-    {
-      "attrs": {"idref": "sect7"},
-      "displayType": "link",
-      "parentType": "none",
-      "subelements": [],
-      "text": "Section 7"
-    },
-    {
-      "attrs": {},
-      "displayType": "plain",
-      "parentType": "none",
-      "subelements": [],
-      "text": ")",
+      "texts": [
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text": "Illustration I (",
+        },
+        {
+          "attrs": {"idref": "sect7"},
+          "displayType": "link",
+          "parentType": "none",
+          "subelements": [],
+          "text": "Section 7"
+        },
+        {
+          "attrs": {},
+          "displayType": "plain",
+          "parentType": "none",
+          "subelements": [],
+          "text": ")",
+        }
+      ]
     }
-  ]
+  ],
+  "depth": 1
 };
 
 const plainListSectionMetaTitle = 'Dedication';
@@ -50,16 +54,20 @@ const plainListSectionXml = '''<section class="$plainListSectionType" id="$plain
   </data>
 </section>''';
 final plainListSectionJson = {
-  "depth": 1,
-  "texts": [
+  "content": [
     {
-      "attrs": {"idref": "dedicate"},
-      "displayType": "link",
-      "parentType": "none",
-      "subelements": [],
-      "text": "Dedication"
+      "texts": [
+        {
+          "attrs": {"idref": plainListSectionId},
+          "displayType": "link",
+          "parentType": "none",
+          "subelements": [],
+          "text": plainListSectionMetaTitle
+        }
+      ]
     }
-  ]
+  ],
+  "depth": 1
 };
 
 void main() {

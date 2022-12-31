@@ -1,7 +1,6 @@
 import 'package:xml/xml.dart';
 
 import '../../../../types/types.dart';
-import '../../../../utils/xml/helpers.dart';
 import '../blockquote.dart';
 import '../choice_tag.dart';
 import '../combat_tag.dart';
@@ -18,7 +17,6 @@ import 'toc_item.dart';
 
 class PlainListItem {
   final List<Tag> content = [];
-  final TextElements texts = [];
   late final int depth;
 
   // ignore: unused_element
@@ -59,7 +57,6 @@ class PlainListItem {
 
   PlainListItem.fromXml(XmlElement xml, int itemDepth) {
     depth = itemDepth;
-    texts.addAll(getTextElementList(xml));
 
     final childNodes = [...xml.childElements];
 
@@ -112,7 +109,6 @@ class PlainListItem {
   Json toJson() => {
         'content': content.map((tag) => tag.toJson()).toList(),
         'depth': depth,
-        'texts': texts.map((text) => text.toJson()).toList(),
       };
 
   @override
