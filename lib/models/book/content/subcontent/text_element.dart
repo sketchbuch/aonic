@@ -96,6 +96,7 @@ class TextElement {
 
       case 'em':
       case 'i':
+      case 'onomatopoeia':
         return DisplayType.italic;
 
       case 'footref':
