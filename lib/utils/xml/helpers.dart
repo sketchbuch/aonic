@@ -39,15 +39,12 @@ DateTime getDate(String year, String month, String day) {
 }
 
 TextElements getTextElementList(XmlElement xml, [DisplayType? type]) {
-  int elementCount = -1;
+  final childNodes = [...xml.childElements];
 
   return xml.children.map((child) {
     if (child.nodeType == XmlNodeType.ELEMENT) {
-      elementCount += 1;
-
       try {
-        final childElement = xml.childElements.elementAt(elementCount);
-        return TextElement.fromXml(childElement, type: type);
+        return TextElement.fromXml(childNodes.removeAt(0), type: type);
       } on RangeError {
         return TextElement.fromTxt(child.text);
       }
