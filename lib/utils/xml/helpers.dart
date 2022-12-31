@@ -18,15 +18,19 @@ String cleanXmlString(String xmlString, Map<String, String> includeLinks) {
   return cleanedString;
 }
 
-String getAttribute(String name, XmlElement xmlNode, [String fallbackValue = '']) {
-  return xmlNode.getAttribute(name) ?? fallbackValue;
+String getAttribute(String name, dynamic xml, [String fallbackValue = '']) {
+  if (xml is XmlElement || xml is XmlNode) {
+    return xml.getAttribute(name) ?? fallbackValue;
+  }
+
+  return fallbackValue;
 }
 
-Attrs getAttributes(XmlElement xmlNode) {
+Attrs getAttributes(XmlElement element) {
   final Attrs attrs = {};
 
-  if (xmlNode.attributes.isNotEmpty) {
-    for (var attr in xmlNode.attributes) {
+  if (element.attributes.isNotEmpty) {
+    for (var attr in element.attributes) {
       attrs[attr.name.toString()] = attr.value;
     }
   }

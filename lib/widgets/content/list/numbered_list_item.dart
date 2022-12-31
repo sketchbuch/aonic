@@ -1,8 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/typography.dart';
-import '../../../models/book/content/subcontent/plain_list_item.dart';
 import '../../../types/types.dart';
 import '../../mixins/content_renderer.dart';
 import '../../mixins/hoverable_text_element.dart';
@@ -16,9 +14,9 @@ class NumberedListItem extends StatefulWidget with ContentRenderer {
   final int itemNumber;
   final int listSize;
   final OnNavigate onNavigate;
-  final PlainListItem item;
+  final List<Widget> content;
 
-  const NumberedListItem(this.item, this.onNavigate, this.depth, this.listSize, this.itemNumber, {Key? key})
+  const NumberedListItem(this.content, this.onNavigate, this.depth, this.listSize, this.itemNumber, {Key? key})
       : super(key: key);
 
   @override
@@ -28,7 +26,6 @@ class NumberedListItem extends StatefulWidget with ContentRenderer {
 class _NumberedListItemState extends State<NumberedListItem> with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
-    final flattenedTexts = widget.getFlattenedTexts(widget.item.texts);
     double numberWidth = oneDigitWidth;
 
     if (widget.listSize >= 10) {
@@ -49,36 +46,9 @@ class _NumberedListItemState extends State<NumberedListItem> with HoverableTextE
         ),
         const SizedBox(width: offsetMedium),
         Expanded(
-          child: RichText(
-            text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: widget.item.texts.map((text) {
-                final int textIndex = flattenedTexts.indexOf(text);
-                final isHover = isHoverIndex(textIndex);
-                final isLink = isHoverable(text);
-                final style = widget.getTextElementTextStyle(text, isHover: isHover);
-
-                TapGestureRecognizer? recognizer;
-
-                if (isLink) {
-                  recognizer = TapGestureRecognizer()
-                    ..onTap = () {
-                      final route = text.attrs['href'] ?? text.attrs['idref'] ?? '';
-                      widget.onNavigate(route);
-                    };
-
-                  hoverRecognizers.add(recognizer);
-                }
-
-                return TextSpan(
-                  onEnter: isLink ? (_) => handleOnEnter(textIndex) : null,
-                  onExit: isLink ? (_) => handleOnExit() : null,
-                  recognizer: recognizer,
-                  style: style,
-                  text: text.text,
-                );
-              }).toList(),
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: widget.content,
           ), //text
         ),
       ],

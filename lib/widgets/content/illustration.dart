@@ -8,9 +8,10 @@ import 'image/image_error.dart';
 import 'image/image_loading.dart';
 
 class Illustration extends StatelessWidget {
+  final double bottomPadding;
   final IllustrationTag tag;
 
-  const Illustration(this.tag, {Key? key}) : super(key: key);
+  const Illustration(this.tag, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class Illustration extends StatelessWidget {
     }
 
     return ContentContainer(
+      bottomPadding: bottomPadding,
       width: sizeZero,
       child: ImageBox(
         child: Image.network(

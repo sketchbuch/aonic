@@ -7,13 +7,15 @@ import '../layout/content_container.dart';
 
 class Combat extends StatelessWidget {
   final CombatTag tag;
+  final double bottomPadding;
   final trans = t.numbered; // get translation
 
-  Combat(this.tag, {Key? key}) : super(key: key);
+  Combat(this.tag, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ContentContainer(
+      bottomPadding: bottomPadding,
       child: RichText(
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
