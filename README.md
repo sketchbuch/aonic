@@ -24,7 +24,7 @@ Currently you need to be a developer to run the books. Once a working version of
 
 - Have all Project Aon game books playable within the app, not just Lone Wolf.
 - Require as few changes as possible to get each book to work - the system is generic and I don't want to have to write custom code for each book.
-- Get the books downoadable (inc. assets) and have them persisted on your device/desktop
+- Get and persist the books via download of XML & assets, and have them persisted on your device/desktop
 
 ### Why I'm Making This App
 
