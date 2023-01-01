@@ -16,7 +16,7 @@ Currently the game book xml from Project Aon is parseable and displayable, but n
 
 Also the books/images cannot yet be downloaded. A system has been started (and the xml can be donloaded), but it is not persisted and no images are collected.
 
-This is my first "real" Flutter app so thgey maybe mayn things to improve or change and the code will be refactored a lot.
+This is my first "real" Flutter app so thgey maybe many things to improve or change and the code will be refactored a lot.
 
 Currently you need to be a developer to run the books. Once a working version of the book 1 is usable this will change. Currently I have been able to parse and display book 1-3 without any changes in code needed.
 
