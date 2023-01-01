@@ -1,6 +1,6 @@
-import 'book_config.dart';
+import '../models/book_config.dart';
 
-const BookConfigItems bookdata = [
+const BookConfigData bookConfigData = [
   {
     "code": "01fftd",
     "useIllustrators": "Gary Chalk:JC Alvarez / Jonathan Blake:Jonathan Blake",

@@ -1,13 +1,13 @@
-import '../types/types.dart';
+import '../../types/types.dart';
 
-typedef BookConfigItem = Map<String, Object>;
-typedef BookConfigItems = List<BookConfigItem>;
+typedef BookConfigDataItem = Map<String, Object>;
+typedef BookConfigData = List<BookConfigDataItem>;
 
 class BookConfig {
   late String code;
   late String useIllustrators;
 
-  BookConfig(BookConfigItem book) {
+  BookConfig(BookConfigDataItem book) {
     code = book['code'] as String;
     useIllustrators = book['useIllustrators'] as String;
   }

@@ -1,30 +1,10 @@
-import 'package:collection/collection.dart';
+import 'package:get_it/get_it.dart';
 
-import '../types/types.dart';
-import 'book_config.dart';
-import 'book_data.dart';
+import 'data/book_config_data.dart';
+import 'models/config.dart';
 
-class Config {
-  List<BookConfig> books = [];
+final getIt = GetIt.instance;
 
-  Config(BookConfigItems bookConfig) {
-    for (var book in bookConfig) {
-      books.add(BookConfig(book));
-    }
-  }
-
-  Json toJson() => {
-        "books": books.map((book) => book.toJson()).toList(),
-      };
-
-  @override
-  String toString() {
-    return toJson().toString();
-  }
-
-  BookConfig? getBookByCode(String code) {
-    return books.firstWhereOrNull((bookConfig) => bookConfig.code == code);
-  }
+void setupConfig() {
+  getIt.registerSingleton<Config>(Config(bookConfigData));
 }
-
-final config = Config(bookdata);

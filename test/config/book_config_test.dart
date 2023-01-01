@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/config/book_config.dart';
+import 'package:lonewolf_new/config/models/book_config.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -6,7 +6,7 @@ void main() {
     const code = "01fftd";
     const useIllustrators = "Gary Chalk:JC Alvarez / Jonathan Blake:Jonathan Blake";
 
-    final BookConfigItem bookData = {
+    final BookConfigDataItem bookData = {
       "code": code,
       "useIllustrators": useIllustrators,
     };

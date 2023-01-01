@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lonewolf_new/theme/theme.dart';
 import 'package:redux/redux.dart';
 
+import 'config/config.dart';
 import 'i18n/_generated_/translations.g.dart';
 import 'routes/generate_main_route.dart';
 import 'routes/routes.dart';
@@ -14,8 +15,9 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
 
-  final store = createStore();
+  setupConfig();
 
+  final store = createStore();
   runApp(TranslationProvider(child: App(store)));
 }
 

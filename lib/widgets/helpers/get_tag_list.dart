@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../config/book_config.dart';
+import '../../config/models/book_config.dart';
 import '../../models/book/content/blockquote.dart';
 import '../../models/book/content/choice_tag.dart';
 import '../../models/book/content/combat_tag.dart';

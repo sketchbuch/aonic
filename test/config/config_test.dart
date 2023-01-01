@@ -1,5 +1,5 @@
-import 'package:lonewolf_new/config/book_config.dart';
-import 'package:lonewolf_new/config/config.dart';
+import 'package:lonewolf_new/config/models/book_config.dart';
+import 'package:lonewolf_new/config/models/config.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -9,7 +9,7 @@ void main() {
     const code3 = "03tcok";
     const useIllustrators = "Gary Chalk:JC Alvarez / Jonathan Blake:Jonathan Blake";
 
-    final BookConfigItems bookdata = [
+    final BookConfigData bookdata = [
       {
         "code": code1,
         "useIllustrators": useIllustrators,
