@@ -1,6 +1,6 @@
 {
-    "name": "lonewolf_new",
-    "short_name": "lonewolf_new",
+    "name": "aonic",
+    "short_name": "aonic",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

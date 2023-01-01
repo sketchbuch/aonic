@@ -1,5 +1,5 @@
-import 'package:lonewolf_new/utils/i18n/map_urls.dart';
-import 'package:lonewolf_new/utils/xml/replace_include_links.dart';
+import 'package:aonic/utils/i18n/map_urls.dart';
+import 'package:aonic/utils/xml/replace_include_links.dart';
 import 'package:test/test.dart';
 
 void main() {

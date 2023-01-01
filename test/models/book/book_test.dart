@@ -1,5 +1,5 @@
-import 'package:lonewolf_new/models/book/book.dart';
-import 'package:lonewolf_new/models/book/section/meta_link.dart';
+import 'package:aonic/models/book/book.dart';
+import 'package:aonic/models/book/section/meta_link.dart';
 import 'package:test/test.dart';
 
 import '../../helpers.dart';

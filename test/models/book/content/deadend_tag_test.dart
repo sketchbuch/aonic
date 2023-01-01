@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/models/book/content/deadend_tag.dart';
+import 'package:aonic/models/book/content/deadend_tag.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';

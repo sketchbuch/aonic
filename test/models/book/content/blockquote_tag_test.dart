@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/models/book/content/blockquote.dart';
+import 'package:aonic/models/book/content/blockquote.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';

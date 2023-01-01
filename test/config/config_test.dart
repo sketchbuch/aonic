@@ -1,5 +1,5 @@
-import 'package:lonewolf_new/config/models/book_config.dart';
-import 'package:lonewolf_new/config/models/config.dart';
+import 'package:aonic/config/models/book_config.dart';
+import 'package:aonic/config/models/config.dart';
 import 'package:test/test.dart';
 
 void main() {

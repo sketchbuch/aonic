@@ -1,7 +1,7 @@
+import 'package:aonic/theme/theme.dart';
+import 'package:aonic/widgets/typography/headline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lonewolf_new/theme/theme.dart';
-import 'package:lonewolf_new/widgets/typography/headline.dart';
 
 import '../test_widget_wrapper.dart';
 

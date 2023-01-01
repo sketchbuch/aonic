@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.lonewolf_new">
+    package="com.example.aonic">
    <application
-        android:label="lonewolf_new"
+        android:label="aonic"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

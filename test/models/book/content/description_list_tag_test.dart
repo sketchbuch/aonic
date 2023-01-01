@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/models/book/content/description_list_tag.dart';
+import 'package:aonic/models/book/content/description_list_tag.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';

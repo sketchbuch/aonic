@@ -1,5 +1,5 @@
-import 'package:lonewolf_new/exceptions/xml.dart';
-import 'package:lonewolf_new/models/book/section/data.dart';
+import 'package:aonic/exceptions/xml.dart';
+import 'package:aonic/models/book/section/data.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';

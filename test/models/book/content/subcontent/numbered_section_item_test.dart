@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/models/book/content/subcontent/numbered_section_item.dart';
+import 'package:aonic/models/book/content/subcontent/numbered_section_item.dart';
 import 'package:test/test.dart';
 
 const nsiId = "dedicate";

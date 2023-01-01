@@ -1,4 +1,4 @@
-package com.example.lonewolf_new
+package com.example.aonic
 
 import io.flutter.embedding.android.FlutterActivity
 

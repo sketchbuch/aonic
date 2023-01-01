@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/models/booklist/booklist_item.dart';
+import 'package:aonic/models/booklist/booklist_item.dart';
 import 'package:test/test.dart';
 
 void main() {

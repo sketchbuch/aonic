@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/models/booklist/booklist.dart';
+import 'package:aonic/models/booklist/booklist.dart';
 import 'package:test/test.dart';
 
 class MockTranslationObject {

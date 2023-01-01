@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/utils/xml/replace_typographic_tags.dart';
+import 'package:aonic/utils/xml/replace_typographic_tags.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/models/book/section/footnote.dart';
+import 'package:aonic/models/book/section/footnote.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';

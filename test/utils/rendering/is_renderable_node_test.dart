@@ -1,4 +1,4 @@
-import 'package:lonewolf_new/utils/rendering/is_renderable_node.dart';
+import 'package:aonic/utils/rendering/is_renderable_node.dart';
 import 'package:test/test.dart';
 
 import '../../helpers.dart';

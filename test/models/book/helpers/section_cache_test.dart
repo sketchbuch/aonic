@@ -1,5 +1,5 @@
-import 'package:lonewolf_new/models/book/content/section_tag.dart';
-import 'package:lonewolf_new/models/book/helpers/section_cache.dart';
+import 'package:aonic/models/book/content/section_tag.dart';
+import 'package:aonic/models/book/helpers/section_cache.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
