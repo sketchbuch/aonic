@@ -6,6 +6,8 @@ Play Lone Wolf games books from Project Aon on desktop/mobile device. Built with
 | :--------------------------------------------
 | **This is a WIP and is not finished or playable YET**
 
+![A demo of Lonewolf FLutter running as a Linux desktop app.](https://raw.githubusercontent.com/sketchbuch/lonewolf-flutter/main/documentation/images/preview.gif 'Lonewolf Flutter')
+
 ## About
 
 This app is eventually going to allow you to play gamebooks from [Project AON](https://www.projectaon.org/) on desktops and on Android/iOS mobile devices.
