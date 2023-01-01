@@ -43,3 +43,7 @@ Currently you need to be a developer to run the books. Once a working version of
 - [Glossary](documentation/Glossary.md)
 - [NewBooks](documentation/NewBooks.md)
 - [Notes](documentation/Notes.md)
+
+## Reporting Issues
+
+Please use the MVP milestone and any relevant labels when reporting [issues](https://github.com/sketchbuch/lonewolf-flutter/issues).
