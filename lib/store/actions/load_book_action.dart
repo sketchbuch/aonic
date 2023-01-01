@@ -14,6 +14,7 @@ import '../../utils/xml/helpers.dart';
 import 'actions.dart';
 
 const useLocalFile = true;
+final chTag = RegExp(r"<ch\.[^>]+?\/>");
 
 ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
   return (Store<AppState> store) async {
@@ -33,7 +34,8 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
       final cleanedXmlString = cleanXmlString(bookData, includeLinks);
 
       if (cleanedXmlString.contains('<ch.')) {
-        throw XmlCleaningException('Unreplaced character tags detected');
+        final firstChTag = chTag.stringMatch(cleanedXmlString).toString();
+        throw XmlCleaningException('Unreplaced character tags detected: "$firstChTag"');
       } else if (cleanedXmlString.contains('&link.')) {
         throw XmlCleaningException('Unreplaced include links detected');
       }
