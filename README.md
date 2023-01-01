@@ -26,6 +26,12 @@ Currently you need to be a developer to run the books. Once a working version of
 - Require as few changes as possible to get each book to work - the system is generic and I don't want to have to write custom code for each book.
 - Get the books downoadable (inc. assets) an dhav them persisted on your device/desktop
 
+### Why I'm Making This App
+
+- The Kai Chronicles app no longer exists
+- I wanted to learn more about flutter and got bored with tutorials
+- Alternative apps onyl support a few books or have adverts.I do not want to have adverts in this app.
+
 ## How to start
 
 1. Install the required packages
