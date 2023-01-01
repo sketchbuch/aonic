@@ -13,8 +13,8 @@ class CountableItem {
 
   Json toJson() => {
         "key": key,
-        "max": maxValue,
-        "min": minValue,
+        "maxValue": maxValue,
+        "minValue": minValue,
         "value": value,
       };
 
