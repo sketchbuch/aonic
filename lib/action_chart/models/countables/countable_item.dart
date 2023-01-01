@@ -40,4 +40,10 @@ class CountableItem {
   void minimise() {
     value = min;
   }
+
+  void set(int newalue) {
+    if (newalue >= min && newalue <= max) {
+      value = newalue;
+    }
+  }
 }
