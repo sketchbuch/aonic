@@ -8,14 +8,21 @@ Play Lone Wolf games books from Project Aon on desktop/mobile device. Built with
 
 ## About
 
-This project is a starting point for a Flutter application.
+This app is eventually going to allow you to play gamebooks from [Project AON](https://www.projectaon.org/) on desktops and on Android/iOS mobile devices.
 
-A few resources to get you started if this is your first Flutter project:
+Currently the game book xml from Project Aon is parseable and displayable, but not playable. Things like a working combat system and a combat chart are still needed.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Also the books/images cannot yet be downloaded. A system has been started (and the xml an be donloaded), but it is not persisted and no images are collected.
 
-For help getting started with Flutter development, view the [online documentation](https://docs.flutter.dev/), which offers tutorials, samples, guidance on mobile development, and a full API reference.
+This is my first "real" Flutter app so thgey maybe mayn things to improve or change and the code will be refactored a lot. 
+
+Currently you need to be a developer to run the books. Once a working version of the book 1 is usable this will change. Currently I have been able to parse and display book 1-3 without any changes in code needed.
+
+### Goals
+
+- Have all Project Aon Lone Wolf game books playable within the app
+- Require as few changes as possible to get each book to work - the system is generic and I don't want to have to write custom code for each book.
+- Get the books downoadable (inc. assets) an dhav them persisted on your device/desktop
 
 ## How to start
 
