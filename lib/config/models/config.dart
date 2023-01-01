@@ -6,7 +6,9 @@ import 'book_config.dart';
 class Config {
   List<BookConfig> books = [];
 
-  Config(BookConfigData bookConfigData) {
+  Config();
+
+  void setBookData(BookConfigData bookConfigData) {
     for (var bookConfig in bookConfigData) {
       books.add(BookConfig(bookConfig));
     }

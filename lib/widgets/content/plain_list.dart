@@ -5,7 +5,6 @@ import '../../../models/book/content/plain_list_tag.dart';
 import '../../../types/types.dart';
 import '../../config/config.dart';
 import '../../config/models/book_config.dart';
-import '../../config/models/config.dart';
 import '../../constants/layout.dart';
 import '../../models/book/content/blockquote.dart';
 import '../../models/book/content/choice_tag.dart';
@@ -165,7 +164,7 @@ class _PlainListState extends State<PlainList> {
     return StoreConnector<AppState, SectionViewModel>(
       converter: (store) => SectionViewModel.create(store),
       builder: (BuildContext context, SectionViewModel viewModel) {
-        final bookConfig = getIt<Config>().getBookByCode(viewModel.bookCode);
+        final bookConfig = config.getBookByCode(viewModel.bookCode);
 
         return ContentContainer(
           bottomPadding: widget.bottomPadding,

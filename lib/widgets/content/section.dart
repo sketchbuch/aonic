@@ -5,7 +5,6 @@ import '../../../i18n/_generated_/translations.g.dart';
 import '../../../models/book/content/section_tag.dart';
 import '../../../types/types.dart';
 import '../../config/config.dart';
-import '../../config/models/config.dart';
 import '../../store/models/app_state.dart';
 import '../helpers/get_tag_list.dart';
 import '../typography/headline.dart';
@@ -25,7 +24,7 @@ class Section extends StatelessWidget {
     return StoreConnector<AppState, SectionViewModel>(
       converter: (store) => SectionViewModel.create(store),
       builder: (BuildContext context, SectionViewModel viewModel) {
-        final bookConfig = getIt<Config>().getBookByCode(viewModel.bookCode);
+        final bookConfig = config.getBookByCode(viewModel.bookCode);
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
