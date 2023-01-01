@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:lonewolf_new/theme/theme.dart';
 import 'package:redux/redux.dart';
 
 import 'action_chart/action_chart.dart';
@@ -11,6 +10,7 @@ import 'routes/generate_main_route.dart';
 import 'routes/routes.dart';
 import 'store/redux/models/app_state.dart';
 import 'store/redux/redux.dart';
+import 'theme/theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

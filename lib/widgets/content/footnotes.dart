@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lonewolf_new/theme/theme.dart';
 
 import '../../../constants/typography.dart';
 import '../../../models/book/section/footnote.dart';
 import '../../../types/types.dart';
 import '../../constants/layout.dart';
+import '../../theme/theme.dart';
 import '../layout/content_container.dart';
 import '../layout/dividing_line.dart';
 import '../mixins/content_renderer.dart';

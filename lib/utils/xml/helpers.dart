@@ -1,9 +1,9 @@
-import 'package:lonewolf_new/utils/xml/replace_include_links.dart';
 import 'package:xml/xml.dart';
 
 import '../../constants/characters.dart';
 import '../../models/book/content/subcontent/text_element.dart';
 import '../../types/types.dart';
+import 'replace_include_links.dart';
 import 'replace_typographic_tags.dart';
 
 final whitespaceBetweenTags = RegExp(r'>\s*<');
