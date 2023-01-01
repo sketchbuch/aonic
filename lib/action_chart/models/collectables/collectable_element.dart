@@ -1,13 +1,15 @@
 import '../../../types/types.dart';
 
-class BackpackItem {
-  String description;
-  String name;
+class CollectableElement {
+  final String description;
+  final String key;
+  final String name;
 
-  BackpackItem(this.name, this.description);
+  CollectableElement(this.key, this.name, this.description);
 
   Json toJson() => {
         'description': description,
+        'key': key,
         'name': name,
       };
 

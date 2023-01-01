@@ -1,12 +1,14 @@
 import '../../../types/types.dart';
 
-class Weapon {
-  String name;
+class LevelItem {
+  final String key;
+  final int level;
 
-  Weapon(this.name);
+  LevelItem(this.key, this.level);
 
   Json toJson() => {
-        'name': name,
+        "key": key,
+        "level": level,
       };
 
   @override
