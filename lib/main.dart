@@ -4,18 +4,20 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:lonewolf_new/theme/theme.dart';
 import 'package:redux/redux.dart';
 
+import 'action_chart/action_chart.dart';
 import 'config/config.dart';
 import 'i18n/_generated_/translations.g.dart';
 import 'routes/generate_main_route.dart';
 import 'routes/routes.dart';
-import 'store/models/app_state.dart';
-import 'store/store.dart';
+import 'store/redux/models/app_state.dart';
+import 'store/redux/redux.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
 
   setupConfig();
+  setupActionChart();
 
   final store = createStore();
   runApp(TranslationProvider(child: App(store)));

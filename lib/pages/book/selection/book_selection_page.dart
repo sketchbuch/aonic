@@ -4,7 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import '../../../constants/books.dart';
 import '../../../i18n/_generated_/translations.g.dart';
 import '../../../models/booklist/booklist.dart';
-import '../../../store/models/app_state.dart';
+import '../../../store/redux/models/app_state.dart';
 import '../../../widgets/page/book_selection.dart';
 import 'book_selection_view_model.dart';
 

@@ -1,16 +1,16 @@
-import 'package:lonewolf_new/store/models/app_state.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:xml/xml.dart';
 
-import '../../exceptions/xml.dart';
-import '../../models/book/book.dart';
-import '../../models/booklist/booklist_item.dart';
-import '../../routes/routes.dart';
-import '../../utils/get_aon_book_data.dart';
-import '../../utils/get_aon_book_file_data.dart';
-import '../../utils/i18n/map_urls.dart';
-import '../../utils/xml/helpers.dart';
+import '../../../exceptions/xml.dart';
+import '../../../models/book/book.dart';
+import '../../../models/booklist/booklist_item.dart';
+import '../../../routes/routes.dart';
+import '../../../utils/get_aon_book_data.dart';
+import '../../../utils/get_aon_book_file_data.dart';
+import '../../../utils/i18n/map_urls.dart';
+import '../../../utils/xml/helpers.dart';
+import '../models/app_state.dart';
 import 'actions.dart';
 
 const useLocalFile = true;

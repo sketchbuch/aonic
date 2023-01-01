@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/book/book.dart';
+import '../../../models/book/book.dart';
 
 enum BookStateStatus {
   failed,

@@ -7,7 +7,7 @@ import '../../constants/books.dart';
 import '../../i18n/_generated_/translations.g.dart';
 import '../../routes/generate_book_route.dart';
 import '../../routes/routes.dart';
-import '../../store/models/app_state.dart';
+import '../../store/redux/models/app_state.dart';
 import 'book_view_model.dart';
 
 class BookPage extends StatefulWidget {

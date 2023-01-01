@@ -2,10 +2,10 @@ import 'package:lonewolf_new/types/types.dart';
 import 'package:redux/redux.dart';
 
 import '../../models/booklist/booklist_item.dart';
-import '../../store/actions/actions.dart';
-import '../../store/actions/load_book_action.dart';
-import '../../store/models/app_state.dart';
-import '../../store/models/book_state.dart';
+import '../../store/redux/actions/actions.dart';
+import '../../store/redux/actions/load_book_action.dart';
+import '../../store/redux/models/app_state.dart';
+import '../../store/redux/models/book_state.dart';
 
 class BookViewModel {
   final BooklistItem? selectedBook;

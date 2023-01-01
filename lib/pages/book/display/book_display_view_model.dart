@@ -4,9 +4,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../exceptions/gameplay.dart';
 import '../../../models/book/book.dart';
 import '../../../routes/routes.dart';
-import '../../../store/actions/actions.dart';
-import '../../../store/models/app_state.dart';
-import '../../../store/models/book_state.dart';
+import '../../../store/redux/actions/actions.dart';
+import '../../../store/redux/models/app_state.dart';
+import '../../../store/redux/models/book_state.dart';
 import '../../../types/types.dart';
 
 class BookDisplayViewModel {

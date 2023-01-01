@@ -15,7 +15,7 @@ import '../../models/book/content/illustration_tag.dart';
 import '../../models/book/content/paragraph_tag.dart';
 import '../../models/book/content/section_tag.dart';
 import '../../models/book/content/subcontent/plain_list_item.dart';
-import '../../store/models/app_state.dart';
+import '../../store/redux/models/app_state.dart';
 import '../layout/content_container.dart';
 import 'blockquote.dart';
 import 'choice.dart';

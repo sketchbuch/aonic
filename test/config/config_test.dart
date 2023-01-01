@@ -33,7 +33,8 @@ void main() {
       ]
     };
 
-    final config = Config(bookdata);
+    final config = Config();
+    config.setBookData(bookdata);
 
     test('Returns expected JSON', () {
       expect(config.toJson(), equals(expectedJson));

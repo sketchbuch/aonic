@@ -5,7 +5,7 @@ import '../../../i18n/_generated_/translations.g.dart';
 import '../../../models/book/content/section_tag.dart';
 import '../../../types/types.dart';
 import '../../config/config.dart';
-import '../../store/models/app_state.dart';
+import '../../store/redux/models/app_state.dart';
 import '../helpers/get_tag_list.dart';
 import '../typography/headline.dart';
 import 'footnotes.dart';

@@ -1,4 +1,4 @@
-import '../config/config.dart';
+import '../store/get_it/get_it.dart';
 import 'models/action_chart.dart';
 
 ActionChart createActionChart() {

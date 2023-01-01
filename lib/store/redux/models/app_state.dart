@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/booklist/booklist_item.dart';
+import '../../../models/booklist/booklist_item.dart';
 import 'book_state.dart';
 import 'page_state.dart';
 

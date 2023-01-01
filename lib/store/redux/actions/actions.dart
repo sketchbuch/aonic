@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../models/book/book.dart';
-import '../../models/booklist/booklist_item.dart';
+import '../../../models/book/book.dart';
+import '../../../models/booklist/booklist_item.dart';
 
 class GoToPageAction {
   final int page;

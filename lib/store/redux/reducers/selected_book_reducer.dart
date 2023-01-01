@@ -1,4 +1,4 @@
-import '../../models/booklist/booklist_item.dart';
+import '../../../models/booklist/booklist_item.dart';
 import '../actions/actions.dart';
 
 BooklistItem? selectedBookReducer(BooklistItem? book, action) {

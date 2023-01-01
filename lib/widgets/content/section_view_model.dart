@@ -1,6 +1,6 @@
 import 'package:redux/redux.dart';
 
-import '../../../store/models/app_state.dart';
+import '../../store/redux/models/app_state.dart';
 
 class SectionViewModel {
   final int bookNumber;
