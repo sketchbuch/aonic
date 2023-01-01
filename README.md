@@ -37,3 +37,9 @@ Currently you need to be a developer to run the books. Once a working version of
 3. Add a folder called samples. It should contain the file "sample.xml" which should be the xml for a book downloaded from project aon. For example:
 
   > view-source:<https://www.projectaon.org/data/trunk/en/xml/01fftd.xml>
+
+## Additional Documentation
+
+- [Glossary](documentation/Glossary.md)
+- [NewBooks](documentation/NewBooks.md)
+- [Notes](documentation/Notes.md)
