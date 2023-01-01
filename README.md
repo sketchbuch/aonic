@@ -34,19 +34,21 @@ Currently you need to be a developer to run the books. Once a working version of
 
 ## How to start
 
-1. Install the required packages
+1. Clone this repo
+
+2. Install the required packages
 
   > flutter pub get
 
-2. Run the following command to create translation files:
+3. Run the following command to create translation files:
 
   > flutter pub run slang
 
-3. Add a folder called samples. It should contain the file "sample.xml" which should be the xml for a book downloaded from project aon. This is just while developing the MVP. A working solution for getting XML from the Project Aon website exists but is switched off. An example book XML file:
+4. Add a folder called samples. It should contain the file "sample.xml" which should be the xml for a book downloaded from project aon. This is just while developing the MVP. A working solution for getting XML from the Project Aon website exists but is switched off. An example book XML file:
 
   > view-source:<https://www.projectaon.org/data/trunk/en/xml/01fftd.xml>
 
-4. Run the application via VSCode. I have only tried a linux desktop app and an andorid emulator. Emulator may not be fully functional - most testing is happening at the moment with the linux app.
+5. Run the application via VSCode. I have only tried a linux desktop app and an andorid emulator. Emulator may not be fully functional - most testing is happening at the moment with the linux app.
 
 ## Additional Documentation
 
