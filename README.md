@@ -42,7 +42,7 @@ Currently you need to be a developer to run the books. Once a working version of
 
   > flutter pub run slang
 
-3. Add a folder called samples. It should contain the file "sample.xml" which should be the xml for a book downloaded from project aon. For example:
+3. Add a folder called samples. It should contain the file "sample.xml" which should be the xml for a book downloaded from project aon. This is just while developing the MVP. A working solution for getting XML from the Project Aon website exists but is switched off. An example book XML file:
 
   > view-source:<https://www.projectaon.org/data/trunk/en/xml/01fftd.xml>
 
