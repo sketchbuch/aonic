@@ -2,4 +2,4 @@
 
 The process to get a new book working:
 
-- Check replaceTypographicTags works
+- Check replaceTypographicTags works by opening the book in samples/sample.xml
