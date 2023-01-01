@@ -1,9 +1,9 @@
 name: lonewolf_new
-description: A new Flutter project.
+description: Play Lone Wolf games books from Project Aon on desktop/mobile device. Built with Flutter.
 
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 0.2.0
 
 environment:
   sdk: ">=2.17.5 <3.0.0"
