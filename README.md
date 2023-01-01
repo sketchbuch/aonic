@@ -46,7 +46,7 @@ Currently you need to be a developer to run the books. Once a working version of
 
   > view-source:<https://www.projectaon.org/data/trunk/en/xml/01fftd.xml>
 
-4. Run the application via VSCode. I have only tried a linux desktop app and an andorid emulator. Emulator may not be fully functional - most testing i shappening at the moment with the linux app.
+4. Run the application via VSCode. I have only tried a linux desktop app and an andorid emulator. Emulator may not be fully functional - most testing is happening at the moment with the linux app.
 
 ## Additional Documentation
 
