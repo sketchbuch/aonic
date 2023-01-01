@@ -28,7 +28,7 @@ Currently you need to be a developer to run the books. Once a working version of
 
 ### Why I'm Making This App
 
-- The Kai Chronicles app no longer exists
+- The [Kai Chronicles](https://github.com/tonib/kaichronicles) app no longer exists
 - I wanted to learn more about flutter and got bored with tutorials
 - Alternative apps onyl support a few books or have adverts.I do not want to have adverts in this app.
 
