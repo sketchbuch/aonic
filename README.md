@@ -14,7 +14,7 @@ This app is eventually going to allow you to play gamebooks from [Project AON](h
 
 Currently the game book xml from Project Aon is parseable and displayable, but not playable. Things like a working combat system and a combat chart are still needed.
 
-Also the books/images cannot yet be downloaded. A system has been started (and the xml an be donloaded), but it is not persisted and no images are collected.
+Also the books/images cannot yet be downloaded. A system has been started (and the xml can be donloaded), but it is not persisted and no images are collected.
 
 This is my first "real" Flutter app so thgey maybe mayn things to improve or change and the code will be refactored a lot.
 
