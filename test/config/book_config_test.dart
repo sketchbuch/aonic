@@ -1,4 +1,5 @@
 import 'package:aonic/config/models/book_config.dart';
+import 'package:aonic/types/types.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -6,7 +7,7 @@ void main() {
     const code = "01fftd";
     const useIllustrators = "Gary Chalk:JC Alvarez / Jonathan Blake:Jonathan Blake";
 
-    final BookConfigDataItem bookData = {
+    final Json bookData = {
       "code": code,
       "useIllustrators": useIllustrators,
     };

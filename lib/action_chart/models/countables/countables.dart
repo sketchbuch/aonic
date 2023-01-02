@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 
 import '../../../types/types.dart';
-import '../../constants.dart';
+import '../../ac_constants.dart';
 import 'countable_item.dart';
 
 /// A generic container for tracking numeric values that can increase/decerase, like gold crowns or meals..
@@ -22,10 +22,10 @@ class Countables {
   void add(
     String key,
     int value, {
-    int max = countableDefaultMax,
-    int min = countableDefaultMin,
+    int maxValue = countableDefaultMax,
+    int minValue = countableDefaultMin,
   }) {
-    items.add(CountableItem(key, value, max: max, min: min));
+    items.add(CountableItem(key, value, maxValue: maxValue, minValue: minValue));
   }
 
   CountableItem? get(String key) {
