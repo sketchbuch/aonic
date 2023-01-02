@@ -3,13 +3,13 @@ import 'dart:math';
 import '../../../types/types.dart';
 import '../../ac_constants.dart';
 
-class Stat {
+class StatItem {
   final String key;
   int maxValue;
   int minValue;
   int value;
 
-  Stat(this.key, this.value, {this.maxValue = statDefaultMax, this.minValue = statDefaultMin});
+  StatItem(this.key, this.value, {this.maxValue = statDefaultMax, this.minValue = statDefaultMin});
 
   Json toJson() => {
         "key": key,

@@ -19,41 +19,41 @@ void main() {
     });
 
     test('Returns expected string', () {
-      expect(countables.toString(), equals(countablesJson.toString()));
+      expect(countables.toString(), countablesJson.toString());
     });
 
     test('add() creates expected item', () {
-      expect(countables.items.length, equals(0));
+      expect(countables.items, isEmpty);
       countables.add(countableItemKey, countableItemValue);
-      expect(countables.items.length, equals(1));
+      expect(countables.items, hasLength(1));
       expect(countables.items.first.toJson(), equals(countableItemJson));
     });
 
     test('add() with optional args creates expected item', () {
-      expect(countables.items.length, equals(0));
+      expect(countables.items, isEmpty);
       countables.add(
         countableItemKey,
         countableItemValue,
         maxValue: countableItemMaxValue,
         minValue: countableItemMinValue,
       );
-      expect(countables.items.length, equals(1));
+      expect(countables.items, hasLength(1));
       expect(countables.items.first.toJson(), equals(countableOptionalJson));
     });
 
     test('remove() deletes an item', () {
       countables.add(countableItemKey, countableItemValue);
-      expect(countables.items.length, equals(1));
+      expect(countables.items, hasLength(1));
 
       countables.remove(countableItemKey);
-      expect(countables.items.length, equals(0));
+      expect(countables.items, isEmpty);
     });
 
     test('get() returns the item', () {
       countables.add(countableItemKey, countableItemValue);
       final item = countables.get(countableItemKey);
 
-      expect(item is CountableItem, equals(true));
+      expect(item, isA<CountableItem>());
       expect(item?.toJson(), equals(countableItemJson));
     });
 
@@ -61,17 +61,17 @@ void main() {
       countables.add(countableItemKey, countableItemValue);
       final item = countables.get('a-nonexistant-key');
 
-      expect(item, equals(null));
+      expect(item, isNull);
     });
 
     test('getValue() returns item value', () {
       countables.add(countableItemKey, countableItemValue);
-      expect(countables.getValue(countableItemKey), equals(countableItemValue));
+      expect(countables.getValue(countableItemKey), countableItemValue);
     });
 
     test('getValue() returns null if no item with key is found', () {
       countables.add(countableItemKey, countableItemValue);
-      expect(countables.getValue('a-nonexistant-key'), equals(null));
+      expect(countables.getValue('a-nonexistant-key'), isNull);
     });
   });
 }
