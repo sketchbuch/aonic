@@ -8,6 +8,7 @@ import '../../i18n/_generated_/translations.g.dart';
 import '../../routes/generate_book_route.dart';
 import '../../routes/routes.dart';
 import '../../store/redux/models/app_state.dart';
+import '../../widgets/action_chart/action_chart.dart';
 import 'book_view_model.dart';
 
 class BookPage extends StatefulWidget {
@@ -21,8 +22,37 @@ class BookPage extends StatefulWidget {
   State<BookPage> createState() => _BookPageState();
 }
 
+const appBarHeight = 56.0;
+
 class _BookPageState extends State<BookPage> {
+  OverlayEntry? overlayEntry;
   int? randomNumber;
+
+  _showOverLay(BuildContext context, void Function(bool) onActionChartClick) async {
+    OverlayState? overlayState = Overlay.of(context);
+    OverlayEntry overlay1;
+
+    overlay1 = OverlayEntry(builder: (context) {
+      return Positioned(
+        height: MediaQuery.of(context).size.height - (50.0 + appBarHeight),
+        left: 25.0,
+        top: 25.0 + appBarHeight,
+        width: MediaQuery.of(context).size.width - 50.0,
+        child: Container(
+          color: const Color.fromARGB(255, 100, 100, 200),
+          child: Column(children: const [ActionChart(true)]),
+        ),
+      );
+    });
+
+    overlayState?.insert(overlay1);
+
+    await Future.delayed(const Duration(seconds: 10), () {
+      overlay1.remove();
+      onActionChartClick(true);
+    });
+  }
+
   /* Future<void> _onExitPressed() async {
     final isConfirmed = await _canExitBook();
 
@@ -74,7 +104,7 @@ class _BookPageState extends State<BookPage> {
       converter: (store) => BookViewModel.create(store),
       builder: (BuildContext context, BookViewModel viewModel) {
         String titleText = widget.transBook.titleSelection;
-        String tooltipText = widget.transBook.loadButton.load;
+        String tooltipText = widget.transBook.buttons.loadButton.labelLoad;
 
         if (viewModel.isLoading) {
           titleText = widget.transBook.titleLoading;
@@ -86,7 +116,7 @@ class _BookPageState extends State<BookPage> {
             titleText = widget.transBook.title(bookTitle: viewModel.bookTitle, pageTitle: viewModel.sectionTitle);
           }
 
-          tooltipText = widget.transBook.loadButton.unload;
+          tooltipText = widget.transBook.buttons.loadButton.labelUnload;
         }
 
         return WillPopScope(
@@ -128,6 +158,28 @@ class _BookPageState extends State<BookPage> {
               initialRoute: bookRoute,
               onGenerateRoute: generateBookRoute,
             ),
+            bottomNavigationBar: viewModel.isBookLoaded
+                ? BottomNavigationBar(
+                    onTap: (value) {
+                      if (value == 0) {
+                        viewModel.onActionChartClick(viewModel.isActionChartVisible);
+                        if (!viewModel.isActionChartVisible) {
+                          _showOverLay(context, viewModel.onActionChartClick);
+                        }
+                      }
+                    },
+                    items: <BottomNavigationBarItem>[
+                      BottomNavigationBarItem(
+                        icon: const Icon(Icons.account_box_rounded),
+                        label: widget.transBook.buttons.actionChart.label,
+                      ),
+                      BottomNavigationBarItem(
+                        icon: const Icon(Icons.sports_kabaddi_rounded),
+                        label: widget.transBook.buttons.combat.label,
+                      ),
+                    ],
+                  )
+                : null,
             floatingActionButton: viewModel.canShowActionButton
                 ? FloatingActionButton(
                     onPressed: () {

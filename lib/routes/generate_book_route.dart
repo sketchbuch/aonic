@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../pages/book/display/book_display_page.dart';
-import '../pages/book/selection/book_selection_page.dart';
+import '../pages/book/pages/book_display/book_display_page.dart';
+import '../pages/book/pages/book_selection/book_selection_page.dart';
 import '../pages/not_found/not_found_page.dart';
 import 'routes.dart';
 

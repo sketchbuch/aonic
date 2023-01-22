@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
 
 import '../../../models/booklist/booklist_item.dart';
+import 'action_chart_state.dart';
 import 'book_state.dart';
 import 'page_state.dart';
 
 @immutable
 class AppState {
-  final BookState bookState;
+  final ActionChartState actionChartState;
   final BooklistItem? selectedBook;
+  final BookState bookState;
   final PageState pageState;
 
   const AppState({
+    required this.actionChartState,
     required this.bookState,
-    required this.selectedBook,
     required this.pageState,
+    required this.selectedBook,
   });
 
   const AppState.initialState()
-      : bookState = const BookState.initialState(),
+      : actionChartState = const ActionChartState.initialState(),
+        bookState = const BookState.initialState(),
         pageState = const PageState.initialState(),
         selectedBook = null;
 
-  AppState copyWith({BookState? bookState, int? page, PageState? pageState, BooklistItem? selectedBook}) => AppState(
+  AppState copyWith({
+    ActionChartState? actionChartState,
+    BooklistItem? selectedBook,
+    BookState? bookState,
+    PageState? pageState,
+  }) =>
+      AppState(
+        actionChartState: actionChartState ?? this.actionChartState,
         bookState: bookState ?? this.bookState,
         pageState: pageState ?? this.pageState,
         selectedBook: selectedBook ?? this.selectedBook,

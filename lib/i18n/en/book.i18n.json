@@ -1,15 +1,21 @@
 {
-  "footnotePrefix": "Section #",
-  "header": {
-    "actions": {
-      "random": "Pick a random number"
+  "buttons": {
+    "actionChart": {
+      "label": "Action Chart"
+    },
+    "combat": {
+      "label": "Combat"
+    },
+    "loadButton": {
+      "labelLoad": "Download book XML",
+      "labelUnload": "Back to book selection"
+    },
+    "random": {
+      "label": "Pick a random number"
     }
   },
+  "footnotePrefix": "Section #",
   "headlineSection": "#$sectionTitle",
-  "loadButton": {
-    "load": "Download book XML",
-    "unload": "Back to book selection"
-  },
   "numberedSection": {
     "searchField": {
       "helperText": "Enter a number in the range of $pageMin-$pageMax",

@@ -1,0 +1,3 @@
+class ActionChartClose {}
+
+class ActionChartOpen {}

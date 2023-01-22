@@ -1,9 +1,9 @@
 import 'package:redux/redux.dart';
 
-import '../../../models/booklist/booklist_item.dart';
-import '../../../store/redux/actions/actions.dart';
-import '../../../store/redux/models/app_state.dart';
-import '../../../store/redux/models/book_state.dart';
+import '../../../../models/booklist/booklist_item.dart';
+import '../../../../store/redux/actions/actions.dart';
+import '../../../../store/redux/models/app_state.dart';
+import '../../../../store/redux/models/book_state.dart';
 
 class BookSelectionViewModel {
   final BooklistItem? selectedBook;
