@@ -9,6 +9,7 @@ import '../../routes/generate_book_route.dart';
 import '../../routes/routes.dart';
 import '../../store/redux/models/app_state.dart';
 import '../../widgets/action_chart/action_chart.dart';
+import '../../widgets/action_chart/book_overlay.dart';
 import 'book_view_model.dart';
 
 class BookPage extends StatefulWidget {
@@ -22,8 +23,6 @@ class BookPage extends StatefulWidget {
   State<BookPage> createState() => _BookPageState();
 }
 
-const appBarHeight = 56.0;
-
 class _BookPageState extends State<BookPage> {
   OverlayEntry? overlayEntry;
   int? randomNumber;
@@ -33,16 +32,7 @@ class _BookPageState extends State<BookPage> {
     OverlayEntry overlay1;
 
     overlay1 = OverlayEntry(builder: (context) {
-      return Positioned(
-        height: MediaQuery.of(context).size.height - (50.0 + appBarHeight),
-        left: 25.0,
-        top: 25.0 + appBarHeight,
-        width: MediaQuery.of(context).size.width - 50.0,
-        child: Container(
-          color: const Color.fromARGB(255, 100, 100, 200),
-          child: Column(children: const [ActionChart(true)]),
-        ),
-      );
+      return const BookOverlay(ActionChart(true));
     });
 
     overlayState?.insert(overlay1);
