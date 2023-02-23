@@ -32,7 +32,7 @@ class _BookPageState extends State<BookPage> {
     OverlayEntry overlay1;
 
     overlay1 = OverlayEntry(builder: (context) {
-      return const BookOverlay(ActionChart(true));
+      return const BookOverlay(child: ActionChart(true));
     });
 
     overlayState?.insert(overlay1);

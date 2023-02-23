@@ -8,6 +8,7 @@ const colourPrimaryTint = Color(0xff004422);
 const colourSecondary = Color.fromARGB(255, 88, 150, 119);
 const colourSplash = Color.fromARGB(32, 0, 51, 0);
 const colourText = Color(0xff003300);
+const colourBorder = Color(0x55003300);
 const colourWhite = Color(0xffffffff);
 
 const fontSizeS = 14.0;

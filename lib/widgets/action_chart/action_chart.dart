@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'stats/stats.dart';
+
 class ActionChart extends StatelessWidget {
   final bool _show;
 
@@ -7,6 +9,6 @@ class ActionChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _show ? const Text('AC Widget') : const Text('HIDDEN');
+    return _show ? const Stats() : const Text('HIDDEN');
   }
 }
