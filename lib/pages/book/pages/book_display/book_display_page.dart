@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 import '../../../../constants/books.dart';
 import '../../../../constants/layout.dart';
 import '../../../../exceptions/render.dart';
 import '../../../../store/redux/models/app_state.dart';
+import '../../../../widgets/action_chart/action_chart.dart';
+import '../../../../widgets/action_chart/book_overlay.dart';
 import '../../../../widgets/content/section.dart';
 import '../../../../widgets/matter/footnotes.dart';
 import '../../../../widgets/matter/numbered_sections.dart';
@@ -12,8 +15,15 @@ import '../../../../widgets/matter/title_page.dart';
 import '../../../../widgets/matter/toc.dart';
 import 'book_display_view_model.dart';
 
-class BookDisplayPage extends StatelessWidget {
+class BookDisplayPage extends StatefulWidget {
   const BookDisplayPage({Key? key}) : super(key: key);
+
+  @override
+  State<BookDisplayPage> createState() => _BookDisplayPageState();
+}
+
+class _BookDisplayPageState extends State<BookDisplayPage> {
+  bool isAcVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +63,20 @@ class BookDisplayPage extends StatelessWidget {
           }
         }
 
-        return Scaffold(
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(paddingExtraLarge),
-            child: pageWidget,
+        return Portal(
+          child: Scaffold(
+            body: Stack(
+              children: [
+                SingleChildScrollView(
+                  padding: const EdgeInsets.all(paddingExtraLarge),
+                  child: pageWidget,
+                ),
+                if (viewModel.isActionChartVisible)
+                  const BookOverlay(
+                    child: ActionChart(true),
+                  ),
+              ],
+            ),
           ),
         );
       },

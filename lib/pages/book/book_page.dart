@@ -8,8 +8,6 @@ import '../../i18n/_generated_/translations.g.dart';
 import '../../routes/generate_book_route.dart';
 import '../../routes/routes.dart';
 import '../../store/redux/models/app_state.dart';
-import '../../widgets/action_chart/action_chart.dart';
-import '../../widgets/action_chart/book_overlay.dart';
 import 'book_view_model.dart';
 
 class BookPage extends StatefulWidget {
@@ -24,23 +22,10 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
-  OverlayEntry? overlayEntry;
   int? randomNumber;
 
-  _showOverLay(BuildContext context, void Function(bool) onActionChartClick) async {
-    OverlayState? overlayState = Overlay.of(context);
-    OverlayEntry overlay1;
-
-    overlay1 = OverlayEntry(builder: (context) {
-      return const BookOverlay(child: ActionChart(true));
-    });
-
-    overlayState?.insert(overlay1);
-
-    await Future.delayed(const Duration(seconds: 10), () {
-      overlay1.remove();
-      onActionChartClick(true);
-    });
+  _handleShowActionChart(void Function(bool) toggleActionChart, bool isVisible) {
+    toggleActionChart(isVisible);
   }
 
   /* Future<void> _onExitPressed() async {
@@ -154,7 +139,7 @@ class _BookPageState extends State<BookPage> {
                       if (value == 0) {
                         viewModel.onActionChartClick(viewModel.isActionChartVisible);
                         if (!viewModel.isActionChartVisible) {
-                          _showOverLay(context, viewModel.onActionChartClick);
+                          _handleShowActionChart(viewModel.onActionChartClick, viewModel.isActionChartVisible);
                         }
                       }
                     },

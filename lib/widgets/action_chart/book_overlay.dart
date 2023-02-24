@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../theme/theme.dart';
 
-const appBarHeight = 56.0;
-
 class BookOverlay extends StatelessWidget {
   final Widget child;
 
@@ -11,26 +9,21 @@ class BookOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned.fill(
-      bottom: 0.0,
-      left: 0.0,
-      right: 0.0,
-      top: 0.0 + appBarHeight,
-      child: Container(
-        color: colourPrimary.withAlpha(100),
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: colourBorder,
-                width: 1,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(5)),
-              color: colourPaper,
+    return Container(
+      color: colourPrimary.withAlpha(100),
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: colourBorder,
+              width: 1,
             ),
-            child: Column(children: [child]),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
+            color: colourPaper,
           ),
+          child: Column(children: [child]),
         ),
       ),
     );
