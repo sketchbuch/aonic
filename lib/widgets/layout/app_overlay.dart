@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../theme/theme.dart';
 
-class BookOverlay extends StatelessWidget {
+class AppOverlay extends StatelessWidget {
   final Widget child;
 
-  const BookOverlay({required this.child, Key? key}) : super(key: key);
+  const AppOverlay({required this.child, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

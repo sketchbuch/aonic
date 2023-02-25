@@ -3,8 +3,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-import 'action_chart/ac.dart';
-import 'action_chart/data/action_chart_data.dart';
 import 'config/config.dart';
 import 'i18n/_generated_/translations.g.dart';
 import 'routes/generate_main_route.dart';
@@ -18,7 +16,6 @@ void main() {
   LocaleSettings.useDeviceLocale();
 
   setupConfig();
-  setupActionChart('lw', actionChart, actionChartData);
 
   final store = createStore();
   runApp(TranslationProvider(child: App(store)));

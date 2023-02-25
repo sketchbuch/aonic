@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
+import '../../../../action_chart/ac.dart';
+import '../../../../action_chart/data/action_chart_data.dart';
 import '../../../../constants/books.dart';
 import '../../../../constants/layout.dart';
 import '../../../../exceptions/render.dart';
 import '../../../../store/redux/models/app_state.dart';
 import '../../../../widgets/action_chart/action_chart.dart';
-import '../../../../widgets/action_chart/book_overlay.dart';
 import '../../../../widgets/content/section.dart';
+import '../../../../widgets/layout/app_overlay.dart';
 import '../../../../widgets/matter/footnotes.dart';
 import '../../../../widgets/matter/numbered_sections.dart';
 import '../../../../widgets/matter/title_page.dart';
@@ -23,6 +25,12 @@ class BookDisplayPage extends StatefulWidget {
 }
 
 class _BookDisplayPageState extends State<BookDisplayPage> {
+  @override
+  void initState() {
+    super.initState();
+    setupActionChart('lw', actionChart, actionChartData);
+  }
+
   bool isAcVisible = false;
 
   @override
@@ -72,8 +80,8 @@ class _BookDisplayPageState extends State<BookDisplayPage> {
                   child: pageWidget,
                 ),
                 if (viewModel.isActionChartVisible)
-                  const BookOverlay(
-                    child: ActionChart(true),
+                  const AppOverlay(
+                    child: ActionChart(),
                   ),
               ],
             ),

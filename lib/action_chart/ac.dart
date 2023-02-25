@@ -10,5 +10,6 @@ ActionChart createActionChart() {
 final actionChart = createActionChart();
 
 void setupActionChart(String chartType, ActionChart ac, Json chartData) {
+  print('### setupActionChart()');
   ac.setup((chartData[chartType] ?? {}) as Json);
 }
