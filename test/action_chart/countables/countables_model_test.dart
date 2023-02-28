@@ -1,17 +1,17 @@
-import 'package:aonic/action_chart/models/countables/countable_item.dart';
-import 'package:aonic/action_chart/models/countables/countables.dart';
+import 'package:aonic/action_chart/models/countables/countable_item_model.dart';
+import 'package:aonic/action_chart/models/countables/countables_model.dart';
 import 'package:test/test.dart';
 
-import 'countable_item_test.dart';
+import 'countable_item_model_test.dart';
 
 final countablesJson = {"items": []};
 
 void main() {
   group('Action Chart Model - Countables()', () {
-    late Countables countables;
+    late CountablesModel countables;
 
     setUp(() {
-      countables = Countables();
+      countables = CountablesModel();
     });
 
     test('Returns expected JSON', () {
@@ -53,7 +53,7 @@ void main() {
       countables.add(countableItemKey, countableItemValue);
       final item = countables.get(countableItemKey);
 
-      expect(item, isA<CountableItem>());
+      expect(item, isA<CountableItemModel>());
       expect(item?.toJson(), equals(countableItemJson));
     });
 

@@ -1,4 +1,4 @@
-import 'package:aonic/action_chart/models/collectables/collectable_element.dart';
+import 'package:aonic/action_chart/models/collectables/collectable_element_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const collectableElementKey = 'weapons';
@@ -12,10 +12,10 @@ final collectableElementJson = {
 
 void main() {
   group('Action Chart Model - CollectableElement()', () {
-    late CollectableElement collectableElement;
+    late CollectableElementModel collectableElement;
 
     setUp(() {
-      collectableElement = CollectableElement(
+      collectableElement = CollectableElementModel(
         collectableElementKey,
         collectableElementName,
         collectableElementDescription,

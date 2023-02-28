@@ -1,17 +1,17 @@
-import 'package:aonic/action_chart/models/levels/level_item.dart';
-import 'package:aonic/action_chart/models/levels/levels.dart';
+import 'package:aonic/action_chart/models/levels/level_item_model.dart';
+import 'package:aonic/action_chart/models/levels/levels_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'level_item_test.dart';
+import 'level_item_model_test.dart';
 
 final levelsJson = {"items": []};
 
 void main() {
   group('Action Chart Model - Levels()', () {
-    late Levels levels;
+    late LevelsModel levels;
 
     setUp(() {
-      levels = Levels();
+      levels = LevelsModel();
     });
 
     test('Returns expected JSON', () {
@@ -41,7 +41,7 @@ void main() {
       levels.add(levelItemKey, levelItemLevel);
       final item = levels.get(levelItemKey);
 
-      expect(item, isA<LevelItem>());
+      expect(item, isA<LevelItemModel>());
       expect(item?.toJson(), equals(levelItemJson));
     });
 

@@ -1,5 +1,5 @@
 import 'package:aonic/action_chart/ac_constants.dart';
-import 'package:aonic/action_chart/models/stats/stat_item.dart';
+import 'package:aonic/action_chart/models/stats/stat_item_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const statItemKey = 'skill';
@@ -22,10 +22,10 @@ final statItemOptionalJson = {
 
 void main() {
   group('Action Chart Model - Stat()', () {
-    late StatItem statItem;
+    late StatItemModel statItem;
 
     setUp(() {
-      statItem = StatItem(statItemKey, statItemValue);
+      statItem = StatItemModel(statItemKey, statItemValue);
     });
 
     test('Returns expected JSON', () {
@@ -37,10 +37,10 @@ void main() {
     });
 
     group('Optional args', () {
-      late StatItem statItem;
+      late StatItemModel statItem;
 
       setUp(() {
-        statItem = StatItem(
+        statItem = StatItemModel(
           statItemKey,
           statItemValue,
           minValue: statMinValue,

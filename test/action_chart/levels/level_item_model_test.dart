@@ -1,4 +1,4 @@
-import 'package:aonic/action_chart/models/levels/level_item.dart';
+import 'package:aonic/action_chart/models/levels/level_item_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const levelItemKey = 'acolyte';
@@ -10,10 +10,10 @@ const levelItemJson = {
 
 void main() {
   group('Action Chart Model - LevelItem()', () {
-    late LevelItem levelItem;
+    late LevelItemModel levelItem;
 
     setUp(() {
-      levelItem = LevelItem(levelItemKey, levelItemLevel);
+      levelItem = LevelItemModel(levelItemKey, levelItemLevel);
     });
 
     test('Returns expected JSON', () {

@@ -1,17 +1,17 @@
-import 'package:aonic/action_chart/models/collectables/collectable_item.dart';
-import 'package:aonic/action_chart/models/collectables/collectables.dart';
+import 'package:aonic/action_chart/models/collectables/collectable_item_model.dart';
+import 'package:aonic/action_chart/models/collectables/collectables_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'collectable_item_test.dart';
+import 'collectable_item_model_test.dart';
 
 final collectablesJson = {'items': []};
 
 void main() {
   group('Action Chart Model - Collectables()', () {
-    late Collectables collectables;
+    late CollectablesModel collectables;
 
     setUp(() {
-      collectables = Collectables();
+      collectables = CollectablesModel();
     });
 
     test('Returns expected JSON', () {
@@ -41,7 +41,7 @@ void main() {
       collectables.add(collectableItemKey, collectableItemMaxElements);
       final item = collectables.get(collectableItemKey);
 
-      expect(item, isA<CollectableItem>());
+      expect(item, isA<CollectableItemModel>());
       expect(item?.toJson(), equals(collectableItemJson));
     });
 

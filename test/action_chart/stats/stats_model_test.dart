@@ -1,17 +1,17 @@
-import 'package:aonic/action_chart/models/stats/stat_item.dart';
-import 'package:aonic/action_chart/models/stats/stats.dart';
+import 'package:aonic/action_chart/models/stats/stat_item_model.dart';
+import 'package:aonic/action_chart/models/stats/stats_model.dart';
 import 'package:test/test.dart';
 
-import 'stat_item_test.dart';
+import 'stat_item_model_test.dart';
 
 final statsJson = {"items": []};
 
 void main() {
   group('Action Chart Model - Stats()', () {
-    late Stats stats;
+    late StatsModel stats;
 
     setUp(() {
-      stats = Stats();
+      stats = StatsModel();
     });
 
     test('Returns expected JSON', () {
@@ -53,7 +53,7 @@ void main() {
       stats.add(statItemKey, statItemValue);
       final item = stats.get(statItemKey);
 
-      expect(item, isA<StatItem>());
+      expect(item, isA<StatItemModel>());
       expect(item?.toJson(), equals(statItemJson));
     });
 

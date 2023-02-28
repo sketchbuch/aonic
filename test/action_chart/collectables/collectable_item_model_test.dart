@@ -1,7 +1,7 @@
-import 'package:aonic/action_chart/models/collectables/collectable_item.dart';
+import 'package:aonic/action_chart/models/collectables/collectable_item_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'collectable_element_test.dart';
+import 'collectable_element_model_test.dart';
 
 const collectableItemKey = 'weapons';
 const collectableItemMaxElements = 2;
@@ -13,10 +13,11 @@ final collectableItemJson = {
 
 void main() {
   group('Action Chart Model - CollectableItem()', () {
-    late CollectableItem collectableItem;
+    late CollectableItemModel collectableItem;
 
     setUp(() {
-      collectableItem = CollectableItem(collectableItemKey, collectableItemMaxElements);
+      collectableItem =
+          CollectableItemModel(collectableItemKey, collectableItemMaxElements);
     });
 
     test('Returns expected JSON', () {
@@ -35,7 +36,8 @@ void main() {
         collectableElementDescription,
       );
       expect(collectableItem.elements, hasLength(1));
-      expect(collectableItem.elements.first.toJson(), equals(collectableElementJson));
+      expect(collectableItem.elements.first.toJson(),
+          equals(collectableElementJson));
     });
 
     test('remove() deletes an element', () {

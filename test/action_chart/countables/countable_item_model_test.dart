@@ -1,5 +1,5 @@
 import 'package:aonic/action_chart/ac_constants.dart';
-import 'package:aonic/action_chart/models/countables/countable_item.dart';
+import 'package:aonic/action_chart/models/countables/countable_item_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 const countableItemKey = 'money';
@@ -22,10 +22,10 @@ final countableOptionalJson = {
 
 void main() {
   group('Action Chart Model - CountableItem()', () {
-    late CountableItem countableItem;
+    late CountableItemModel countableItem;
 
     setUp(() {
-      countableItem = CountableItem(countableItemKey, countableItemValue);
+      countableItem = CountableItemModel(countableItemKey, countableItemValue);
     });
 
     test('Returns expected JSON', () {
@@ -37,10 +37,10 @@ void main() {
     });
 
     group('Optional args', () {
-      late CountableItem countableItem;
+      late CountableItemModel countableItem;
 
       setUp(() {
-        countableItem = CountableItem(
+        countableItem = CountableItemModel(
           countableItemKey,
           countableItemValue,
           minValue: countableItemMinValue,
