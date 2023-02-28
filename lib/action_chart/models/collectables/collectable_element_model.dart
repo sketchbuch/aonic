@@ -1,11 +1,11 @@
 import '../../../types/types.dart';
 
-class CollectableElement {
+class CollectableElementModel {
   final String description;
   final String key;
   final String name;
 
-  CollectableElement(this.key, this.name, this.description);
+  CollectableElementModel(this.key, this.name, this.description);
 
   Json toJson() => {
         'description': description,

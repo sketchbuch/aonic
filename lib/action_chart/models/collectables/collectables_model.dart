@@ -1,13 +1,13 @@
 import 'package:collection/collection.dart';
 
 import '../../../types/types.dart';
-import 'collectable_item.dart';
+import 'collectable_item_model.dart';
 
 /// A generic container for tracking things like backpack items an weapons.
-class Collectables {
-  final List<CollectableItem> items = [];
+class CollectablesModel {
+  final List<CollectableItemModel> items = [];
 
-  Collectables();
+  CollectablesModel();
 
   Json toJson() => {
         'items': items.map((item) => item.toJson()).toList(),
@@ -19,10 +19,10 @@ class Collectables {
   }
 
   void add(String key, int maxElements) {
-    items.add(CollectableItem(key, maxElements));
+    items.add(CollectableItemModel(key, maxElements));
   }
 
-  CollectableItem? get(String key) {
+  CollectableItemModel? get(String key) {
     return items.firstWhereOrNull((item) => item.key == key);
   }
 

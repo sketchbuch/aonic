@@ -1,13 +1,13 @@
 import 'package:collection/collection.dart';
 
 import '../../../types/types.dart';
-import 'level_item.dart';
+import 'level_item_model.dart';
 
 /// A generic container for things like experience levels.
-class Levels {
-  final List<LevelItem> items = [];
+class LevelsModel {
+  final List<LevelItemModel> items = [];
 
-  Levels();
+  LevelsModel();
 
   Json toJson() => {
         'items': items.map((item) => item.toJson()).toList(),
@@ -19,10 +19,10 @@ class Levels {
   }
 
   void add(String key, int level) {
-    items.add(LevelItem(key, level));
+    items.add(LevelItemModel(key, level));
   }
 
-  LevelItem? get(String key) {
+  LevelItemModel? get(String key) {
     return items.firstWhereOrNull((item) => item.key == key);
   }
 

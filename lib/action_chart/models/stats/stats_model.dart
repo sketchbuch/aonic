@@ -1,14 +1,14 @@
-import 'package:aonic/action_chart/models/stats/stat_item.dart';
+import 'package:aonic/action_chart/models/stats/stat_item_model.dart';
 import 'package:collection/collection.dart';
 
 import '../../../types/types.dart';
 import '../../ac_constants.dart';
 
 /// A generic container for tracking values like combat skill, endurance pointes, etc.
-class Stats {
-  final List<StatItem> items = [];
+class StatsModel {
+  final List<StatItemModel> items = [];
 
-  Stats();
+  StatsModel();
 
   Json toJson() => {
         'items': items.map((stat) => stat.toJson()).toList(),
@@ -25,10 +25,11 @@ class Stats {
     int maxValue = statDefaultMax,
     int minValue = statDefaultMin,
   }) {
-    items.add(StatItem(key, value, maxValue: maxValue, minValue: minValue));
+    items
+        .add(StatItemModel(key, value, maxValue: maxValue, minValue: minValue));
   }
 
-  StatItem? get(String key) {
+  StatItemModel? get(String key) {
     return items.firstWhereOrNull((stat) => stat.key == key);
   }
 

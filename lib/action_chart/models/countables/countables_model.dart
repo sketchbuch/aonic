@@ -2,13 +2,13 @@ import 'package:collection/collection.dart';
 
 import '../../../types/types.dart';
 import '../../ac_constants.dart';
-import 'countable_item.dart';
+import 'countable_item_model.dart';
 
 /// A generic container for tracking numeric values that can increase/decerase, like gold crowns or meals..
-class Countables {
-  final List<CountableItem> items = [];
+class CountablesModel {
+  final List<CountableItemModel> items = [];
 
-  Countables();
+  CountablesModel();
 
   Json toJson() => {
         'items': items.map((item) => item.toJson()).toList(),
@@ -25,10 +25,11 @@ class Countables {
     int maxValue = countableDefaultMax,
     int minValue = countableDefaultMin,
   }) {
-    items.add(CountableItem(key, value, maxValue: maxValue, minValue: minValue));
+    items.add(
+        CountableItemModel(key, value, maxValue: maxValue, minValue: minValue));
   }
 
-  CountableItem? get(String key) {
+  CountableItemModel? get(String key) {
     return items.firstWhereOrNull((item) => item.key == key);
   }
 

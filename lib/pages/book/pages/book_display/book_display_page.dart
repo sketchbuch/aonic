@@ -52,16 +52,19 @@ class _BookDisplayPageState extends State<BookDisplayPage> {
             final section = book.getSection(viewModel.pageId);
 
             if (section == null) {
-              throw RenderException('Unable to find section for display: "${viewModel.pageId}"');
+              throw RenderException(
+                  'Unable to find section for display: "${viewModel.pageId}"');
             }
 
             switch (viewModel.pageId) {
               case bookIdFootnotes:
-                pageWidget = Footnotes(section.meta.title, viewModel.onNavigate, book.footnoteSections);
+                pageWidget = Footnotes(section.meta.title, viewModel.onNavigate,
+                    book.footnoteSections);
                 break;
 
               case bookIdNumbered:
-                pageWidget = NumberedSections(section.meta.title, viewModel.onNavigate, book.numberedSectionItems);
+                pageWidget = NumberedSections(section.meta.title,
+                    viewModel.onNavigate, book.numberedSectionItems);
                 break;
 
               default:
@@ -80,8 +83,8 @@ class _BookDisplayPageState extends State<BookDisplayPage> {
                   child: pageWidget,
                 ),
                 if (viewModel.isActionChartVisible)
-                  const AppOverlay(
-                    child: ActionChart(),
+                  AppOverlay(
+                    child: ActionChart(actionChart),
                   ),
               ],
             ),

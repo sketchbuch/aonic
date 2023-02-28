@@ -1,10 +1,10 @@
 import '../../../types/types.dart';
 
-class LevelItem {
+class LevelItemModel {
   final String key;
   final int level;
 
-  LevelItem(this.key, this.level);
+  LevelItemModel(this.key, this.level);
 
   Json toJson() => {
         "key": key,

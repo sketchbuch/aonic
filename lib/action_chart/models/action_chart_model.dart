@@ -1,16 +1,16 @@
 import '../../types/types.dart';
-import 'collectables/collectables.dart';
-import 'countables/countables.dart';
-import 'levels/levels.dart';
-import 'stats/stats.dart';
+import 'collectables/collectables_model.dart';
+import 'countables/countables_model.dart';
+import 'levels/levels_model.dart';
+import 'stats/stats_model.dart';
 
-class ActionChart {
-  final collectables = Collectables();
-  final countables = Countables();
-  final levels = Levels();
-  final stats = Stats();
+class ActionChartModel {
+  final collectables = CollectablesModel();
+  final countables = CountablesModel();
+  final levels = LevelsModel();
+  final stats = StatsModel();
 
-  ActionChart();
+  ActionChartModel();
 
   Json toJson() => {
         'collectables': collectables.toJson(),
@@ -31,7 +31,8 @@ class ActionChart {
 
     if (collectableData.isNotEmpty) {
       for (var collectable in collectableData) {
-        collectables.add(collectable['key'].toString(), collectable['max'] as int);
+        collectables.add(
+            collectable['key'].toString(), collectable['max'] as int);
       }
     }
 

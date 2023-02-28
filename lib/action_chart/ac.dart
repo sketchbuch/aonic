@@ -1,15 +1,14 @@
 import '../store/get_it/get_it.dart';
 import '../types/types.dart';
-import 'models/action_chart.dart';
+import 'models/action_chart_model.dart';
 
-ActionChart createActionChart() {
-  getIt.registerSingleton<ActionChart>(ActionChart());
-  return getIt<ActionChart>();
+ActionChartModel createActionChart() {
+  getIt.registerSingleton<ActionChartModel>(ActionChartModel());
+  return getIt<ActionChartModel>();
 }
 
 final actionChart = createActionChart();
 
-void setupActionChart(String chartType, ActionChart ac, Json chartData) {
-  print('### setupActionChart()');
+void setupActionChart(String chartType, ActionChartModel ac, Json chartData) {
   ac.setup((chartData[chartType] ?? {}) as Json);
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../action_chart/models/stats/stats_model.dart';
+
 class Stats extends StatelessWidget {
-  const Stats({Key? key}) : super(key: key);
+  final StatsModel data;
+
+  const Stats(this.data, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

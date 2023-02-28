@@ -1,12 +1,12 @@
 import '../../../types/types.dart';
-import 'collectable_element.dart';
+import 'collectable_element_model.dart';
 
-class CollectableItem {
+class CollectableItemModel {
   final int maxElements;
-  final List<CollectableElement> elements = [];
+  final List<CollectableElementModel> elements = [];
   final String key;
 
-  CollectableItem(this.key, this.maxElements);
+  CollectableItemModel(this.key, this.maxElements);
 
   Json toJson() => {
         'elements': elements.map((element) => element.toJson()).toList(),
@@ -20,7 +20,7 @@ class CollectableItem {
   }
 
   void add(String key, String name, String description) {
-    elements.add(CollectableElement(key, name, description));
+    elements.add(CollectableElementModel(key, name, description));
   }
 
   void remove(String key) {
