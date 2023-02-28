@@ -3,7 +3,7 @@ import 'package:collection/collection.dart';
 import '../../../types/types.dart';
 import 'level_item_model.dart';
 
-/// A generic container for things like experience levels.
+/// A generic container for tracking experience levels.
 class LevelsModel {
   final List<LevelItemModel> items = [];
 

@@ -4,7 +4,7 @@ import 'package:collection/collection.dart';
 import '../../../types/types.dart';
 import '../../ac_constants.dart';
 
-/// A generic container for tracking values like combat skill, endurance pointes, etc.
+/// A generic container for attributes like combat skill, endurance pointes, etc.
 class StatsModel {
   final List<StatItemModel> items = [];
 

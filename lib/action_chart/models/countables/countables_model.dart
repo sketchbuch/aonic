@@ -4,7 +4,7 @@ import '../../../types/types.dart';
 import '../../ac_constants.dart';
 import 'countable_item_model.dart';
 
-/// A generic container for tracking numeric values that can increase/decerase, like gold crowns or meals..
+/// A generic container for tracking numeric values that can increase/decerase, like gold crowns or meals.
 class CountablesModel {
   final List<CountableItemModel> items = [];
 
