@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/book/content/blockquote.dart';
+import '../../models/book/content/blockquote_model.dart';
 import '../../constants/layout.dart';
 import '../layout/content_container.dart';
 import '../mixins/content_renderer.dart';
 
 class Blockquote extends StatelessWidget with ContentRenderer {
   final double bottomPadding;
-  final BlockquoteTag tag;
+  final BlockquoteTagModel tag;
 
-  const Blockquote(this.tag, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
+  const Blockquote(this.tag, {Key? key, this.bottomPadding = paddingLarge})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

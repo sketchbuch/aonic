@@ -1,7 +1,7 @@
 import 'package:xml/xml.dart';
 
 import '../../constants/characters.dart';
-import '../../models/book/content/subcontent/text_element.dart';
+import '../../models/book/content/subcontent/text_element_model.dart';
 import '../../types/types.dart';
 import 'replace_include_links.dart';
 import 'replace_typographic_tags.dart';
@@ -10,7 +10,10 @@ final whitespaceBetweenTags = RegExp(r'>\s*<');
 final htmlComments = RegExp(r"<\!--.+?-->");
 
 String cleanXmlString(String xmlString, Map<String, String> includeLinks) {
-  String cleanedString = xmlString.trim().replaceAll(whitespaceBetweenTags, '><').replaceAll(newLine, '');
+  String cleanedString = xmlString
+      .trim()
+      .replaceAll(whitespaceBetweenTags, '><')
+      .replaceAll(newLine, '');
   cleanedString = replaceTypographicTags(cleanedString);
   cleanedString = replaceIncludeLinks(cleanedString, includeLinks);
   cleanedString = cleanedString.replaceAll(htmlComments, '');
@@ -39,7 +42,8 @@ Attrs getAttributes(XmlElement element) {
 }
 
 DateTime getDate(String year, String month, String day) {
-  return DateTime.parse('$year-${month.padLeft(2, '0')}-${day.padLeft(2, '0')}');
+  return DateTime.parse(
+      '$year-${month.padLeft(2, '0')}-${day.padLeft(2, '0')}');
 }
 
 TextElements getTextElementList(XmlElement xml, [DisplayType? type]) {
@@ -48,16 +52,17 @@ TextElements getTextElementList(XmlElement xml, [DisplayType? type]) {
   return xml.children.map((child) {
     if (child.nodeType == XmlNodeType.ELEMENT) {
       try {
-        return TextElement.fromXml(childNodes.removeAt(0), type: type);
+        return TextElementModel.fromXml(childNodes.removeAt(0), type: type);
       } on RangeError {
-        return TextElement.fromTxt(child.text);
+        return TextElementModel.fromTxt(child.text);
       }
     } else {
-      return TextElement.fromTxt(child.text, type: type);
+      return TextElementModel.fromTxt(child.text, type: type);
     }
   }).toList();
 }
 
-String getValue(String element, XmlElement xmlNode, [String fallbackValue = '']) {
+String getValue(String element, XmlElement xmlNode,
+    [String fallbackValue = '']) {
   return xmlNode.getElement(element)?.text ?? fallbackValue;
 }

@@ -1,12 +1,12 @@
-import 'package:aonic/models/book/content/section_tag.dart';
+import 'package:aonic/models/book/content/section_tag_model.dart';
 import 'package:aonic/models/book/helpers/section_cache.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
-import '../content/section_test.dart';
+import '../content/section_model_test.dart';
 
 void main() {
-  final tag = SectionTag.fromXml(getRootXmlElement(sectionXml));
+  final tag = SectionTagModel.fromXml(getRootXmlElement(sectionXml));
   const cachKey1 = 'cache-key-1';
   const cachKey2 = 'cache-key-2';
 

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/typography.dart';
-import '../../../models/book/content/subcontent/text_element.dart';
+import '../../../models/book/content/subcontent/text_element_model.dart';
 import '../../mixins/content_renderer.dart';
 
-class DescriptionDetailTextListItem extends StatelessWidget with ContentRenderer {
-  final TextElement text;
+class DescriptionDetailTextListItem extends StatelessWidget
+    with ContentRenderer {
+  final TextElementModel text;
 
   const DescriptionDetailTextListItem(this.text, {Key? key}) : super(key: key);
 

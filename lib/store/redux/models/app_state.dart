@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/booklist/booklist_item.dart';
+import '../../../models/booklist/booklist_item_model.dart';
 import 'action_chart_state.dart';
 import 'book_state.dart';
 import 'page_state.dart';
@@ -8,7 +8,7 @@ import 'page_state.dart';
 @immutable
 class AppState {
   final ActionChartState actionChartState;
-  final BooklistItem? selectedBook;
+  final BooklistItemModel? selectedBook;
   final BookState bookState;
   final PageState pageState;
 
@@ -27,7 +27,7 @@ class AppState {
 
   AppState copyWith({
     ActionChartState? actionChartState,
-    BooklistItem? selectedBook,
+    BooklistItemModel? selectedBook,
     BookState? bookState,
     PageState? pageState,
   }) =>

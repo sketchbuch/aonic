@@ -1,6 +1,6 @@
 import 'package:redux/redux.dart';
 
-import '../../models/booklist/booklist_item.dart';
+import '../../models/booklist/booklist_item_model.dart';
 import '../../store/redux/actions/action_chart.dart';
 import '../../store/redux/actions/actions.dart';
 import '../../store/redux/actions/load_book_action.dart';
@@ -9,7 +9,7 @@ import '../../store/redux/models/book_state.dart';
 import '../../types/types.dart';
 
 class BookViewModel {
-  final BooklistItem? selectedBook;
+  final BooklistItemModel? selectedBook;
   final BookText bookTitle;
   final BookText sectionTitle;
   final bool canShowActionButton;
@@ -23,7 +23,7 @@ class BookViewModel {
   final void Function() onNextPage;
   final void Function() onPrevPage;
   final void Function() onUnloadBook;
-  final void Function(BooklistItem) onLoadBook;
+  final void Function(BooklistItemModel) onLoadBook;
 
   BookViewModel({
     required this.bookTitle,
@@ -58,7 +58,7 @@ class BookViewModel {
       store.dispatch(PrevPageAction());
     }
 
-    void onLoadBook(BooklistItem selectedBook) {
+    void onLoadBook(BooklistItemModel selectedBook) {
       store.dispatch(loadBookAction(selectedBook));
     }
 
@@ -79,7 +79,8 @@ class BookViewModel {
     return BookViewModel(
       isActionChartVisible: actionChartState.isVisible,
       bookTitle: book != null ? book.title : '',
-      canShowActionButton: state.selectedBook != null && bookState.status != BookStateStatus.loading,
+      canShowActionButton: state.selectedBook != null &&
+          bookState.status != BookStateStatus.loading,
       isBookLoaded: bookState.status == BookStateStatus.succeeded,
       isLoading: bookState.status == BookStateStatus.loading,
       isSection: currentSection != null ? currentSection.isNumbered() : false,

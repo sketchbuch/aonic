@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../../models/book/content/subcontent/text_element.dart';
+import '../../models/book/content/subcontent/text_element_model.dart';
 import '../../theme/theme.dart';
 
 const hoverBackgroundColour = Color(0xffcce0c1);
@@ -30,7 +30,8 @@ mixin ContentRenderer on Widget {
     return _flattenTexts(textElements);
   }
 
-  TextStyle getTextElementTextStyle(TextElement text, {bool isHover = false}) {
+  TextStyle getTextElementTextStyle(TextElementModel text,
+      {bool isHover = false}) {
     Color? backgroundColor;
     Color? foregrondColor;
     double? size;
@@ -53,7 +54,8 @@ mixin ContentRenderer on Widget {
       weight = FontWeight.bold;
     }
 
-    if (text.displayType == DisplayType.bookref || text.displayType == DisplayType.link) {
+    if (text.displayType == DisplayType.bookref ||
+        text.displayType == DisplayType.link) {
       decoration = TextDecoration.underline;
       foregrondColor = colourPrimary;
 

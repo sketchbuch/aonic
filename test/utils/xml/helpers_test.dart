@@ -1,4 +1,4 @@
-import 'package:aonic/models/book/content/subcontent/text_element.dart';
+import 'package:aonic/models/book/content/subcontent/text_element_model.dart';
 import 'package:aonic/utils/xml/helpers.dart';
 import 'package:test/test.dart';
 
@@ -10,10 +10,13 @@ void main() {
     const attrId = 'wolf';
     const bValue = 'paragraph';
     const fallbackValue = 'kai';
-    const xmlString = '<p class="$attrClass" id="$attrId">This is a <b>$bValue</b></p>';
+    const xmlString =
+        '<p class="$attrClass" id="$attrId">This is a <b>$bValue</b></p>';
 
     group('cleanXmlString()', () {
-      test('Removes newlines, white space between tags, trims and replaces <ch...> tags', () {
+      test(
+          'Removes newlines, white space between tags, trims and replaces <ch...> tags',
+          () {
         const xml = '''   <data>   <choice idref="sect275">If <ch.copy/>
 you wish to follow the <quote>left track</quote>, <link-text>turn to 275</link-text>.</choice>    
         </data> ''';
@@ -27,7 +30,8 @@ you wish to follow the <quote>left track</quote>, <link-text>turn to 275</link-t
       });
 
       test('Removes html comments', () {
-        const xml = '''   <data>   <choice idref="sect275">If <!-- <ch.copy/> -->
+        const xml =
+            '''   <data>   <choice idref="sect275">If <!-- <ch.copy/> -->
 you wish to follow the <quote>left track</quote>, <link-text>turn to 275</link-text>. <!-- this
  is a multiline 
  comment -->
@@ -80,18 +84,22 @@ you wish to follow the <quote>left track</quote>, <link-text>turn to 275</link-t
       const year = 2022;
 
       test('Returns date object with correct date', () {
-        final dateObj = getDate(year.toString(), month.toString(), day.toString());
+        final dateObj =
+            getDate(year.toString(), month.toString(), day.toString());
 
         expect(dateObj.day, equals(day));
         expect(dateObj.month, equals(month));
         expect(dateObj.year, equals(year));
       });
 
-      test('Returns date object with correct date even with single digit day/month', () {
+      test(
+          'Returns date object with correct date even with single digit day/month',
+          () {
         const day2 = 2;
         const month2 = 8;
 
-        final dateObj = getDate(year.toString(), month2.toString(), day2.toString());
+        final dateObj =
+            getDate(year.toString(), month2.toString(), day2.toString());
 
         expect(dateObj.day, equals(day2));
         expect(dateObj.month, equals(month2));

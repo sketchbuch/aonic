@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/book/book.dart';
-import '../../../models/booklist/booklist_item.dart';
+import '../../../models/book/book_model.dart';
+import '../../../models/booklist/booklist_item_model.dart';
 
 class GoToPageAction {
   final int page;
@@ -48,7 +48,7 @@ class PageNavigateAction {
 class PrevPageAction {}
 
 class SelectBookAction {
-  final BooklistItem? book;
+  final BooklistItemModel? book;
 
   SelectBookAction(this.book);
 }

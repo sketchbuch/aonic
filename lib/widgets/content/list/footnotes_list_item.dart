@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../constants/layout.dart';
 import '../../../constants/typography.dart';
 import '../../../i18n/_generated_/translations.g.dart';
-import '../../../models/book/section/footnote.dart';
+import '../../../models/book/section/footnote_model.dart';
 import '../../../theme/theme.dart';
 import '../../../types/types.dart';
 import '../../mixins/content_renderer.dart';
@@ -13,24 +13,30 @@ import '../../mixins/hoverable_text_element.dart';
 class FootnotesListItem extends StatefulWidget with ContentRenderer {
   final transBook = t.book;
   final bool isInSection;
-  final Footnote footnote;
+  final FootnoteModel footnote;
   final OnNavigate onNavigate;
 
-  FootnotesListItem(this.footnote, this.onNavigate, {Key? key, this.isInSection = false}) : super(key: key);
+  FootnotesListItem(this.footnote, this.onNavigate,
+      {Key? key, this.isInSection = false})
+      : super(key: key);
 
   @override
   State<FootnotesListItem> createState() => _FootnotesListItemState();
 }
 
-class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTextElement {
+class _FootnotesListItemState extends State<FootnotesListItem>
+    with HoverableTextElement {
   @override
   Widget build(BuildContext context) {
     final flattenedTexts = widget.getFlattenedTexts(widget.footnote.texts);
     final fontSize = widget.isInSection ? fontSizeS : fontSizeM;
 
-    final itemPadding = widget.footnote.footnoteNumber > 1 ? const EdgeInsets.only(top: paddingLarge) : EdgeInsets.zero;
+    final itemPadding = widget.footnote.footnoteNumber > 1
+        ? const EdgeInsets.only(top: paddingLarge)
+        : EdgeInsets.zero;
     final chldren = [
-      if (!widget.isInSection) ...widget.footnote.getSectionPrefix(widget.transBook.footnotePrefix),
+      if (!widget.isInSection)
+        ...widget.footnote.getSectionPrefix(widget.transBook.footnotePrefix),
       ...flattenedTexts,
     ];
 
@@ -39,7 +45,8 @@ class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTex
       children: [
         Padding(
           padding: itemPadding,
-          child: Text(widget.footnote.footnoteNumber.toString(), style: TextStyle(fontSize: fontSize)),
+          child: Text(widget.footnote.footnoteNumber.toString(),
+              style: TextStyle(fontSize: fontSize)),
         ),
         const SizedBox(width: offsetSmall),
         Expanded(
@@ -52,7 +59,8 @@ class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTex
                   final int textIndex = chldren.indexOf(text);
                   final isHover = isHoverIndex(textIndex);
                   final isLink = isHoverable(text);
-                  var style = widget.getTextElementTextStyle(text, isHover: isHover);
+                  var style =
+                      widget.getTextElementTextStyle(text, isHover: isHover);
                   style = style.copyWith(fontSize: fontSize);
 
                   TapGestureRecognizer? recognizer;
@@ -60,7 +68,8 @@ class _FootnotesListItemState extends State<FootnotesListItem> with HoverableTex
                   if (isLink) {
                     recognizer = TapGestureRecognizer()
                       ..onTap = () {
-                        final route = text.attrs['href'] ?? text.attrs['idref'] ?? '';
+                        final route =
+                            text.attrs['href'] ?? text.attrs['idref'] ?? '';
                         widget.onNavigate(route);
                       };
 

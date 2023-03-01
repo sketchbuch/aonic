@@ -2,7 +2,7 @@ import 'package:redux/redux.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../exceptions/gameplay.dart';
-import '../../../../models/book/book.dart';
+import '../../../../models/book/book_model.dart';
 import '../../../../routes/routes.dart';
 import '../../../../store/redux/actions/action_chart.dart';
 import '../../../../store/redux/actions/actions.dart';
@@ -58,7 +58,8 @@ class BookDisplayViewModel {
     return BookDisplayViewModel(
       book: bookState.book,
       isActionChartVisible: actionChartState.isVisible,
-      isLoading: bookState.status != BookStateStatus.succeeded || bookState.book == null,
+      isLoading: bookState.status != BookStateStatus.succeeded ||
+          bookState.book == null,
       onActionChartClick: onActionChartClick,
       onNavigate: onNavigate,
       pageId: pageState.pageId,

@@ -1,14 +1,14 @@
 import 'package:redux/redux.dart';
 
-import '../../../../models/booklist/booklist_item.dart';
+import '../../../../models/booklist/booklist_item_model.dart';
 import '../../../../store/redux/actions/actions.dart';
 import '../../../../store/redux/models/app_state.dart';
 import '../../../../store/redux/models/book_state.dart';
 
 class BookSelectionViewModel {
-  final BooklistItem? selectedBook;
+  final BooklistItemModel? selectedBook;
   final bool isLoading;
-  final void Function(BooklistItem?) onSelectBook;
+  final void Function(BooklistItemModel?) onSelectBook;
 
   BookSelectionViewModel({
     required this.isLoading,
@@ -20,12 +20,13 @@ class BookSelectionViewModel {
     final state = store.state;
     final bookState = state.bookState;
 
-    void onSelectBook(BooklistItem? selectedBook) {
+    void onSelectBook(BooklistItemModel? selectedBook) {
       store.dispatch(SelectBookAction(selectedBook));
     }
 
     return BookSelectionViewModel(
-      isLoading: bookState.status == BookStateStatus.loading || bookState.status == BookStateStatus.succeeded,
+      isLoading: bookState.status == BookStateStatus.loading ||
+          bookState.status == BookStateStatus.succeeded,
       onSelectBook: onSelectBook,
       selectedBook: state.selectedBook,
     );

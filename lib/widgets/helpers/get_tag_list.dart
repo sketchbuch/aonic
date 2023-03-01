@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../config/models/book_config.dart';
-import '../../models/book/content/blockquote.dart';
-import '../../models/book/content/choice_tag.dart';
-import '../../models/book/content/combat_tag.dart';
-import '../../models/book/content/deadend_tag.dart';
-import '../../models/book/content/description_list_tag.dart';
-import '../../models/book/content/illustration_tag.dart';
-import '../../models/book/content/paragraph_tag.dart';
-import '../../models/book/content/plain_list_tag.dart';
-import '../../models/book/content/section_tag.dart';
+import '../../models/book/content/blockquote_model.dart';
+import '../../models/book/content/choice_tag_model.dart';
+import '../../models/book/content/combat_tag_model.dart';
+import '../../models/book/content/deadend_tag_model.dart';
+import '../../models/book/content/description_list_tag_model.dart';
+import '../../models/book/content/illustration_tag_model.dart';
+import '../../models/book/content/paragraph_tag_model.dart';
+import '../../models/book/content/plain_list_tag_model.dart';
+import '../../models/book/content/section_tag_model.dart';
 import '../../models/book/content/tag.dart';
 import '../../types/types.dart';
 import '../content/blockquote.dart';
@@ -22,41 +22,43 @@ import '../content/paragraph.dart';
 import '../content/plain_list.dart';
 import '../content/section.dart';
 
-List<Widget> getTagList(SectionTag section, OnNavigate onNavigate, int level, BookConfig? bookConfig) {
-  List<Tag> tagList = section.data.content;
+List<Widget> getTagList(SectionTagModel section, OnNavigate onNavigate,
+    int level, BookConfig? bookConfig) {
+  List<TagModel> tagList = section.data.content;
   final List<Widget> sectionContent = [];
 
   for (var tag in tagList) {
     final tagType = tag.tagType();
 
     switch (tagType) {
-      case 'BlockquoteTag':
-        sectionContent.add(Blockquote(tag as BlockquoteTag));
+      case 'BlockquoteTagModel':
+        sectionContent.add(Blockquote(tag as BlockquoteTagModel));
         break;
 
-      case 'ChoiceTag':
-        sectionContent.add(Choice(tag as ChoiceTag, onNavigate));
+      case 'ChoiceTagModel':
+        sectionContent.add(Choice(tag as ChoiceTagModel, onNavigate));
         break;
 
-      case 'CombatTag':
-        sectionContent.add(Combat(tag as CombatTag));
+      case 'CombatTagModel':
+        sectionContent.add(Combat(tag as CombatTagModel));
         break;
 
-      case 'DeadendTag':
-        sectionContent.add(Deadend(tag as DeadendTag));
+      case 'DeadendTagModel':
+        sectionContent.add(Deadend(tag as DeadendTagModel));
         break;
 
-      case 'DescriptionListTag':
-        sectionContent.add(DescriptionList(tag as DescriptionListTag));
+      case 'DescriptionListTagModel':
+        sectionContent.add(DescriptionList(tag as DescriptionListTagModel));
         break;
 
-      case 'PlainListTag':
-        sectionContent.add(PlainList(tag as PlainListTag, onNavigate));
+      case 'PlainListTagModel':
+        sectionContent.add(PlainList(tag as PlainListTagModel, onNavigate));
         break;
 
-      case 'IllustrationTag':
-        final illy = tag as IllustrationTag;
-        final List<String> realIllustrators = bookConfig == null ? [] : bookConfig.useIllustrators.split(':');
+      case 'IllustrationTagModel':
+        final illy = tag as IllustrationTagModel;
+        final List<String> realIllustrators =
+            bookConfig == null ? [] : bookConfig.useIllustrators.split(':');
         var isRealIllustration = false;
 
         for (var illustrator in realIllustrators) {
@@ -66,22 +68,23 @@ List<Widget> getTagList(SectionTag section, OnNavigate onNavigate, int level, Bo
           }
         }
 
-        if ((!section.isNumbered() || isRealIllustration) && illy.getHtmlInstance() != null) {
+        if ((!section.isNumbered() || isRealIllustration) &&
+            illy.getHtmlInstance() != null) {
           sectionContent.add(Illustration(illy));
         }
 
         break;
 
-      case 'ListTag':
-        sectionContent.add(PlainList(tag as PlainListTag, onNavigate));
+      case 'ListTagModel':
+        sectionContent.add(PlainList(tag as PlainListTagModel, onNavigate));
         break;
 
-      case 'ParagraphTag':
-        sectionContent.add(Paragraph(tag as ParagraphTag, onNavigate));
+      case 'ParagraphTagModel':
+        sectionContent.add(Paragraph(tag as ParagraphTagModel, onNavigate));
         break;
 
-      case 'SectionTag':
-        final sec = tag as SectionTag;
+      case 'SectionTagModel':
+        final sec = tag as SectionTagModel;
 
         if (!sec.isFrontmatterSeperate()) {
           sectionContent.add(Section(
@@ -93,8 +96,8 @@ List<Widget> getTagList(SectionTag section, OnNavigate onNavigate, int level, Bo
 
         break;
 
-      case 'SignpostTag':
-        sectionContent.add(Blockquote(tag as BlockquoteTag));
+      case 'SignpostTagModel':
+        sectionContent.add(Blockquote(tag as BlockquoteTagModel));
         break;
 
       default:

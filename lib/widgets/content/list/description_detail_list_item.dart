@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/typography.dart';
-import '../../../models/book/content/subcontent/description_list_item.dart';
+import '../../../models/book/content/subcontent/description_list_item_model.dart';
 import '../../mixins/content_renderer.dart';
 
 class DescriptionDetailListItem extends StatelessWidget with ContentRenderer {
-  final DescriptionListItem item;
+  final DescriptionListItemModel item;
 
   const DescriptionDetailListItem(this.item, {Key? key}) : super(key: key);
 

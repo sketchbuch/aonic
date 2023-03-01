@@ -3,7 +3,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/book/content/subcontent/text_element.dart';
+import '../../models/book/content/subcontent/text_element_model.dart';
 
 mixin HoverableTextElement<T extends StatefulWidget> on State<T> {
   int? hoverIndex;
@@ -32,7 +32,8 @@ mixin HoverableTextElement<T extends StatefulWidget> on State<T> {
     return hoverIndex == textIndex;
   }
 
-  bool isHoverable(TextElement textElement) {
-    return textElement.displayType == DisplayType.link || textElement.displayType == DisplayType.bookref;
+  bool isHoverable(TextElementModel textElement) {
+    return textElement.displayType == DisplayType.link ||
+        textElement.displayType == DisplayType.bookref;
   }
 }

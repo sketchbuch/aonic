@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/typography.dart';
-import '../../../models/book/section/footnote.dart';
+import '../../models/book/section/footnote_model.dart';
 import '../../../types/types.dart';
 import '../../constants/layout.dart';
 import '../../theme/theme.dart';
@@ -12,10 +12,12 @@ import 'list/footnotes_list_item.dart';
 
 class Footnotes extends StatelessWidget with ContentRenderer {
   final double bottomPadding;
-  final List<Footnote> footnotes;
+  final List<FootnoteModel> footnotes;
   final OnNavigate onNavigate;
 
-  const Footnotes(this.footnotes, this.onNavigate, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
+  const Footnotes(this.footnotes, this.onNavigate,
+      {Key? key, this.bottomPadding = paddingLarge})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,8 @@ class Footnotes extends StatelessWidget with ContentRenderer {
             children: const [
               Text(
                 'Footnotes',
-                style: TextStyle(fontSize: fontSizeS, fontStyle: FontStyle.italic),
+                style:
+                    TextStyle(fontSize: fontSizeS, fontStyle: FontStyle.italic),
               ),
               SizedBox(width: offsetSmall),
               Expanded(
@@ -39,7 +42,10 @@ class Footnotes extends StatelessWidget with ContentRenderer {
               )),
             ],
           ),
-          ...footnotes.map((footnote) => FootnotesListItem(footnote, onNavigate, isInSection: true)).toList(),
+          ...footnotes
+              .map((footnote) =>
+                  FootnotesListItem(footnote, onNavigate, isInSection: true))
+              .toList(),
         ],
       ),
     );

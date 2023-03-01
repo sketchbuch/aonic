@@ -3,8 +3,8 @@ import 'package:redux_thunk/redux_thunk.dart';
 import 'package:xml/xml.dart';
 
 import '../../../exceptions/xml.dart';
-import '../../../models/book/book.dart';
-import '../../../models/booklist/booklist_item.dart';
+import '../../../models/book/book_model.dart';
+import '../../../models/booklist/booklist_item_model.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/get_aon_book_data.dart';
 import '../../../utils/get_aon_book_file_data.dart';
@@ -16,7 +16,7 @@ import 'actions.dart';
 const useLocalFile = true;
 final chTag = RegExp(r"<ch\.[^>]+?\/>");
 
-ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
+ThunkAction<AppState> loadBookAction(BooklistItemModel selectedBook) {
   return (Store<AppState> store) async {
     final includeLinks = mapUrls();
 
@@ -35,7 +35,8 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
 
       if (cleanedXmlString.contains('<ch.')) {
         final firstChTag = chTag.stringMatch(cleanedXmlString).toString();
-        throw XmlCleaningException('Unreplaced character tags detected: "$firstChTag"');
+        throw XmlCleaningException(
+            'Unreplaced character tags detected: "$firstChTag"');
       } else if (cleanedXmlString.contains('&link.')) {
         throw XmlCleaningException('Unreplaced include links detected');
       }
@@ -48,7 +49,8 @@ ThunkAction<AppState> loadBookAction(BooklistItem selectedBook) {
         store.dispatch(LoadBookSuccess(bookData, book));
         store.dispatch(NavigateAction(bookNav, bookPlayRoute));
       } else {
-        store.dispatch(LoadBookFaliure('Book data does not contain a "gamebook" element'));
+        store.dispatch(
+            LoadBookFaliure('Book data does not contain a "gamebook" element'));
       }
     } catch (error) {
       print('### loadBookAction() Error: "${error.toString()}"');

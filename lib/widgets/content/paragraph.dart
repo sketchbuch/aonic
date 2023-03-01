@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/layout.dart';
-import '../../../models/book/content/paragraph_tag.dart';
+import '../../models/book/content/paragraph_tag_model.dart';
 import '../../../types/types.dart';
 import '../layout/content_container.dart';
 import '../mixins/content_renderer.dart';
@@ -11,9 +11,11 @@ import '../mixins/hoverable_text_element.dart';
 class Paragraph extends StatefulWidget with ContentRenderer {
   final double bottomPadding;
   final OnNavigate onNavigate;
-  final ParagraphTag tag;
+  final ParagraphTagModel tag;
 
-  const Paragraph(this.tag, this.onNavigate, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
+  const Paragraph(this.tag, this.onNavigate,
+      {Key? key, this.bottomPadding = paddingLarge})
+      : super(key: key);
 
   @override
   State<Paragraph> createState() => _ParagraphState();
@@ -33,7 +35,8 @@ class _ParagraphState extends State<Paragraph> with HoverableTextElement {
             final int textIndex = widget.tag.texts.indexOf(text);
             final isHover = isHoverIndex(textIndex);
             final isLink = isHoverable(text);
-            final style = widget.getTextElementTextStyle(text, isHover: isHover);
+            final style =
+                widget.getTextElementTextStyle(text, isHover: isHover);
 
             TapGestureRecognizer? recognizer;
 

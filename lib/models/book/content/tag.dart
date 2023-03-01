@@ -1,10 +1,10 @@
 import '../../../types/types.dart';
-import 'subcontent/text_element.dart';
+import 'subcontent/text_element_model.dart';
 
-abstract class Tag {
+abstract class TagModel {
   final TextElements texts = [];
 
-  Tag();
+  TagModel();
 
   Json toJson() => {};
 

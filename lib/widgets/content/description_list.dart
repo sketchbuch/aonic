@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/book/content/description_list_tag.dart';
-import '../../../models/book/content/subcontent/description_list_item.dart';
+import '../../models/book/content/description_list_tag_model.dart';
+import '../../models/book/content/subcontent/description_list_item_model.dart';
 import '../../constants/layout.dart';
 import '../layout/content_container.dart';
 import '../mixins/content_renderer.dart';
@@ -10,10 +10,11 @@ import 'list/description_detail_text_list_item.dart';
 import 'list/description_term_list_item.dart';
 
 class DescriptionList extends StatelessWidget with ContentRenderer {
-  final DescriptionListTag tag;
+  final DescriptionListTagModel tag;
   final double bottomPadding;
 
-  const DescriptionList(this.tag, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
+  const DescriptionList(this.tag, {Key? key, this.bottomPadding = paddingLarge})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

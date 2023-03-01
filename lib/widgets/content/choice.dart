@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/book/content/choice_tag.dart';
+import '../../models/book/content/choice_tag_model.dart';
 import '../../../types/types.dart';
 import '../../constants/layout.dart';
 import '../layout/content_container.dart';
@@ -9,11 +9,13 @@ import '../mixins/content_renderer.dart';
 import '../mixins/hoverable_text_element.dart';
 
 class Choice extends StatefulWidget with ContentRenderer {
-  final ChoiceTag tag;
+  final ChoiceTagModel tag;
   final double bottomPadding;
   final OnNavigate onNavigate;
 
-  const Choice(this.tag, this.onNavigate, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
+  const Choice(this.tag, this.onNavigate,
+      {Key? key, this.bottomPadding = paddingLarge})
+      : super(key: key);
 
   @override
   State<Choice> createState() => _ChoiceState();

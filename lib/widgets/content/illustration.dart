@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/book/content/illustration_tag.dart';
+import '../../models/book/content/illustration_tag_model.dart';
 import '../../constants/layout.dart';
 import '../layout/content_container.dart';
 import 'image/image_box.dart';
@@ -9,9 +9,10 @@ import 'image/image_loading.dart';
 
 class Illustration extends StatelessWidget {
   final double bottomPadding;
-  final IllustrationTag tag;
+  final IllustrationTagModel tag;
 
-  const Illustration(this.tag, {Key? key, this.bottomPadding = paddingLarge}) : super(key: key);
+  const Illustration(this.tag, {Key? key, this.bottomPadding = paddingLarge})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +32,20 @@ class Illustration extends StatelessWidget {
       child: ImageBox(
         child: Image.network(
           'https://www.projectaon.org/en/xhtml/lw/01fftd/${htmlInstance.fileName}',
-          errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+          errorBuilder:
+              (BuildContext context, Object exception, StackTrace? stackTrace) {
             if (exception.runtimeType == NetworkImageLoadException) {
               final imageException = exception as NetworkImageLoadException;
 
-              return ImageError('Network Error: "${imageException.statusCode}"');
+              return ImageError(
+                  'Network Error: "${imageException.statusCode}"');
             }
 
             return ImageError('Unknown Error: "${exception.toString()}"');
           },
           height: htmlInstance.height.toDouble(),
-          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent? loadingProgress) {
             if (loadingProgress == null) {
               return child;
             }

@@ -5,7 +5,7 @@ import '../../constants/books.dart';
 import '../../constants/layout.dart';
 import '../../constants/typography.dart';
 import '../../i18n/_generated_/translations.g.dart';
-import '../../models/book/content/subcontent/numbered_section_item.dart';
+import '../../models/book/content/subcontent/numbered_section_item_model.dart';
 import '../../theme/theme.dart';
 import '../../types/types.dart';
 import '../helpers/limit_range.dart';
@@ -16,9 +16,11 @@ class NumberedSections extends StatefulWidget {
   final transBook = t.book;
   final OnNavigate onNavigate;
   final BookText sectionTitle;
-  final List<NumberedSectionItem> numberedSections;
+  final List<NumberedSectionItemModel> numberedSections;
 
-  NumberedSections(this.sectionTitle, this.onNavigate, this.numberedSections, {Key? key}) : super(key: key);
+  NumberedSections(this.sectionTitle, this.onNavigate, this.numberedSections,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<NumberedSections> createState() => _NumberedSectionsState();
@@ -37,7 +39,10 @@ class _NumberedSectionsState extends State<NumberedSections> {
   Widget build(BuildContext context) {
     final visibleSections = _textEditingController.text.isEmpty
         ? widget.numberedSections
-        : widget.numberedSections.where((section) => section.title.startsWith(_textEditingController.text)).toList();
+        : widget.numberedSections
+            .where((section) =>
+                section.title.startsWith(_textEditingController.text))
+            .toList();
     final itemCount = visibleSections.length;
 
     const borderRadiusAll = BorderRadius.all(Radius.circular(borderRadius));
@@ -52,9 +57,11 @@ class _NumberedSectionsState extends State<NumberedSections> {
             controller: _textEditingController,
             decoration: InputDecoration(
               border: const OutlineInputBorder(borderRadius: borderRadiusAll),
-              enabledBorder: const OutlineInputBorder(borderRadius: borderRadiusAll),
+              enabledBorder:
+                  const OutlineInputBorder(borderRadius: borderRadiusAll),
               hintText: widget.transBook.numberedSection.searchField.hintText,
-              helperText: widget.transBook.numberedSection.searchField.helperText(pageMin: pageMin, pageMax: pageMax),
+              helperText: widget.transBook.numberedSection.searchField
+                  .helperText(pageMin: pageMin, pageMax: pageMax),
               suffixIcon: _textEditingController.text.isEmpty
                   ? null
                   : IconButton(
@@ -68,12 +75,16 @@ class _NumberedSectionsState extends State<NumberedSections> {
                     ),
             ),
             keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly, LimitRange(pageMin, pageMax)],
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LimitRange(pageMin, pageMax)
+            ],
             maxLength: 3,
             onChanged: (value) {
               if (mounted) {
                 _textEditingController.text = value;
-                _textEditingController.selection = TextSelection.collapsed(offset: _textEditingController.text.length);
+                _textEditingController.selection = TextSelection.collapsed(
+                    offset: _textEditingController.text.length);
                 setState(() {});
               }
             },
@@ -91,7 +102,9 @@ class _NumberedSectionsState extends State<NumberedSections> {
 
               return Container(
                 alignment: Alignment.center,
-                decoration: BoxDecoration(color: colourSplash, borderRadius: BorderRadius.circular(borderRadius)),
+                decoration: BoxDecoration(
+                    color: colourSplash,
+                    borderRadius: BorderRadius.circular(borderRadius)),
                 child: Text(section.title),
               );
             },
