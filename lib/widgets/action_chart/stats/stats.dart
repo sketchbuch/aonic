@@ -15,6 +15,7 @@ class Stats extends StatelessWidget {
       children: stats.items.map((stat) {
         return ChartBox(
           label: stat.key,
+          value: stat.value.toString(),
         );
       }).toList(),
     );
