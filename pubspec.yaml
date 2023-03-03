@@ -25,8 +25,8 @@ dependencies:
   redux: ^5.0.0
   redux_thunk: ^0.4.0
   shared_preferences: ^2.0.15
-  slang: ^2.7.0
-  slang_flutter: ^2.7.0
+  slang: ^3.13.0
+  slang_flutter: ^3.13.0
   url_launcher: ^6.1.7
   xml: ^6.1.0
 
