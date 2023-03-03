@@ -1,0 +1,33 @@
+{
+  "levels": {
+    "columns": [
+      "DE - Kai Disciplines",
+      "DE - Ranks"
+    ],
+    "labels": [
+      "DE - Novice",
+      "DE - Intuite",
+      "DE - Doan",
+      "DE - Acolyte",
+      "DE - Initiate",
+      "DE - Aspirant",
+      "DE - Guardian",
+      "DE - Warmarn or Journeyman",
+      "DE - Savant",
+      "DE - Master"
+    ]
+  },
+  "stats": {
+    "endurance": {
+      "description": [
+        "DE - Can never go above initial score",
+        "DE - 0 = dead"
+      ],
+      "label": "DE - Endurance Points"
+    },
+    "skill": {
+      "description": [],
+      "label": "DE - Combat Skill"
+    }
+  }
+}

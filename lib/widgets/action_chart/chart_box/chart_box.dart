@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../typography/headline.dart';
+import '../../typography/headline_text.dart';
+
+const chartBoxBorderWidth = 2.0;
+const chartBoxHeight = 80.0;
+const chartBoxWidth = 160.0;
+
 class ChartBox extends StatelessWidget {
   final String label;
+  final int? labelLevel;
   final String value;
   final List<String> description;
 
@@ -10,19 +18,24 @@ class ChartBox extends StatelessWidget {
     required this.label,
     required this.value,
     this.description = const [],
+    this.labelLevel = 1,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(label),
+        HeadlineText(label, level: 2),
         Container(
-          height: 80.0,
+          height: chartBoxHeight,
           padding: const EdgeInsets.all(8),
-          width: 160.0,
+          width: chartBoxWidth,
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.orangeAccent, width: 4)),
+            border: Border.all(
+              color: Colors.orangeAccent,
+              width: chartBoxBorderWidth,
+            ),
+          ),
           child: Text(value),
         ),
       ],

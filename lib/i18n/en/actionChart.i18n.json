@@ -1,0 +1,33 @@
+{
+  "levels": {
+    "columns": [
+      "Kai Disciplines",
+      "Ranks"
+    ],
+    "labels": [
+      "Novice",
+      "Intuite",
+      "Doan",
+      "Acolyte",
+      "Initiate",
+      "Aspirant",
+      "Guardian",
+      "Warmarn or Journeyman",
+      "Savant",
+      "Master"
+    ]
+  },
+  "stats": {
+    "endurance": {
+      "description": [
+        "Can never go above initial score",
+        "0 = dead"
+      ],
+      "label": "Endurance Points"
+    },
+    "skill": {
+      "description": [],
+      "label": "Combat Skill"
+    }
+  }
+}
