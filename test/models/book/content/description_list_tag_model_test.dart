@@ -54,7 +54,7 @@ void main() {
 
     test('Returns expected tagType', () {
       final tag = DescriptionListTagModel.fromXml(getRootXmlElement(dlXml));
-      expect(tag.tagType(), equals('DescriptionListTag'));
+      expect(tag.tagType(), equals('DescriptionListTagModel'));
     });
   });
 }

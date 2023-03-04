@@ -24,7 +24,7 @@ void main() {
     });
 
     test('Returns expected tagType', () {
-      expect(tag.tagType(), equals('CombatTag'));
+      expect(tag.tagType(), equals('CombatTagModel'));
     });
   });
 }

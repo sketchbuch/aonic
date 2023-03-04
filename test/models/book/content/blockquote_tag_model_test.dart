@@ -56,8 +56,7 @@ final blockquoteTextJson = {
       'displayType': 'plain',
       "parentType": "none",
       "subelements": [],
-      'text':
-          'The others are all seated at a large table waiting your appearance.'
+      'text': 'The others are all seated at a large table waiting your appearance.'
     },
   ]
 };
@@ -89,7 +88,7 @@ void main() {
 
     test('Returns expected tagType', () {
       final tag = BlockquoteTagModel.fromXml(getRootXmlElement(blockquoteXml));
-      expect(tag.tagType(), equals('BlockquoteTag'));
+      expect(tag.tagType(), equals('BlockquoteTagModel'));
     });
   });
 }

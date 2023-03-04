@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../typography/headline.dart';
 import '../../typography/headline_text.dart';
 
 const chartBoxBorderWidth = 2.0;

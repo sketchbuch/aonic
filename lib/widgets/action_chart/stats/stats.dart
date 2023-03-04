@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../i18n/_generated_/translations.g.dart';
 
 import '../../../action_chart/models/stats/stats_model.dart';
+import '../../../i18n/_generated_/translations.g.dart';
+import '../../../utils/i18n/split_translation.dart';
 import '../chart_box/chart_box.dart';
 
 class Stats extends StatelessWidget {
@@ -15,7 +16,7 @@ class Stats extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: stats.items.map((stat) {
         return ChartBox(
-          description: const [],
+          description: splitTranslation(t['actionChart.stats.${stat.key}.description']),
           label: t['actionChart.stats.${stat.key}.label'],
           value: stat.value.toString(),
         );

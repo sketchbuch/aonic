@@ -29,8 +29,7 @@ final paragraphJson = {
       "displayType": "plain",
       "parentType": "none",
       "subelements": [],
-      "text":
-          " points. Laumspur may also be consumed at any other time to restore ",
+      "text": " points. Laumspur may also be consumed at any other time to restore ",
     },
     {
       "attrs": {"class": "attribute"},
@@ -48,8 +47,7 @@ final paragraphJson = {
     }
   ]
 };
-const paragraphDedicationXml =
-    '<p class="dedication">Each Meal of Laumspur may be consumed...</p>';
+const paragraphDedicationXml = '<p class="dedication">Each Meal of Laumspur may be consumed...</p>';
 final paragraphDedicationJson = {
   "texts": [
     {
@@ -75,12 +73,11 @@ void main() {
     });
 
     test('Returns expected tagType', () {
-      expect(tag.tagType(), equals('ParagraphTag'));
+      expect(tag.tagType(), equals('ParagraphTagModel'));
     });
 
     group('With dedication class', () {
-      final tag =
-          ParagraphTagModel.fromXml(getRootXmlElement(paragraphDedicationXml));
+      final tag = ParagraphTagModel.fromXml(getRootXmlElement(paragraphDedicationXml));
 
       test('Returns expected JSON', () {
         expect(tag.toJson(), equals(paragraphDedicationJson));

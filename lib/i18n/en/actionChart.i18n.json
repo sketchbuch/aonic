@@ -19,14 +19,11 @@
   },
   "stats": {
     "endurance": {
-      "description": [
-        "Can never go above initial score",
-        "0 = dead"
-      ],
+      "description": "Can never go above initial score.|0 = dead",
       "label": "Endurance Points"
     },
     "skill": {
-      "description": [],
+      "description": "",
       "label": "Combat Skill"
     }
   }

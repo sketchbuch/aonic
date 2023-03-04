@@ -2,11 +2,11 @@ import 'package:aonic/models/book/content/section_tag_model.dart';
 import 'package:test/test.dart';
 
 import '../../../helpers.dart';
-import 'blockquote_tag_model_test.dart';
-import 'choice_tag_model_test.dart';
 import '../section/data_model_test.dart';
 import '../section/footnote_model_test.dart';
 import '../section/section_meta_model_test.dart';
+import 'blockquote_tag_model_test.dart';
+import 'choice_tag_model_test.dart';
 
 const sectionText = 'To Mel and Yin';
 const sectionType = 'frontmatter';
@@ -89,7 +89,7 @@ void main() {
 
     test('Returns expected tagType', () {
       final tag = SectionTagModel.fromXml(getRootXmlElement(sectionXml));
-      expect(tag.tagType(), equals('SectionTag'));
+      expect(tag.tagType(), equals('SectionTagModel'));
     });
 
     group('isNumbered()', () {
@@ -158,70 +158,26 @@ void main() {
 
     group('canAddToIndex()', () {
       canAddToIndexTest(data) {
-        String labelSuffix = data['isSub'] == true
-            ? 'that is a subsection'
-            : 'that is NOT a subsection';
+        String labelSuffix = data['isSub'] == true ? 'that is a subsection' : 'that is NOT a subsection';
 
-        test(
-            'Returns ${data['result']} for a ${data['type']} section $labelSuffix',
-            () {
+        test('Returns ${data['result']} for a ${data['type']} section $labelSuffix', () {
           final tag = SectionTagModel.fromXml(getRootXmlElement(data['xml']));
           expect(tag.canAddToIndex(data['isSub']), equals(data['result']));
         });
       }
 
       [
-        {
-          "result": false,
-          "type": numbered,
-          "xml": numberedSecXml,
-          "isSub": false
-        },
-        {
-          "result": true,
-          "type": frontmatter,
-          "xml": frontmatterSecXml,
-          "isSub": false
-        },
-        {
-          "result": false,
-          "type": frontmatterSep,
-          "xml": frontmatterSepSecXml,
-          "isSub": false
-        },
-        {
-          "result": true,
-          "type": backmatter,
-          "xml": backmatterSecXml,
-          "isSub": false
-        },
+        {"result": false, "type": numbered, "xml": numberedSecXml, "isSub": false},
+        {"result": true, "type": frontmatter, "xml": frontmatterSecXml, "isSub": false},
+        {"result": false, "type": frontmatterSep, "xml": frontmatterSepSecXml, "isSub": false},
+        {"result": true, "type": backmatter, "xml": backmatterSecXml, "isSub": false},
       ].forEach(canAddToIndexTest);
 
       [
-        {
-          "result": false,
-          "type": numbered,
-          "xml": numberedSecXml,
-          "isSub": true
-        },
-        {
-          "result": false,
-          "type": frontmatter,
-          "xml": frontmatterSecXml,
-          "isSub": true
-        },
-        {
-          "result": true,
-          "type": frontmatterSep,
-          "xml": frontmatterSepSecXml,
-          "isSub": true
-        },
-        {
-          "result": false,
-          "type": backmatter,
-          "xml": backmatterSecXml,
-          "isSub": true
-        },
+        {"result": false, "type": numbered, "xml": numberedSecXml, "isSub": true},
+        {"result": false, "type": frontmatter, "xml": frontmatterSecXml, "isSub": true},
+        {"result": true, "type": frontmatterSep, "xml": frontmatterSepSecXml, "isSub": true},
+        {"result": false, "type": backmatter, "xml": backmatterSecXml, "isSub": true},
       ].forEach(canAddToIndexTest);
     });
 
@@ -234,8 +190,7 @@ void main() {
       });
 
       test('Returns false for a section without subsections', () {
-        final tag =
-            SectionTagModel.fromXml(getRootXmlElement(frontmatterSecXml));
+        final tag = SectionTagModel.fromXml(getRootXmlElement(frontmatterSecXml));
         expect(tag.hasSubsections(), equals(false));
       });
     });
@@ -253,9 +208,7 @@ void main() {
     group('getVisibleSubsections()', () {
       final xml = getSectionXmlWithSubsections(numbered, 'sect141');
 
-      test(
-          'Returns an array of just the non-frontmatter-separate subsections from section data',
-          () {
+      test('Returns an array of just the non-frontmatter-separate subsections from section data', () {
         final tag = SectionTagModel.fromXml(getRootXmlElement(xml));
         final subsections = tag.getVisibleSubsections();
         expect(subsections.length, equals(3));

@@ -133,13 +133,12 @@ void main() {
 
     test('Returns expected tagType', () {
       final tag = PlainListTagModel.fromXml(getRootXmlElement(plainListUlXml));
-      expect(tag.tagType(), equals('PlainListTag'));
+      expect(tag.tagType(), equals('PlainListTagModel'));
     });
   });
 
   group('Model - PlainListTag.fromTocIndexSections()', () {
-    final indexSection =
-        SectionTagModel.fromXml(getRootXmlElement(plainListSectionXml));
+    final indexSection = SectionTagModel.fromXml(getRootXmlElement(plainListSectionXml));
     final indexSections = [TocItemModel(indexSection, 1)];
     final tag = PlainListTagModel.fromTocItems(indexSections);
 

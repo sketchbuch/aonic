@@ -26,8 +26,7 @@ final illustrationJson = {
 
 void main() {
   group('Model - IllustrationTagModel()', () {
-    final tag =
-        IllustrationTagModel.fromXml(getRootXmlElement(illustrationXml));
+    final tag = IllustrationTagModel.fromXml(getRootXmlElement(illustrationXml));
 
     test('Returns expected JSON', () {
       expect(tag.toJson(), equals(illustrationJson));
@@ -64,7 +63,7 @@ void main() {
     });
 
     test('Returns expected tagType', () {
-      expect(tag.tagType(), equals('IllustrationTag'));
+      expect(tag.tagType(), equals('IllustrationTagModel'));
     });
   });
 }

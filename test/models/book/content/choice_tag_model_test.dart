@@ -46,7 +46,7 @@ void main() {
     });
 
     test('Returns expected tagType', () {
-      expect(tag.tagType(), equals('ChoiceTag'));
+      expect(tag.tagType(), equals('ChoiceTagModel'));
     });
   });
 }

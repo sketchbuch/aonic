@@ -29,7 +29,7 @@ void main() {
     });
 
     test('Returns expected tagType', () {
-      expect(tag.tagType(), equals('SignpostTag'));
+      expect(tag.tagType(), equals('SignpostTagModel'));
     });
   });
 }

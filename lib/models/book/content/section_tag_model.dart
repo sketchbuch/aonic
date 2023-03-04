@@ -89,23 +89,20 @@ class SectionTagModel extends TagModel {
 
   bool canAddToIndex([bool isSubsection = false]) {
     final isIndexableSub = isSubsection && isFrontmatterSeperate();
-    final isIndexableMain =
-        !isSubsection && (isFrontmatter() || isBackmatter());
+    final isIndexableMain = !isSubsection && (isFrontmatter() || isBackmatter());
 
     return isIndexableSub || isIndexableMain;
   }
 
   List<SectionTagModel> getSubsections() {
     return data.content
-        .where((element) => element.tagType() == 'SectionTag')
+        .where((element) => element.tagType() == 'SectionTagModel')
         .map((section) => section as SectionTagModel)
         .toList();
   }
 
   List<SectionTagModel> getVisibleSubsections() {
-    return getSubsections()
-        .where((section) => !section.isFrontmatterSeperate())
-        .toList();
+    return getSubsections().where((section) => !section.isFrontmatterSeperate()).toList();
   }
 
   bool hasSubsections() {

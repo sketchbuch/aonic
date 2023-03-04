@@ -21,7 +21,7 @@ void main() {
     });
 
     test('Returns expected tagType', () {
-      expect(tag.tagType(), equals('DeadendTag'));
+      expect(tag.tagType(), equals('DeadendTagModel'));
     });
   });
 }
