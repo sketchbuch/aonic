@@ -17,7 +17,7 @@ class TextParagraph extends StatelessWidget {
         text: TextSpan(
           style: DefaultTextStyle.of(context).style,
           children: [
-            TextSpan(text: text, style: const TextStyle(fontWeight: FontWeight.normal, fontStyle: FontStyle.normal))
+            TextSpan(text: text, style: Theme.of(context).textTheme.bodyText2),
           ],
         ),
       ),

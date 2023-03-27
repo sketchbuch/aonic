@@ -35,8 +35,17 @@ class ChartBox extends StatelessWidget {
               width: chartBoxBorderWidth,
             ),
           ),
-          child: Text(value),
+          child: Text(
+            value,
+            style: Theme.of(context).textTheme.bodyText2,
+          ),
         ),
+        ...description.map(
+          (text) => Text(
+            text,
+            style: Theme.of(context).textTheme.bodyText2,
+          ),
+        )
       ],
     );
   }

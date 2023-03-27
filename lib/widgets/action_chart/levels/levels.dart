@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../i18n/_generated_/translations.g.dart';
 
 import '../../../action_chart/models/levels/levels_model.dart';
+import '../../../i18n/_generated_/translations.g.dart';
 import '../../typography/headline_text.dart';
 
 class Levels extends StatelessWidget {
@@ -26,11 +26,11 @@ class Levels extends StatelessWidget {
           },
           defaultVerticalAlignment: TableCellVerticalAlignment.middle,
           children: [
-            const TableRow(
+            TableRow(
               children: [
-                Text('Level'),
-                Text('Discipline'),
-                Text('Rank'),
+                Text('Level', style: Theme.of(context).textTheme.bodyText2),
+                Text('Discipline', style: Theme.of(context).textTheme.bodyText2),
+                Text('Rank', style: Theme.of(context).textTheme.bodyText2),
               ],
             ),
             ...levels.items.map((level) {
@@ -45,9 +45,9 @@ class Levels extends StatelessWidget {
 
               return TableRow(
                 children: [
-                  Text(level.level.toString()),
+                  Text(level.level.toString(), style: Theme.of(context).textTheme.bodyText2),
                   const Text(''),
-                  Text(levelLabel),
+                  Text(levelLabel, style: Theme.of(context).textTheme.bodyText2),
                 ],
               );
             })
